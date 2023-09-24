@@ -1,0 +1,17 @@
+**/bin/*
+**/obj/*
+.vs/*
+packages/*
+**/.svn
+_git2_*
+**/StyleCop.Cache
+# solution user option files
+*.suo
+# protocol checklist template
+**/*.dotx
+# Word owner file (opened document)
+**/~$*.docx
+# visual studio project user setting
+**/*.csproj.user
+# resharper solution user settings
+*sln.DotSettings.user
