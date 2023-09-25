@@ -45,15 +45,15 @@ Any inquiries can be addressed to:
 -->
 
 <Protocol xmlns="http://www.skyline.be/protocol">
-	<Name>Github Repository</Name>
-	<Description>Github Repository DataMiner connector</Description>
+	<Name>Github Repositories</Name>
+	<Description>Github Repositories DataMiner connector</Description>
 	<Version>1.0.0.1</Version>
 	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Github</Vendor>
 	<VendorOID>1.3.6.1.4.1.8813.2.0</VendorOID>
 	<DeviceOID>0</DeviceOID>
-	<ElementType>Github Repository</ElementType>
+	<ElementType>Github Repositories</ElementType>
 	<Type relativeTimers="true">http</Type>
 	<Display defaultPage="General" pageOrder="General;----------;Repositories;Issues" wideColumnPages=""/>
 	<SNMP includepages="true">auto</SNMP>
@@ -379,6 +379,34 @@ Any inquiries can be addressed to:
 				</Discreets>
 			</Measurement>
 		</Param>
+		<Param id="51">
+			<Name>AddRepositoryPageButton</Name>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Repositories</Page>
+						<Column>0</Column>
+						<Row>3</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type width="110">pagebutton</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Add Repository...</Display>
+						<Value>Add Repository</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
 		
 		<Param id="100" trending="false">
 			<Name>StatusCode</Name>
@@ -470,6 +498,192 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+		</Param>
+		
+		<Param id="500">
+			<Name>AddRepositoryButton</Name>
+			<Type>write</Type>
+			<Information>
+				<Subtext>The button that trigger an add to the repositories table.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Repository</Page>
+						<Column>0</Column>
+						<Row>2</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type width="110">button</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Add Repositories</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="501" trending="false">
+			<Name>AddRepositoryName</Name>
+			<Description>Add Repository Name</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The name of the repository to add.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<DefaultValue>-2</DefaultValue>
+				<Exceptions>
+					<Exception id="2" value="-2">
+						<Display>Please fill in...</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Repository</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="601" setter="true">
+			<Name>AddRepositoryName</Name>
+			<Description>Add Repository Name</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Repository</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="502" trending="false">
+			<Name>AddRepositoryOwner</Name>
+			<Description>Add Repository Owner</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The owner of the repository to add.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<DefaultValue>-2</DefaultValue>
+				<Exceptions>
+					<Exception id="2" value="-2">
+						<Display>Please fill in...</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Repository</Page>
+						<Column>0</Column>
+						<Row>1</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="602" setter="true">
+			<Name>AddRepositoryOwner</Name>
+			<Description>Add Repository Owner</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Repository</Page>
+						<Column>0</Column>
+						<Row>1</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="503" trending="false">
+			<Name>AddRepositoryUrl</Name>
+			<Description>Add Repository Url</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The url for the repository to add.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<DefaultValue>-2</DefaultValue>
+				<Exceptions>
+					<Exception id="2" value="-2">
+						<Display>Please fill in...</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="603" setter="true">
+			<Name>AddRepositoryUrl</Name>
+			<Description>Add Repository Url</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
 		</Param>
 		
 		<Param id="990">
@@ -1831,7 +2045,8 @@ Any inquiries can be addressed to:
 		<QAction id="200" name="Parse Responses" encoding="csharp" triggers="201;202;203;204"></QAction>
 
 		<QAction id="990" name="Repositories Table - ContextMenu" encoding="csharp" triggers="990" />
-
+		<QAction id="1000" name="Add Repositories page" encoding="csharp" triggers="500"></QAction>
+		
 		<QAction id="20000" name="HTTP Request Handling" encoding="csharp" triggers="30" />
 		<QAction id="20002" name="HTTP Poll Manager Updates" encoding="csharp" row="true" triggers="21006" />
 	</QActions>

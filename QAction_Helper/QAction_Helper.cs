@@ -98,6 +98,21 @@ public static class Parameter
 	public const int getrepositoryreleasescontent_204 = 204;
 	/// <summary>PID: 204 | Type: read</summary>
 	public const int getrepositoryreleasescontent = 204;
+	/// <summary>PID: 501 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int addrepositoryname_501 = 501;
+	/// <summary>PID: 501 | Type: read</summary>
+	public const int addrepositoryname = 501;
+	/// <summary>PID: 502 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int addrepositoryowner_502 = 502;
+	/// <summary>PID: 502 | Type: read</summary>
+	public const int addrepositoryowner = 502;
+	/// <summary>PID: 503 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int addrepositoryurl_503 = 503;
+	/// <summary>PID: 503 | Type: read</summary>
+	public const int addrepositoryurl = 503;
 	public class Write
 	{
 		/// <summary>PID: 50 | Type: write</summary>
@@ -105,6 +120,11 @@ public static class Parameter
 		public const int generalpagebuttons_50 = 50;
 		/// <summary>PID: 50 | Type: write</summary>
 		public const int generalpagebuttons = 50;
+		/// <summary>PID: 51 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int addrepositorypagebutton_51 = 51;
+		/// <summary>PID: 51 | Type: write</summary>
+		public const int addrepositorypagebutton = 51;
 		/// <summary>PID: 110 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public const int apikey_110 = 110;
@@ -115,6 +135,26 @@ public static class Parameter
 		public const int githubapiversion_112 = 112;
 		/// <summary>PID: 112 | Type: write</summary>
 		public const int githubapiversion = 112;
+		/// <summary>PID: 500 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int addrepositorybutton_500 = 500;
+		/// <summary>PID: 500 | Type: write</summary>
+		public const int addrepositorybutton = 500;
+		/// <summary>PID: 601 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int addrepositoryname_601 = 601;
+		/// <summary>PID: 601 | Type: write</summary>
+		public const int addrepositoryname = 601;
+		/// <summary>PID: 602 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int addrepositoryowner_602 = 602;
+		/// <summary>PID: 602 | Type: write</summary>
+		public const int addrepositoryowner = 602;
+		/// <summary>PID: 603 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int addrepositoryurl_603 = 603;
+		/// <summary>PID: 603 | Type: write</summary>
+		public const int addrepositoryurl = 603;
 		/// <summary>PID: 990 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public const int repositories_contextmenu_990 = 990;
@@ -701,10 +741,20 @@ public class WriteParameters
 {
 	/// <summary>PID: 50  | Type: write | DISCREETS: Configuration... = Configuration, Poll Manager... = Poll Manager</summary>
 	public System.Object Generalpagebuttons {get { return Protocol.GetParameter(50); }set { Protocol.SetParameter(50, value); }}
+	/// <summary>PID: 51  | Type: write | DISCREETS: Add Repository... = Add Repository</summary>
+	public System.Object Addrepositorypagebutton {get { return Protocol.GetParameter(51); }set { Protocol.SetParameter(51, value); }}
 	/// <summary>PID: 110  | Type: write</summary>
 	public System.Object Apikey {get { return Protocol.GetParameter(110); }set { Protocol.SetParameter(110, value); }}
 	/// <summary>PID: 112  | Type: write | DISCREETS: 2022-11-28 = 2022-11-28</summary>
 	public System.Object Githubapiversion {get { return Protocol.GetParameter(112); }set { Protocol.SetParameter(112, value); }}
+	/// <summary>PID: 500  | Type: write | DISCREETS: Add Repositories = 1</summary>
+	public System.Object Addrepositorybutton {get { return Protocol.GetParameter(500); }set { Protocol.SetParameter(500, value); }}
+	/// <summary>PID: 601  | Type: write</summary>
+	public System.Object Addrepositoryname {get { return Protocol.GetParameter(601); }set { Protocol.SetParameter(601, value); }}
+	/// <summary>PID: 602  | Type: write</summary>
+	public System.Object Addrepositoryowner {get { return Protocol.GetParameter(602); }set { Protocol.SetParameter(602, value); }}
+	/// <summary>PID: 603  | Type: write</summary>
+	public System.Object Addrepositoryurl {get { return Protocol.GetParameter(603); }set { Protocol.SetParameter(603, value); }}
 	/// <summary>PID: 990  | Type: write | DISCREETS: Add... = 1, Delete selected row(s) = 2</summary>
 	public System.Object Repositories_contextmenu {get { return Protocol.GetParameter(990); }set { Protocol.SetParameter(990, value); }}
 	/// <summary>PID: 21006  | Type: write | DISCREETS: Refresh = 1</summary>
@@ -752,6 +802,8 @@ public interface SLProtocolExt : SLProtocol
 	object Triggerrequesthandling { get; set; }
 	object Generalpagebuttons_50 { get; set; }
 	object Generalpagebuttons { get; set; }
+	object Addrepositorypagebutton_51 { get; set; }
+	object Addrepositorypagebutton { get; set; }
 	object Statuscode_100 { get; set; }
 	object Statuscode { get; set; }
 	object Getrepositoryurl_101 { get; set; }
@@ -772,6 +824,17 @@ public interface SLProtocolExt : SLProtocol
 	object Getrepositorytagscontent { get; set; }
 	object Getrepositoryreleasescontent_204 { get; set; }
 	object Getrepositoryreleasescontent { get; set; }
+	object Addrepositorybutton_500 { get; set; }
+	object Addrepositorybutton { get; set; }
+	object Addrepositoryname_501 { get; set; }
+	object Addrepositoryname { get; set; }
+	object Addrepositoryowner_502 { get; set; }
+	object Addrepositoryowner { get; set; }
+	object Addrepositoryurl_503 { get; set; }
+	object Addrepositoryurl { get; set; }
+	object Addrepositoryname_601 { get; set; }
+	object Addrepositoryowner_602 { get; set; }
+	object Addrepositoryurl_603 { get; set; }
 	object Repositories_contextmenu_990 { get; set; }
 	object Repositories_contextmenu { get; set; }
 	object Repositoriesfullname_1001 { get; set; }
@@ -937,6 +1000,10 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Generalpagebuttons_50 {get { return GetParameter(50); }set { SetParameter(50, value); }}
 	/// <summary>PID: 50  | Type: write | DISCREETS: Configuration... = Configuration, Poll Manager... = Poll Manager</summary>
 	public System.Object Generalpagebuttons {get { return Write.Generalpagebuttons; }set { Write.Generalpagebuttons = value; }}
+	/// <summary>PID: 51  | Type: write | DISCREETS: Add Repository... = Add Repository</summary>
+	public System.Object Addrepositorypagebutton_51 {get { return GetParameter(51); }set { SetParameter(51, value); }}
+	/// <summary>PID: 51  | Type: write | DISCREETS: Add Repository... = Add Repository</summary>
+	public System.Object Addrepositorypagebutton {get { return Write.Addrepositorypagebutton; }set { Write.Addrepositorypagebutton = value; }}
 	/// <summary>PID: 100  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Statuscode_100 {get { return GetParameter(100); }set { SetParameter(100, value); }}
@@ -988,6 +1055,34 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Getrepositoryreleasescontent_204 {get { return GetParameter(204); }set { SetParameter(204, value); }}
 	/// <summary>PID: 204  | Type: read</summary>
 	public System.Object Getrepositoryreleasescontent {get { return GetParameter(204); }set { SetParameter(204, value); }}
+	/// <summary>PID: 500  | Type: write | DISCREETS: Add Repositories = 1</summary>
+	public System.Object Addrepositorybutton_500 {get { return GetParameter(500); }set { SetParameter(500, value); }}
+	/// <summary>PID: 500  | Type: write | DISCREETS: Add Repositories = 1</summary>
+	public System.Object Addrepositorybutton {get { return Write.Addrepositorybutton; }set { Write.Addrepositorybutton = value; }}
+	/// <summary>PID: 501  | Type: read | EXCEPTIONS: Please fill in... = -2</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Addrepositoryname_501 {get { return GetParameter(501); }set { SetParameter(501, value); }}
+	/// <summary>PID: 501  | Type: read | EXCEPTIONS: Please fill in... = -2</summary>
+	public System.Object Addrepositoryname {get { return GetParameter(501); }set { SetParameter(501, value); }}
+	/// <summary>PID: 502  | Type: read | EXCEPTIONS: Please fill in... = -2</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Addrepositoryowner_502 {get { return GetParameter(502); }set { SetParameter(502, value); }}
+	/// <summary>PID: 502  | Type: read | EXCEPTIONS: Please fill in... = -2</summary>
+	public System.Object Addrepositoryowner {get { return GetParameter(502); }set { SetParameter(502, value); }}
+	/// <summary>PID: 503  | Type: read | EXCEPTIONS: Please fill in... = -2</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Addrepositoryurl_503 {get { return GetParameter(503); }set { SetParameter(503, value); }}
+	/// <summary>PID: 503  | Type: read | EXCEPTIONS: Please fill in... = -2</summary>
+	public System.Object Addrepositoryurl {get { return GetParameter(503); }set { SetParameter(503, value); }}
+	/// <summary>PID: 601  | Type: write</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Addrepositoryname_601 {get { return GetParameter(601); }set { SetParameter(601, value); }}
+	/// <summary>PID: 602  | Type: write</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Addrepositoryowner_602 {get { return GetParameter(602); }set { SetParameter(602, value); }}
+	/// <summary>PID: 603  | Type: write</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Addrepositoryurl_603 {get { return GetParameter(603); }set { SetParameter(603, value); }}
 	/// <summary>PID: 990  | Type: write | DISCREETS: Add... = 1, Delete selected row(s) = 2</summary>
 	public System.Object Repositories_contextmenu_990 {get { return GetParameter(990); }set { SetParameter(990, value); }}
 	/// <summary>PID: 990  | Type: write | DISCREETS: Add... = 1, Delete selected row(s) = 2</summary>

@@ -3,14 +3,19 @@
     <TargetFramework>net462</TargetFramework>
     <Company>Skyline Communications</Company>
     <Copyright>© Skyline Communications</Copyright>
-    <AssemblyVersion>2023.0925.0711.32032</AssemblyVersion>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <AssemblyVersion>2023.0925.0711.18083</AssemblyVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QAction_1\QAction_1.csproj" />
+    <ProjectReference Include="..\QAction_Helper\QAction_Helper.csproj" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Skyline.DataMiner.Dev.Protocol" Version="10.1.0.6" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties DisLinkId="" DisProjectType="qactionHelperProject" DisLinkedXmlFile="..\protocol.xml" />
+      <UserProperties DisLinkedXmlFile="..\protocol.xml" DisProjectType="qactionProject" DisLinkId="1000" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
