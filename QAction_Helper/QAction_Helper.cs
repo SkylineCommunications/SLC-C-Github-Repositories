@@ -8,6 +8,11 @@ namespace Skyline.DataMiner.Scripting
 {
 public static class Parameter
 {
+	/// <summary>PID: 5 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int explanation_5 = 5;
+	/// <summary>PID: 5 | Type: read</summary>
+	public const int explanation = 5;
 	/// <summary>PID: 10 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int apikey_10 = 10;
@@ -775,6 +780,8 @@ public interface SLProtocolExt : SLProtocol
 	/// <summary>PID: 21000</summary>
 	PollmanagerQActionTable pollmanager { get; set; }
 	object Afterstartup_dummy { get; set; }
+	object Explanation_5 { get; set; }
+	object Explanation { get; set; }
 	object Apikey_10 { get; set; }
 	object Apikey { get; set; }
 	object Apikeybearer_11 { get; set; }
@@ -943,6 +950,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public PollmanagerQActionTable pollmanager { get; set; }
 	/// <summary>PID: 2  | Type: dummy</summary>
 	public System.Object Afterstartup_dummy {get { return GetParameter(2); }set { SetParameter(2, value); }}
+	/// <summary>PID: 5  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Explanation_5 {get { return GetParameter(5); }set { SetParameter(5, value); }}
+	/// <summary>PID: 5  | Type: read</summary>
+	public System.Object Explanation {get { return GetParameter(5); }set { SetParameter(5, value); }}
 	/// <summary>PID: 10  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Apikey_10 {get { return GetParameter(10); }set { SetParameter(10, value); }}

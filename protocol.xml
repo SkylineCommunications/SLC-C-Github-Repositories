@@ -89,6 +89,39 @@ Any inquiries can be addressed to:
 			<Description>After Startup</Description>
 			<Type>dummy</Type>
 		</Param>
+		<Param id="5" trending="false">
+			<Name>Explanation</Name>
+			<Description>How To Use</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>How to use the protocol</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<DefaultValue>
+					<![CDATA[To start tracking repositories, add one to the repositories table. This can be done via the context menu or via the add repository page.
+Both will ask for the repository owner and name, both can be found in the url of the github repository.
+
+By default this element runs without an api key. This means that the element can only sent 60 request per hour before being blocked out by Github.
+To get more request you can add an api key under General/Configuration page. To generate such a token you can go to Github.com -> Settings -> Developer settings -> Personal access tokens -> tokens (classic), to generate one.]]>
+				</DefaultValue>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>General</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type lines="15">string</Type>
+			</Measurement>
+		</Param>
 		
 		<Param id="10" save="true">
 			<Name>ApiKey</Name>
@@ -237,7 +270,7 @@ Any inquiries can be addressed to:
 				<Positions>
 					<Position>
 						<Page>General</Page>
-						<Column>0</Column>
+						<Column>1</Column>
 						<Row>0</Row>
 					</Position>
 				</Positions>
@@ -269,7 +302,7 @@ Any inquiries can be addressed to:
 				<Positions>
 					<Position>
 						<Page>General</Page>
-						<Column>0</Column>
+						<Column>1</Column>
 						<Row>2</Row>
 					</Position>
 				</Positions>
@@ -301,7 +334,7 @@ Any inquiries can be addressed to:
 				<Positions>
 					<Position>
 						<Page>General</Page>
-						<Column>0</Column>
+						<Column>1</Column>
 						<Row>1</Row>
 					</Position>
 				</Positions>
@@ -329,7 +362,7 @@ Any inquiries can be addressed to:
 				<Positions>
 					<Position>
 						<Page>General</Page>
-						<Column>0</Column>
+						<Column>1</Column>
 						<Row>3</Row>
 					</Position>
 				</Positions>
@@ -373,7 +406,7 @@ Any inquiries can be addressed to:
 				<Positions>
 					<Position>
 						<Page>General</Page>
-						<Column>0</Column>
+						<Column>1</Column>
 						<Row>4</Row>
 					</Position>
 				</Positions>
@@ -656,7 +689,7 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="990">
 			<Name>Repositories_ContextMenu</Name>
 			<Description>Context Menu for Repositories Table</Description>
