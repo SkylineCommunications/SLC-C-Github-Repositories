@@ -65,7 +65,7 @@
 
     public class RepositoryTagsRecords
     {
-        public RepositoryTagsRecords() { { } }
+        public RepositoryTagsRecords() { }
 
         public RepositoryTagsRecords(SLProtocol protocol)
         {
@@ -82,7 +82,6 @@
             object[] repositoryID = (object[])repositorytags[2];
             object[] commitSHA = (object[])repositorytags[3];
 
-            Rows = new List<RepositoryTagsRecord>();
             for (int i = 0; i < iD.Length; i++)
             {
                 Rows.Add(new RepositoryTagsRecord(
@@ -93,7 +92,7 @@
             }
         }
 
-        public List<RepositoryTagsRecord> Rows { get; set; }
+        public List<RepositoryTagsRecord> Rows { get; set; } = new List<RepositoryTagsRecord>();
 
         public void SaveToProtocol(SLProtocol protocol, bool partial = false)
         {

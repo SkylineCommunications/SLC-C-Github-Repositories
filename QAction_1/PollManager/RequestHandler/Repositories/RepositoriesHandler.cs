@@ -20,7 +20,7 @@
             var table = new RepositoriesTable(protocol);
             foreach (var row in table.Rows)
             {
-                protocol.SetParameter(Parameter.getrepositoryurl, $"repos/{row.Owner}/{row.Name}/issues");
+                protocol.SetParameter(Parameter.getrepositoryissuesurl, $"repos/{row.Owner}/{row.Name}/issues?state=all");
                 protocol.CheckTrigger(202);
             }
         }

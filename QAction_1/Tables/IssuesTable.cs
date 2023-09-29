@@ -213,7 +213,6 @@
             object[] closedAt = (object[])repositoryissues[9];
             object[] repositoryID = (object[])repositoryissues[10];
 
-            Rows = new List<RepositoryIssuesRow>();
             for (int i = 0; i < instance.Length; i++)
             {
                 Rows.Add(new RepositoryIssuesRow(

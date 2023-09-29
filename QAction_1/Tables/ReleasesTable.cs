@@ -167,7 +167,6 @@
             object[] publishedAt = (object[])repositoryreleases[11];
             object[] repositoryId = (object[])repositoryreleases[12];
 
-            Rows = new List<RepositoryReleasesRecord>();
             for (int i = 0; i < instance.Length; i++)
             {
                 Rows.Add(new RepositoryReleasesRecord(
@@ -187,7 +186,7 @@
             }
         }
 
-        public List<RepositoryReleasesRecord> Rows { get; set; }
+        public List<RepositoryReleasesRecord> Rows { get; set; } = new List<RepositoryReleasesRecord>();
 
         public void SaveToProtocol(SLProtocol protocol, bool partial = false)
         {

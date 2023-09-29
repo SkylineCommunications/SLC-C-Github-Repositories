@@ -182,7 +182,6 @@
             object[] watcher = (object[])repositoriestable[11];
             object[] language = (object[])repositoriestable[12];
 
-            Rows = new List<RepositoriesTableRow>();
             for (int i = 0; i < name.Length; i++)
             {
                 Rows.Add(new RepositoriesTableRow(
@@ -202,7 +201,7 @@
             }
         }
 
-        public List<RepositoriesTableRow> Rows { get; set; }
+        public List<RepositoriesTableRow> Rows { get; set; } = new List<RepositoriesTableRow>();
 
         public void SaveToProtocol(SLProtocol protocol, bool partial = false)
         {

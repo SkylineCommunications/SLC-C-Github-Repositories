@@ -55,7 +55,7 @@ Any inquiries can be addressed to:
 	<DeviceOID>0</DeviceOID>
 	<ElementType>Github Repositories</ElementType>
 	<Type relativeTimers="true">http</Type>
-	<Display defaultPage="General" pageOrder="General;----------;Repositories;Issues" wideColumnPages=""/>
+	<Display defaultPage="General" pageOrder="General;----------;Repositories - Overview;Repositories;Issues" wideColumnPages=""/>
 	<SNMP includepages="true">auto</SNMP>
 
 	<Compliancies>
@@ -70,6 +70,19 @@ Any inquiries can be addressed to:
 		<Relation name="Tags Releases" path="1200;1400"/>
 	</Relations>
 
+	<TreeControls>
+		<TreeControl parameterId="996">
+			<Hierarchy>
+				<Table id="1000"/>
+			</Hierarchy>
+			<ExtraTabs>
+				<Tab title="Tags" tableId="1000" type="relation" parameter="1203"/>
+				<Tab title="Releases" tableId="1000" type="relation" parameter="1413"/>
+				<Tab title="Issues" tableId="1000" type="relation" parameter="2011"/>
+			</ExtraTabs>
+		</TreeControl>
+	</TreeControls>
+	
 	<Params>
 		<Param id="2">
 			<Name>AfterStartup</Name>
@@ -545,7 +558,7 @@ Any inquiries can be addressed to:
 				<DefaultValue>-2</DefaultValue>
 				<Exceptions>
 					<Exception id="2" value="-2">
-						<Display>Please fill in...</Display>
+						<Display>Please Fill in...</Display>
 						<Value>-2</Value>
 					</Exception>
 				</Exceptions>
@@ -601,7 +614,7 @@ Any inquiries can be addressed to:
 				<DefaultValue>-2</DefaultValue>
 				<Exceptions>
 					<Exception id="2" value="-2">
-						<Display>Please fill in...</Display>
+						<Display>Please Fill in...</Display>
 						<Value>-2</Value>
 					</Exception>
 				</Exceptions>
@@ -643,49 +656,7 @@ Any inquiries can be addressed to:
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		<Param id="503" trending="false">
-			<Name>AddRepositoryUrl</Name>
-			<Description>Add Repository Url</Description>
-			<Type>read</Type>
-			<Information>
-				<Subtext>The url for the repository to add.</Subtext>
-			</Information>
-			<Interprete>
-				<RawType>other</RawType>
-				<Type>string</Type>
-				<LengthType>next param</LengthType>
-				<DefaultValue>-2</DefaultValue>
-				<Exceptions>
-					<Exception id="2" value="-2">
-						<Display>Please fill in...</Display>
-						<Value>-2</Value>
-					</Exception>
-				</Exceptions>
-			</Interprete>
-			<Display>
-				<RTDisplay>true</RTDisplay>
-			</Display>
-			<Measurement>
-				<Type>string</Type>
-			</Measurement>
-		</Param>
-		<Param id="603" setter="true">
-			<Name>AddRepositoryUrl</Name>
-			<Description>Add Repository Url</Description>
-			<Type>write</Type>
-			<Interprete>
-				<RawType>other</RawType>
-				<Type>string</Type>
-				<LengthType>next param</LengthType>
-			</Interprete>
-			<Display>
-				<RTDisplay>true</RTDisplay>
-			</Display>
-			<Measurement>
-				<Type>string</Type>
-			</Measurement>
-		</Param>
-		
+
 		<Param id="990">
 			<Name>Repositories_ContextMenu</Name>
 			<Description>Context Menu for Repositories Table</Description>
@@ -712,6 +683,27 @@ Any inquiries can be addressed to:
 				</Discreets>
 			</Measurement>
 		</Param>
+		<Param id="996">
+			<Name>RepositoriesOverview</Name>
+			<Description>Repositories Overview</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Repositories - Overview</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+		</Param>
+		
 		<Param id="1000">
 			<Name>Repositories</Name>
 			<Description>Repositories</Description>
@@ -1201,7 +1193,7 @@ Any inquiries can be addressed to:
 			<Name>RepositoryReleases</Name>
 			<Description>Repository Releases</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" options="volatile">
 				<ColumnOption idx="0" pid="1401" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="1402" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="1403" type="retrieved" options="" />
@@ -1510,7 +1502,7 @@ Any inquiries can be addressed to:
 			<Name>RepositoryIssues</Name>
 			<Description>Repository Issues</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" options="volatile">
 				<ColumnOption idx="0" pid="2001" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="2002" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="2003" type="retrieved" options="" />
@@ -1881,7 +1873,7 @@ Any inquiries can be addressed to:
 				</Discreets>
 			</Measurement>
 		</Param>
-		<Param id="21053">
+		<Param id="21053" setter="true">
 			<Name>PollManagerPollState</Name>
 			<Description>Poll State (Poll Manager)</Description>
 			<Type>write</Type>
@@ -1933,7 +1925,7 @@ Any inquiries can be addressed to:
 				<Type options="time">number</Type>
 			</Measurement>
 		</Param>
-		<Param id="21054">
+		<Param id="21054" setter="true">
 			<Name>PollManagerPollFrequency</Name>
 			<Description>Poll Frequency (Poll Manager)</Description>
 			<Type>write</Type>

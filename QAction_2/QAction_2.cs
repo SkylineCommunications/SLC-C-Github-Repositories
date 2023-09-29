@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
 using QAction_1.PollManager;
 using Skyline.DataMiner.Scripting;
 
@@ -19,8 +16,6 @@ public static class QAction
         try
         {
             PollManager.InitPollManagerTableSettings(protocol);
-            protocol.ClearAllKeys(Parameter.Repositorytags.tablePid);
-            protocol.ClearAllKeys(Parameter.Repositoryreleases.tablePid);
         }
         catch (Exception ex)
         {

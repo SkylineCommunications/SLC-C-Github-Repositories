@@ -108,11 +108,11 @@ public static class Parameter
 	public const int addrepositoryowner_502 = 502;
 	/// <summary>PID: 502 | Type: read</summary>
 	public const int addrepositoryowner = 502;
-	/// <summary>PID: 503 | Type: read</summary>
+	/// <summary>PID: 996 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public const int addrepositoryurl_503 = 503;
-	/// <summary>PID: 503 | Type: read</summary>
-	public const int addrepositoryurl = 503;
+	public const int repositoriesoverview_996 = 996;
+	/// <summary>PID: 996 | Type: read</summary>
+	public const int repositoriesoverview = 996;
 	public class Write
 	{
 		/// <summary>PID: 50 | Type: write</summary>
@@ -150,11 +150,6 @@ public static class Parameter
 		public const int addrepositoryowner_602 = 602;
 		/// <summary>PID: 602 | Type: write</summary>
 		public const int addrepositoryowner = 602;
-		/// <summary>PID: 603 | Type: write</summary>
-		[EditorBrowsable(EditorBrowsableState.Never)]
-		public const int addrepositoryurl_603 = 603;
-		/// <summary>PID: 603 | Type: write</summary>
-		public const int addrepositoryurl = 603;
 		/// <summary>PID: 990 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public const int repositories_contextmenu_990 = 990;
@@ -753,8 +748,6 @@ public class WriteParameters
 	public System.Object Addrepositoryname {get { return Protocol.GetParameter(601); }set { Protocol.SetParameter(601, value); }}
 	/// <summary>PID: 602  | Type: write</summary>
 	public System.Object Addrepositoryowner {get { return Protocol.GetParameter(602); }set { Protocol.SetParameter(602, value); }}
-	/// <summary>PID: 603  | Type: write</summary>
-	public System.Object Addrepositoryurl {get { return Protocol.GetParameter(603); }set { Protocol.SetParameter(603, value); }}
 	/// <summary>PID: 990  | Type: write | DISCREETS: Add... = 1, Delete selected row(s) = 2</summary>
 	public System.Object Repositories_contextmenu {get { return Protocol.GetParameter(990); }set { Protocol.SetParameter(990, value); }}
 	/// <summary>PID: 21006  | Type: write | DISCREETS: Refresh = 1</summary>
@@ -830,13 +823,12 @@ public interface SLProtocolExt : SLProtocol
 	object Addrepositoryname { get; set; }
 	object Addrepositoryowner_502 { get; set; }
 	object Addrepositoryowner { get; set; }
-	object Addrepositoryurl_503 { get; set; }
-	object Addrepositoryurl { get; set; }
 	object Addrepositoryname_601 { get; set; }
 	object Addrepositoryowner_602 { get; set; }
-	object Addrepositoryurl_603 { get; set; }
 	object Repositories_contextmenu_990 { get; set; }
 	object Repositories_contextmenu { get; set; }
+	object Repositoriesoverview_996 { get; set; }
+	object Repositoriesoverview { get; set; }
 	object Repositoriesfullname_1001 { get; set; }
 	object Repositoriesfullname { get; set; }
 	object Repositoriesname_1002 { get; set; }
@@ -1059,34 +1051,31 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Addrepositorybutton_500 {get { return GetParameter(500); }set { SetParameter(500, value); }}
 	/// <summary>PID: 500  | Type: write | DISCREETS: Add Repositories = 1</summary>
 	public System.Object Addrepositorybutton {get { return Write.Addrepositorybutton; }set { Write.Addrepositorybutton = value; }}
-	/// <summary>PID: 501  | Type: read | EXCEPTIONS: Please fill in... = -2</summary>
+	/// <summary>PID: 501  | Type: read | EXCEPTIONS: Please Fill in... = -2</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Addrepositoryname_501 {get { return GetParameter(501); }set { SetParameter(501, value); }}
-	/// <summary>PID: 501  | Type: read | EXCEPTIONS: Please fill in... = -2</summary>
+	/// <summary>PID: 501  | Type: read | EXCEPTIONS: Please Fill in... = -2</summary>
 	public System.Object Addrepositoryname {get { return GetParameter(501); }set { SetParameter(501, value); }}
-	/// <summary>PID: 502  | Type: read | EXCEPTIONS: Please fill in... = -2</summary>
+	/// <summary>PID: 502  | Type: read | EXCEPTIONS: Please Fill in... = -2</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Addrepositoryowner_502 {get { return GetParameter(502); }set { SetParameter(502, value); }}
-	/// <summary>PID: 502  | Type: read | EXCEPTIONS: Please fill in... = -2</summary>
+	/// <summary>PID: 502  | Type: read | EXCEPTIONS: Please Fill in... = -2</summary>
 	public System.Object Addrepositoryowner {get { return GetParameter(502); }set { SetParameter(502, value); }}
-	/// <summary>PID: 503  | Type: read | EXCEPTIONS: Please fill in... = -2</summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Addrepositoryurl_503 {get { return GetParameter(503); }set { SetParameter(503, value); }}
-	/// <summary>PID: 503  | Type: read | EXCEPTIONS: Please fill in... = -2</summary>
-	public System.Object Addrepositoryurl {get { return GetParameter(503); }set { SetParameter(503, value); }}
 	/// <summary>PID: 601  | Type: write</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Addrepositoryname_601 {get { return GetParameter(601); }set { SetParameter(601, value); }}
 	/// <summary>PID: 602  | Type: write</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Addrepositoryowner_602 {get { return GetParameter(602); }set { SetParameter(602, value); }}
-	/// <summary>PID: 603  | Type: write</summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Addrepositoryurl_603 {get { return GetParameter(603); }set { SetParameter(603, value); }}
 	/// <summary>PID: 990  | Type: write | DISCREETS: Add... = 1, Delete selected row(s) = 2</summary>
 	public System.Object Repositories_contextmenu_990 {get { return GetParameter(990); }set { SetParameter(990, value); }}
 	/// <summary>PID: 990  | Type: write | DISCREETS: Add... = 1, Delete selected row(s) = 2</summary>
 	public System.Object Repositories_contextmenu {get { return Write.Repositories_contextmenu; }set { Write.Repositories_contextmenu = value; }}
+	/// <summary>PID: 996  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoriesoverview_996 {get { return GetParameter(996); }set { SetParameter(996, value); }}
+	/// <summary>PID: 996  | Type: read</summary>
+	public System.Object Repositoriesoverview {get { return GetParameter(996); }set { SetParameter(996, value); }}
 	/// <summary>PID: 1001  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoriesfullname_1001 {get { return GetParameter(1001); }set { SetParameter(1001, value); }}

@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Skyline.DataMiner.Scripting;
@@ -33,7 +31,7 @@ public static class QAction
         try
         {
             var trigger = protocol.GetTriggerParameter();
-            if(handlers.ContainsKey(trigger))
+            if (handlers.ContainsKey(trigger))
             {
                 handlers[trigger](protocol);
             }
@@ -50,7 +48,7 @@ public static class QAction
 
     public static void ParseGetRepositoryResponse(SLProtocol protocol)
     {
-        if(!protocol.IsSuccessStatusCode())
+        if (!protocol.IsSuccessStatusCode())
         {
             return;
         }
@@ -76,7 +74,7 @@ public static class QAction
         // Check if row exists, add or edit.
         var table = new RepositoriesTable(protocol);
         var exist = table.Rows.SingleOrDefault(row => row.FullName == response.FullName);
-        if(exist == default(RepositoriesTableRow))
+        if (exist == default(RepositoriesTableRow))
         {
             table.Rows.Add(repo);
         }
@@ -100,7 +98,7 @@ public static class QAction
         var pattern = "https:\\/\\/api.github.com\\/repos\\/(.*)\\/(.*)\\/issues\\/(\\d+)";
         var options = RegexOptions.Multiline;
 
-        var table = new RepositoryIssuesTable(protocol);
+        var table = new RepositoryIssuesTable();
         foreach (var issue in response)
         {
             // Parse url to check which respository this issue is linked to
@@ -122,12 +120,15 @@ public static class QAction
         }
 
         var toRemove = table.Rows.RemoveAll(row => String.IsNullOrEmpty(row.Title));
-        if(toRemove > 0)
+        if (toRemove > 0)
         {
             protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|Removed {toRemove} old rows.", LogType.Information, LogLevel.NoLogging);
         }
 
-        table.SaveToProtocol(protocol);
+        if (table.Rows.Count > 0)
+        {
+            table.SaveToProtocol(protocol, true);
+        }
     }
 
     private static void ParseGetRepositoryTagsResponse(SLProtocol protocol)
@@ -139,7 +140,7 @@ public static class QAction
 
         var response = JsonConvert.DeserializeObject<List<RepositoryTagsResponse>>(Convert.ToString(protocol.GetParameter(Parameter.getrepositorytagscontent)));
 
-        if(response == null)
+        if (response == null)
         {
             protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|response was null.", LogType.Error, LogLevel.NoLogging);
             return;
@@ -148,10 +149,10 @@ public static class QAction
         var pattern = "https:\\/\\/api.github.com\\/repos\\/(.*)\\/(.*)\\/commits\\/(.*)";
         var options = RegexOptions.Multiline;
 
-        var table = new RepositoryTagsRecords(protocol);
+        var table = new RepositoryTagsRecords();
         foreach (var tag in response)
         {
-            if(tag == null)
+            if (tag == null)
             {
                 protocol.Log($"QA{protocol.QActionID}|GetRepositoryTagsResponse|Tag was null.", LogType.Information, LogLevel.NoLogging);
                 continue;
@@ -168,7 +169,10 @@ public static class QAction
             });
         }
 
-        table.SaveToProtocol(protocol);
+        if (table.Rows.Count > 0)
+        {
+            table.SaveToProtocol(protocol, true);
+        }
     }
 
     private static void ParseGetRepositoryReleasesResponse(SLProtocol protocol)
@@ -189,7 +193,7 @@ public static class QAction
         var pattern = "https:\\/\\/api.github.com\\/repos\\/(.*)\\/(.*)\\/releases\\/(\\d+)";
         var options = RegexOptions.Multiline;
 
-        var table = new RepositoryReleasesRecords(protocol);
+        var table = new RepositoryReleasesRecords();
         foreach (var release in response)
         {
             if (release == null)
@@ -198,7 +202,7 @@ public static class QAction
                 continue;
             }
 
-            if(release.Url == null)
+            if (release.Url == null)
             {
                 protocol.Log($"QA{protocol.QActionID}|GetRepositoryReleasesResponse|Release url null.", LogType.Information, LogLevel.NoLogging);
                 continue;
@@ -224,6 +228,9 @@ public static class QAction
             });
         }
 
-        table.SaveToProtocol(protocol);
+        if(table.Rows.Count > 0)
+        {
+            table.SaveToProtocol(protocol, true);
+        }
     }
 }
