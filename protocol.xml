@@ -1155,7 +1155,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Name>RepositoryTags</Name>
 			<Description>Repository Tags</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0" options="volatile">
+			<ArrayOptions index="0">
 				<ColumnOption idx="0" pid="1201" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="1202" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="1203" type="retrieved" options=";foreignKey=1000" />
@@ -1259,7 +1259,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Name>RepositoryReleases</Name>
 			<Description>Repository Releases</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0" options="volatile">
+			<ArrayOptions index="0">
 				<ColumnOption idx="0" pid="1401" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="1402" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="1403" type="retrieved" options="" />
@@ -1568,7 +1568,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Name>RepositoryIssues</Name>
 			<Description>Repository Issues</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0" options="volatile">
+			<ArrayOptions index="0">
 				<ColumnOption idx="0" pid="2001" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="2002" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="2003" type="retrieved" options="" />

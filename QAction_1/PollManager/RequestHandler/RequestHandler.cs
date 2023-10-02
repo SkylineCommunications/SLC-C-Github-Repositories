@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using QAction_1.PollManager.RequestHandler.Issues;
     using QAction_1.PollManager.RequestHandler.Repositories;
     using Skyline.DataMiner.Scripting;
 

@@ -6,7 +6,7 @@
     <AssemblyVersion>2023.0925.0711.32032</AssemblyVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Skyline.DataMiner.Dev.Protocol" Version="10.1.0.6" />
+    <PackageReference Include="Skyline.DataMiner.Dev.Protocol" Version="10.3.9" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

@@ -1,7 +1,9 @@
 ﻿namespace Skyline.Protocol.Extensions
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Linq;
     using System.Reflection;
     using System.Text.RegularExpressions;
     using Skyline.DataMiner.Scripting;
@@ -42,6 +44,15 @@
             }
 
             return name;
+        }
+
+        public static List<List<T>> ToRows<T>(this IEnumerable<IEnumerable<T>> columns)
+        {
+            return columns.SelectMany(x => x)
+                .Select((x, i) => new { V = x, Index = i })
+                .GroupBy(x => (x.Index + 1) % columns.First().Count())
+                .Select(g => g.Select(x => x.V).ToList())
+                .ToList();
         }
     }
 }
