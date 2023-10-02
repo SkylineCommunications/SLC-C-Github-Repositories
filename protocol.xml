@@ -91,7 +91,7 @@ Any inquiries can be addressed to:
 		</Param>
 		<Param id="5" trending="false">
 			<Name>Explanation</Name>
-			<Description>How To Use</Description>
+			<Description>How to Use</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>How to use the protocol</Subtext>
@@ -197,6 +197,10 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 				<DefaultValue>2022-11-28</DefaultValue>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<Normal>2022-11-28</Normal>
+			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Positions>
@@ -259,6 +263,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<CL>60</CL>
+				<Normal>5000</Normal>
+			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<!-- SuppressValidator 2.9.4 This is correct -->
@@ -291,6 +300,14 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<CL>250</CL>
+				<MaL>750</MaL>
+				<MiL>1500</MiL>
+				<WaL>2500</WaL>
+				<Normal>6000</Normal>
+			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<!-- SuppressValidator 2.9.4 This is correct -->
@@ -323,6 +340,14 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<Normal>0</Normal>
+				<WaH>2500</WaH>
+				<MiH>3500</MiH>
+				<MaH>4250</MaH>
+				<CH>4750</CH>
+			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<!-- SuppressValidator 2.9.4 This is correct -->
@@ -1021,6 +1046,14 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Exception>
 				</Exceptions>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<Normal>0</Normal>
+				<WaH>100000</WaH>
+				<MiH>150000</MiH>
+				<MaH>250000</MaH>
+				<CH>1000000</CH>
+			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Units>kB</Units>
@@ -1677,6 +1710,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<Normal>closed</Normal>
+				<CH>open</CH>
+			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
