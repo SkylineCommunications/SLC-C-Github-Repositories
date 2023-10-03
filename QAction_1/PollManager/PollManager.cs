@@ -1,8 +1,9 @@
-﻿namespace QAction_1.PollManager
+﻿namespace Skyline.Protocol.PollManager
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using Skyline.DataMiner.Net.Messages;
     using Skyline.DataMiner.Scripting;
     using Skyline.Protocol.Extensions;

@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using QAction_1.PollManager;
+
 using Skyline.DataMiner.Scripting;
 using Skyline.Protocol.Extensions;
+using Skyline.Protocol.PollManager;
 
 /// <summary>
 /// DataMiner QAction Class.

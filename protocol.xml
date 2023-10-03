@@ -540,9 +540,29 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
+		<Param id="251">
+			<Name>GetRepositoryLinkHeader</Name>
+			<Description>Get Repository Link Header</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
 		<Param id="202">
 			<Name>GetRepositoryIssuesContent</Name>
 			<Description>Get Repository Issues Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="252">
+			<Name>GetRepositoryIssuesLinkHeader</Name>
+			<Description>Get Repository Issues Link Header</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -560,9 +580,29 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
+		<Param id="253">
+			<Name>GetRepositoryTagsLinkHeader</Name>
+			<Description>Get Repository Tags Link Header</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
 		<Param id="204">
 			<Name>GetRepositoryReleasesContent</Name>
 			<Description>Get Repository Releases Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="254">
+			<Name>GetRepositoryReleasesLinkHeader</Name>
+			<Description>Get Repository Releases Link Header</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -1839,7 +1879,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="21000">
 			<Name>PollManager</Name>
 			<Description>Poll Manager</Description>
@@ -2133,6 +2173,7 @@ To get more request you can add an api key under General/Configuration page. To 
 						<Header key="x-ratelimit-remaining" pid="16"></Header>
 						<Header key="x-ratelimit-used" pid="17"></Header>
 						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="251"/>
 					</Headers>
 				</Response>
 			</Connection>
@@ -2150,6 +2191,13 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Request>
 				<Response statusCode="100">
 					<Content pid="202"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="252"/>
+					</Headers>
 				</Response>
 			</Connection>
 		</Session>
@@ -2166,6 +2214,13 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Request>
 				<Response statusCode="100">
 					<Content pid="203"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="253"/>
+					</Headers>
 				</Response>
 			</Connection>
 		</Session>
@@ -2182,6 +2237,13 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Request>
 				<Response statusCode="100">
 					<Content pid="204"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="254"/>
+					</Headers>
 				</Response>
 			</Connection>
 		</Session>
@@ -2278,6 +2340,43 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Id>204</Id>
 			</Content>
 		</Trigger>
+		
+		<Trigger id="251">
+			<Name>After GetRepository</Name>
+			<On id="201">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>251</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="252">
+			<Name>After GetRepository Issues</Name>
+			<On id="202">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>252</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="253">
+			<Name>After GetRepository Tags</Name>
+			<On id="203">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>253</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="254">
+			<Name>After GetRepository Releases</Name>
+			<On id="204">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>254</Id>
+			</Content>
+		</Trigger>
 	</Triggers>
 
 	<Actions>
@@ -2317,6 +2416,27 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Name>Get Repository Releases</Name>
 			<On id="204">group</On>
 			<Type>execute next</Type>
+		</Action>
+
+		<Action id="251">
+			<Name>Clear Get Repository Link Header</Name>
+			<On id="251">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="252">
+			<Name>Clear Get Repository Issues Link Header</Name>
+			<On id="252">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="253">
+			<Name>Clear Get Repository Tags Link Header</Name>
+			<On id="253">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="254">
+			<Name>Clear Get Repository Releases Link Header</Name>
+			<On id="254">parameter</On>
+			<Type>clear</Type>
 		</Action>
 	</Actions>
 

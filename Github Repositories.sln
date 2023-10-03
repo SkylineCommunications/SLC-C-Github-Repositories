@@ -18,6 +18,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DefaultTemplates", "DefaultTemplates", "{F2683535-3B81-4454-9E99-120E5016BBCE}"
 	ProjectSection(SolutionItems) = preProject
 		DefaultTemplates\ABOUT.md = DefaultTemplates\ABOUT.md
+		DefaultTemplates\Template_Default.xml = DefaultTemplates\Template_Default.xml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{447084A2-8605-4FEC-9298-91D4E609D560}"

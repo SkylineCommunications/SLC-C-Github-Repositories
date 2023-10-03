@@ -103,6 +103,26 @@ public static class Parameter
 	public const int getrepositoryreleasescontent_204 = 204;
 	/// <summary>PID: 204 | Type: read</summary>
 	public const int getrepositoryreleasescontent = 204;
+	/// <summary>PID: 251 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int getrepositorylinkheader_251 = 251;
+	/// <summary>PID: 251 | Type: read</summary>
+	public const int getrepositorylinkheader = 251;
+	/// <summary>PID: 252 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int getrepositoryissueslinkheader_252 = 252;
+	/// <summary>PID: 252 | Type: read</summary>
+	public const int getrepositoryissueslinkheader = 252;
+	/// <summary>PID: 253 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int getrepositorytagslinkheader_253 = 253;
+	/// <summary>PID: 253 | Type: read</summary>
+	public const int getrepositorytagslinkheader = 253;
+	/// <summary>PID: 254 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int getrepositoryreleaseslinkheader_254 = 254;
+	/// <summary>PID: 254 | Type: read</summary>
+	public const int getrepositoryreleaseslinkheader = 254;
 	/// <summary>PID: 501 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int addrepositoryname_501 = 501;
@@ -824,6 +844,14 @@ public interface SLProtocolExt : SLProtocol
 	object Getrepositorytagscontent { get; set; }
 	object Getrepositoryreleasescontent_204 { get; set; }
 	object Getrepositoryreleasescontent { get; set; }
+	object Getrepositorylinkheader_251 { get; set; }
+	object Getrepositorylinkheader { get; set; }
+	object Getrepositoryissueslinkheader_252 { get; set; }
+	object Getrepositoryissueslinkheader { get; set; }
+	object Getrepositorytagslinkheader_253 { get; set; }
+	object Getrepositorytagslinkheader { get; set; }
+	object Getrepositoryreleaseslinkheader_254 { get; set; }
+	object Getrepositoryreleaseslinkheader { get; set; }
 	object Addrepositorybutton_500 { get; set; }
 	object Addrepositorybutton { get; set; }
 	object Addrepositoryname_501 { get; set; }
@@ -1059,6 +1087,26 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Getrepositoryreleasescontent_204 {get { return GetParameter(204); }set { SetParameter(204, value); }}
 	/// <summary>PID: 204  | Type: read</summary>
 	public System.Object Getrepositoryreleasescontent {get { return GetParameter(204); }set { SetParameter(204, value); }}
+	/// <summary>PID: 251  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Getrepositorylinkheader_251 {get { return GetParameter(251); }set { SetParameter(251, value); }}
+	/// <summary>PID: 251  | Type: read</summary>
+	public System.Object Getrepositorylinkheader {get { return GetParameter(251); }set { SetParameter(251, value); }}
+	/// <summary>PID: 252  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Getrepositoryissueslinkheader_252 {get { return GetParameter(252); }set { SetParameter(252, value); }}
+	/// <summary>PID: 252  | Type: read</summary>
+	public System.Object Getrepositoryissueslinkheader {get { return GetParameter(252); }set { SetParameter(252, value); }}
+	/// <summary>PID: 253  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Getrepositorytagslinkheader_253 {get { return GetParameter(253); }set { SetParameter(253, value); }}
+	/// <summary>PID: 253  | Type: read</summary>
+	public System.Object Getrepositorytagslinkheader {get { return GetParameter(253); }set { SetParameter(253, value); }}
+	/// <summary>PID: 254  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Getrepositoryreleaseslinkheader_254 {get { return GetParameter(254); }set { SetParameter(254, value); }}
+	/// <summary>PID: 254  | Type: read</summary>
+	public System.Object Getrepositoryreleaseslinkheader {get { return GetParameter(254); }set { SetParameter(254, value); }}
 	/// <summary>PID: 500  | Type: write | DISCREETS: Add Repositories = 1</summary>
 	public System.Object Addrepositorybutton_500 {get { return GetParameter(500); }set { SetParameter(500, value); }}
 	/// <summary>PID: 500  | Type: write | DISCREETS: Add Repositories = 1</summary>

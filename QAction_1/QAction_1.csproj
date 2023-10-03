@@ -4,7 +4,8 @@
     <Company>Skyline Communications</Company>
     <Copyright>© Skyline Communications</Copyright>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <AssemblyVersion>2023.0925.0711.32727</AssemblyVersion>
+    <AssemblyVersion>2023.1003.1224.22851</AssemblyVersion>
+    <RootNamespace>Skyline.Protocol</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\QAction_Helper\QAction_Helper.csproj" />
@@ -12,6 +13,9 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Skyline.DataMiner.Dev.Protocol" Version="10.3.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

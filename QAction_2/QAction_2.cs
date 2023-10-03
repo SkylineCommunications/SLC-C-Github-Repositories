@@ -1,6 +1,6 @@
 using System;
-using QAction_1.PollManager;
 using Skyline.DataMiner.Scripting;
+using Skyline.Protocol.PollManager;
 
 /// <summary>
 /// DataMiner QAction Class: After Startup.
