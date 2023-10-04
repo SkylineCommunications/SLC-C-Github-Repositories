@@ -15,7 +15,7 @@ public static class QAction
     {
         try
         {
-            PollManager.InitPollManagerTableSettings(protocol);
+            PollManager.InitPollManagerTableSettings(protocol, true);
         }
         catch (Exception ex)
         {

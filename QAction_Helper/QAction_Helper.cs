@@ -133,6 +133,11 @@ public static class Parameter
 	public const int addrepositoryowner_502 = 502;
 	/// <summary>PID: 502 | Type: read</summary>
 	public const int addrepositoryowner = 502;
+	/// <summary>PID: 992 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int repositories_changerequest_992 = 992;
+	/// <summary>PID: 992 | Type: read</summary>
+	public const int repositories_changerequest = 992;
 	/// <summary>PID: 996 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int repositoriesoverview_996 = 996;
@@ -862,6 +867,8 @@ public interface SLProtocolExt : SLProtocol
 	object Addrepositoryowner_602 { get; set; }
 	object Repositories_contextmenu_990 { get; set; }
 	object Repositories_contextmenu { get; set; }
+	object Repositories_changerequest_992 { get; set; }
+	object Repositories_changerequest { get; set; }
 	object Repositoriesoverview_996 { get; set; }
 	object Repositoriesoverview { get; set; }
 	object Repositoriesfullname_1001 { get; set; }
@@ -1131,6 +1138,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositories_contextmenu_990 {get { return GetParameter(990); }set { SetParameter(990, value); }}
 	/// <summary>PID: 990  | Type: write | DISCREETS: Add... = 1, Delete selected row(s) = 2</summary>
 	public System.Object Repositories_contextmenu {get { return Write.Repositories_contextmenu; }set { Write.Repositories_contextmenu = value; }}
+	/// <summary>PID: 992  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositories_changerequest_992 {get { return GetParameter(992); }set { SetParameter(992, value); }}
+	/// <summary>PID: 992  | Type: read</summary>
+	public System.Object Repositories_changerequest {get { return GetParameter(992); }set { SetParameter(992, value); }}
 	/// <summary>PID: 996  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoriesoverview_996 {get { return GetParameter(996); }set { SetParameter(996, value); }}

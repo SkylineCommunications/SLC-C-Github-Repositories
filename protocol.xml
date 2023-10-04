@@ -47,7 +47,7 @@ Any inquiries can be addressed to:
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>Github Repositories</Name>
 	<Description>Github Repositories DataMiner connector</Description>
-	<Version>1.0.0.2</Version>
+	<Version>1.0.0.3</Version>
 	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Github</Vendor>
@@ -780,6 +780,19 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Discreet>
 				</Discreets>
 			</Measurement>
+		</Param>
+		<Param id="992">
+			<Name>Repositories_ChangeRequest</Name>
+			<Description>Repositories Change Request</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay onAppLevel="true">true</RTDisplay>
+			</Display>
 		</Param>
 		<Param id="996">
 			<Name>RepositoriesOverview</Name>
@@ -2148,6 +2161,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		<QAction id="200" name="Parse Responses" encoding="csharp" triggers="201;202;203;204"></QAction>
 
 		<QAction id="990" name="Repositories Table - ContextMenu" encoding="csharp" triggers="990" />
+		<QAction id="992" name="Repositories Table - Changes" encoding="csharp" triggers="992" />
 		<QAction id="1000" name="Add Repositories page" encoding="csharp" triggers="500"></QAction>
 		
 		<QAction id="20000" name="HTTP Request Handling" encoding="csharp" triggers="30" />
@@ -2505,6 +2519,16 @@ To get more request you can add an api key under General/Configuration page. To 
 										<References>
 											<Reference type="Github">https://github.com/SkylineCommunications/SLC-Connector-Github-Repositories/issues/1</Reference>
 										</References>
+									</MinorVersion>
+									<MinorVersion id="3" basedOn="1.0.0.2">
+										<Date>2023-10-04</Date>
+										<Provider>
+											<Author>AMA</Author>
+											<Company>Skyline Communications</Company>
+										</Provider>
+										<Changes>
+											<Change>Changed the way the context menu works. Now you can more easily add/remove repos from automation scripts</Change>
+										</Changes>
 									</MinorVersion>
 								</MinorVersions>
 							</MajorVersion>
