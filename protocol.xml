@@ -47,7 +47,7 @@ Any inquiries can be addressed to:
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>Github Repositories</Name>
 	<Description>Github Repositories DataMiner connector</Description>
-	<Version>1.0.0.1</Version>
+	<Version>1.0.0.2</Version>
 	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Github</Vendor>
@@ -2492,6 +2492,19 @@ To get more request you can add an api key under General/Configuration page. To 
 										<Changes>
 											<NewFeature>Initial version</NewFeature>
 										</Changes>
+									</MinorVersion>
+									<MinorVersion id="2" basedOn="1.0.0.1">
+										<Date>2023-10-04</Date>
+										<Provider>
+											<Author>AMA</Author>
+											<Company>Skyline Communications</Company>
+										</Provider>
+										<Changes>
+											<Fix>Issue 1 pagination</Fix>
+										</Changes>
+										<References>
+											<Reference type="Github">https://github.com/SkylineCommunications/SLC-Connector-Github-Repositories/issues/1</Reference>
+										</References>
 									</MinorVersion>
 								</MinorVersions>
 							</MajorVersion>
