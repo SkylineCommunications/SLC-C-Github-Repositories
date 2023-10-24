@@ -47,7 +47,7 @@ Any inquiries can be addressed to:
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>Github Repositories</Name>
 	<Description>Github Repositories DataMiner connector</Description>
-	<Version>1.0.0.3</Version>
+	<Version>1.0.0.4</Version>
 	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Github</Vendor>
@@ -55,7 +55,7 @@ Any inquiries can be addressed to:
 	<DeviceOID>0</DeviceOID>
 	<ElementType>Github Repositories</ElementType>
 	<Type relativeTimers="true">http</Type>
-	<Display defaultPage="General" pageOrder="General;----------;Repositories - Overview;Repositories;Issues" wideColumnPages=""/>
+	<Display defaultPage="General" pageOrder="General;----------;Repositories - Overview;Repositories;Issues;Workflows" wideColumnPages=""/>
 	<SNMP includepages="true">auto</SNMP>
 
 	<Compliancies>
@@ -67,6 +67,7 @@ Any inquiries can be addressed to:
 		<Relation name="Repository Issues" path="1000;2000"/>
 		<Relation name="Repository Tags" path="1000;1200"/>
 		<Relation name="Repository Releases" path="1000;1400"/>
+		<Relation name="Repository Workflows" path="1000;1600"/>
 		<Relation name="Tags Releases" path="1200;1400"/>
 	</Relations>
 
@@ -79,6 +80,7 @@ Any inquiries can be addressed to:
 				<Tab title="Tags" tableId="1000" type="relation" parameter="1203"/>
 				<Tab title="Releases" tableId="1000" type="relation" parameter="1413"/>
 				<Tab title="Issues" tableId="1000" type="relation" parameter="2011"/>
+				<Tab title="Workflows" tableId="1000" type="relation" parameter="1602"/>
 			</ExtraTabs>
 		</TreeControl>
 	</TreeControls>
@@ -529,6 +531,16 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
+		<Param id="105">
+			<Name>GetRepositoryWorkflowsUrl</Name>
+			<Description>Get Repository Workflows Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
 		
 		<Param id="201">
 			<Name>GetRepositoryContent</Name>
@@ -603,6 +615,26 @@ To get more request you can add an api key under General/Configuration page. To 
 		<Param id="254">
 			<Name>GetRepositoryReleasesLinkHeader</Name>
 			<Description>Get Repository Releases Link Header</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="205">
+			<Name>GetRepositoryWorkflowsContent</Name>
+			<Description>Get Repository Workflows Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="255">
+			<Name>GetRepositoryWorkflowsLinkHeader</Name>
+			<Description>Get Repository Workflows Link Header</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -829,7 +861,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<ColumnOption idx="6" pid="1007" type="retrieved" options="" />
 				<ColumnOption idx="7" pid="1008" type="retrieved" options="" />
 				<ColumnOption idx="8" pid="1009" type="retrieved" options="" />
-				<ColumnOption idx="9" pid="1010" type="retrieved" options="" />
+				<ColumnOption idx="9" pid="1010" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="10" pid="1011" type="retrieved" options="" />
 				<ColumnOption idx="11" pid="1012" type="retrieved" options="" />
 				<ColumnOption idx="12" pid="1013" type="retrieved" options="" />
@@ -1081,7 +1113,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type options="datetime">number</Type>
 			</Measurement>
 		</Param>
-		<Param id="1010" trending="false">
+		<Param id="1010" trending="true">
 			<Name>RepositoriesSize</Name>
 			<Description>Size (Repositories)</Description>
 			<Type>read</Type>
@@ -1118,7 +1150,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>number</Type>
 			</Measurement>
 		</Param>
-		<Param id="1011" trending="false">
+		<Param id="1011" trending="true">
 			<Name>RepositoriesStars</Name>
 			<Description>Stars (Repositories)</Description>
 			<Type>read</Type>
@@ -1148,7 +1180,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>number</Type>
 			</Measurement>
 		</Param>
-		<Param id="1012" trending="false">
+		<Param id="1012" trending="true">
 			<Name>RepositoriesWatcher</Name>
 			<Description>Watcher (Repositories)</Description>
 			<Type>read</Type>
@@ -1617,6 +1649,257 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Measurement>
 		</Param>
 		
+		<Param id="1600">
+			<Name>RepositoryWorkflows</Name>
+			<Description>Repository Workflows</Description>
+			<Type>array</Type>
+			<ArrayOptions index="0">
+				<ColumnOption idx="0" pid="1601" type="retrieved" options=""/>
+				<ColumnOption idx="1" pid="1602" type="retrieved" options=";foreignKey=1000" />
+				<ColumnOption idx="2" pid="1603" type="retrieved" options="" />
+				<ColumnOption idx="3" pid="1604" type="retrieved" options="" />
+				<ColumnOption idx="4" pid="1605" type="retrieved" options="" />
+				<ColumnOption idx="5" pid="1606" type="retrieved" options="" />
+				<ColumnOption idx="6" pid="1607" type="retrieved" options="" />
+				<ColumnOption idx="7" pid="1608" type="retrieved" options="" />
+			</ArrayOptions>
+			<Information>
+				<Subtext>A list of all the workflows per tracked repository.</Subtext>
+			</Information>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Workflows</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<!-- SuppressValidator 2.31.9 More important to be grouped by repository then by datetime column -->
+				<Type options="tab=columns:1601|0-1602|1-1603|2-1604|3-1605|4-1606|5-1607|6-1608|7,width:100-0-100-108-100-144-144-144,sort:STRING|ASC|0-STRING-STRING-STRING-STRING-INT|ASC|1-INT-INT,lines:25,filter:true">table</Type>
+				<!-- /SuppressValidator 2.31.9 -->
+			</Measurement>
+		</Param>
+		<Param id="1601" trending="false">
+			<Name>RepositoryWorkflowsId</Name>
+			<Description>ID (Repository Workflows)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>This is the key used internally by DataMiner to identify the table entries.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1602" trending="false">
+			<Name>RepositoryWorkflowsRepositoryId</Name>
+			<Description>Repository ID (Repository Workflows)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The ID of the repository this workflow is linked.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1603" trending="false">
+			<Name>RepositoryWorkflowsName</Name>
+			<Description>Name (Repository Workflows)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The name of the workflow.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1604" trending="false">
+			<Name>RepositoryWorkflowsState</Name>
+			<Description>State (Repository Workflows)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The state of the workflow</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<Normal>active</Normal>
+				<MaH>disabled_fork;disabled_inactivity;disabled_manually</MaH>
+				<CH>deleted</CH>
+			</Alarm>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Active</Display>
+						<Value>active</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Deleted</Display>
+						<Value>deleted</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Disabled Fork</Display>
+						<Value>disabled_fork</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Disabled Inactivity</Display>
+						<Value>disabled_inactivity</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Disabled Manually</Display>
+						<Value>disabled_manually</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="1605" trending="false">
+			<Name>RepositoryWorkflowsPath</Name>
+			<Description>Path (Repository Workflows)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The path to the workflow yaml file.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1606" trending="false">
+			<Name>RepositoryWorkflowsCreatedAt</Name>
+			<Description>Created At (Repository Workflows)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The datetime when the workflow was created.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="2" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="1607" trending="false">
+			<Name>RepositoryWorkflowsUpdatedAt</Name>
+			<Description>Updated At (Repository Workflows)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The datetime of the last update to the workflow</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="2" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="1608" trending="false">
+			<Name>RepositoryWorkflowsDeletedAt</Name>
+			<Description>Deleted At (Repository Workflows)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The datetime when the workflow was deleted.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="2" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<Normal>-2</Normal>
+			</Alarm>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
+		
 		<Param id="2000">
 			<Name>RepositoryIssues</Name>
 			<Description>Repository Issues</Description>
@@ -1892,7 +2175,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="21000">
 			<Name>PollManager</Name>
 			<Description>Poll Manager</Description>
@@ -2158,7 +2441,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		<QAction id="2" name="After Startup" encoding="csharp" triggers="2" />
 		<QAction id="19" name="Parse general parameters" encoding="csharp" triggers="110;19"></QAction>
 
-		<QAction id="200" name="Parse Responses" encoding="csharp" triggers="201;202;203;204"></QAction>
+		<QAction id="200" name="Parse Responses" encoding="csharp" triggers="201;202;203;204;205"></QAction>
 
 		<QAction id="990" name="Repositories Table - ContextMenu" encoding="csharp" triggers="990" />
 		<QAction id="992" name="Repositories Table - Changes" encoding="csharp" triggers="992" />
@@ -2169,7 +2452,7 @@ To get more request you can add an api key under General/Configuration page. To 
 	</QActions>
 
 	<HTTP>
-		<Session id="1">
+		<Session id="1" name="Get Repository">
 			<Connection id="1" name="Get Repository">
 				<Request verb="GET" pid="101">
 					<Headers>
@@ -2192,7 +2475,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Response>
 			</Connection>
 		</Session>
-		<Session id="2">
+		<Session id="2" name="Get Repository Issues">
 			<Connection id="2" name="Get Repository Issues">
 				<Request verb="GET" pid="102">
 					<Headers>
@@ -2215,7 +2498,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Response>
 			</Connection>
 		</Session>
-		<Session id="3">
+		<Session id="3" name="Get Repository Tags">
 			<Connection id="3" name="Get Repository Tags">
 				<Request verb="GET" pid="103">
 					<Headers>
@@ -2257,6 +2540,29 @@ To get more request you can add an api key under General/Configuration page. To 
 						<Header key="x-ratelimit-used" pid="17"></Header>
 						<Header key="x-ratelimit-reset" pid="19"></Header>
 						<Header key="Link" pid="254"/>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
+		<Session id="5" name="Get Repository Workflows">
+			<Connection id="5" name="Get Repository Workflows">
+				<Request verb="GET" pid="105">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Authorization" pid="11"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="12"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="205"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="255"/>
 					</Headers>
 				</Response>
 			</Connection>
@@ -2313,6 +2619,14 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Session>4</Session>
 			</Content>
 		</Group>
+		<Group id="205">
+			<Name>PollRepositoryWorkflows</Name>
+			<Description>Poll Repository Workflows</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>5</Session>
+			</Content>
+		</Group>
 	</Groups>
 
 	<Triggers>
@@ -2354,6 +2668,13 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Id>204</Id>
 			</Content>
 		</Trigger>
+		<Trigger id="205">
+			<Name>Start GetRepository Workflows</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>205</Id>
+			</Content>
+		</Trigger>
 		
 		<Trigger id="251">
 			<Name>After GetRepository</Name>
@@ -2389,6 +2710,15 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Type>action</Type>
 			<Content>
 				<Id>254</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="255">
+			<Name>After GetRepository Workflows</Name>
+			<On id="205">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>255</Id>
 			</Content>
 		</Trigger>
 	</Triggers>
@@ -2431,6 +2761,11 @@ To get more request you can add an api key under General/Configuration page. To 
 			<On id="204">group</On>
 			<Type>execute next</Type>
 		</Action>
+		<Action id="205">
+			<Name>Get Repository Workflows</Name>
+			<On id="205">group</On>
+			<Type>execute next</Type>
+		</Action>
 
 		<Action id="251">
 			<Name>Clear Get Repository Link Header</Name>
@@ -2452,6 +2787,11 @@ To get more request you can add an api key under General/Configuration page. To 
 			<On id="254">parameter</On>
 			<Type>clear</Type>
 		</Action>
+		<Action id="255">
+			<Name>Clear Get Repository Workflows Link Header</Name>
+			<On id="255">parameter</On>
+			<Type>clear</Type>
+		</Action>
 	</Actions>
 
 	<Timers>
@@ -2461,20 +2801,6 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Interval>75</Interval>
 			<Content>
 				<Group>15</Group>
-			</Content>
-		</Timer>
-		<Timer id="2">
-			<Name>Medium Timer (1m)</Name>
-			<Time initial="true" dataDisplay="30000">60000</Time>
-			<Interval>75</Interval>
-			<Content>
-			</Content>
-		</Timer>
-		<Timer id="3">
-			<Name>Slow Timer (1h)</Name>
-			<Time initial="true">3600000</Time>
-			<Interval>75</Interval>
-			<Content>
 			</Content>
 		</Timer>
 	</Timers>

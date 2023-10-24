@@ -14,6 +14,7 @@
             { RequestType.Repositories_Tags,                RepositoriesResponseHandler.HandleRepositoriesTagsResponse },
             { RequestType.Repositories_Releases,            RepositoriesResponseHandler.HandleRepositoriesReleasesResponse },
             { RequestType.Repository_Issues,                RepositoriesResponseHandler.HandleRepositoriesIssuesResponse },
+            { RequestType.Repositories_Workflows,           RepositoriesResponseHandler.HandleRepositoriesWorkflowsResponse },
         };
 
         public static IReadOnlyDictionary<RequestType, Action<SLProtocol>> Handlers => handlers;

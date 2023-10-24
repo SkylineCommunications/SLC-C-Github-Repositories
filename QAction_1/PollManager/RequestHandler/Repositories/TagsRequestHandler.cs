@@ -25,6 +25,5 @@
             protocol.SetParameter(Parameter.getrepositorytagsurl, $"repos/{owner}/{name}/tags?per_page={perPage}&page={page}");
             protocol.CheckTrigger(203);
         }
-
     }
 }
