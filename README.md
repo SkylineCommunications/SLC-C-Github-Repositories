@@ -65,6 +65,16 @@ The issues table contains all the issues from all the tracked repositories. Here
 
 ![Editor](Documentation/IssuesPage.png)
 
+### Workflows
+The workflows table contains all the workflows from all the tracked repositories. Here you can find some general information about the workflows, for example:
+1. Name
+1. State
+1. Path to the yaml file
+1. when it was created
+1. ...
+
+![Editor](Documentation/WorkflowsPage.png)
+
 ## About DataMiner
 
 DataMiner is a transformational platform that provides vendor-independent control and monitoring of devices and services. 
