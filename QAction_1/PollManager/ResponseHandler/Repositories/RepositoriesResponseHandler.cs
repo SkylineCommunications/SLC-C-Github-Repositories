@@ -37,6 +37,7 @@
                 Stars = response.StargazersCount,
                 Watcher = response.WatchersCount,
                 Language = response.Language,
+                DefaultBranch = response.DefaultBranch,
             };
 
             // Check if row exists, add or edit.

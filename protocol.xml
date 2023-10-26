@@ -862,9 +862,10 @@ To get more request you can add an api key under General/Configuration page. To 
 				<ColumnOption idx="7" pid="1008" type="retrieved" options="" />
 				<ColumnOption idx="8" pid="1009" type="retrieved" options="" />
 				<ColumnOption idx="9" pid="1010" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="10" pid="1011" type="retrieved" options="" />
-				<ColumnOption idx="11" pid="1012" type="retrieved" options="" />
+				<ColumnOption idx="10" pid="1011" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="11" pid="1012" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="12" pid="1013" type="retrieved" options="" />
+				<ColumnOption idx="13" pid="1014" type="retrieved" options="" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>A list of all the tracked repositories.</Subtext>
@@ -880,7 +881,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3-1005|4-1006|5-1007|6-1008|7-1009|8-1010|9-1011|10-1012|11-1013|12,width:100-134-157-140-165-137-144-160-165-157-123-128-147,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT-INT-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3-1005|4-1006|5-1007|6-1008|7-1009|8-1010|9-1011|10-1012|11-1013|12-1014|13,width:100-134-157-140-165-137-144-160-165-157-123-128-147-103,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT-INT-INT-STRING,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1001" trending="false">
@@ -1169,6 +1170,9 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Exceptions>
 			</Interprete>
 			<!-- SuppressValidator 2.9.7 No units needed -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Range>
@@ -1199,6 +1203,9 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Exceptions>
 			</Interprete>
 			<!-- SuppressValidator 2.9.7 No units  -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Range>
@@ -1228,6 +1235,37 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Exception>
 				</Exceptions>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1014" trending="false">
+			<Name>RepositoriesDefaultBranch</Name>
+			<Description>Default Branch (Repositories)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The default branch of the repository.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="2" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -1660,8 +1698,8 @@ To get more request you can add an api key under General/Configuration page. To 
 				<ColumnOption idx="3" pid="1604" type="retrieved" options="" />
 				<ColumnOption idx="4" pid="1605" type="retrieved" options="" />
 				<ColumnOption idx="5" pid="1606" type="retrieved" options="" />
-				<ColumnOption idx="6" pid="1607" type="retrieved" options="" />
-				<ColumnOption idx="7" pid="1608" type="retrieved" options="" />
+				<ColumnOption idx="6" pid="1607" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="7" pid="1608" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>A list of all the workflows per tracked repository.</Subtext>

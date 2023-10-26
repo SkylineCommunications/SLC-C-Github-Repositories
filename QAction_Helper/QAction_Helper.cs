@@ -286,6 +286,11 @@ public static class Parameter
 			public const int repositorieslanguage_1013 = 1013;
 			/// <summary>PID: 1013 | Type: read</summary>
 			public const int repositorieslanguage = 1013;
+			/// <summary>PID: 1014 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoriesdefaultbranch_1014 = 1014;
+			/// <summary>PID: 1014 | Type: read</summary>
+			public const int repositoriesdefaultbranch = 1014;
 			public class Write
 			{
 			}
@@ -357,6 +362,11 @@ public static class Parameter
 			public const int repositorieslanguage_1013 = 12;
 			/// <summary>IDX: 12 | Type: read</summary>
 			public const int repositorieslanguage = 12;
+			/// <summary>IDX: 13 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoriesdefaultbranch_1014 = 13;
+			/// <summary>IDX: 13 | Type: read</summary>
+			public const int repositoriesdefaultbranch = 13;
 		}
 	}
 	public class Repositorytags
@@ -1018,6 +1028,8 @@ public interface SLProtocolExt : SLProtocol
 	object Repositorieswatcher { get; set; }
 	object Repositorieslanguage_1013 { get; set; }
 	object Repositorieslanguage { get; set; }
+	object Repositoriesdefaultbranch_1014 { get; set; }
+	object Repositoriesdefaultbranch { get; set; }
 	object Repositorytagsid_1201 { get; set; }
 	object Repositorytagsid { get; set; }
 	object Repositorytagsname_1202 { get; set; }
@@ -1367,6 +1379,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositorieslanguage_1013 {get { return GetParameter(1013); }set { SetParameter(1013, value); }}
 	/// <summary>PID: 1013  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	public System.Object Repositorieslanguage {get { return GetParameter(1013); }set { SetParameter(1013, value); }}
+	/// <summary>PID: 1014  | Type: read | EXCEPTIONS: N/A = -2</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoriesdefaultbranch_1014 {get { return GetParameter(1014); }set { SetParameter(1014, value); }}
+	/// <summary>PID: 1014  | Type: read | EXCEPTIONS: N/A = -2</summary>
+	public System.Object Repositoriesdefaultbranch {get { return GetParameter(1014); }set { SetParameter(1014, value); }}
 	/// <summary>PID: 1201  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositorytagsid_1201 {get { return GetParameter(1201); }set { SetParameter(1201, value); }}
@@ -1709,8 +1726,13 @@ public class RepositoriesQActionRow : QActionTableRow
 	public System.Object Repositorieslanguage_1013 { get { if (base.Columns.ContainsKey(12)) { return base.Columns[12]; } else { return null; } } set { if (base.Columns.ContainsKey(12)) { base.Columns[12] = value; } else { base.Columns.Add(12, value); } } }
 	/// <summary>PID: 1013 | Type: read</summary>
 	public System.Object Repositorieslanguage { get { if (base.Columns.ContainsKey(12)) { return base.Columns[12]; } else { return null; } } set { if (base.Columns.ContainsKey(12)) { base.Columns[12] = value; } else { base.Columns.Add(12, value); } } }
-	public RepositoriesQActionRow() : base(0, 13) { }
-	public RepositoriesQActionRow(System.Object[] oRow) : base(0, 13, oRow) { }
+	/// <summary>PID: 1014 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoriesdefaultbranch_1014 { get { if (base.Columns.ContainsKey(13)) { return base.Columns[13]; } else { return null; } } set { if (base.Columns.ContainsKey(13)) { base.Columns[13] = value; } else { base.Columns.Add(13, value); } } }
+	/// <summary>PID: 1014 | Type: read</summary>
+	public System.Object Repositoriesdefaultbranch { get { if (base.Columns.ContainsKey(13)) { return base.Columns[13]; } else { return null; } } set { if (base.Columns.ContainsKey(13)) { base.Columns[13] = value; } else { base.Columns.Add(13, value); } } }
+	public RepositoriesQActionRow() : base(0, 14) { }
+	public RepositoriesQActionRow(System.Object[] oRow) : base(0, 14, oRow) { }
 	public static implicit operator RepositoriesQActionRow(System.Object[] source) { return new RepositoriesQActionRow(source); }
 	public static implicit operator System.Object[](RepositoriesQActionRow source) { return source.ToObjectArray(); }
 	public System.String[] GetChildKeysRepositorytagsRepositorytagsrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 1203, Key); }
