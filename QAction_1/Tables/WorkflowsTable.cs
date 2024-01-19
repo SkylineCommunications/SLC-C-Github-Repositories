@@ -154,6 +154,7 @@ namespace Skyline.Protocol.Tables
 	{
 		private static RepositoryWorkflowsTable instance = new RepositoryWorkflowsTable();
 
+		#region Constructor
 		protected RepositoryWorkflowsTable()
 		{
 			RepositoriesTable.RepositoriesChanged += RepositoriesTable_RepositoriesChanged;
@@ -203,6 +204,7 @@ namespace Skyline.Protocol.Tables
 			// Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
 			Dispose(false);
 		}
+		#endregion
 
 		public List<RepositoryWorkflowsTableRow> Rows { get; private set; } = new List<RepositoryWorkflowsTableRow>();
 
@@ -224,6 +226,7 @@ namespace Skyline.Protocol.Tables
 			protocol.FillArray(Parameter.Repositoryworkflows.tablePid, rows, option);
 		}
 
+		#region IDisposable
 		public void Dispose()
 		{
 			// Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
@@ -235,6 +238,7 @@ namespace Skyline.Protocol.Tables
 		{
 			RepositoriesTable.RepositoriesChanged -= RepositoriesTable_RepositoriesChanged;
 		}
+		#endregion
 
 		private static void RepositoriesTable_RepositoriesChanged(object sender, RepositoryEventArgs e)
 		{

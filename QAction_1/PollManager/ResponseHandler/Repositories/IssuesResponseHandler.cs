@@ -14,6 +14,7 @@
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;
+
 	public static partial class RepositoriesResponseHandler
 	{
 		public static void HandleRepositoriesIssuesResponse(SLProtocol protocol)
@@ -26,16 +27,16 @@
 
 			// Parse response
 			var response = JsonConvert.DeserializeObject<List<RepositoryIssuesResponse>>(Convert.ToString(protocol.GetParameter(Parameter.getrepositoryissuescontent)));
-
 			if (response == null)
 			{
-				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|response was null.", LogType.Error, LogLevel.NoLogging);
+				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|response was null.", LogType.Error, LogLevel.Level1);
 				return;
 			}
 
 			if (!response.Any())
 			{
 				// No issues for the repository
+				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|No issues for the repo.", LogType.Information, LogLevel.Level2);
 				return;
 			}
 
@@ -78,16 +79,14 @@
 				table.SaveToProtocol(protocol, true);
 			}
 
-			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|Issue repo: {owner}/{name}", LogType.DebugInfo, LogLevel.NoLogging);
-
 			// Check if there are more tags to fetch
 			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryissueslinkheader));
 			if (string.IsNullOrEmpty(linkHeader)) return;
 
 			var link = new LinkHeader(linkHeader);
 
-			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|Current page: {link.CurrentPage}", LogType.DebugInfo, LogLevel.NoLogging);
-			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|Has next page: {link.HasNext}", LogType.DebugInfo, LogLevel.NoLogging);
+			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|Current page: {link.CurrentPage}", LogType.Information, LogLevel.Level2);
+			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|Has next page: {link.HasNext}", LogType.Information, LogLevel.Level2);
 
 			if (link.HasNext)
 			{

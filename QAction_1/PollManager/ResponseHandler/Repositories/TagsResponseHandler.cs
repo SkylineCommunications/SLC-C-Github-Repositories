@@ -30,14 +30,15 @@
 
             if (response == null)
             {
-                protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|response was null.", LogType.Error, LogLevel.NoLogging);
+                protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|response was null.", LogType.Error, LogLevel.Level1);
                 return;
             }
 
             if (!response.Any())
             {
-                // No tags for the repository
-                return;
+				// No tags for the repository
+				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|No tags for the repo.", LogType.Information, LogLevel.Level2);
+				return;
             }
 
             // Parse url to check which respository this issue is linked to
@@ -54,7 +55,7 @@
             {
                 if (tag == null)
                 {
-                    protocol.Log($"QA{protocol.QActionID}|GetRepositoryTagsResponse|Tag was null.", LogType.Information, LogLevel.NoLogging);
+                    protocol.Log($"QA{protocol.QActionID}|GetRepositoryTagsResponse|Tag was null.", LogType.Error, LogLevel.Level1);
                     continue;
                 }
 
@@ -72,16 +73,14 @@
                 table.SaveToProtocol(protocol, true);
             }
 
-            protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|Tag repo: {owner}/{name}", LogType.DebugInfo, LogLevel.NoLogging);
-
             // Check if there are more tags to fetch
             var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositorytagslinkheader));
             if (string.IsNullOrEmpty(linkHeader)) return;
 
             var link = new LinkHeader(linkHeader);
 
-            protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|Current page: {link.CurrentPage}", LogType.DebugInfo, LogLevel.NoLogging);
-            protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|Has next page: {link.HasNext}", LogType.DebugInfo, LogLevel.NoLogging);
+            protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|Current page: {link.CurrentPage}", LogType.Information, LogLevel.Level2);
+            protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|Has next page: {link.HasNext}", LogType.Information, LogLevel.Level2);
 
             if (link.HasNext)
             {

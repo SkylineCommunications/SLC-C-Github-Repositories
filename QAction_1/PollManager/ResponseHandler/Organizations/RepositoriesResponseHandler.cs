@@ -17,8 +17,6 @@
 	{
 		public static void HandleOrganizationRepositoriesResponse(SLProtocol protocol)
 		{
-			protocol.Log($"QA{protocol.QActionID}|HandleOrganizationRepositoriesResponse|StatusCode: {Convert.ToString(protocol.GetParameter(Parameter.statuscode_100))}", LogType.DebugInfo, LogLevel.NoLogging);
-
 			// Check status code
 			if (!protocol.IsSuccessStatusCode())
 			{
@@ -29,25 +27,20 @@
 			var response = JsonConvert.DeserializeObject<List<RepositoryResponse>>(Convert.ToString(protocol.GetParameter(Parameter.getorganizationrepositoriescontent)));
 			if (response == null)
 			{
-				protocol.Log($"QA{protocol.QActionID}|ParseGetOrganizationRepositoriesResponse|response was null.", LogType.Error, LogLevel.NoLogging);
+				protocol.Log($"QA{protocol.QActionID}|ParseGetOrganizationRepositoriesResponse|response was null.", LogType.Error, LogLevel.Level1);
 				return;
 			}
 
 			if (!response.Any())
 			{
 				// No repositories for the organization
-				protocol.Log($"QA{protocol.QActionID}|ParseGetOrganizationRepositoriesResponse|No repositories", LogType.Error, LogLevel.NoLogging);
+				protocol.Log($"QA{protocol.QActionID}|ParseGetOrganizationRepositoriesResponse|No repositories", LogType.Information, LogLevel.Level2);
 				return;
 			}
-
-			protocol.Log($"QA{protocol.QActionID}|ParseGetOrganizationRepositoriesResponse|Repositories: {response.Count}", LogType.DebugInfo, LogLevel.NoLogging);
 
 			var table = RepositoriesTable.GetTable();
 			foreach (var repo in response)
 			{
-				protocol.Log($"QA{protocol.QActionID}|HandleOrganizationRepositoriesResponse|repo: {repo.FullName}", LogType.DebugInfo, LogLevel.NoLogging);
-				protocol.Log($"QA{protocol.QActionID}|HandleOrganizationRepositoriesResponse|row == null: {table.Rows.Find(repository => repository.FullName == repo.FullName) == null}", LogType.DebugInfo, LogLevel.NoLogging);
-
 				// Update existing organization if found, otherwise create new one
 				var row = table.Rows.Find(repository => repository.FullName == repo.FullName) ?? new RepositoriesTableRow();
 				row.Name = repo.Name;
@@ -64,8 +57,6 @@
 				row.Language = repo.Language;
 				row.DefaultBranch = repo.DefaultBranch;
 
-				protocol.Log($"QA{protocol.QActionID}|HandleOrganizationRepositoriesResponse|rowKey: {row.FullName}", LogType.DebugInfo, LogLevel.NoLogging);
-
 				// If its a new row fill in ID and add it to the table.
 				if (row.FullName == Exceptions.NotAvailable)
 				{
@@ -73,8 +64,6 @@
 					table.Rows.Add(row);
 				}
 			}
-
-			protocol.Log($"QA{protocol.QActionID}|HandleOrganizationRepositoriesResponse|rows: {table.Rows.Count}", LogType.DebugInfo, LogLevel.NoLogging);
 
 			if (table.Rows.Count > 0)
 			{
@@ -87,8 +76,8 @@
 
 			var link = new LinkHeader(linkHeader);
 
-			protocol.Log($"QA{protocol.QActionID}|ParseGetOrganizationRepositoriesResponse|Current page: {link.CurrentPage}", LogType.DebugInfo, LogLevel.NoLogging);
-			protocol.Log($"QA{protocol.QActionID}|ParseGetOrganizationRepositoriesResponse|Has next page: {link.HasNext}", LogType.DebugInfo, LogLevel.NoLogging);
+			protocol.Log($"QA{protocol.QActionID}|ParseGetOrganizationRepositoriesResponse|Current page: {link.CurrentPage}", LogType.Information, LogLevel.Level2);
+			protocol.Log($"QA{protocol.QActionID}|ParseGetOrganizationRepositoriesResponse|Has next page: {link.HasNext}", LogType.Information, LogLevel.Level2);
 
 			if (link.HasNext)
 			{

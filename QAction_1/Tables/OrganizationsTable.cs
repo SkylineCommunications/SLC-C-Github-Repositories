@@ -96,9 +96,12 @@ namespace Skyline.Protocol.Tables
 
     public class OrganizationsTable
     {
-        public OrganizationsTable() { }
+        private static OrganizationsTable instance = new OrganizationsTable();
 
-        public OrganizationsTable(SLProtocol protocol)
+		#region Constructor
+		protected OrganizationsTable() { }
+
+        protected OrganizationsTable(SLProtocol protocol)
         {
             uint[] organizationsIdx = new uint[]
             {
@@ -117,7 +120,6 @@ namespace Skyline.Protocol.Tables
 
             for (int i = 0; i < instance.Length; i++)
             {
-                protocol.Log($"QA{protocol.QActionID}|OrganizationTable|AvatarUrl: {avatarURL[i]}", LogType.DebugInfo, LogLevel.NoLogging);
                 Rows.Add(new OrganizationsTableRow(
                 instance[i],
                 id[i],
@@ -126,10 +128,21 @@ namespace Skyline.Protocol.Tables
                 tracked[i]));
             }
         }
+		#endregion
 
-        public List<OrganizationsTableRow> Rows { get; set; } = new List<OrganizationsTableRow>();
+		public List<OrganizationsTableRow> Rows { get; set; } = new List<OrganizationsTableRow>();
 
-        public void SaveToProtocol(SLProtocol protocol, bool partial = false)
+        public static OrganizationsTable GetTable(SLProtocol protocol = null)
+        {
+			if (protocol != null)
+			{
+				instance = new OrganizationsTable(protocol);
+			}
+
+			return instance;
+		}
+
+		public void SaveToProtocol(SLProtocol protocol, bool partial = false)
         {
             List<object[]> rows = Rows.Select(x => x.ToProtocolRow()).ToList();
             NotifyProtocol.SaveOption option = partial ? NotifyProtocol.SaveOption.Partial : NotifyProtocol.SaveOption.Full;

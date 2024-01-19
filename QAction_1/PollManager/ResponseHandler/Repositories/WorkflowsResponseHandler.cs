@@ -32,14 +32,14 @@
 
 			if (response == null)
 			{
-				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|response was null.", LogType.Error, LogLevel.NoLogging);
+				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|response was null.", LogType.Error, LogLevel.Level1);
 				return;
 			}
 
 			if (response.TotalCount <= 0)
 			{
-				// No tags for the repository
-				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|No workflows for the repo.", LogType.Information, LogLevel.NoLogging);
+				// No workflows for the repository
+				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|No workflows for the repo.", LogType.Information, LogLevel.Level2);
 				return;
 			}
 
@@ -85,16 +85,14 @@
 				table.SaveToProtocol(protocol, true);
 			}
 
-			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|Workflow repo: {owner}/{name}", LogType.DebugInfo, LogLevel.NoLogging);
-
 			// Check if there are more workflows to fetch
-			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositorytagslinkheader));
+			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowslinkheader));
 			if (string.IsNullOrEmpty(linkHeader)) return;
 
 			var link = new LinkHeader(linkHeader);
 
-			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|Current page: {link.CurrentPage}", LogType.DebugInfo, LogLevel.NoLogging);
-			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|Has next page: {link.HasNext}", LogType.DebugInfo, LogLevel.NoLogging);
+			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|Current page: {link.CurrentPage}", LogType.Information, LogLevel.Level2);
+			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|Has next page: {link.HasNext}", LogType.Information, LogLevel.Level2);
 
 			if (link.HasNext)
 			{

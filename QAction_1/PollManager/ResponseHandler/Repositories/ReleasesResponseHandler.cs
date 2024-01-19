@@ -27,16 +27,16 @@
 
 			// Parse response
 			var response = JsonConvert.DeserializeObject<List<RepositoryReleasesResponse>>(Convert.ToString(protocol.GetParameter(Parameter.getrepositoryreleasescontent)));
-
 			if (response == null)
 			{
-				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|response was null.", LogType.Error, LogLevel.NoLogging);
+				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|response was null.", LogType.Error, LogLevel.Level1);
 				return;
 			}
 
 			if (!response.Any())
 			{
 				// No releases for the repository
+				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|No releases for the repo.", LogType.Information, LogLevel.Level2);
 				return;
 			}
 
@@ -54,13 +54,13 @@
 			{
 				if (release == null)
 				{
-					protocol.Log($"QA{protocol.QActionID}|GetRepositoryReleasesResponse|Release was null.", LogType.Information, LogLevel.NoLogging);
+					protocol.Log($"QA{protocol.QActionID}|GetRepositoryReleasesResponse|Release was null.", LogType.Error, LogLevel.Level1);
 					continue;
 				}
 
 				if (release.Url == null)
 				{
-					protocol.Log($"QA{protocol.QActionID}|GetRepositoryReleasesResponse|Release url null.", LogType.Information, LogLevel.NoLogging);
+					protocol.Log($"QA{protocol.QActionID}|GetRepositoryReleasesResponse|Release url null.", LogType.Error, LogLevel.Level1);
 					continue;
 				}
 
@@ -93,16 +93,14 @@
 				table.SaveToProtocol(protocol, true);
 			}
 
-			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|Release repo: {owner}/{name}", LogType.DebugInfo, LogLevel.NoLogging);
-
 			// Check if there are more releases to fetch
 			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryreleaseslinkheader));
 			if (string.IsNullOrEmpty(linkHeader)) return;
 
 			var link = new LinkHeader(linkHeader);
 
-			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|Current page: {link.CurrentPage}", LogType.DebugInfo, LogLevel.NoLogging);
-			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|Has next page: {link.HasNext}", LogType.DebugInfo, LogLevel.NoLogging);
+			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|Current page: {link.CurrentPage}", LogType.Information, LogLevel.Level2);
+			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|Has next page: {link.HasNext}", LogType.Information, LogLevel.Level2);
 
 			if (link.HasNext)
 			{

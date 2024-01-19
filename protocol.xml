@@ -153,7 +153,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type options="password">string</Type>
 			</Measurement>
 		</Param>
-		<Param id="110" setter="true">
+		<Param id="11" setter="true">
 			<Name>ApiKey</Name>
 			<Description>API Key</Description>
 			<Type>write</Type>
@@ -176,7 +176,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type options="password">string</Type>
 			</Measurement>
 		</Param>
-		<Param id="11" save="true">
+		<Param id="12" save="true">
 			<Name>ApiKeyBearer</Name>
 			<Description>Api Key Bearer</Description>
 			<Type>read</Type>
@@ -186,7 +186,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
-		<Param id="12" save="true">
+		<Param id="13" save="true">
 			<Name>GithubApiVersion</Name>
 			<Description>Github API Version</Description>
 			<Type>read</Type>
@@ -223,7 +223,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Discreets>
 			</Measurement>
 		</Param>
-		<Param id="112" setter="true">
+		<Param id="14" setter="true">
 			<Name>GithubApiVersion</Name>
 			<Description>Github API Version</Description>
 			<Type>write</Type>
@@ -534,6 +534,16 @@ To get more request you can add an api key under General/Configuration page. To 
 		<Param id="105">
 			<Name>GetRepositoryWorkflowsUrl</Name>
 			<Description>Get Repository Workflows Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="110">
+			<Name>GetUserOrganizationsUrl</Name>
+			<Description>Get User Organizations Url</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -2872,7 +2882,7 @@ Are you sure you want to continue.]]>
 	<QActions>
 		<QAction id="1" name="Precompiled Code" encoding="csharp" options="precompile" />
 		<QAction id="2" name="After Startup" encoding="csharp" triggers="2" />
-		<QAction id="19" name="Parse general parameters" encoding="csharp" triggers="110;19"></QAction>
+		<QAction id="19" name="Parse general parameters" encoding="csharp" triggers="11;19"></QAction>
 
 		<QAction id="990" name="Repositories Table - ContextMenu" encoding="csharp" triggers="990" />
 		<QAction id="992" name="Repositories Table - Changes" encoding="csharp" triggers="992" />
@@ -3004,7 +3014,7 @@ Are you sure you want to continue.]]>
 
 		<Session id="10" name="Get User Organizations">
 			<Connection id="10" name="Get User Organizations">
-				<Request verb="GET" url="/user/orgs">
+				<Request verb="GET" pid="110">
 					<Headers>
 						<Header key="Accept">application/vnd.github+json</Header>
 						<Header key="Authorization" pid="11"></Header>

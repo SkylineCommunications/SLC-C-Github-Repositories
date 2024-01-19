@@ -186,6 +186,7 @@
 	{
 		private static RepositoryIssuesTable instance = new RepositoryIssuesTable();
 
+		#region Constructor
 		protected RepositoryIssuesTable()
 		{
 			RepositoriesTable.RepositoriesChanged += RepositoriesTable_RepositoriesChanged;
@@ -244,6 +245,7 @@
 			// Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
 			Dispose(disposing: false);
 		}
+		#endregion
 
 		public List<RepositoryIssuesRow> Rows { get; private set; } = new List<RepositoryIssuesRow>();
 
@@ -265,6 +267,7 @@
 			protocol.FillArray(Parameter.Repositoryissues.tablePid, rows, option);
 		}
 
+		#region IDisposable
 		public void Dispose()
 		{
 			// Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
@@ -276,6 +279,7 @@
 		{
 			RepositoriesTable.RepositoriesChanged -= RepositoriesTable_RepositoriesChanged;
 		}
+		#endregion
 
 		private void RepositoriesTable_RepositoriesChanged(object sender, RepositoryEventArgs e)
 		{

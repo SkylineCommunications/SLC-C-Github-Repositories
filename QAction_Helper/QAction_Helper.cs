@@ -18,16 +18,16 @@ public static class Parameter
 	public const int apikey_10 = 10;
 	/// <summary>PID: 10 | Type: read</summary>
 	public const int apikey = 10;
-	/// <summary>PID: 11 | Type: read</summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public const int apikeybearer_11 = 11;
-	/// <summary>PID: 11 | Type: read</summary>
-	public const int apikeybearer = 11;
 	/// <summary>PID: 12 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public const int githubapiversion_12 = 12;
+	public const int apikeybearer_12 = 12;
 	/// <summary>PID: 12 | Type: read</summary>
-	public const int githubapiversion = 12;
+	public const int apikeybearer = 12;
+	/// <summary>PID: 13 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int githubapiversion_13 = 13;
+	/// <summary>PID: 13 | Type: read</summary>
+	public const int githubapiversion = 13;
 	/// <summary>PID: 15 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int ratelimit_15 = 15;
@@ -88,6 +88,11 @@ public static class Parameter
 	public const int getrepositoryworkflowsurl_105 = 105;
 	/// <summary>PID: 105 | Type: read</summary>
 	public const int getrepositoryworkflowsurl = 105;
+	/// <summary>PID: 110 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int getuserorganizationsurl_110 = 110;
+	/// <summary>PID: 110 | Type: read</summary>
+	public const int getuserorganizationsurl = 110;
 	/// <summary>PID: 111 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int getorganizationrepositoriesurl_111 = 111;
@@ -195,6 +200,16 @@ public static class Parameter
 	public const int repositoriesoverview = 996;
 	public class Write
 	{
+		/// <summary>PID: 11 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int apikey_11 = 11;
+		/// <summary>PID: 11 | Type: write</summary>
+		public const int apikey = 11;
+		/// <summary>PID: 14 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int githubapiversion_14 = 14;
+		/// <summary>PID: 14 | Type: write</summary>
+		public const int githubapiversion = 14;
 		/// <summary>PID: 50 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public const int generalpagebuttons_50 = 50;
@@ -205,16 +220,6 @@ public static class Parameter
 		public const int addrepositorypagebutton_51 = 51;
 		/// <summary>PID: 51 | Type: write</summary>
 		public const int addrepositorypagebutton = 51;
-		/// <summary>PID: 110 | Type: write</summary>
-		[EditorBrowsable(EditorBrowsableState.Never)]
-		public const int apikey_110 = 110;
-		/// <summary>PID: 110 | Type: write</summary>
-		public const int apikey = 110;
-		/// <summary>PID: 112 | Type: write</summary>
-		[EditorBrowsable(EditorBrowsableState.Never)]
-		public const int githubapiversion_112 = 112;
-		/// <summary>PID: 112 | Type: write</summary>
-		public const int githubapiversion = 112;
 		/// <summary>PID: 500 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public const int addrepositorybutton_500 = 500;
@@ -1005,14 +1010,14 @@ public static class Parameter
 }
 public class WriteParameters
 {
+	/// <summary>PID: 11  | Type: write</summary>
+	public System.Object Apikey {get { return Protocol.GetParameter(11); }set { Protocol.SetParameter(11, value); }}
+	/// <summary>PID: 14  | Type: write | DISCREETS: 2022-11-28 = 2022-11-28</summary>
+	public System.Object Githubapiversion {get { return Protocol.GetParameter(14); }set { Protocol.SetParameter(14, value); }}
 	/// <summary>PID: 50  | Type: write | DISCREETS: Configuration... = Configuration, Poll Manager... = Poll Manager</summary>
 	public System.Object Generalpagebuttons {get { return Protocol.GetParameter(50); }set { Protocol.SetParameter(50, value); }}
 	/// <summary>PID: 51  | Type: write | DISCREETS: Add Repository... = Add Repository</summary>
 	public System.Object Addrepositorypagebutton {get { return Protocol.GetParameter(51); }set { Protocol.SetParameter(51, value); }}
-	/// <summary>PID: 110  | Type: write</summary>
-	public System.Object Apikey {get { return Protocol.GetParameter(110); }set { Protocol.SetParameter(110, value); }}
-	/// <summary>PID: 112  | Type: write | DISCREETS: 2022-11-28 = 2022-11-28</summary>
-	public System.Object Githubapiversion {get { return Protocol.GetParameter(112); }set { Protocol.SetParameter(112, value); }}
 	/// <summary>PID: 500  | Type: write | DISCREETS: Add Repository = 1</summary>
 	public System.Object Addrepositorybutton {get { return Protocol.GetParameter(500); }set { Protocol.SetParameter(500, value); }}
 	/// <summary>PID: 505  | Type: write | DISCREETS: Add Repositories = 1</summary>
@@ -1060,10 +1065,12 @@ public interface SLProtocolExt : SLProtocol
 	object Explanation { get; set; }
 	object Apikey_10 { get; set; }
 	object Apikey { get; set; }
-	object Apikeybearer_11 { get; set; }
+	object Apikey_11 { get; set; }
+	object Apikeybearer_12 { get; set; }
 	object Apikeybearer { get; set; }
-	object Githubapiversion_12 { get; set; }
+	object Githubapiversion_13 { get; set; }
 	object Githubapiversion { get; set; }
+	object Githubapiversion_14 { get; set; }
 	object Ratelimit_15 { get; set; }
 	object Ratelimit { get; set; }
 	object Ratelimitremaining_16 { get; set; }
@@ -1092,10 +1099,10 @@ public interface SLProtocolExt : SLProtocol
 	object Getrepositoryreleasesurl { get; set; }
 	object Getrepositoryworkflowsurl_105 { get; set; }
 	object Getrepositoryworkflowsurl { get; set; }
-	object Apikey_110 { get; set; }
+	object Getuserorganizationsurl_110 { get; set; }
+	object Getuserorganizationsurl { get; set; }
 	object Getorganizationrepositoriesurl_111 { get; set; }
 	object Getorganizationrepositoriesurl { get; set; }
-	object Githubapiversion_112 { get; set; }
 	object Getrepositorycontent_201 { get; set; }
 	object Getrepositorycontent { get; set; }
 	object Getrepositoryissuescontent_202 { get; set; }
@@ -1305,16 +1312,22 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Apikey_10 {get { return GetParameter(10); }set { SetParameter(10, value); }}
 	/// <summary>PID: 10  | Type: read</summary>
 	public System.Object Apikey {get { return GetParameter(10); }set { SetParameter(10, value); }}
-	/// <summary>PID: 11  | Type: read</summary>
+	/// <summary>PID: 11  | Type: write</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Apikeybearer_11 {get { return GetParameter(11); }set { SetParameter(11, value); }}
-	/// <summary>PID: 11  | Type: read</summary>
-	public System.Object Apikeybearer {get { return GetParameter(11); }set { SetParameter(11, value); }}
-	/// <summary>PID: 12  | Type: read | DISCREETS: 2022-11-28 = 2022-11-28</summary>
+	public System.Object Apikey_11 {get { return GetParameter(11); }set { SetParameter(11, value); }}
+	/// <summary>PID: 12  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Githubapiversion_12 {get { return GetParameter(12); }set { SetParameter(12, value); }}
-	/// <summary>PID: 12  | Type: read | DISCREETS: 2022-11-28 = 2022-11-28</summary>
-	public System.Object Githubapiversion {get { return GetParameter(12); }set { SetParameter(12, value); }}
+	public System.Object Apikeybearer_12 {get { return GetParameter(12); }set { SetParameter(12, value); }}
+	/// <summary>PID: 12  | Type: read</summary>
+	public System.Object Apikeybearer {get { return GetParameter(12); }set { SetParameter(12, value); }}
+	/// <summary>PID: 13  | Type: read | DISCREETS: 2022-11-28 = 2022-11-28</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Githubapiversion_13 {get { return GetParameter(13); }set { SetParameter(13, value); }}
+	/// <summary>PID: 13  | Type: read | DISCREETS: 2022-11-28 = 2022-11-28</summary>
+	public System.Object Githubapiversion {get { return GetParameter(13); }set { SetParameter(13, value); }}
+	/// <summary>PID: 14  | Type: write | DISCREETS: 2022-11-28 = 2022-11-28</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Githubapiversion_14 {get { return GetParameter(14); }set { SetParameter(14, value); }}
 	/// <summary>PID: 15  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Ratelimit_15 {get { return GetParameter(15); }set { SetParameter(15, value); }}
@@ -1383,17 +1396,16 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Getrepositoryworkflowsurl_105 {get { return GetParameter(105); }set { SetParameter(105, value); }}
 	/// <summary>PID: 105  | Type: read</summary>
 	public System.Object Getrepositoryworkflowsurl {get { return GetParameter(105); }set { SetParameter(105, value); }}
-	/// <summary>PID: 110  | Type: write</summary>
+	/// <summary>PID: 110  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Apikey_110 {get { return GetParameter(110); }set { SetParameter(110, value); }}
+	public System.Object Getuserorganizationsurl_110 {get { return GetParameter(110); }set { SetParameter(110, value); }}
+	/// <summary>PID: 110  | Type: read</summary>
+	public System.Object Getuserorganizationsurl {get { return GetParameter(110); }set { SetParameter(110, value); }}
 	/// <summary>PID: 111  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Getorganizationrepositoriesurl_111 {get { return GetParameter(111); }set { SetParameter(111, value); }}
 	/// <summary>PID: 111  | Type: read</summary>
 	public System.Object Getorganizationrepositoriesurl {get { return GetParameter(111); }set { SetParameter(111, value); }}
-	/// <summary>PID: 112  | Type: write | DISCREETS: 2022-11-28 = 2022-11-28</summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Githubapiversion_112 {get { return GetParameter(112); }set { SetParameter(112, value); }}
 	/// <summary>PID: 201  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Getrepositorycontent_201 {get { return GetParameter(201); }set { SetParameter(201, value); }}

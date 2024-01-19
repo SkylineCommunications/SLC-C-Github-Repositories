@@ -9,30 +9,6 @@
 
 	using SLNetMessages = Skyline.DataMiner.Net.Messages;
 
-	public delegate void RepositoryTableEventHandler(object sender, RepositoriesTableRow e);
-
-	public enum RepositoryChange
-	{
-		Add,
-		Remove,
-	}
-
-	public class RepositoryEventArgs : EventArgs
-	{
-		public RepositoryEventArgs(SLProtocol protocol, RepositoryChange changeType, params string[] repositories)
-		{
-			Protocol = protocol;
-			Type = changeType;
-			Repositories = repositories;
-		}
-
-		public SLProtocol Protocol { get; }
-
-		public RepositoryChange Type { get; }
-
-		public string[] Repositories { get; }
-	}
-
 	public class RepositoriesTableRow
 	{
 		private string description = Exceptions.NotAvailable;
@@ -229,6 +205,7 @@
 	{
 		private static RepositoriesTable instance = new RepositoriesTable();
 
+		#region Constructor
 		protected RepositoriesTable() { }
 
 		protected RepositoriesTable(SLProtocol protocol)
@@ -285,8 +262,11 @@
 				defaultBranch[i]));
 			}
 		}
+		#endregion
 
+		#region Events
 		public static event EventHandler<RepositoryEventArgs> RepositoriesChanged;
+		#endregion
 
 		public List<RepositoriesTableRow> Rows { get; private set; } = new List<RepositoriesTableRow>();
 
