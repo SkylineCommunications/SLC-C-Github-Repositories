@@ -47,7 +47,7 @@ Any inquiries can be addressed to:
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>Github Repositories</Name>
 	<Description>Github Repositories DataMiner connector</Description>
-	<Version>1.0.0.4</Version>
+	<Version>1.0.0.5</Version>
 	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Github</Vendor>
@@ -55,7 +55,7 @@ Any inquiries can be addressed to:
 	<DeviceOID>0</DeviceOID>
 	<ElementType>Github Repositories</ElementType>
 	<Type relativeTimers="true">http</Type>
-	<Display defaultPage="General" pageOrder="General;----------;Repositories - Overview;Repositories;Issues;Workflows" wideColumnPages=""/>
+	<Display defaultPage="General" pageOrder="General;Organizations;----------;Repositories - Overview;Repositories;Issues;Workflows" wideColumnPages=""/>
 	<SNMP includepages="true">auto</SNMP>
 
 	<Compliancies>
@@ -84,7 +84,7 @@ Any inquiries can be addressed to:
 			</ExtraTabs>
 		</TreeControl>
 	</TreeControls>
-	
+
 	<Params>
 		<Param id="2">
 			<Name>AfterStartup</Name>
@@ -541,6 +541,16 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
+		<Param id="111">
+			<Name>GetOrganizationRepositoriesUrl</Name>
+			<Description>Get Organization Repositories Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
 		
 		<Param id="201">
 			<Name>GetRepositoryContent</Name>
@@ -642,6 +652,108 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
+		<Param id="210">
+			<Name>GetUserOrganizationsContent</Name>
+			<Description>Get User Organizations Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="260">
+			<Name>GetUserOrganizationsLinkHeader</Name>
+			<Description>Get User Organizations Link Header</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="211">
+			<Name>GetOrganizationRepositoriesContent</Name>
+			<Description>Get Organization Repositories Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="261">
+			<Name>GetOrganizationRepositoriesLinkHeader</Name>
+			<Description>Get Organization Repositories Link Header</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		
+		<Param id="300">
+			<Name>Title_End_Generic</Name>
+			<Type>fixed</Type>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<!--Note that by adding multiple positions,
+					the same title end can be re-used for closing different group boxes.
+					Indeed, Cube only uses the positions in order to potentially group a title begin to a title end.-->
+				<Positions>
+					<Position>
+						<Page>Add Repository</Page>
+						<Column>0</Column>
+						<Row>4</Row>
+					</Position>
+					<Position>
+						<Page>Add Repository</Page>
+						<Column>1</Column>
+						<Row>3</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="end">title</Type>
+			</Measurement>
+		</Param>
+		<Param id="301">
+			<Name>Title_Begin_SingleRepository</Name>
+			<Description>Single Repository</Description>
+			<Type>fixed</Type>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Repository</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="begin">title</Type>
+			</Measurement>
+		</Param>
+		<Param id="302">
+			<Name>Title_Begin_OrganizationRepositories</Name>
+			<Description>Organization Repositories</Description>
+			<Type>fixed</Type>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Repository</Page>
+						<Column>1</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="begin">title</Type>
+			</Measurement>
+		</Param>
 		
 		<Param id="500">
 			<Name>AddRepositoryButton</Name>
@@ -660,7 +772,7 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Position>
 						<Page>Add Repository</Page>
 						<Column>0</Column>
-						<Row>2</Row>
+						<Row>3</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -668,7 +780,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type width="110">button</Type>
 				<Discreets>
 					<Discreet>
-						<Display>Add Repositories</Display>
+						<Display>Add Repository</Display>
 						<Value>1</Value>
 					</Discreet>
 				</Discreets>
@@ -699,7 +811,7 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Position>
 						<Page>Add Repository</Page>
 						<Column>0</Column>
-						<Row>0</Row>
+						<Row>1</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -722,7 +834,7 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Position>
 						<Page>Add Repository</Page>
 						<Column>0</Column>
-						<Row>0</Row>
+						<Row>1</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -755,7 +867,7 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Position>
 						<Page>Add Repository</Page>
 						<Column>0</Column>
-						<Row>1</Row>
+						<Row>2</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -778,9 +890,107 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Position>
 						<Page>Add Repository</Page>
 						<Column>0</Column>
+						<Row>2</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="505">
+			<Name>AddOrganizationRepositoriesButton</Name>
+			<Type>write</Type>
+			<Information>
+				<Subtext>The button that trigger an add to the repositories table.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Repository</Page>
+						<Column>1</Column>
+						<Row>2</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type width="110">button</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Add Repositories</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="506" trending="false">
+			<Name>AddOrganizationRepositories</Name>
+			<Description>Add Organization Repositories</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The organization that holds the repositories.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Repository</Page>
+						<Column>1</Column>
 						<Row>1</Row>
 					</Position>
 				</Positions>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets dependencyId="507" />
+			</Measurement>
+		</Param>
+		<Param id="606" setter="true">
+			<Name>AddOrganizationRepositories</Name>
+			<Description>Add Organization Repositories</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Repository</Page>
+						<Column>1</Column>
+						<Row>1</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets dependencyId="507" />
+			</Measurement>
+		</Param>
+		<Param id="507" trending="false">
+			<Name>AddOrganizationRepositories_DiscreetList</Name>
+			<Description>Add Organization Repositories Discreet List</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
 			</Display>
 			<Measurement>
 				<Type>string</Type>
@@ -1170,9 +1380,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Exceptions>
 			</Interprete>
 			<!-- SuppressValidator 2.9.7 No units needed -->
+			<!-- SuppressValidator 2.5.1 Depends on use case. -->
 			<Alarm>
 				<Monitored>true</Monitored>
 			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Range>
@@ -1203,9 +1415,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Exceptions>
 			</Interprete>
 			<!-- SuppressValidator 2.9.7 No units  -->
+			<!-- SuppressValidator 2.5.1 Depends on use case. -->
 			<Alarm>
 				<Monitored>true</Monitored>
 			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Range>
@@ -1235,9 +1449,11 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Exception>
 				</Exceptions>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on use case. -->
 			<Alarm>
 				<Monitored>true</Monitored>
 			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -1265,6 +1481,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Interprete>
 			<Alarm>
 				<Monitored>true</Monitored>
+				<Normal>main</Normal>
 			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -1298,7 +1515,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1201|0-1202|1-1203|2-1204|3,width:100-100-100-100,sort:STRING-STRING-STRING-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1201|0-1202|1-1203|2-1204|3,width:100-100-111-100,sort:STRING-STRING-STRING-STRING,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1201" trending="false">
@@ -1411,7 +1628,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1401|0-1402|1-1403|2-1404|3-1405|4-1406|5-1407|6-1408|7-1409|8-1410|9-1411|10-1412|11-1413|12,width:100-100-100-0-118-100-100-100-100-100-144-144-100,sort:STRING|ASC|1-INT-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1401|0-1402|1-1403|2-1404|3-1405|4-1406|5-1407|6-1408|7-1409|8-1410|9-1411|10-1412|11-1413|12,width:100-100-100-0-118-100-100-100-100-100-144-144-111,sort:STRING|ASC|1-INT-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-STRING,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1401" trending="false">
@@ -2214,6 +2431,184 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Measurement>
 		</Param>
 		
+		<Param id="3000">
+			<Name>Organizations</Name>
+			<Description>Organizations</Description>
+			<Type>array</Type>
+			<ArrayOptions index="0">
+				<ColumnOption idx="0" pid="3001" type="retrieved" options=""/>
+				<ColumnOption idx="1" pid="3002" type="retrieved" options="" />
+				<ColumnOption idx="2" pid="3003" type="retrieved" options="" />
+				<ColumnOption idx="3" pid="3004" type="retrieved" options="" />
+				<ColumnOption idx="4" pid="3005" type="retrieved" options=";save" />
+			</ArrayOptions>
+			<Information>
+				<Subtext>Table containing a list of all the organizations.</Subtext>
+			</Information>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Organizations</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:3001|0-3002|1-3003|2-3004|3-3005|4,width:250-0-100-400-121,sort:STRING-INT-STRING-STRING-STRING,lines:25,filter:true">table</Type>
+			</Measurement>
+		</Param>
+		<Param id="3001" trending="false">
+			<Name>OrganizationsInstance</Name>
+			<Description>Instance (Organizations)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>This is the key used internally by DataMiner to identify the table entries.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="3002" trending="false">
+			<Name>OrganizationsId</Name>
+			<Description>Id (Organizations)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The ID used by GitHub to identify the organization.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<!-- SuppressValidator 2.9.7 An ID does not have a unit. -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Range>
+					<Low>0</Low>
+				</Range>
+			</Display>
+			<!-- /SuppressValidator 2.9.7 -->
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="3003" trending="false">
+			<Name>OrganizationsDescription</Name>
+			<Description>Description (Organizations)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The description for the organization</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="1" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="3004" trending="false">
+			<Name>OrganizationsAvatarUrl</Name>
+			<Description>Avatar URL (Organizations)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The url the the avatar of the organization.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="3005" trending="false">
+			<Name>OrganizationsTrackRepositories</Name>
+			<Description>Track Repositories (Organizations)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Indicates if the repositories under this origanization should be polled.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Disabled</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Enabled</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="3105" setter="true">
+			<Name>OrganizationsTrackRepositories</Name>
+			<Description>Track Repositories (Organizations)</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Message>
+				<![CDATA[This will enable/disable tracking of all the repositories under this organization. 
+When enabling it will also start polling all the repositories. 
+When disabling it will remove all the repositories under this organization.
+				
+Are you sure you want to continue.]]>
+			</Message>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>togglebutton</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Disabled</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Enabled</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		
 		<Param id="21000">
 			<Name>PollManager</Name>
 			<Description>Poll Manager</Description>
@@ -2479,13 +2874,14 @@ To get more request you can add an api key under General/Configuration page. To 
 		<QAction id="2" name="After Startup" encoding="csharp" triggers="2" />
 		<QAction id="19" name="Parse general parameters" encoding="csharp" triggers="110;19"></QAction>
 
-		<QAction id="200" name="Parse Responses" encoding="csharp" triggers="201;202;203;204;205"></QAction>
-
 		<QAction id="990" name="Repositories Table - ContextMenu" encoding="csharp" triggers="990" />
 		<QAction id="992" name="Repositories Table - Changes" encoding="csharp" triggers="992" />
-		<QAction id="1000" name="Add Repositories page" encoding="csharp" triggers="500"></QAction>
+		<QAction id="1000" name="Add Repositories page" encoding="csharp" triggers="500;505"></QAction>
+
+		<QAction id="3000" name="Organizations Table - Changes" encoding="csharp" triggers="3105" row="true" />
 		
 		<QAction id="20000" name="HTTP Request Handling" encoding="csharp" triggers="30" />
+		<QAction id="20001" name="Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211"></QAction>
 		<QAction id="20002" name="HTTP Poll Manager Updates" encoding="csharp" row="true" triggers="21006" />
 	</QActions>
 
@@ -2605,6 +3001,53 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Response>
 			</Connection>
 		</Session>
+
+		<Session id="10" name="Get User Organizations">
+			<Connection id="10" name="Get User Organizations">
+				<Request verb="GET" url="/user/orgs">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Authorization" pid="11"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="12"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="210"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="260"/>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
+		<Session id="11" name="Get Organization Repositories">
+			<Connection id="11" name="Get Organization Repositories">
+				<Request verb="GET" pid="111">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Authorization" pid="11"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="12"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="211"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="261"/>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
 	</HTTP>
 
 	<Groups>
@@ -2665,6 +3108,23 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Session>5</Session>
 			</Content>
 		</Group>
+
+		<Group id="210">
+			<Name>PollUserOrganizations</Name>
+			<Description>Poll User Organizations</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>10</Session>
+			</Content>
+		</Group>
+		<Group id="211">
+			<Name>PollOrganizationRepositories</Name>
+			<Description>Poll Organization Repositories</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>11</Session>
+			</Content>
+		</Group>
 	</Groups>
 
 	<Triggers>
@@ -2713,7 +3173,21 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Id>205</Id>
 			</Content>
 		</Trigger>
-		
+		<Trigger id="210">
+			<Name>Start GetUser Organizations</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>210</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="211">
+			<Name>Start GetOrganization Repositories</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>211</Id>
+			</Content>
+		</Trigger>
+
 		<Trigger id="251">
 			<Name>After GetRepository</Name>
 			<On id="201">group</On>
@@ -2757,6 +3231,24 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Type>action</Type>
 			<Content>
 				<Id>255</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="260">
+			<Name>After GetUser Organizations</Name>
+			<On id="210">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>260</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="261">
+			<Name>After GetOrganizations Repositories</Name>
+			<On id="211">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>261</Id>
 			</Content>
 		</Trigger>
 	</Triggers>
@@ -2804,6 +3296,16 @@ To get more request you can add an api key under General/Configuration page. To 
 			<On id="205">group</On>
 			<Type>execute next</Type>
 		</Action>
+		<Action id="210">
+			<Name>Get User Organizations</Name>
+			<On id="210">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="211">
+			<Name>Get Organization Repositories</Name>
+			<On id="211">group</On>
+			<Type>execute next</Type>
+		</Action>
 
 		<Action id="251">
 			<Name>Clear Get Repository Link Header</Name>
@@ -2828,6 +3330,16 @@ To get more request you can add an api key under General/Configuration page. To 
 		<Action id="255">
 			<Name>Clear Get Repository Workflows Link Header</Name>
 			<On id="255">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="260">
+			<Name>Clear Get User Organizations Link Header</Name>
+			<On id="260">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="261">
+			<Name>Clear Get Organization Repositories Link Header</Name>
+			<On id="261">parameter</On>
 			<Type>clear</Type>
 		</Action>
 	</Actions>

@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 
 using Skyline.DataMiner.Scripting;
 using Skyline.Protocol.Extensions;
+using Skyline.Protocol.PollManager.RequestHandler.Organizations;
 using Skyline.Protocol.Tables;
 
 using SLNetMessages = Skyline.DataMiner.Net.Messages;
@@ -49,71 +50,61 @@ public static class QAction
 
     private static void Add(SLProtocol protocol, IRepositoriesTableRequest request)
     {
-        var row = new RepositoriesTableRow
+        if(request.Organization == IndividualOrOrganization.Individual)
         {
-            FullName = $"{request.Data[0]}/{request.Data[1]}",
-            Owner = request.Data[0],
-            Name = request.Data[1],
-        };
+            var row = new RepositoriesTableRow
+            {
+                FullName = $"{request.Data[0]}/{request.Data[1]}",
+                Owner = request.Data[0],
+                Name = request.Data[1],
+            };
 
-        row.SaveToProtocol(protocol);
+            row.SaveToProtocol(protocol);
+        }
+        else
+        {
+            var org = request.Data[0];
+            protocol.SetParameterIndexByKey(Parameter.Organizations.tablePid, org, Parameter.Organizations.Idx.organizationstrackrepositories + 1, Convert.ToDouble(true));
+            OrganizationsRequestHandler.HandleOrganizationRepositoriesRequest(protocol, org);
+        }
     }
 
     private static void Delete(SLProtocol protocol, IRepositoriesTableRequest request)
     {
-        protocol.DeleteRow(Parameter.Repositories.tablePid, request.Data);
-        protocol.Log($"QA{protocol.QActionID}|Delete|Repositories|Deleting '{request.Data.Count()}' rows", LogType.DebugInfo, LogLevel.NoLogging);
-
-        foreach (var rowId in request.Data)
+        var reposToDelete = request.Data;
+        if (request.Organization == IndividualOrOrganization.Organization)
         {
-            // Delete Linked Tags
-            var tagsIdx = new uint[]
+            uint[] repositoriesTableIdx = new uint[]
             {
-                Parameter.Repositorytags.Idx.repositorytagsid,
-                Parameter.Repositorytags.Idx.repositorytagsrepositoryid,
+                Parameter.Repositories.Idx.repositoriesfullname,
+                Parameter.Repositories.Idx.repositoriesowner,
             };
-            var tagRows = ((object[])protocol.NotifyProtocol((int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Repositorytags.tablePid, tagsIdx))
-                .Select(col => Array.ConvertAll((object[])col, Convert.ToString))
-                .ToRows()
-                .Where(row => row[1] == rowId)
-                .Select(row => row[0]);
-            protocol.Log($"QA{protocol.QActionID}|Delete|{rowId}|Tags|Deleting '{tagRows.Count()}' rows", LogType.DebugInfo, LogLevel.NoLogging);
-            protocol.DeleteRow(Parameter.Repositorytags.tablePid, tagRows.ToArray());
+            object[] repositoriestable = (object[])protocol.NotifyProtocol((int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Repositories.tablePid, repositoriesTableIdx);
+            object[] fullName = (object[])repositoriestable[0];
+            object[] owner = (object[])repositoriestable[1];
 
-            // Delete Linked Releases
-            var releasesIdx = new uint[]
+            var orgRepos = new List<string>();
+            for(int i = 0; i < owner.Length; i++)
             {
-                Parameter.Repositoryreleases.Idx.repositoryreleasesinstance,
-                Parameter.Repositoryreleases.Idx.repositoryreleasesrepositoryid,
-            };
-            var releaseRows = ((object[])protocol.NotifyProtocol((int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Repositoryreleases.tablePid, releasesIdx))
-                .Select(col => Array.ConvertAll((object[])col, Convert.ToString))
-                .ToRows()
-                .Where(row => row[1] == rowId)
-                .Select(row => row[0]);
-            protocol.Log($"QA{protocol.QActionID}|Delete|{rowId}|Releases|Deleting '{releaseRows.Count()}' rows", LogType.DebugInfo, LogLevel.NoLogging);
-            protocol.DeleteRow(Parameter.Repositoryreleases.tablePid, releaseRows.ToArray());
+                if (Convert.ToString(owner[i]) != request.Data[0])
+                    continue;
 
-            // Delete Linked Issues
-            var issuesIdx = new uint[]
-            {
-                Parameter.Repositoryissues.Idx.repositoryissuesinstance,
-                Parameter.Repositoryissues.Idx.repositoryissuesrepositoryid,
-            };
-            var issuesRows = ((object[])protocol.NotifyProtocol((int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Repositoryissues.tablePid, issuesIdx))
-                .Select(col => Array.ConvertAll((object[])col, Convert.ToString))
-                .ToRows()
-                .Where(row => row[1] == rowId)
-                .Select(row => row[0]);
-            protocol.Log($"QA{protocol.QActionID}|Delete|{rowId}|Issues|Deleting '{issuesRows.Count()}' rows", LogType.DebugInfo, LogLevel.NoLogging);
-            protocol.DeleteRow(Parameter.Repositoryissues.tablePid, issuesRows.ToArray());
+                orgRepos.Add(Convert.ToString(fullName[i]));
+            }
+
+            reposToDelete = orgRepos.ToArray();
         }
+
+        RepositoriesTable.GetTable().DeleteRow(protocol, reposToDelete);
+        protocol.Log($"QA{protocol.QActionID}|Delete|Repositories|Deleting '{reposToDelete.Count()}' rows", LogType.DebugInfo, LogLevel.NoLogging);
     }
 }
 
 internal class RepositoryTableRequest : IRepositoriesTableRequest
 {
     public RepositoryTableAction Action { get; set; }
+
+    public IndividualOrOrganization Organization { get; set; }
 
     public string[] Data { get; set; }
 }

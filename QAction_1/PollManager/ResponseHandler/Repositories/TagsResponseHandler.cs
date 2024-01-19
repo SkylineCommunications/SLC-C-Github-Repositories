@@ -49,7 +49,7 @@
             var name = match.Groups[2].Value;
 
             // Update the tags table
-            var table = new RepositoryTagsRecords();
+            var table = RepositoryTagsTable.GetTable();
             foreach (var tag in response)
             {
                 if (tag == null)
@@ -58,7 +58,7 @@
                     continue;
                 }
 
-                table.Rows.Add(new RepositoryTagsRecord
+                table.Rows.Add(new RepositoryTagsTableRow
                 {
                     ID = $"{owner}/{name}/commits/{tag.Name}",
                     Name = tag.Name,

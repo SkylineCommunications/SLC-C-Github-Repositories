@@ -30,7 +30,7 @@ namespace QAction_990
 
                 case Action.Deleteselectedrow_40_s_41_:
                     Protocol.Log("QA" + Protocol.QActionID + "|ContextMenuRepositoriesTable|ProcessContextMenuAction|Deleteselectedrow_40_s_41_", LogType.DebugInfo, LogLevel.NoLogging);
-                    Protocol.SetParameter(Parameter.repositories_changerequest, JsonConvert.SerializeObject(new RemoveRepositoriesTableRequest(Data)));
+                    Protocol.SetParameter(Parameter.repositories_changerequest, JsonConvert.SerializeObject(new RemoveRepositoriesTableRequest(IndividualOrOrganization.Individual, Data)));
                     break;
 
                 default:

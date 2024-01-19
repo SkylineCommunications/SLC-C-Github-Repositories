@@ -7,7 +7,7 @@
     {
         public static void HandleRepositoriesRequest(SLProtocol protocol)
         {
-            var table = new RepositoriesTable(protocol);
+            var table = RepositoriesTable.GetTable(protocol);
             foreach (var row in table.Rows)
             {
                 protocol.SetParameter(Parameter.getrepositoryurl, $"repos/{row.Owner}/{row.Name}");

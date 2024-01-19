@@ -9,8 +9,33 @@
 
 	using SLNetMessages = Skyline.DataMiner.Net.Messages;
 
+	public delegate void RepositoryTableEventHandler(object sender, RepositoriesTableRow e);
+
+	public enum RepositoryChange
+	{
+		Add,
+		Remove,
+	}
+
+	public class RepositoryEventArgs : EventArgs
+	{
+		public RepositoryEventArgs(SLProtocol protocol, RepositoryChange changeType, params string[] repositories)
+		{
+			Protocol = protocol;
+			Type = changeType;
+			Repositories = repositories;
+		}
+
+		public SLProtocol Protocol { get; }
+
+		public RepositoryChange Type { get; }
+
+		public string[] Repositories { get; }
+	}
+
 	public class RepositoriesTableRow
 	{
+		private string description = Exceptions.NotAvailable;
 		private double isPrivate = Exceptions.IntNotAvailable;
 		private double isFork = Exceptions.IntNotAvailable;
 		private DateTime createdAt;
@@ -19,6 +44,7 @@
 		private double updatedAtOA = Exceptions.IntNotAvailable;
 		private DateTime pushedAt;
 		private double pushedAtOA = Exceptions.IntNotAvailable;
+		private string language = Exceptions.NotAvailable;
 
 		public RepositoriesTableRow() { }
 
@@ -27,7 +53,7 @@
 			Name = Convert.ToString(row[0]);
 			FullName = Convert.ToString(row[1]);
 			Private = Convert.ToBoolean(row[2]);
-			Description = Convert.ToString(row[3]);
+			description = Convert.ToString(row[3]);
 			Owner = Convert.ToString(row[4]);
 			Fork = Convert.ToBoolean(row[5]);
 			CreatedAt = DateTime.FromOADate(Convert.ToDouble(row[6]));
@@ -36,7 +62,7 @@
 			Size = Convert.ToInt64(row[9]);
 			Stars = Convert.ToInt32(row[10]);
 			Watcher = Convert.ToInt32(row[11]);
-			Language = Convert.ToString(row[12]);
+			language = Convert.ToString(row[12]);
 			DefaultBranch = Convert.ToString(row[13]);
 		}
 
@@ -46,7 +72,32 @@
 
 		public bool Private { get => Convert.ToBoolean(isPrivate); set => isPrivate = Convert.ToDouble(value); }
 
-		public string Description { get; set; } = Exceptions.NotAvailable;
+		public string Description
+		{
+			get
+			{
+				if (description == Exceptions.NotAvailable)
+				{
+					return String.Empty;
+				}
+				else
+				{
+					return description;
+				}
+			}
+
+			set
+			{
+				if (String.IsNullOrWhiteSpace(value))
+				{
+					description = Exceptions.NotAvailable;
+				}
+				else
+				{
+					description = value;
+				}
+			}
+		}
 
 		public string Owner { get; set; } = Exceptions.NotAvailable;
 
@@ -100,7 +151,32 @@
 
 		public int Watcher { get; set; } = Exceptions.IntNotAvailable;
 
-		public string Language { get; set; } = Exceptions.NotAvailable;
+		public string Language
+		{
+			get
+			{
+				if (language == Exceptions.NotAvailable)
+				{
+					return String.Empty;
+				}
+				else
+				{
+					return language;
+				}
+			}
+
+			set
+			{
+				if (String.IsNullOrWhiteSpace(value))
+				{
+					language = Exceptions.NotAvailable;
+				}
+				else
+				{
+					language = value;
+				}
+			}
+		}
 
 		public string DefaultBranch { get; set; } = Exceptions.NotAvailable;
 
@@ -122,7 +198,7 @@
 				Repositoriesname = Name,
 				Repositoriesfullname = FullName,
 				Repositoriesprivate = isPrivate,
-				Repositoriesdescription = Description,
+				Repositoriesdescription = description,
 				Repositoriesowner = Owner,
 				Repositoriesfork = isFork,
 				Repositoriescreatedat = createdAtOA,
@@ -131,7 +207,7 @@
 				Repositoriessize = Convert.ToDouble(Size),
 				Repositoriesstars = Convert.ToDouble(Stars),
 				Repositorieswatcher = Convert.ToDouble(Watcher),
-				Repositorieslanguage = Language,
+				Repositorieslanguage = language,
 				Repositoriesdefaultbranch = DefaultBranch,
 			};
 		}
@@ -151,9 +227,11 @@
 
 	public class RepositoriesTable
 	{
-		public RepositoriesTable() { }
+		private static RepositoriesTable instance = new RepositoriesTable();
 
-		public RepositoriesTable(SLProtocol protocol)
+		protected RepositoriesTable() { }
+
+		protected RepositoriesTable(SLProtocol protocol)
 		{
 			uint[] repositoriesTableIdx = new uint[]
 			{
@@ -208,7 +286,25 @@
 			}
 		}
 
-		public List<RepositoriesTableRow> Rows { get; set; } = new List<RepositoriesTableRow>();
+		public static event EventHandler<RepositoryEventArgs> RepositoriesChanged;
+
+		public List<RepositoriesTableRow> Rows { get; private set; } = new List<RepositoriesTableRow>();
+
+		public static RepositoriesTable GetTable(SLProtocol protocol = null)
+		{
+			if (protocol != null)
+			{
+				instance = new RepositoriesTable(protocol);
+			}
+
+			return instance;
+		}
+
+		public void DeleteRow(SLProtocol protocol, params string[] rowsToDelete)
+		{
+			protocol.DeleteRow(Parameter.Repositories.tablePid, rowsToDelete);
+			RepositoriesChanged?.Invoke(instance, new RepositoryEventArgs(protocol, RepositoryChange.Remove, rowsToDelete));
+		}
 
 		public void SaveToProtocol(SLProtocol protocol, bool partial = false)
 		{

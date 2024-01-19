@@ -17,6 +17,7 @@ public static class QAction
         try
         {
             var trigger = protocol.GetTriggerParameter();
+            protocol.Log($"QA{protocol.QActionID}|Parse|Trigger: {trigger}", LogType.DebugInfo, LogLevel.NoLogging);
             if(ResponseHandler.Handlers.TryGetValue((RequestType)trigger, out var handler))
             {
                 handler(protocol);

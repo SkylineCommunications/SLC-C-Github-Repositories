@@ -15,7 +15,7 @@ namespace Skyline.Protocol.PollManager.RequestHandler.Repositories
 
         public static void HandleRepositoriesWorkflowsRequest(SLProtocol protocol, int perPage, int page)
         {
-            var table = new RepositoriesTable(protocol);
+            var table = RepositoriesTable.GetTable(protocol);
             foreach (var row in table.Rows)
             {
                 HandleRepositoriesWorkflowsRequest(protocol, row.Owner, row.Name, perPage, page);

@@ -13,7 +13,7 @@
 
         public static void HandleRepositoriesTagsRequest(SLProtocol protocol, int perPage, int page)
         {
-            var table = new RepositoriesTable(protocol);
+            var table = RepositoriesTable.GetTable(protocol);
             foreach (var row in table.Rows)
             {
                 HandleRepositoriesTagsRequest(protocol, row.Owner, row.Name, perPage, page);

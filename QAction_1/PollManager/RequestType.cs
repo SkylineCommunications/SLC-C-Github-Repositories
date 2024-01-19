@@ -10,5 +10,8 @@ namespace Skyline.Protocol.PollManager
         [Description("Repositories/Tags")] Repositories_Tags = 203,
         [Description("Repositories/Releases")] Repositories_Releases = 204,
 		[Description("Repositories/Workflows")] Repositories_Workflows = 205,
-	}
+
+        [Description("Organizations/User")] Organizations_User = 210,
+        [Description("Organizations/Repositories")] Organizations_Repositories = 211,
+    }
 }

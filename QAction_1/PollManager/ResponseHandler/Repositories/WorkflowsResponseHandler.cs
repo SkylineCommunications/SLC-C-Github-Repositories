@@ -1,6 +1,7 @@
 ﻿namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 {
 	using System;
+	using System.IO;
 	using System.Linq;
 	using System.Text.RegularExpressions;
 
@@ -13,6 +14,8 @@
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;
+
+	using static SLDataGateway.API.Types.Migration.ETLStatus;
 
 	public static partial class RepositoriesResponseHandler
 	{
@@ -49,7 +52,7 @@
 			var name = match.Groups[2].Value;
 
 			// Update the tags table
-			var table = new RepositoryWorkflowsRecords();
+			var table = RepositoryWorkflowsTable.GetTable();
 			foreach (var workflow in response.Workflows)
 			{
 				if (workflow == null)
@@ -58,17 +61,23 @@
 					continue;
 				}
 
-				table.Rows.Add(new RepositoryWorkflowsRecord
+				// Update existing workflow if found, otherwise create new one
+				var id = $"{owner}/{name}/actions/workflows/{workflow.Id}";
+				var row = table.Rows.Find(wf => wf.ID == id) ?? new RepositoryWorkflowsTableRow();
+				row.RepositoryID = $"{owner}/{name}";
+				row.Name = workflow.Name;
+				row.State = workflow.State;
+				row.Path = workflow.Path;
+				row.CreatedAt = workflow.CreatedAt;
+				row.UpdatedAt = workflow.UpdatedAt;
+				row.DeletedAt = workflow.DeletedAt;
+
+				// If its a new row fill in ID and add it to the table.
+				if (String.IsNullOrEmpty(row.ID))
 				{
-					ID = $"{owner}/{name}/actions/workflows/{workflow.Id}",
-					RepositoryID = $"{owner}/{name}",
-					Name = workflow.Name,
-					State = workflow.State,
-					Path = workflow.Path,
-					CreatedAt = workflow.CreatedAt,
-					UpdatedAt = workflow.UpdatedAt,
-					DeletedAt = workflow.DeletedAt,
-				});
+					row.ID = id;
+					table.Rows.Add(row);
+				}
 			}
 
 			if (table.Rows.Count > 0)

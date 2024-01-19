@@ -4,6 +4,7 @@
     using System.Collections.Generic;
 
     using Skyline.DataMiner.Scripting;
+    using Skyline.Protocol.PollManager.ResponseHandler.Organizations;
     using Skyline.Protocol.PollManager.ResponseHandler.Repositories;
 
     public static class ResponseHandler
@@ -15,6 +16,9 @@
             { RequestType.Repositories_Releases,            RepositoriesResponseHandler.HandleRepositoriesReleasesResponse },
             { RequestType.Repository_Issues,                RepositoriesResponseHandler.HandleRepositoriesIssuesResponse },
             { RequestType.Repositories_Workflows,           RepositoriesResponseHandler.HandleRepositoriesWorkflowsResponse },
+
+            { RequestType.Organizations_User,               OrganizationsResponseHandler.HandleUserOrganizationsResponse },
+            { RequestType.Organizations_Repositories,       OrganizationsResponseHandler.HandleOrganizationRepositoriesResponse },
         };
 
         public static IReadOnlyDictionary<RequestType, Action<SLProtocol>> Handlers => handlers;

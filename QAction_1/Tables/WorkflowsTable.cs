@@ -1,14 +1,18 @@
-﻿namespace Skyline.Protocol.Tables
+﻿// Ignore Spelling: Workflows
+
+namespace Skyline.Protocol.Tables
 {
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 
+	using Skyline.DataMiner.Net;
 	using Skyline.DataMiner.Scripting;
+	using Skyline.Protocol.Extensions;
 
 	using SLNetMessages = Skyline.DataMiner.Net.Messages;
 
-	public class RepositoryWorkflowsRecord
+	public class RepositoryWorkflowsTableRow
 	{
 		private DateTime createdAt;
 		private double createdAtOA = Exceptions.IntNotAvailable;
@@ -17,9 +21,9 @@
 		private DateTime deletedAt;
 		private double deletedAtOA = Exceptions.IntNotAvailable;
 
-		public RepositoryWorkflowsRecord() { }
+		public RepositoryWorkflowsTableRow() { }
 
-		public RepositoryWorkflowsRecord(params object[] row)
+		public RepositoryWorkflowsTableRow(params object[] row)
 		{
 			ID = Convert.ToString(row[0]);
 			RepositoryID = Convert.ToString(row[1]);
@@ -94,7 +98,7 @@
 
 			set
 			{
-				if(value == default)
+				if (value == default)
 				{
 					deletedAt = value;
 					deletedAtOA = Exceptions.IntNotAvailable;
@@ -107,7 +111,7 @@
 			}
 		}
 
-		public static RepositoryWorkflowsRecord FromPK(SLProtocol protocol, string pk)
+		public static RepositoryWorkflowsTableRow FromPK(SLProtocol protocol, string pk)
 		{
 			var row = (object[])protocol.GetRow(Parameter.Repositoryworkflows.tablePid, pk);
 			if (row[0] == null)
@@ -115,7 +119,7 @@
 				return default;
 			}
 
-			return new RepositoryWorkflowsRecord(row);
+			return new RepositoryWorkflowsTableRow(row);
 		}
 
 		public object[] ToProtocolRow()
@@ -146,12 +150,19 @@
 		}
 	}
 
-	public class RepositoryWorkflowsRecords
+	public class RepositoryWorkflowsTable : IDisposable
 	{
-		public RepositoryWorkflowsRecords() { }
+		private static RepositoryWorkflowsTable instance = new RepositoryWorkflowsTable();
 
-		public RepositoryWorkflowsRecords(SLProtocol protocol)
+		protected RepositoryWorkflowsTable()
 		{
+			RepositoriesTable.RepositoriesChanged += RepositoriesTable_RepositoriesChanged;
+		}
+
+		protected RepositoryWorkflowsTable(SLProtocol protocol)
+		{
+			RepositoriesTable.RepositoriesChanged += RepositoriesTable_RepositoriesChanged;
+
 			uint[] repositoryWorkflowsIdx = new uint[]
 			{
 				Parameter.Repositoryworkflows.Idx.repositoryworkflowsid_1601,
@@ -175,7 +186,7 @@
 
 			for (int i = 0; i < iD.Length; i++)
 			{
-				Rows.Add(new RepositoryWorkflowsRecord(
+				Rows.Add(new RepositoryWorkflowsTableRow(
 				iD[i],
 				repositoryID[i],
 				name[i],
@@ -187,13 +198,64 @@
 			}
 		}
 
-		public List<RepositoryWorkflowsRecord> Rows { get; set; } = new List<RepositoryWorkflowsRecord>();
+		~RepositoryWorkflowsTable()
+		{
+			// Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+			Dispose(false);
+		}
+
+		public List<RepositoryWorkflowsTableRow> Rows { get; private set; } = new List<RepositoryWorkflowsTableRow>();
+
+		public static RepositoryWorkflowsTable GetTable(SLProtocol protocol = null)
+		{
+			if (protocol != null)
+			{
+				instance.Dispose();
+				instance = new RepositoryWorkflowsTable(protocol);
+			}
+
+			return instance;
+		}
 
 		public void SaveToProtocol(SLProtocol protocol, bool partial = false)
 		{
 			List<object[]> rows = Rows.Select(x => x.ToProtocolRow()).ToList();
 			NotifyProtocol.SaveOption option = partial ? NotifyProtocol.SaveOption.Partial : NotifyProtocol.SaveOption.Full;
 			protocol.FillArray(Parameter.Repositoryworkflows.tablePid, rows, option);
+		}
+
+		public void Dispose()
+		{
+			// Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		protected virtual void Dispose(bool disposing)
+		{
+			RepositoriesTable.RepositoriesChanged -= RepositoriesTable_RepositoriesChanged;
+		}
+
+		private static void RepositoriesTable_RepositoriesChanged(object sender, RepositoryEventArgs e)
+		{
+			// There only needs to happen something when removing a repository
+			if (e.Type != RepositoryChange.Remove)
+				return;
+
+			// Delete Linked Workflows
+			var workflowsIdx = new uint[]
+			{
+				Parameter.Repositoryworkflows.Idx.repositoryworkflowsid,
+				Parameter.Repositoryworkflows.Idx.repositoryworkflowsrepositoryid,
+			};
+
+			var workflowsRows = ((object[])e.Protocol.NotifyProtocol((int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Repositoryworkflows.tablePid, workflowsIdx))
+				.Select(col => Array.ConvertAll((object[])col, Convert.ToString))
+				.ToRows()
+				.Where(row => e.Repositories.Contains(row[1]))
+				.Select(row => row[0]);
+
+			e.Protocol.DeleteRow(Parameter.Repositoryworkflows.tablePid, workflowsRows.ToArray());
 		}
 	}
 }
