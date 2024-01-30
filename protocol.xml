@@ -3912,6 +3912,7 @@ Are you sure you want to continue.]]>
 			<Type>action</Type>
 			<Content>
 				<Id>251</Id>
+				<Id>301</Id>
 			</Content>
 		</Trigger>
 		<Trigger id="252">
@@ -3921,6 +3922,7 @@ Are you sure you want to continue.]]>
 			<Type>action</Type>
 			<Content>
 				<Id>252</Id>
+				<Id>302</Id>
 			</Content>
 		</Trigger>
 		<Trigger id="253">
@@ -3930,6 +3932,7 @@ Are you sure you want to continue.]]>
 			<Type>action</Type>
 			<Content>
 				<Id>253</Id>
+				<Id>303</Id>
 			</Content>
 		</Trigger>
 		<Trigger id="254">
@@ -3939,6 +3942,7 @@ Are you sure you want to continue.]]>
 			<Type>action</Type>
 			<Content>
 				<Id>254</Id>
+				<Id>304</Id>
 			</Content>
 		</Trigger>
 		<Trigger id="255">
@@ -3948,6 +3952,7 @@ Are you sure you want to continue.]]>
 			<Type>action</Type>
 			<Content>
 				<Id>255</Id>
+				<Id>305</Id>
 			</Content>
 		</Trigger>
 		<Trigger id="260">
@@ -3957,6 +3962,7 @@ Are you sure you want to continue.]]>
 			<Type>action</Type>
 			<Content>
 				<Id>260</Id>
+				<Id>310</Id>
 			</Content>
 		</Trigger>
 		<Trigger id="261">
@@ -3966,6 +3972,7 @@ Are you sure you want to continue.]]>
 			<Type>action</Type>
 			<Content>
 				<Id>261</Id>
+				<Id>311</Id>
 			</Content>
 		</Trigger>
 		<Trigger id="270">
@@ -3975,6 +3982,7 @@ Are you sure you want to continue.]]>
 			<Type>action</Type>
 			<Content>
 				<Id>270</Id>
+				<Id>320</Id>
 			</Content>
 		</Trigger>
 		<Trigger id="271">
@@ -3984,6 +3992,7 @@ Are you sure you want to continue.]]>
 			<Type>action</Type>
 			<Content>
 				<Id>271</Id>
+				<Id>321</Id>
 			</Content>
 		</Trigger>
 		<Trigger id="276">
@@ -3993,6 +4002,7 @@ Are you sure you want to continue.]]>
 			<Type>action</Type>
 			<Content>
 				<Id>276</Id>
+				<Id>326</Id>
 			</Content>
 		</Trigger>
 		<Trigger id="278">
@@ -4137,6 +4147,56 @@ Are you sure you want to continue.]]>
 			<Type>clear</Type>
 		</Action>
 
+		<Action id="301">
+			<Name>Clear Repository Content</Name>
+			<On id="201">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="302">
+			<Name>Clear Repository Issues Content</Name>
+			<On id="202">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="303">
+			<Name>Clear Repository Tags Content</Name>
+			<On id="203">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="304">
+			<Name>Clear Repository Releases Content</Name>
+			<On id="204">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="305">
+			<Name>Clear Repository Workflows Content</Name>
+			<On id="205">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="310">
+			<Name>Clear User Organizations Content</Name>
+			<On id="210">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="311">
+			<Name>Clear Organization Repositories</Name>
+			<On id="211">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="320">
+			<Name>Clear Repository Content Content</Name>
+			<On id="220">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="321">
+			<Name>Clear Repository Content Content</Name>
+			<On id="221">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="326">
+			<Name>Clear Repository Secret Content</Name>
+			<On id="226">parameter</On>
+			<Type>clear</Type>
+		</Action>
 		<Action id="328">
 			<Name>Clear Get Repository Public Key Content</Name>
 			<On id="228">parameter</On>

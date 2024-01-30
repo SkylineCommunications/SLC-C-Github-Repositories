@@ -25,10 +25,6 @@
 				return;
 			}
 
-			// Check if there are more workflows to fetch
-			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowslinkheader));
-			var link = new LinkHeader(linkHeader);
-
 			// Parse response
 			var response = JsonConvert.DeserializeObject<RepositoryWorkflowsResponse>(Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowscontent)));
 			var url = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowsurl));

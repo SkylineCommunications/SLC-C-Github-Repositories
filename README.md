@@ -18,6 +18,7 @@ You can do a manual install by downloading the .dmprotocol package file from the
 
 - [Configuration](#configuration)
 - [Overview](#overview)
+- [Organizations](#organizations)
 - [Tags](#tags)
 - [Releases](#releases)
 - [Issues](#issues)
@@ -40,8 +41,14 @@ On the Repositories - Overview page you get a tree control that shows all the co
 1. Tags
 1. Releases
 1. Issues
+1. Workflows
 
 ![Repositories - Overview](Documentation/RepositoriesOverviewPage.png)
+
+### Organizations
+On the Organizations page you get an overview of the organizations the configured token is part of. You can enable repository tracking from this page. This will add all the repositories under the repository to the repositories table and start polling them.
+
+![Organizations](Documentation/Organizations.png)
 
 ### Tags
 The tags table contains all the tags from all the tracked repositories. Here you can find the tag name the repository it's linked with and the commit ID it was placed on.
@@ -63,7 +70,7 @@ The issues table contains all the issues from all the tracked repositories. Here
 1. when it was created
 1. ...
 
-![Editor](Documentation/IssuesPage.png)
+![Issues](Documentation/IssuesPage.png)
 
 ### Workflows
 The workflows table contains all the workflows from all the tracked repositories. Here you can find some general information about the workflows, for example:
@@ -73,7 +80,9 @@ The workflows table contains all the workflows from all the tracked repositories
 1. when it was created
 1. ...
 
-![Editor](Documentation/WorkflowsPage.png)
+![Workflows](Documentation/WorkflowsPage.png)
+
+![Add Workflow](Documentation/Workflows_AddWorkflowPage.png)
 
 ## About DataMiner
 
