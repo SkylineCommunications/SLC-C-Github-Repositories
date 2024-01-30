@@ -1,13 +1,21 @@
 ﻿namespace Skyline.Protocol.Tables
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
-	using Skyline.DataMiner.Scripting;
-	using Skyline.Protocol;
+    using Newtonsoft.Json;
 
-	using SLNetMessages = Skyline.DataMiner.Net.Messages;
+    using Skyline.DataMiner.Scripting;
+    using Skyline.Protocol;
+    using SLNetMessages = Skyline.DataMiner.Net.Messages;
+
+    public enum RepositoryType
+	{
+		Other = 0,
+		Automation = 1,
+		Connector = 2,
+	}
 
 	public class RepositoriesTableRow
 	{
@@ -26,8 +34,8 @@
 
 		public RepositoriesTableRow(params object[] row)
 		{
-			Name = Convert.ToString(row[0]);
-			FullName = Convert.ToString(row[1]);
+			FullName = Convert.ToString(row[0]);
+			Name = Convert.ToString(row[1]);
 			Private = Convert.ToBoolean(row[2]);
 			description = Convert.ToString(row[3]);
 			Owner = Convert.ToString(row[4]);
@@ -40,6 +48,9 @@
 			Watcher = Convert.ToInt32(row[11]);
 			language = Convert.ToString(row[12]);
 			DefaultBranch = Convert.ToString(row[13]);
+			Type = (RepositoryType)Convert.ToInt16(row[14]);
+			PublicKeyID = Convert.ToString(row[15]);
+			PublicKey = Convert.ToString(row[16]);
 		}
 
 		public string Name { get; set; }
@@ -156,9 +167,32 @@
 
 		public string DefaultBranch { get; set; } = Exceptions.NotAvailable;
 
+		public RepositoryType Type { get; set; } = RepositoryType.Other;
+
+		public string PublicKeyID { get; set; } = Exceptions.NotAvailable;
+
+		public string PublicKey { get; set; } = Exceptions.NotAvailable;
+
+		public static RepositoryType GetTypeFromTopics(IEnumerable<string> topics)
+		{
+			if (topics.Contains("dataminer-automation-script"))
+			{
+				return RepositoryType.Automation;
+			}
+			else if (topics.Contains("dataminer-connector"))
+			{
+				return RepositoryType.Connector;
+			}
+			else
+			{
+				return RepositoryType.Other;
+			}
+		}
+
 		public static RepositoriesTableRow FromPK(SLProtocol protocol, string pk)
 		{
 			var row = (object[])protocol.GetRow(Parameter.Repositories.tablePid, pk);
+			protocol.Log($"QA{protocol.QActionID}|FromPK|{JsonConvert.SerializeObject(row)}", LogType.DebugInfo, LogLevel.NoLogging);
 			if (row[0] == null)
 			{
 				return default;
@@ -185,18 +219,22 @@
 				Repositorieswatcher = Convert.ToDouble(Watcher),
 				Repositorieslanguage = language,
 				Repositoriesdefaultbranch = DefaultBranch,
+				Repositoriestype = Convert.ToInt16(Type),
+				Repositoriespublickeyid = PublicKeyID,
+				Repositoriespublickey = PublicKey,
 			};
 		}
 
 		public void SaveToProtocol(SLProtocol protocol)
 		{
-			if (!protocol.Exists(Parameter.Repositories.tablePid, Name))
+			protocol.Log($"QA{protocol.QActionID}|SaveToProtocol|{FullName}", LogType.DebugInfo, LogLevel.NoLogging);
+			if (!protocol.Exists(Parameter.Repositories.tablePid, FullName))
 			{
 				protocol.AddRow(Parameter.Repositories.tablePid, ToProtocolRow());
 			}
 			else
 			{
-				protocol.SetRow(Parameter.Repositories.tablePid, Name, ToProtocolRow());
+				protocol.SetRow(Parameter.Repositories.tablePid, FullName, ToProtocolRow());
 			}
 		}
 	}
@@ -212,8 +250,8 @@
 		{
 			uint[] repositoriesTableIdx = new uint[]
 			{
-				Parameter.Repositories.Idx.repositoriesname,
 				Parameter.Repositories.Idx.repositoriesfullname,
+				Parameter.Repositories.Idx.repositoriesname,
 				Parameter.Repositories.Idx.repositoriesprivate,
 				Parameter.Repositories.Idx.repositoriesdescription,
 				Parameter.Repositories.Idx.repositoriesowner,
@@ -226,10 +264,13 @@
 				Parameter.Repositories.Idx.repositorieswatcher,
 				Parameter.Repositories.Idx.repositorieslanguage,
 				Parameter.Repositories.Idx.repositoriesdefaultbranch,
+				Parameter.Repositories.Idx.repositoriestype,
+				Parameter.Repositories.Idx.repositoriespublickeyid,
+				Parameter.Repositories.Idx.repositoriespublickey,
 			};
 			object[] repositoriestable = (object[])protocol.NotifyProtocol((int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Repositories.tablePid, repositoriesTableIdx);
-			object[] name = (object[])repositoriestable[0];
-			object[] fullName = (object[])repositoriestable[1];
+			object[] fullName = (object[])repositoriestable[0];
+			object[] name = (object[])repositoriestable[1];
 			object[] isprivate = (object[])repositoriestable[2];
 			object[] description = (object[])repositoriestable[3];
 			object[] owner = (object[])repositoriestable[4];
@@ -242,12 +283,15 @@
 			object[] watcher = (object[])repositoriestable[11];
 			object[] language = (object[])repositoriestable[12];
 			object[] defaultBranch = (object[])repositoriestable[13];
+			object[] type = (object[])repositoriestable[14];
+			object[] publicKeyId = (object[])repositoriestable[15];
+			object[] publicKey = (object[])repositoriestable[16];
 
 			for (int i = 0; i < name.Length; i++)
 			{
 				Rows.Add(new RepositoriesTableRow(
-				name[i],
 				fullName[i],
+				name[i],
 				isprivate[i],
 				description[i],
 				owner[i],
@@ -259,7 +303,10 @@
 				stars[i],
 				watcher[i],
 				language[i],
-				defaultBranch[i]));
+				defaultBranch[i],
+				type[i],
+				publicKeyId[i],
+				publicKey[i]));
 			}
 		}
 		#endregion
@@ -291,6 +338,8 @@
 			List<object[]> rows = Rows.Select(x => x.ToProtocolRow()).ToList();
 			NotifyProtocol.SaveOption option = partial ? NotifyProtocol.SaveOption.Partial : NotifyProtocol.SaveOption.Full;
 			protocol.FillArray(Parameter.Repositories.tablePid, rows, option);
+
+			protocol.SetParameter(Parameter.addworkflowrepository_discreetlist, String.Join(";", Rows.Select(row => row.FullName)));
 		}
 	}
 }

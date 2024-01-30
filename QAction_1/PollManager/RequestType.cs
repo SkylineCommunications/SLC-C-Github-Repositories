@@ -13,5 +13,7 @@ namespace Skyline.Protocol.PollManager
 
 		[Description("Organizations/User")] Organizations_User = 210,
 		[Description("Organizations/Repositories")] Organizations_Repositories = 211,
+
+		[Description("Repositories/Public Keys")] Repositories_PublicKey = 228,
 	}
 }

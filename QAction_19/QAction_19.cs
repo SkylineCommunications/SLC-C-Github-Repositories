@@ -44,6 +44,7 @@ public static class QAction
     {
         var trigger = protocol.GetTriggerParameter();
         var key = Convert.ToString(protocol.GetParameter(trigger));
+        protocol.Log($"QA{protocol.QActionID}|ApiKeyHandler|Bearer {key}", LogType.DebugInfo, LogLevel.NoLogging);
         protocol.SetParameter(Parameter.apikeybearer, $"Bearer {key}");
     }
 

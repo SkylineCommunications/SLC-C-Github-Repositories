@@ -56,6 +56,7 @@
 				row.Watcher = repo.WatchersCount;
 				row.Language = repo.Language;
 				row.DefaultBranch = repo.DefaultBranch;
+				row.Type = RepositoriesTableRow.GetTypeFromTopics(repo.Topics);
 
 				// If its a new row fill in ID and add it to the table.
 				if (row.FullName == Exceptions.NotAvailable)
@@ -72,6 +73,7 @@
 
 			// Check if there are more repositories to fetch
 			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getorganizationrepositorieslinkheader));
+			protocol.Log($"QA{protocol.QActionID}|{nameof(HandleOrganizationRepositoriesResponse)}|Link Header: {linkHeader}", LogType.DebugInfo, LogLevel.NoLogging);
 			if (string.IsNullOrEmpty(linkHeader)) return;
 
 			var link = new LinkHeader(linkHeader);

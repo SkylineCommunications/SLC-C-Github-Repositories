@@ -2,17 +2,19 @@
 
 namespace Skyline.Protocol.Tables
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+	using Newtonsoft.Json;
 
 	using Skyline.DataMiner.Net;
+	using Skyline.DataMiner.Net.Helper;
 	using Skyline.DataMiner.Scripting;
-	using Skyline.Protocol.Extensions;
+    using Skyline.Protocol.Extensions;
+    using SLNetMessages = Skyline.DataMiner.Net.Messages;
 
-	using SLNetMessages = Skyline.DataMiner.Net.Messages;
-
-	public class RepositoryWorkflowsTableRow
+    public class RepositoryWorkflowsTableRow
 	{
 		private DateTime createdAt;
 		private double createdAtOA = Exceptions.IntNotAvailable;
@@ -206,6 +208,10 @@ namespace Skyline.Protocol.Tables
 		}
 		#endregion
 
+		#region Events
+		public static event EventHandler<RepositoryWorkflowsEventArgs> WorkflowChanged;
+		#endregion
+
 		public List<RepositoryWorkflowsTableRow> Rows { get; private set; } = new List<RepositoryWorkflowsTableRow>();
 
 		public static RepositoryWorkflowsTable GetTable(SLProtocol protocol = null)
@@ -217,6 +223,30 @@ namespace Skyline.Protocol.Tables
 			}
 
 			return instance;
+		}
+
+		public void DeleteRow(SLProtocol protocol, params string[] rowsToDelete)
+		{
+			if (rowsToDelete.Length <= 0)
+				return;
+
+			// Remove from DateMiner and local instance
+			protocol.DeleteRow(Parameter.Repositoryworkflows.tablePid, rowsToDelete);
+			instance.Rows.RemoveAll(x => rowsToDelete.ToList().Contains(x.ID));
+
+			// Notify other parts that rely on this table.
+			var workflowPerRepo = rowsToDelete.Select(x => new
+			{
+				WorkflowID = x,
+				RepositoryID = String.Join("/", x.Split('/')[0], x.Split('/')[1]),
+			}).GroupBy(x => x.RepositoryID);
+
+			foreach(var group in workflowPerRepo)
+			{
+				var repo = group.Key;
+				var repoWorkflowsToRemove = group.Select(x => x.WorkflowID).ToArray();
+				WorkflowChanged?.Invoke(instance, new RepositoryWorkflowsEventArgs(protocol, WorkflowChange.Remove, repo, repoWorkflowsToRemove));
+			}
 		}
 
 		public void SaveToProtocol(SLProtocol protocol, bool partial = false)

@@ -408,7 +408,6 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
-		
 		<Param id="30">
 			<Name>TriggerRequestHandling</Name>
 			<Description>Trigger Request Handling</Description>
@@ -466,7 +465,7 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Position>
 						<Page>Repositories</Page>
 						<Column>0</Column>
-						<Row>3</Row>
+						<Row>4</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -476,6 +475,34 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Discreet>
 						<Display>Add Repository...</Display>
 						<Value>Add Repository</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="52">
+			<Name>AddWorkflowPageButton</Name>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Workflows</Page>
+						<Column>0</Column>
+						<Row>3</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type width="110">pagebutton</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Add Workflow...</Display>
+						<Value>Add Workflow</Value>
 					</Discreet>
 				</Discreets>
 			</Measurement>
@@ -541,6 +568,16 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
+		<Param id="155">
+			<Name>GetRepositoryWorkflowsQueue</Name>
+			<Description>Get Repository Workflows Queue</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
 		<Param id="110">
 			<Name>GetUserOrganizationsUrl</Name>
 			<Description>Get User Organizations Url</Description>
@@ -554,6 +591,76 @@ To get more request you can add an api key under General/Configuration page. To 
 		<Param id="111">
 			<Name>GetOrganizationRepositoriesUrl</Name>
 			<Description>Get Organization Repositories Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="120">
+			<Name>GetRepositoryContentUrl</Name>
+			<Description>Get Repository Content Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="121">
+			<Name>PutRepositoryContentUrl</Name>
+			<Description>Create/Update Repository Content Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="171">
+			<Name>PutRepositoryContentBody</Name>
+			<Description>Create/Update Repository Content Body</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="126">
+			<Name>PutRepositorySecretUrl</Name>
+			<Description>Create/Update Repository Secret Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="176">
+			<Name>PutRepositorySecretBody</Name>
+			<Description>Create/Update Repository Secret Body</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="128">
+			<Name>GetRepositoryPublicKeyUrl</Name>
+			<Description>Get Repository Public Key Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="178">
+			<Name>GetRepositoryPublicKeyQueue</Name>
+			<Description>Get Repository Public Key Queue</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -695,6 +802,86 @@ To get more request you can add an api key under General/Configuration page. To 
 		<Param id="261">
 			<Name>GetOrganizationRepositoriesLinkHeader</Name>
 			<Description>Get Organization Repositories Link Header</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="220">
+			<Name>GetRepositoryContentContent</Name>
+			<Description>Get Repository Content Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="270">
+			<Name>GetRepositoryContentLinkHeader</Name>
+			<Description>Get Repository Content Link Header</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="221">
+			<Name>PutRepositoryContentContent</Name>
+			<Description>Create/Update Repository Content Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="271">
+			<Name>PutRepositoryContentLinkHeader</Name>
+			<Description>Create/Update Repository Content Link Header</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="226">
+			<Name>PutRepositorySecretContent</Name>
+			<Description>Create/Update Repository Secret Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="276">
+			<Name>PutRepositorySecretLinkHeader</Name>
+			<Description>Create/Update Repository Secret Link Header</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="228">
+			<Name>GetRepositoryPublicKeyContent</Name>
+			<Description>Get Repository Public Key Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="278">
+			<Name>GetRepositoryPublicKeyLinkHeader</Name>
+			<Description>Get Repository Public Key Link Header</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -1000,10 +1187,252 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
+				<RTDisplay onAppLevel="true">true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="550">
+			<Name>AddWorkflowButton</Name>
+			<Type>write</Type>
+			<Information>
+				<Subtext>The button that triggers the creation of the specified workflow to the selected repository.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Workflow</Page>
+						<Column>0</Column>
+						<Row>3</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type width="110">button</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Add Workflow</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="551" trending="false">
+			<Name>AddWorkflowRepository</Name>
+			<Description>Repository</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The repository the workflow needs to be added to.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Workflow</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets dependencyId="552" />
+			</Measurement>
+		</Param>
+		<Param id="651" setter="true">
+			<Name>AddWorkflowRepository</Name>
+			<Description>Repository</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Workflow</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets dependencyId="552" />
+			</Measurement>
+		</Param>
+		<Param id="552" trending="false">
+			<Name>AddWorkflowRepository_DiscreetList</Name>
+			<Description>Add Workflow Repository Discreet List</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay onAppLevel="true">true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="553" trending="false">
+			<Name>AddWorkflowBranch</Name>
+			<Description>Branch</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The branch the workflow needs to be added to.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<DefaultValue>Default Branch</DefaultValue>
+				<Exceptions>
+					<Exception id="1" value="">
+						<Display state="enabled">Default Branch</Display>
+						<Value></Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Workflow</Page>
+						<Column>0</Column>
+						<Row>1</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets dependencyId="554" />
+			</Measurement>
+		</Param>
+		<Param id="653" setter="true">
+			<Name>AddWorkflowBranch</Name>
+			<Description>Branch</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Workflow</Page>
+						<Column>0</Column>
+						<Row>1</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets dependencyId="554" />
+			</Measurement>
+		</Param>
+		<Param id="554" trending="false">
+			<Name>AddWorkflowBranch_DiscreetList</Name>
+			<Description>Add Workflow Branch Discreet List</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<DefaultValue>Default Branch</DefaultValue>
+			</Interprete>
+			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
 			<Measurement>
 				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="555" trending="false">
+			<Name>AddWorkflowWorkflow</Name>
+			<Description>Workflow</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The workflow you want to add to the selected repository.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Workflow</Page>
+						<Column>0</Column>
+						<Row>2</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Automation Script CI</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Automation Script CD</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="655" setter="true">
+			<Name>AddWorkflowWorkflow</Name>
+			<Description>Workflow</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Add Workflow</Page>
+						<Column>0</Column>
+						<Row>2</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Automation Script CI</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Automation Script CD</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
 			</Measurement>
 		</Param>
 		
@@ -1086,6 +1515,9 @@ To get more request you can add an api key under General/Configuration page. To 
 				<ColumnOption idx="11" pid="1012" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="12" pid="1013" type="retrieved" options="" />
 				<ColumnOption idx="13" pid="1014" type="retrieved" options="" />
+				<ColumnOption idx="14" pid="1015" type="retrieved" options="" />
+				<ColumnOption idx="15" pid="1016" type="retrieved" options="" />
+				<ColumnOption idx="16" pid="1017" type="retrieved" options="" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>A list of all the tracked repositories.</Subtext>
@@ -1096,12 +1528,12 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Position>
 						<Page>Repositories</Page>
 						<Column>0</Column>
-						<Row>0</Row>
+						<Row>1</Row>
 					</Position>
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3-1005|4-1006|5-1007|6-1008|7-1009|8-1010|9-1011|10-1012|11-1013|12-1014|13,width:100-134-157-140-165-137-144-160-165-157-123-128-147-103,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT-INT-INT-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3-1005|4-1006|5-1007|6-1008|7-1009|8-1010|9-1011|10-1012|11-1013|12-1014|13-1015|14-1016|15-1017|16,width:100-134-157-140-165-137-144-160-165-157-123-128-147-103-100-0-0,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT-INT-INT-STRING-STRING-STRING-STRING,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1001" trending="false">
@@ -1500,6 +1932,79 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
+		<Param id="1015" trending="false">
+			<Name>RepositoriesType</Name>
+			<Description>Type (Repositories)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The type of the repository</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="1" value="0">
+						<Display state="enabled">Other</Display>
+						<Value>0</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Automation</Display>
+						<Value>1</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Connector</Display>
+						<Value>2</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="1016" trending="false">
+			<Name>RepositoriesPublicKeyId</Name>
+			<Description>Public Key ID (Repositories)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The ID of the public key.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1017" trending="false">
+			<Name>RepositoriesPublicKey</Name>
+			<Description>Public Key (Repositories)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The public key for the repository.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="password">string</Type>
+			</Measurement>
+		</Param>
 		
 		<Param id="1200">
 			<Name>RepositoryTags</Name>
@@ -1520,7 +2025,7 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Position>
 						<Page>Repositories</Page>
 						<Column>0</Column>
-						<Row>1</Row>
+						<Row>2</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -1633,7 +2138,7 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Position>
 						<Page>Repositories</Page>
 						<Column>0</Column>
-						<Row>2</Row>
+						<Row>3</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -1914,6 +2419,41 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Measurement>
 		</Param>
 		
+		<Param id="1590">
+			<Name>RepositoryWorkflows_ContextMenu</Name>
+			<Description>Context Menu for Repository Workflows Table</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet dependencyValues="1602:[value:1602];555">
+						<Display>Add...</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="1592">
+			<Name>RepositoryWorkflow_ChangeRequest</Name>
+			<Description>Repository Workflow Change Request</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay onAppLevel="true">true</RTDisplay>
+			</Display>
+		</Param>
 		<Param id="1600">
 			<Name>RepositoryWorkflows</Name>
 			<Description>Repository Workflows</Description>
@@ -2888,10 +3428,14 @@ Are you sure you want to continue.]]>
 		<QAction id="992" name="Repositories Table - Changes" encoding="csharp" triggers="992" />
 		<QAction id="1000" name="Add Repositories page" encoding="csharp" triggers="500;505"></QAction>
 
+		<QAction id="1590" name="Repository Workflow Table - ContextMenu" encoding="csharp" triggers="1590" />
+		<QAction id="1592" name="Repositories Workflow Table - Changes" encoding="csharp" triggers="1592" />
+		<QAction id="1600" name="Add Repository Workflow page" encoding="csharp" triggers="550;651"></QAction>
+
 		<QAction id="3000" name="Organizations Table - Changes" encoding="csharp" triggers="3105" row="true" />
 		
 		<QAction id="20000" name="HTTP Request Handling" encoding="csharp" triggers="30" />
-		<QAction id="20001" name="Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211"></QAction>
+		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211;220;221;226;228"></QAction>
 		<QAction id="20002" name="HTTP Poll Manager Updates" encoding="csharp" row="true" triggers="21006" />
 	</QActions>
 
@@ -2901,9 +3445,9 @@ Are you sure you want to continue.]]>
 				<Request verb="GET" pid="101">
 					<Headers>
 						<Header key="Accept">application/vnd.github+json</Header>
-						<Header key="Authorization" pid="11"></Header>
+						<Header key="Authorization" pid="12"></Header>
 						<!-- SuppressValidator 8.3.1 Required github header -->
-						<Header key="X-GitHub-Api-Version" pid="12"></Header>
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
 						<!-- /SuppressValidator 8.3.1 -->
 					</Headers>
 				</Request>
@@ -2924,9 +3468,9 @@ Are you sure you want to continue.]]>
 				<Request verb="GET" pid="102">
 					<Headers>
 						<Header key="Accept">application/vnd.github+json</Header>
-						<Header key="Authorization" pid="11"></Header>
+						<Header key="Authorization" pid="12"></Header>
 						<!-- SuppressValidator 8.3.1 Required github header -->
-						<Header key="X-GitHub-Api-Version" pid="12"></Header>
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
 						<!-- /SuppressValidator 8.3.1 -->
 					</Headers>
 				</Request>
@@ -2947,9 +3491,9 @@ Are you sure you want to continue.]]>
 				<Request verb="GET" pid="103">
 					<Headers>
 						<Header key="Accept">application/vnd.github+json</Header>
-						<Header key="Authorization" pid="11"></Header>
+						<Header key="Authorization" pid="12"></Header>
 						<!-- SuppressValidator 8.3.1 Required github header -->
-						<Header key="X-GitHub-Api-Version" pid="12"></Header>
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
 						<!-- /SuppressValidator 8.3.1 -->
 					</Headers>
 				</Request>
@@ -2970,9 +3514,9 @@ Are you sure you want to continue.]]>
 				<Request verb="GET" pid="104">
 					<Headers>
 						<Header key="Accept">application/vnd.github+json</Header>
-						<Header key="Authorization" pid="11"></Header>
+						<Header key="Authorization" pid="12"></Header>
 						<!-- SuppressValidator 8.3.1 Required github header -->
-						<Header key="X-GitHub-Api-Version" pid="12"></Header>
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
 						<!-- /SuppressValidator 8.3.1 -->
 					</Headers>
 				</Request>
@@ -2993,9 +3537,9 @@ Are you sure you want to continue.]]>
 				<Request verb="GET" pid="105">
 					<Headers>
 						<Header key="Accept">application/vnd.github+json</Header>
-						<Header key="Authorization" pid="11"></Header>
+						<Header key="Authorization" pid="12"></Header>
 						<!-- SuppressValidator 8.3.1 Required github header -->
-						<Header key="X-GitHub-Api-Version" pid="12"></Header>
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
 						<!-- /SuppressValidator 8.3.1 -->
 					</Headers>
 				</Request>
@@ -3017,9 +3561,9 @@ Are you sure you want to continue.]]>
 				<Request verb="GET" pid="110">
 					<Headers>
 						<Header key="Accept">application/vnd.github+json</Header>
-						<Header key="Authorization" pid="11"></Header>
+						<Header key="Authorization" pid="12"></Header>
 						<!-- SuppressValidator 8.3.1 Required github header -->
-						<Header key="X-GitHub-Api-Version" pid="12"></Header>
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
 						<!-- /SuppressValidator 8.3.1 -->
 					</Headers>
 				</Request>
@@ -3040,9 +3584,9 @@ Are you sure you want to continue.]]>
 				<Request verb="GET" pid="111">
 					<Headers>
 						<Header key="Accept">application/vnd.github+json</Header>
-						<Header key="Authorization" pid="11"></Header>
+						<Header key="Authorization" pid="12"></Header>
 						<!-- SuppressValidator 8.3.1 Required github header -->
-						<Header key="X-GitHub-Api-Version" pid="12"></Header>
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
 						<!-- /SuppressValidator 8.3.1 -->
 					</Headers>
 				</Request>
@@ -3054,6 +3598,108 @@ Are you sure you want to continue.]]>
 						<Header key="x-ratelimit-used" pid="17"></Header>
 						<Header key="x-ratelimit-reset" pid="19"></Header>
 						<Header key="Link" pid="261"/>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
+
+		<Session id="20" name="Get Repository Content">
+			<Connection id="20" name="Get Repository Content">
+				<Request verb="GET" pid="120">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Authorization" pid="12"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="220"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="270"/>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
+		<Session id="21" name="Create/Update Repository Content">
+			<Connection id="21" name="Create/Update Repository Content">
+				<Request verb="PUT" pid="121">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Content-Type">application/json</Header>
+						<Header key="Authorization" pid="12"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+					<Data pid="171"/>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="221"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="271"/>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
+
+		<!--ID 25 for Get Repository Secret-->
+		<!--ID 26 for Put Repository Secret-->
+		<!--ID 27 for Delete Repository Secret-->
+		<!--ID 28 for Get Repository Pulic Key-->
+		<Session id="26" name="Create/Update Repository Secret">
+			<Connection id="26" name="Create/Update Repository Secret">
+				<Request verb="PUT" pid="126">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Content-Type">application/json</Header>
+						<Header key="Authorization" pid="12"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+					<Data pid="176"/>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="226"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="276"/>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
+		<Session id="28" name="Get Repository Pulic Key">
+			<Connection id="28" name="Get Repository Public Key">
+				<Request verb="GET" pid="128">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Authorization" pid="12"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="228"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="278"/>
 					</Headers>
 				</Response>
 			</Connection>
@@ -3135,6 +3781,39 @@ Are you sure you want to continue.]]>
 				<Session>11</Session>
 			</Content>
 		</Group>
+
+		<Group id="220">
+			<Name>PollRepositoryContent</Name>
+			<Description>Poll Repository Content</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>20</Session>
+			</Content>
+		</Group>
+		<Group id="221">
+			<Name>UpdateRepositoryContent</Name>
+			<Description>Update Repository Content</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>21</Session>
+			</Content>
+		</Group>
+		<Group id="226">
+			<Name>UpdateRepositorySecret</Name>
+			<Description>Update Repository Secret</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>26</Session>
+			</Content>
+		</Group>
+		<Group id="228">
+			<Name>GetRepositoryPublicKey</Name>
+			<Description>Get Repository Public Key</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>28</Session>
+			</Content>
+		</Group>
 	</Groups>
 
 	<Triggers>
@@ -3195,6 +3874,34 @@ Are you sure you want to continue.]]>
 			<Type>action</Type>
 			<Content>
 				<Id>211</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="220">
+			<Name>Start GetRepository Content</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>220</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="221">
+			<Name>Start PutRepository Content</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>221</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="226">
+			<Name>Start PutRepository Secret</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>226</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="228">
+			<Name>Start GetRepository Public Key</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>228</Id>
 			</Content>
 		</Trigger>
 
@@ -3261,6 +3968,43 @@ Are you sure you want to continue.]]>
 				<Id>261</Id>
 			</Content>
 		</Trigger>
+		<Trigger id="270">
+			<Name>After GetRepository Content</Name>
+			<On id="220">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>270</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="271">
+			<Name>After PutRepository Content</Name>
+			<On id="221">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>271</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="276">
+			<Name>After PutRepository Secret</Name>
+			<On id="226">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>276</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="278">
+			<Name>After GetRepository Public Key</Name>
+			<On id="228">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>276</Id>
+				<Id>328</Id>
+			</Content>
+		</Trigger>
 	</Triggers>
 
 	<Actions>
@@ -3316,6 +4060,26 @@ Are you sure you want to continue.]]>
 			<On id="211">group</On>
 			<Type>execute next</Type>
 		</Action>
+		<Action id="220">
+			<Name>Get Repository Content</Name>
+			<On id="220">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="221">
+			<Name>Put Repository Content</Name>
+			<On id="221">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="226">
+			<Name>Put Repository Secret</Name>
+			<On id="226">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="228">
+			<Name>Get Repository Public Key</Name>
+			<On id="228">group</On>
+			<Type>execute next</Type>
+		</Action>
 
 		<Action id="251">
 			<Name>Clear Get Repository Link Header</Name>
@@ -3350,6 +4114,32 @@ Are you sure you want to continue.]]>
 		<Action id="261">
 			<Name>Clear Get Organization Repositories Link Header</Name>
 			<On id="261">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="270">
+			<Name>Clear Get Repository Content Link Header</Name>
+			<On id="270">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="271">
+			<Name>Clear Put Repository Content Link Header</Name>
+			<On id="271">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="276">
+			<Name>Clear Put Repository Secret Link Header</Name>
+			<On id="276">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="278">
+			<Name>Clear Get Repository Public Key Link Header</Name>
+			<On id="278">parameter</On>
+			<Type>clear</Type>
+		</Action>
+
+		<Action id="328">
+			<Name>Clear Get Repository Public Key Content</Name>
+			<On id="228">parameter</On>
 			<Type>clear</Type>
 		</Action>
 	</Actions>
@@ -3414,6 +4204,28 @@ Are you sure you want to continue.]]>
 										</Provider>
 										<Changes>
 											<Change>Changed the way the context menu works. Now you can more easily add/remove repos from automation scripts</Change>
+										</Changes>
+									</MinorVersion>
+									<MinorVersion id="4" basedOn="1.0.0.3">
+										<Date>2024-01-30</Date>
+										<Provider>
+											<Author>AMA</Author>
+											<Company>Skyline Communications</Company>
+										</Provider>
+										<Changes>
+											<NewFeature>Added workflows table to the connector.</NewFeature>
+										</Changes>
+									</MinorVersion>
+									<MinorVersion id="5" basedOn="1.0.0.4">
+										<Date>2024-01-30</Date>
+										<Provider>
+											<Author>AMA</Author>
+											<Company>Skyline Communications</Company>
+										</Provider>
+										<Changes>
+											<NewFeature>Added organization table</NewFeature>
+											<NewFeature>Added option to track all the repositories under an organization</NewFeature>
+											<NewFeature>Added a way to create automation scripts workflows</NewFeature>
 										</Changes>
 									</MinorVersion>
 								</MinorVersions>

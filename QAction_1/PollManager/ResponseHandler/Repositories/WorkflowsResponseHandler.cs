@@ -1,7 +1,7 @@
 ﻿namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 {
 	using System;
-	using System.IO;
+	using System.Collections.Generic;
 	using System.Linq;
 	using System.Text.RegularExpressions;
 
@@ -15,8 +15,6 @@
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;
 
-	using static SLDataGateway.API.Types.Migration.ETLStatus;
-
 	public static partial class RepositoriesResponseHandler
 	{
 		public static void HandleRepositoriesWorkflowsResponse(SLProtocol protocol)
@@ -27,9 +25,24 @@
 				return;
 			}
 
+			// Check if there are more workflows to fetch
+			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowslinkheader));
+			var link = new LinkHeader(linkHeader);
+
 			// Parse response
 			var response = JsonConvert.DeserializeObject<RepositoryWorkflowsResponse>(Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowscontent)));
+			var url = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowsurl));
+			var table = RepositoryWorkflowsTable.GetTable();
 
+			// Parse url to check which respository this issue is linked to
+			var pattern = "repos\\/(.*)\\/(.*)\\/actions\\/workflows(.*)";
+			var options = RegexOptions.Multiline;
+
+			var match = Regex.Match(url, pattern, options);
+			var owner = match.Groups[1].Value;
+			var name = match.Groups[2].Value;
+
+			// Sanity checks
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|response was null.", LogType.Error, LogLevel.Level1);
@@ -40,19 +53,11 @@
 			{
 				// No workflows for the repository
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|No workflows for the repo.", LogType.Information, LogLevel.Level2);
+				table.DeleteRow(protocol, table.Rows.Where(x => x.RepositoryID == $"{owner}/{name}").Select(x => x.ID).ToArray());
+				HandleNextRepositoryWorkflow(protocol, owner, name);
 				return;
 			}
 
-			// Parse url to check which respository this issue is linked to
-			var pattern = "https:\\/\\/api.github.com\\/repos\\/(.*)\\/(.*)\\/actions\\/workflows\\/(.*)";
-			var options = RegexOptions.Multiline;
-
-			var match = Regex.Match(response.Workflows[0]?.Url, pattern, options);
-			var owner = match.Groups[1].Value;
-			var name = match.Groups[2].Value;
-
-			// Update the tags table
-			var table = RepositoryWorkflowsTable.GetTable();
 			foreach (var workflow in response.Workflows)
 			{
 				if (workflow == null)
@@ -85,19 +90,46 @@
 				table.SaveToProtocol(protocol, true);
 			}
 
+			HandleNextRepositoryWorkflow(protocol, owner, name);
+		}
+
+		private static void HandleNextRepositoryWorkflow(SLProtocol protocol, string owner, string name)
+		{
 			// Check if there are more workflows to fetch
 			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowslinkheader));
-			if (string.IsNullOrEmpty(linkHeader)) return;
-
 			var link = new LinkHeader(linkHeader);
 
-			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|Current page: {link.CurrentPage}", LogType.Information, LogLevel.Level2);
-			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|Has next page: {link.HasNext}", LogType.Information, LogLevel.Level2);
-
-			if (link.HasNext)
+			// Check if there are more workflows to fetch for the current repository
+			if (!string.IsNullOrEmpty(linkHeader))
 			{
-				RepositoriesRequestHandler.HandleRepositoriesTagsRequest(protocol, owner, name, PollingConstants.PerPage, link.NextPage);
+				// Update the tags table
+				if (link.IsFirst)
+				{
+					var table = RepositoryWorkflowsTable.GetTable();
+					table.DeleteRow(protocol, table.Rows.Where(x => x.RepositoryID == $"{owner}/{name}").Select(x => x.ID).ToArray());
+				}
+
+				if (link.HasNext)
+				{
+					RepositoriesRequestHandler.HandleRepositoriesTagsRequest(protocol, owner, name, PollingConstants.PerPage, link.NextPage);
+					return;
+				}
 			}
+
+			// If no more workflows for this repo fetch the next repository in the queue.
+			var queue = JsonConvert.DeserializeObject<List<string>>(Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowsqueue)));
+			var next = queue?.FirstOrDefault();
+
+			if (next == null)
+			{
+				return;
+			}
+
+			protocol.SetParameter(Parameter.getrepositoryworkflowsqueue, JsonConvert.SerializeObject(queue.Skip(1)));
+
+			var nextOwner = next.Split('/')[0];
+			var nextName = next.Split('/')[1];
+			RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, nextOwner, nextName, PollingConstants.PerPage, 1);
 		}
 	}
 }

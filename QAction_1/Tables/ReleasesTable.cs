@@ -1,16 +1,15 @@
 ﻿namespace Skyline.Protocol.Tables
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
-	using Skyline.DataMiner.Net;
-	using Skyline.DataMiner.Scripting;
-	using Skyline.Protocol.Extensions;
+    using Skyline.DataMiner.Net;
+    using Skyline.DataMiner.Scripting;
+    using Skyline.Protocol.Extensions;
+    using SLNetMessages = Skyline.DataMiner.Net.Messages;
 
-	using SLNetMessages = Skyline.DataMiner.Net.Messages;
-
-	public class RepositoryReleasesTableRow
+    public class RepositoryReleasesTableRow
 	{
 		private double isDraft = Exceptions.IntNotAvailable;
 		private double isPreRelease = Exceptions.IntNotAvailable;

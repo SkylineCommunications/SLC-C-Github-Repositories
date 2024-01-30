@@ -98,6 +98,46 @@ public static class Parameter
 	public const int getorganizationrepositoriesurl_111 = 111;
 	/// <summary>PID: 111 | Type: read</summary>
 	public const int getorganizationrepositoriesurl = 111;
+	/// <summary>PID: 120 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int getrepositorycontenturl_120 = 120;
+	/// <summary>PID: 120 | Type: read</summary>
+	public const int getrepositorycontenturl = 120;
+	/// <summary>PID: 121 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int putrepositorycontenturl_121 = 121;
+	/// <summary>PID: 121 | Type: read</summary>
+	public const int putrepositorycontenturl = 121;
+	/// <summary>PID: 126 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int putrepositorysecreturl_126 = 126;
+	/// <summary>PID: 126 | Type: read</summary>
+	public const int putrepositorysecreturl = 126;
+	/// <summary>PID: 128 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int getrepositorypublickeyurl_128 = 128;
+	/// <summary>PID: 128 | Type: read</summary>
+	public const int getrepositorypublickeyurl = 128;
+	/// <summary>PID: 155 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int getrepositoryworkflowsqueue_155 = 155;
+	/// <summary>PID: 155 | Type: read</summary>
+	public const int getrepositoryworkflowsqueue = 155;
+	/// <summary>PID: 171 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int putrepositorycontentbody_171 = 171;
+	/// <summary>PID: 171 | Type: read</summary>
+	public const int putrepositorycontentbody = 171;
+	/// <summary>PID: 176 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int putrepositorysecretbody_176 = 176;
+	/// <summary>PID: 176 | Type: read</summary>
+	public const int putrepositorysecretbody = 176;
+	/// <summary>PID: 178 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int getrepositorypublickeyqueue_178 = 178;
+	/// <summary>PID: 178 | Type: read</summary>
+	public const int getrepositorypublickeyqueue = 178;
 	/// <summary>PID: 201 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int getrepositorycontent_201 = 201;
@@ -133,6 +173,26 @@ public static class Parameter
 	public const int getorganizationrepositoriescontent_211 = 211;
 	/// <summary>PID: 211 | Type: read</summary>
 	public const int getorganizationrepositoriescontent = 211;
+	/// <summary>PID: 220 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int getrepositorycontentcontent_220 = 220;
+	/// <summary>PID: 220 | Type: read</summary>
+	public const int getrepositorycontentcontent = 220;
+	/// <summary>PID: 221 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int putrepositorycontentcontent_221 = 221;
+	/// <summary>PID: 221 | Type: read</summary>
+	public const int putrepositorycontentcontent = 221;
+	/// <summary>PID: 226 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int putrepositorysecretcontent_226 = 226;
+	/// <summary>PID: 226 | Type: read</summary>
+	public const int putrepositorysecretcontent = 226;
+	/// <summary>PID: 228 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int getrepositorypublickeycontent_228 = 228;
+	/// <summary>PID: 228 | Type: read</summary>
+	public const int getrepositorypublickeycontent = 228;
 	/// <summary>PID: 251 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int getrepositorylinkheader_251 = 251;
@@ -168,6 +228,26 @@ public static class Parameter
 	public const int getorganizationrepositorieslinkheader_261 = 261;
 	/// <summary>PID: 261 | Type: read</summary>
 	public const int getorganizationrepositorieslinkheader = 261;
+	/// <summary>PID: 270 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int getrepositorycontentlinkheader_270 = 270;
+	/// <summary>PID: 270 | Type: read</summary>
+	public const int getrepositorycontentlinkheader = 270;
+	/// <summary>PID: 271 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int putrepositorycontentlinkheader_271 = 271;
+	/// <summary>PID: 271 | Type: read</summary>
+	public const int putrepositorycontentlinkheader = 271;
+	/// <summary>PID: 276 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int putrepositorysecretlinkheader_276 = 276;
+	/// <summary>PID: 276 | Type: read</summary>
+	public const int putrepositorysecretlinkheader = 276;
+	/// <summary>PID: 278 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int getrepositorypublickeylinkheader_278 = 278;
+	/// <summary>PID: 278 | Type: read</summary>
+	public const int getrepositorypublickeylinkheader = 278;
 	/// <summary>PID: 501 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int addrepositoryname_501 = 501;
@@ -188,6 +268,31 @@ public static class Parameter
 	public const int addorganizationrepositories_discreetlist_507 = 507;
 	/// <summary>PID: 507 | Type: read</summary>
 	public const int addorganizationrepositories_discreetlist = 507;
+	/// <summary>PID: 551 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int addworkflowrepository_551 = 551;
+	/// <summary>PID: 551 | Type: read</summary>
+	public const int addworkflowrepository = 551;
+	/// <summary>PID: 552 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int addworkflowrepository_discreetlist_552 = 552;
+	/// <summary>PID: 552 | Type: read</summary>
+	public const int addworkflowrepository_discreetlist = 552;
+	/// <summary>PID: 553 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int addworkflowbranch_553 = 553;
+	/// <summary>PID: 553 | Type: read</summary>
+	public const int addworkflowbranch = 553;
+	/// <summary>PID: 554 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int addworkflowbranch_discreetlist_554 = 554;
+	/// <summary>PID: 554 | Type: read</summary>
+	public const int addworkflowbranch_discreetlist = 554;
+	/// <summary>PID: 555 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int addworkflowworkflow_555 = 555;
+	/// <summary>PID: 555 | Type: read</summary>
+	public const int addworkflowworkflow = 555;
 	/// <summary>PID: 992 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int repositories_changerequest_992 = 992;
@@ -198,6 +303,11 @@ public static class Parameter
 	public const int repositoriesoverview_996 = 996;
 	/// <summary>PID: 996 | Type: read</summary>
 	public const int repositoriesoverview = 996;
+	/// <summary>PID: 1592 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int repositoryworkflow_changerequest_1592 = 1592;
+	/// <summary>PID: 1592 | Type: read</summary>
+	public const int repositoryworkflow_changerequest = 1592;
 	public class Write
 	{
 		/// <summary>PID: 11 | Type: write</summary>
@@ -220,6 +330,11 @@ public static class Parameter
 		public const int addrepositorypagebutton_51 = 51;
 		/// <summary>PID: 51 | Type: write</summary>
 		public const int addrepositorypagebutton = 51;
+		/// <summary>PID: 52 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int addworkflowpagebutton_52 = 52;
+		/// <summary>PID: 52 | Type: write</summary>
+		public const int addworkflowpagebutton = 52;
 		/// <summary>PID: 500 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public const int addrepositorybutton_500 = 500;
@@ -230,6 +345,11 @@ public static class Parameter
 		public const int addorganizationrepositoriesbutton_505 = 505;
 		/// <summary>PID: 505 | Type: write</summary>
 		public const int addorganizationrepositoriesbutton = 505;
+		/// <summary>PID: 550 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int addworkflowbutton_550 = 550;
+		/// <summary>PID: 550 | Type: write</summary>
+		public const int addworkflowbutton = 550;
 		/// <summary>PID: 601 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public const int addrepositoryname_601 = 601;
@@ -245,11 +365,31 @@ public static class Parameter
 		public const int addorganizationrepositories_606 = 606;
 		/// <summary>PID: 606 | Type: write</summary>
 		public const int addorganizationrepositories = 606;
+		/// <summary>PID: 651 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int addworkflowrepository_651 = 651;
+		/// <summary>PID: 651 | Type: write</summary>
+		public const int addworkflowrepository = 651;
+		/// <summary>PID: 653 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int addworkflowbranch_653 = 653;
+		/// <summary>PID: 653 | Type: write</summary>
+		public const int addworkflowbranch = 653;
+		/// <summary>PID: 655 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int addworkflowworkflow_655 = 655;
+		/// <summary>PID: 655 | Type: write</summary>
+		public const int addworkflowworkflow = 655;
 		/// <summary>PID: 990 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public const int repositories_contextmenu_990 = 990;
 		/// <summary>PID: 990 | Type: write</summary>
 		public const int repositories_contextmenu = 990;
+		/// <summary>PID: 1590 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int repositoryworkflows_contextmenu_1590 = 1590;
+		/// <summary>PID: 1590 | Type: write</summary>
+		public const int repositoryworkflows_contextmenu = 1590;
 		/// <summary>PID: 3105 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public const int organizationstrackrepositories_3105 = 3105;
@@ -346,6 +486,21 @@ public static class Parameter
 			public const int repositoriesdefaultbranch_1014 = 1014;
 			/// <summary>PID: 1014 | Type: read</summary>
 			public const int repositoriesdefaultbranch = 1014;
+			/// <summary>PID: 1015 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoriestype_1015 = 1015;
+			/// <summary>PID: 1015 | Type: read</summary>
+			public const int repositoriestype = 1015;
+			/// <summary>PID: 1016 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoriespublickeyid_1016 = 1016;
+			/// <summary>PID: 1016 | Type: read</summary>
+			public const int repositoriespublickeyid = 1016;
+			/// <summary>PID: 1017 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoriespublickey_1017 = 1017;
+			/// <summary>PID: 1017 | Type: read</summary>
+			public const int repositoriespublickey = 1017;
 			public class Write
 			{
 			}
@@ -422,6 +577,21 @@ public static class Parameter
 			public const int repositoriesdefaultbranch_1014 = 13;
 			/// <summary>IDX: 13 | Type: read</summary>
 			public const int repositoriesdefaultbranch = 13;
+			/// <summary>IDX: 14 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoriestype_1015 = 14;
+			/// <summary>IDX: 14 | Type: read</summary>
+			public const int repositoriestype = 14;
+			/// <summary>IDX: 15 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoriespublickeyid_1016 = 15;
+			/// <summary>IDX: 15 | Type: read</summary>
+			public const int repositoriespublickeyid = 15;
+			/// <summary>IDX: 16 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoriespublickey_1017 = 16;
+			/// <summary>IDX: 16 | Type: read</summary>
+			public const int repositoriespublickey = 16;
 		}
 	}
 	public class Repositorytags
@@ -1018,18 +1188,30 @@ public class WriteParameters
 	public System.Object Generalpagebuttons {get { return Protocol.GetParameter(50); }set { Protocol.SetParameter(50, value); }}
 	/// <summary>PID: 51  | Type: write | DISCREETS: Add Repository... = Add Repository</summary>
 	public System.Object Addrepositorypagebutton {get { return Protocol.GetParameter(51); }set { Protocol.SetParameter(51, value); }}
+	/// <summary>PID: 52  | Type: write | DISCREETS: Add Workflow... = Add Workflow</summary>
+	public System.Object Addworkflowpagebutton {get { return Protocol.GetParameter(52); }set { Protocol.SetParameter(52, value); }}
 	/// <summary>PID: 500  | Type: write | DISCREETS: Add Repository = 1</summary>
 	public System.Object Addrepositorybutton {get { return Protocol.GetParameter(500); }set { Protocol.SetParameter(500, value); }}
 	/// <summary>PID: 505  | Type: write | DISCREETS: Add Repositories = 1</summary>
 	public System.Object Addorganizationrepositoriesbutton {get { return Protocol.GetParameter(505); }set { Protocol.SetParameter(505, value); }}
+	/// <summary>PID: 550  | Type: write | DISCREETS: Add Workflow = 1</summary>
+	public System.Object Addworkflowbutton {get { return Protocol.GetParameter(550); }set { Protocol.SetParameter(550, value); }}
 	/// <summary>PID: 601  | Type: write</summary>
 	public System.Object Addrepositoryname {get { return Protocol.GetParameter(601); }set { Protocol.SetParameter(601, value); }}
 	/// <summary>PID: 602  | Type: write</summary>
 	public System.Object Addrepositoryowner {get { return Protocol.GetParameter(602); }set { Protocol.SetParameter(602, value); }}
 	/// <summary>PID: 606  | Type: write</summary>
 	public System.Object Addorganizationrepositories {get { return Protocol.GetParameter(606); }set { Protocol.SetParameter(606, value); }}
+	/// <summary>PID: 651  | Type: write</summary>
+	public System.Object Addworkflowrepository {get { return Protocol.GetParameter(651); }set { Protocol.SetParameter(651, value); }}
+	/// <summary>PID: 653  | Type: write</summary>
+	public System.Object Addworkflowbranch {get { return Protocol.GetParameter(653); }set { Protocol.SetParameter(653, value); }}
+	/// <summary>PID: 655  | Type: write | DISCREETS: Automation Script CI = 0, Automation Script CD = 1</summary>
+	public System.Object Addworkflowworkflow {get { return Protocol.GetParameter(655); }set { Protocol.SetParameter(655, value); }}
 	/// <summary>PID: 990  | Type: write | DISCREETS: Add... = 1, Delete selected row(s) = 2</summary>
 	public System.Object Repositories_contextmenu {get { return Protocol.GetParameter(990); }set { Protocol.SetParameter(990, value); }}
+	/// <summary>PID: 1590  | Type: write | DISCREETS: Add... = 1</summary>
+	public System.Object Repositoryworkflows_contextmenu {get { return Protocol.GetParameter(1590); }set { Protocol.SetParameter(1590, value); }}
 	/// <summary>PID: 3105  | Type: write | DISCREETS: Disabled = 0, Enabled = 1</summary>
 	public System.Object Organizationstrackrepositories {get { return Protocol.GetParameter(3105); }set { Protocol.SetParameter(3105, value); }}
 	/// <summary>PID: 21006  | Type: write | DISCREETS: Refresh = 1</summary>
@@ -1087,6 +1269,8 @@ public interface SLProtocolExt : SLProtocol
 	object Generalpagebuttons { get; set; }
 	object Addrepositorypagebutton_51 { get; set; }
 	object Addrepositorypagebutton { get; set; }
+	object Addworkflowpagebutton_52 { get; set; }
+	object Addworkflowpagebutton { get; set; }
 	object Statuscode_100 { get; set; }
 	object Statuscode { get; set; }
 	object Getrepositoryurl_101 { get; set; }
@@ -1103,6 +1287,22 @@ public interface SLProtocolExt : SLProtocol
 	object Getuserorganizationsurl { get; set; }
 	object Getorganizationrepositoriesurl_111 { get; set; }
 	object Getorganizationrepositoriesurl { get; set; }
+	object Getrepositorycontenturl_120 { get; set; }
+	object Getrepositorycontenturl { get; set; }
+	object Putrepositorycontenturl_121 { get; set; }
+	object Putrepositorycontenturl { get; set; }
+	object Putrepositorysecreturl_126 { get; set; }
+	object Putrepositorysecreturl { get; set; }
+	object Getrepositorypublickeyurl_128 { get; set; }
+	object Getrepositorypublickeyurl { get; set; }
+	object Getrepositoryworkflowsqueue_155 { get; set; }
+	object Getrepositoryworkflowsqueue { get; set; }
+	object Putrepositorycontentbody_171 { get; set; }
+	object Putrepositorycontentbody { get; set; }
+	object Putrepositorysecretbody_176 { get; set; }
+	object Putrepositorysecretbody { get; set; }
+	object Getrepositorypublickeyqueue_178 { get; set; }
+	object Getrepositorypublickeyqueue { get; set; }
 	object Getrepositorycontent_201 { get; set; }
 	object Getrepositorycontent { get; set; }
 	object Getrepositoryissuescontent_202 { get; set; }
@@ -1117,6 +1317,14 @@ public interface SLProtocolExt : SLProtocol
 	object Getuserorganizationscontent { get; set; }
 	object Getorganizationrepositoriescontent_211 { get; set; }
 	object Getorganizationrepositoriescontent { get; set; }
+	object Getrepositorycontentcontent_220 { get; set; }
+	object Getrepositorycontentcontent { get; set; }
+	object Putrepositorycontentcontent_221 { get; set; }
+	object Putrepositorycontentcontent { get; set; }
+	object Putrepositorysecretcontent_226 { get; set; }
+	object Putrepositorysecretcontent { get; set; }
+	object Getrepositorypublickeycontent_228 { get; set; }
+	object Getrepositorypublickeycontent { get; set; }
 	object Getrepositorylinkheader_251 { get; set; }
 	object Getrepositorylinkheader { get; set; }
 	object Getrepositoryissueslinkheader_252 { get; set; }
@@ -1131,6 +1339,14 @@ public interface SLProtocolExt : SLProtocol
 	object Getuserorganizationslinkheader { get; set; }
 	object Getorganizationrepositorieslinkheader_261 { get; set; }
 	object Getorganizationrepositorieslinkheader { get; set; }
+	object Getrepositorycontentlinkheader_270 { get; set; }
+	object Getrepositorycontentlinkheader { get; set; }
+	object Putrepositorycontentlinkheader_271 { get; set; }
+	object Putrepositorycontentlinkheader { get; set; }
+	object Putrepositorysecretlinkheader_276 { get; set; }
+	object Putrepositorysecretlinkheader { get; set; }
+	object Getrepositorypublickeylinkheader_278 { get; set; }
+	object Getrepositorypublickeylinkheader { get; set; }
 	object Title_end_generic__fixed { get; set; }
 	object Title_begin_singlerepository__fixed { get; set; }
 	object Title_begin_organizationrepositories__fixed { get; set; }
@@ -1146,9 +1362,24 @@ public interface SLProtocolExt : SLProtocol
 	object Addorganizationrepositories { get; set; }
 	object Addorganizationrepositories_discreetlist_507 { get; set; }
 	object Addorganizationrepositories_discreetlist { get; set; }
+	object Addworkflowbutton_550 { get; set; }
+	object Addworkflowbutton { get; set; }
+	object Addworkflowrepository_551 { get; set; }
+	object Addworkflowrepository { get; set; }
+	object Addworkflowrepository_discreetlist_552 { get; set; }
+	object Addworkflowrepository_discreetlist { get; set; }
+	object Addworkflowbranch_553 { get; set; }
+	object Addworkflowbranch { get; set; }
+	object Addworkflowbranch_discreetlist_554 { get; set; }
+	object Addworkflowbranch_discreetlist { get; set; }
+	object Addworkflowworkflow_555 { get; set; }
+	object Addworkflowworkflow { get; set; }
 	object Addrepositoryname_601 { get; set; }
 	object Addrepositoryowner_602 { get; set; }
 	object Addorganizationrepositories_606 { get; set; }
+	object Addworkflowrepository_651 { get; set; }
+	object Addworkflowbranch_653 { get; set; }
+	object Addworkflowworkflow_655 { get; set; }
 	object Repositories_contextmenu_990 { get; set; }
 	object Repositories_contextmenu { get; set; }
 	object Repositories_changerequest_992 { get; set; }
@@ -1183,6 +1414,12 @@ public interface SLProtocolExt : SLProtocol
 	object Repositorieslanguage { get; set; }
 	object Repositoriesdefaultbranch_1014 { get; set; }
 	object Repositoriesdefaultbranch { get; set; }
+	object Repositoriestype_1015 { get; set; }
+	object Repositoriestype { get; set; }
+	object Repositoriespublickeyid_1016 { get; set; }
+	object Repositoriespublickeyid { get; set; }
+	object Repositoriespublickey_1017 { get; set; }
+	object Repositoriespublickey { get; set; }
 	object Repositorytagsid_1201 { get; set; }
 	object Repositorytagsid { get; set; }
 	object Repositorytagsname_1202 { get; set; }
@@ -1217,6 +1454,10 @@ public interface SLProtocolExt : SLProtocol
 	object Repositoryreleasespublishedat { get; set; }
 	object Repositoryreleasesrepositoryid_1413 { get; set; }
 	object Repositoryreleasesrepositoryid { get; set; }
+	object Repositoryworkflows_contextmenu_1590 { get; set; }
+	object Repositoryworkflows_contextmenu { get; set; }
+	object Repositoryworkflow_changerequest_1592 { get; set; }
+	object Repositoryworkflow_changerequest { get; set; }
 	object Repositoryworkflowsid_1601 { get; set; }
 	object Repositoryworkflowsid { get; set; }
 	object Repositoryworkflowsrepositoryid_1602 { get; set; }
@@ -1366,6 +1607,10 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Addrepositorypagebutton_51 {get { return GetParameter(51); }set { SetParameter(51, value); }}
 	/// <summary>PID: 51  | Type: write | DISCREETS: Add Repository... = Add Repository</summary>
 	public System.Object Addrepositorypagebutton {get { return Write.Addrepositorypagebutton; }set { Write.Addrepositorypagebutton = value; }}
+	/// <summary>PID: 52  | Type: write | DISCREETS: Add Workflow... = Add Workflow</summary>
+	public System.Object Addworkflowpagebutton_52 {get { return GetParameter(52); }set { SetParameter(52, value); }}
+	/// <summary>PID: 52  | Type: write | DISCREETS: Add Workflow... = Add Workflow</summary>
+	public System.Object Addworkflowpagebutton {get { return Write.Addworkflowpagebutton; }set { Write.Addworkflowpagebutton = value; }}
 	/// <summary>PID: 100  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Statuscode_100 {get { return GetParameter(100); }set { SetParameter(100, value); }}
@@ -1406,6 +1651,46 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Getorganizationrepositoriesurl_111 {get { return GetParameter(111); }set { SetParameter(111, value); }}
 	/// <summary>PID: 111  | Type: read</summary>
 	public System.Object Getorganizationrepositoriesurl {get { return GetParameter(111); }set { SetParameter(111, value); }}
+	/// <summary>PID: 120  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Getrepositorycontenturl_120 {get { return GetParameter(120); }set { SetParameter(120, value); }}
+	/// <summary>PID: 120  | Type: read</summary>
+	public System.Object Getrepositorycontenturl {get { return GetParameter(120); }set { SetParameter(120, value); }}
+	/// <summary>PID: 121  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Putrepositorycontenturl_121 {get { return GetParameter(121); }set { SetParameter(121, value); }}
+	/// <summary>PID: 121  | Type: read</summary>
+	public System.Object Putrepositorycontenturl {get { return GetParameter(121); }set { SetParameter(121, value); }}
+	/// <summary>PID: 126  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Putrepositorysecreturl_126 {get { return GetParameter(126); }set { SetParameter(126, value); }}
+	/// <summary>PID: 126  | Type: read</summary>
+	public System.Object Putrepositorysecreturl {get { return GetParameter(126); }set { SetParameter(126, value); }}
+	/// <summary>PID: 128  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Getrepositorypublickeyurl_128 {get { return GetParameter(128); }set { SetParameter(128, value); }}
+	/// <summary>PID: 128  | Type: read</summary>
+	public System.Object Getrepositorypublickeyurl {get { return GetParameter(128); }set { SetParameter(128, value); }}
+	/// <summary>PID: 155  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Getrepositoryworkflowsqueue_155 {get { return GetParameter(155); }set { SetParameter(155, value); }}
+	/// <summary>PID: 155  | Type: read</summary>
+	public System.Object Getrepositoryworkflowsqueue {get { return GetParameter(155); }set { SetParameter(155, value); }}
+	/// <summary>PID: 171  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Putrepositorycontentbody_171 {get { return GetParameter(171); }set { SetParameter(171, value); }}
+	/// <summary>PID: 171  | Type: read</summary>
+	public System.Object Putrepositorycontentbody {get { return GetParameter(171); }set { SetParameter(171, value); }}
+	/// <summary>PID: 176  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Putrepositorysecretbody_176 {get { return GetParameter(176); }set { SetParameter(176, value); }}
+	/// <summary>PID: 176  | Type: read</summary>
+	public System.Object Putrepositorysecretbody {get { return GetParameter(176); }set { SetParameter(176, value); }}
+	/// <summary>PID: 178  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Getrepositorypublickeyqueue_178 {get { return GetParameter(178); }set { SetParameter(178, value); }}
+	/// <summary>PID: 178  | Type: read</summary>
+	public System.Object Getrepositorypublickeyqueue {get { return GetParameter(178); }set { SetParameter(178, value); }}
 	/// <summary>PID: 201  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Getrepositorycontent_201 {get { return GetParameter(201); }set { SetParameter(201, value); }}
@@ -1441,6 +1726,26 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Getorganizationrepositoriescontent_211 {get { return GetParameter(211); }set { SetParameter(211, value); }}
 	/// <summary>PID: 211  | Type: read</summary>
 	public System.Object Getorganizationrepositoriescontent {get { return GetParameter(211); }set { SetParameter(211, value); }}
+	/// <summary>PID: 220  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Getrepositorycontentcontent_220 {get { return GetParameter(220); }set { SetParameter(220, value); }}
+	/// <summary>PID: 220  | Type: read</summary>
+	public System.Object Getrepositorycontentcontent {get { return GetParameter(220); }set { SetParameter(220, value); }}
+	/// <summary>PID: 221  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Putrepositorycontentcontent_221 {get { return GetParameter(221); }set { SetParameter(221, value); }}
+	/// <summary>PID: 221  | Type: read</summary>
+	public System.Object Putrepositorycontentcontent {get { return GetParameter(221); }set { SetParameter(221, value); }}
+	/// <summary>PID: 226  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Putrepositorysecretcontent_226 {get { return GetParameter(226); }set { SetParameter(226, value); }}
+	/// <summary>PID: 226  | Type: read</summary>
+	public System.Object Putrepositorysecretcontent {get { return GetParameter(226); }set { SetParameter(226, value); }}
+	/// <summary>PID: 228  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Getrepositorypublickeycontent_228 {get { return GetParameter(228); }set { SetParameter(228, value); }}
+	/// <summary>PID: 228  | Type: read</summary>
+	public System.Object Getrepositorypublickeycontent {get { return GetParameter(228); }set { SetParameter(228, value); }}
 	/// <summary>PID: 251  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Getrepositorylinkheader_251 {get { return GetParameter(251); }set { SetParameter(251, value); }}
@@ -1476,6 +1781,26 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Getorganizationrepositorieslinkheader_261 {get { return GetParameter(261); }set { SetParameter(261, value); }}
 	/// <summary>PID: 261  | Type: read</summary>
 	public System.Object Getorganizationrepositorieslinkheader {get { return GetParameter(261); }set { SetParameter(261, value); }}
+	/// <summary>PID: 270  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Getrepositorycontentlinkheader_270 {get { return GetParameter(270); }set { SetParameter(270, value); }}
+	/// <summary>PID: 270  | Type: read</summary>
+	public System.Object Getrepositorycontentlinkheader {get { return GetParameter(270); }set { SetParameter(270, value); }}
+	/// <summary>PID: 271  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Putrepositorycontentlinkheader_271 {get { return GetParameter(271); }set { SetParameter(271, value); }}
+	/// <summary>PID: 271  | Type: read</summary>
+	public System.Object Putrepositorycontentlinkheader {get { return GetParameter(271); }set { SetParameter(271, value); }}
+	/// <summary>PID: 276  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Putrepositorysecretlinkheader_276 {get { return GetParameter(276); }set { SetParameter(276, value); }}
+	/// <summary>PID: 276  | Type: read</summary>
+	public System.Object Putrepositorysecretlinkheader {get { return GetParameter(276); }set { SetParameter(276, value); }}
+	/// <summary>PID: 278  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Getrepositorypublickeylinkheader_278 {get { return GetParameter(278); }set { SetParameter(278, value); }}
+	/// <summary>PID: 278  | Type: read</summary>
+	public System.Object Getrepositorypublickeylinkheader {get { return GetParameter(278); }set { SetParameter(278, value); }}
 	/// <summary>PID: 300  | Type: fixed</summary>
 	public System.Object Title_end_generic__fixed {get { return GetParameter(300); }set { SetParameter(300, value); }}
 	/// <summary>PID: 301  | Type: fixed</summary>
@@ -1510,6 +1835,35 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Addorganizationrepositories_discreetlist_507 {get { return GetParameter(507); }set { SetParameter(507, value); }}
 	/// <summary>PID: 507  | Type: read</summary>
 	public System.Object Addorganizationrepositories_discreetlist {get { return GetParameter(507); }set { SetParameter(507, value); }}
+	/// <summary>PID: 550  | Type: write | DISCREETS: Add Workflow = 1</summary>
+	public System.Object Addworkflowbutton_550 {get { return GetParameter(550); }set { SetParameter(550, value); }}
+	/// <summary>PID: 550  | Type: write | DISCREETS: Add Workflow = 1</summary>
+	public System.Object Addworkflowbutton {get { return Write.Addworkflowbutton; }set { Write.Addworkflowbutton = value; }}
+	/// <summary>PID: 551  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Addworkflowrepository_551 {get { return GetParameter(551); }set { SetParameter(551, value); }}
+	/// <summary>PID: 551  | Type: read</summary>
+	public System.Object Addworkflowrepository {get { return GetParameter(551); }set { SetParameter(551, value); }}
+	/// <summary>PID: 552  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Addworkflowrepository_discreetlist_552 {get { return GetParameter(552); }set { SetParameter(552, value); }}
+	/// <summary>PID: 552  | Type: read</summary>
+	public System.Object Addworkflowrepository_discreetlist {get { return GetParameter(552); }set { SetParameter(552, value); }}
+	/// <summary>PID: 553  | Type: read | EXCEPTIONS: Default Branch = </summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Addworkflowbranch_553 {get { return GetParameter(553); }set { SetParameter(553, value); }}
+	/// <summary>PID: 553  | Type: read | EXCEPTIONS: Default Branch = </summary>
+	public System.Object Addworkflowbranch {get { return GetParameter(553); }set { SetParameter(553, value); }}
+	/// <summary>PID: 554  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Addworkflowbranch_discreetlist_554 {get { return GetParameter(554); }set { SetParameter(554, value); }}
+	/// <summary>PID: 554  | Type: read</summary>
+	public System.Object Addworkflowbranch_discreetlist {get { return GetParameter(554); }set { SetParameter(554, value); }}
+	/// <summary>PID: 555  | Type: read | DISCREETS: Automation Script CI = 0, Automation Script CD = 1</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Addworkflowworkflow_555 {get { return GetParameter(555); }set { SetParameter(555, value); }}
+	/// <summary>PID: 555  | Type: read | DISCREETS: Automation Script CI = 0, Automation Script CD = 1</summary>
+	public System.Object Addworkflowworkflow {get { return GetParameter(555); }set { SetParameter(555, value); }}
 	/// <summary>PID: 601  | Type: write</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Addrepositoryname_601 {get { return GetParameter(601); }set { SetParameter(601, value); }}
@@ -1519,6 +1873,15 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	/// <summary>PID: 606  | Type: write</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Addorganizationrepositories_606 {get { return GetParameter(606); }set { SetParameter(606, value); }}
+	/// <summary>PID: 651  | Type: write</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Addworkflowrepository_651 {get { return GetParameter(651); }set { SetParameter(651, value); }}
+	/// <summary>PID: 653  | Type: write</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Addworkflowbranch_653 {get { return GetParameter(653); }set { SetParameter(653, value); }}
+	/// <summary>PID: 655  | Type: write | DISCREETS: Automation Script CI = 0, Automation Script CD = 1</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Addworkflowworkflow_655 {get { return GetParameter(655); }set { SetParameter(655, value); }}
 	/// <summary>PID: 990  | Type: write | DISCREETS: Add... = 1, Delete selected row(s) = 2</summary>
 	public System.Object Repositories_contextmenu_990 {get { return GetParameter(990); }set { SetParameter(990, value); }}
 	/// <summary>PID: 990  | Type: write | DISCREETS: Add... = 1, Delete selected row(s) = 2</summary>
@@ -1603,6 +1966,21 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoriesdefaultbranch_1014 {get { return GetParameter(1014); }set { SetParameter(1014, value); }}
 	/// <summary>PID: 1014  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	public System.Object Repositoriesdefaultbranch {get { return GetParameter(1014); }set { SetParameter(1014, value); }}
+	/// <summary>PID: 1015  | Type: read | DISCREETS: Automation = 1, Connector = 2 | EXCEPTIONS: Other = 0</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoriestype_1015 {get { return GetParameter(1015); }set { SetParameter(1015, value); }}
+	/// <summary>PID: 1015  | Type: read | DISCREETS: Automation = 1, Connector = 2 | EXCEPTIONS: Other = 0</summary>
+	public System.Object Repositoriestype {get { return GetParameter(1015); }set { SetParameter(1015, value); }}
+	/// <summary>PID: 1016  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoriespublickeyid_1016 {get { return GetParameter(1016); }set { SetParameter(1016, value); }}
+	/// <summary>PID: 1016  | Type: read</summary>
+	public System.Object Repositoriespublickeyid {get { return GetParameter(1016); }set { SetParameter(1016, value); }}
+	/// <summary>PID: 1017  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoriespublickey_1017 {get { return GetParameter(1017); }set { SetParameter(1017, value); }}
+	/// <summary>PID: 1017  | Type: read</summary>
+	public System.Object Repositoriespublickey {get { return GetParameter(1017); }set { SetParameter(1017, value); }}
 	/// <summary>PID: 1201  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositorytagsid_1201 {get { return GetParameter(1201); }set { SetParameter(1201, value); }}
@@ -1688,6 +2066,15 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoryreleasesrepositoryid_1413 {get { return GetParameter(1413); }set { SetParameter(1413, value); }}
 	/// <summary>PID: 1413  | Type: read</summary>
 	public System.Object Repositoryreleasesrepositoryid {get { return GetParameter(1413); }set { SetParameter(1413, value); }}
+	/// <summary>PID: 1590  | Type: write | DISCREETS: Add... = 1</summary>
+	public System.Object Repositoryworkflows_contextmenu_1590 {get { return GetParameter(1590); }set { SetParameter(1590, value); }}
+	/// <summary>PID: 1590  | Type: write | DISCREETS: Add... = 1</summary>
+	public System.Object Repositoryworkflows_contextmenu {get { return Write.Repositoryworkflows_contextmenu; }set { Write.Repositoryworkflows_contextmenu = value; }}
+	/// <summary>PID: 1592  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryworkflow_changerequest_1592 {get { return GetParameter(1592); }set { SetParameter(1592, value); }}
+	/// <summary>PID: 1592  | Type: read</summary>
+	public System.Object Repositoryworkflow_changerequest {get { return GetParameter(1592); }set { SetParameter(1592, value); }}
 	/// <summary>PID: 1601  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoryworkflowsid_1601 {get { return GetParameter(1601); }set { SetParameter(1601, value); }}
@@ -1986,8 +2373,23 @@ public class RepositoriesQActionRow : QActionTableRow
 	public System.Object Repositoriesdefaultbranch_1014 { get { if (base.Columns.ContainsKey(13)) { return base.Columns[13]; } else { return null; } } set { if (base.Columns.ContainsKey(13)) { base.Columns[13] = value; } else { base.Columns.Add(13, value); } } }
 	/// <summary>PID: 1014 | Type: read</summary>
 	public System.Object Repositoriesdefaultbranch { get { if (base.Columns.ContainsKey(13)) { return base.Columns[13]; } else { return null; } } set { if (base.Columns.ContainsKey(13)) { base.Columns[13] = value; } else { base.Columns.Add(13, value); } } }
-	public RepositoriesQActionRow() : base(0, 14) { }
-	public RepositoriesQActionRow(System.Object[] oRow) : base(0, 14, oRow) { }
+	/// <summary>PID: 1015 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoriestype_1015 { get { if (base.Columns.ContainsKey(14)) { return base.Columns[14]; } else { return null; } } set { if (base.Columns.ContainsKey(14)) { base.Columns[14] = value; } else { base.Columns.Add(14, value); } } }
+	/// <summary>PID: 1015 | Type: read</summary>
+	public System.Object Repositoriestype { get { if (base.Columns.ContainsKey(14)) { return base.Columns[14]; } else { return null; } } set { if (base.Columns.ContainsKey(14)) { base.Columns[14] = value; } else { base.Columns.Add(14, value); } } }
+	/// <summary>PID: 1016 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoriespublickeyid_1016 { get { if (base.Columns.ContainsKey(15)) { return base.Columns[15]; } else { return null; } } set { if (base.Columns.ContainsKey(15)) { base.Columns[15] = value; } else { base.Columns.Add(15, value); } } }
+	/// <summary>PID: 1016 | Type: read</summary>
+	public System.Object Repositoriespublickeyid { get { if (base.Columns.ContainsKey(15)) { return base.Columns[15]; } else { return null; } } set { if (base.Columns.ContainsKey(15)) { base.Columns[15] = value; } else { base.Columns.Add(15, value); } } }
+	/// <summary>PID: 1017 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoriespublickey_1017 { get { if (base.Columns.ContainsKey(16)) { return base.Columns[16]; } else { return null; } } set { if (base.Columns.ContainsKey(16)) { base.Columns[16] = value; } else { base.Columns.Add(16, value); } } }
+	/// <summary>PID: 1017 | Type: read</summary>
+	public System.Object Repositoriespublickey { get { if (base.Columns.ContainsKey(16)) { return base.Columns[16]; } else { return null; } } set { if (base.Columns.ContainsKey(16)) { base.Columns[16] = value; } else { base.Columns.Add(16, value); } } }
+	public RepositoriesQActionRow() : base(0, 17) { }
+	public RepositoriesQActionRow(System.Object[] oRow) : base(0, 17, oRow) { }
 	public static implicit operator RepositoriesQActionRow(System.Object[] source) { return new RepositoriesQActionRow(source); }
 	public static implicit operator System.Object[](RepositoriesQActionRow source) { return source.ToObjectArray(); }
 	public System.String[] GetChildKeysRepositorytagsRepositorytagsrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 1203, Key); }

@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Skyline.DataMiner.Dev.Protocol" Version="10.3.9" />
+    <PackageReference Include="YamlDotNet" Version="15.1.0" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web" />

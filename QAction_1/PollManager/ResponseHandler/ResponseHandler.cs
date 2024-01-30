@@ -19,6 +19,8 @@
 
 			{ RequestType.Organizations_User,               OrganizationsResponseHandler.HandleUserOrganizationsResponse },
 			{ RequestType.Organizations_Repositories,       OrganizationsResponseHandler.HandleOrganizationRepositoriesResponse },
+
+			{ RequestType.Repositories_PublicKey,           RepositoriesResponseHandler.HandleRepositoriesPublicKeysResponse },
 		};
 
 		public static IReadOnlyDictionary<RequestType, Action<SLProtocol>> Handlers => handlers;

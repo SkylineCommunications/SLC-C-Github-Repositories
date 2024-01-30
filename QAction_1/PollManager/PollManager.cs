@@ -22,6 +22,8 @@
 
 			{ RequestType.Organizations_User, new PollSettings { PollFrequency = TimeSpan.FromHours(24), Enabled = true } },
 			{ RequestType.Organizations_Repositories, new PollSettings { PollFrequency = TimeSpan.FromHours(10), Enabled = true } },
+
+			{ RequestType.Repositories_PublicKey, new PollSettings { PollFrequency = TimeSpan.FromHours(360), Enabled = true } },
 		};
 
 		/// <summary>

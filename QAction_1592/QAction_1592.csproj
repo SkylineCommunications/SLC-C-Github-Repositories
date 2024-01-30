@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net462</TargetFramework>
+    <Company>Skyline Communications</Company>
+    <Copyright>© Skyline Communications</Copyright>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QAction_1\QAction_1.csproj" />
+    <ProjectReference Include="..\QAction_Helper\QAction_Helper.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Skyline.DataMiner.Dev.Protocol" Version="10.3.9" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties DisLinkedXmlFile="..\protocol.xml" DisProjectType="qactionProject" DisLinkId="1592" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
