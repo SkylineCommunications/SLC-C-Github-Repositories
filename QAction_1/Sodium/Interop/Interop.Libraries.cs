@@ -4,7 +4,7 @@
 	{
 		private static class Libraries
 		{
-			internal const string Libsodium = @"C:\Users\ArneMA\Documents\Visual Studio Projects\Testing\Testing\bin\Debug\net6.0\runtimes\win-x86\native\libsodium.dll";
+			internal const string Libsodium = @"C:\Skyline DataMiner\ProtocolScripts\DllImport\libsodium\1.0.19\win-x86\native\libsodium.dll";
 		}
 	}
 }
