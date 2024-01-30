@@ -24,12 +24,10 @@ namespace QAction_990
             switch (Action)
             {
                 case Action.Add:
-                    Protocol.Log("QA" + Protocol.QActionID + "|ContextMenuRepositoriesTable|ProcessContextMenuAction|Add", LogType.DebugInfo, LogLevel.NoLogging);
                     Protocol.SetParameter(Parameter.repositories_changerequest, JsonConvert.SerializeObject(new AddRepositoriesTableRequest(Data[1], Data[0])));
                     break;
 
                 case Action.Deleteselectedrow_40_s_41_:
-                    Protocol.Log("QA" + Protocol.QActionID + "|ContextMenuRepositoriesTable|ProcessContextMenuAction|Deleteselectedrow_40_s_41_", LogType.DebugInfo, LogLevel.NoLogging);
                     Protocol.SetParameter(Parameter.repositories_changerequest, JsonConvert.SerializeObject(new RemoveRepositoriesTableRequest(IndividualOrOrganization.Individual, Data)));
                     break;
 

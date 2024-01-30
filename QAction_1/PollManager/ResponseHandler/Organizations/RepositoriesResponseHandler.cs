@@ -73,13 +73,9 @@
 
 			// Check if there are more repositories to fetch
 			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getorganizationrepositorieslinkheader));
-			protocol.Log($"QA{protocol.QActionID}|{nameof(HandleOrganizationRepositoriesResponse)}|Link Header: {linkHeader}", LogType.DebugInfo, LogLevel.NoLogging);
 			if (string.IsNullOrEmpty(linkHeader)) return;
 
 			var link = new LinkHeader(linkHeader);
-
-			protocol.Log($"QA{protocol.QActionID}|ParseGetOrganizationRepositoriesResponse|Current page: {link.CurrentPage}", LogType.Information, LogLevel.Level2);
-			protocol.Log($"QA{protocol.QActionID}|ParseGetOrganizationRepositoriesResponse|Has next page: {link.HasNext}", LogType.Information, LogLevel.Level2);
 
 			if (link.HasNext)
 			{

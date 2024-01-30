@@ -2,13 +2,10 @@
 
 namespace QAction_1590
 {
-	using System;
-
 	using Newtonsoft.Json;
 
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Table.ContextMenu;
-	using Skyline.Protocol.Tables;
 	using Skyline.Protocol.Tables.WorkflowsTable.Requests;
 
 	using Extensions = Skyline.Protocol.Extensions.Extensions;
@@ -30,7 +27,6 @@ namespace QAction_1590
 			switch (Action)
 			{
 				case Action.Add:
-					Protocol.Log("QA" + Protocol.QActionID + "|ContextMenuRepositoryWorkflowsTable|ProcessContextMenuAction|Add", LogType.DebugInfo, LogLevel.NoLogging);
 					Protocol.SetParameter(Parameter.repositoryworkflow_changerequest, JsonConvert.SerializeObject(new[] { new BaseWorkflowRequest(Data[0], Extensions.ParseEnumDescription<WorkflowType>(Data[1]), WorkflowAction.Add) }));
 					break;
 

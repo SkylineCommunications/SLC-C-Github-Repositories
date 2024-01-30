@@ -42,8 +42,6 @@
 
 		public static void CreateRepositoryContent(SLProtocol protocol, string repositoryId, string path, string content, string commitMessage)
 		{
-			protocol.Log($"QA{protocol.QActionID}|CreateRepositoryContent|{repositoryId}", LogType.DebugInfo, LogLevel.NoLogging);
-
 			var body = new PutRepositoryContent
 			{
 				Message = commitMessage,

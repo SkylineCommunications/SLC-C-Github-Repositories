@@ -29,7 +29,6 @@ public static class QAction
 		try
 		{
 			var param = Convert.ToString(protocol.GetParameter(Parameter.repositoryworkflow_changerequest));
-			protocol.Log($"QA{protocol.QActionID}|Run|Request: {param}", LogType.DebugInfo, LogLevel.NoLogging);
 			var requests = JsonConvert.DeserializeObject<IWorkflowsTableRequest[]>(param, new WorkflowTableRequestConverter());
 			foreach (var request in requests)
 			{

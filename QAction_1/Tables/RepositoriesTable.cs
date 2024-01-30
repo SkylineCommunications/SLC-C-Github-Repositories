@@ -1,16 +1,17 @@
 ﻿namespace Skyline.Protocol.Tables
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
 
-    using Newtonsoft.Json;
+	using Newtonsoft.Json;
 
-    using Skyline.DataMiner.Scripting;
-    using Skyline.Protocol;
-    using SLNetMessages = Skyline.DataMiner.Net.Messages;
+	using Skyline.DataMiner.Scripting;
+	using Skyline.Protocol;
 
-    public enum RepositoryType
+	using SLNetMessages = Skyline.DataMiner.Net.Messages;
+
+	public enum RepositoryType
 	{
 		Other = 0,
 		Automation = 1,
@@ -192,7 +193,6 @@
 		public static RepositoriesTableRow FromPK(SLProtocol protocol, string pk)
 		{
 			var row = (object[])protocol.GetRow(Parameter.Repositories.tablePid, pk);
-			protocol.Log($"QA{protocol.QActionID}|FromPK|{JsonConvert.SerializeObject(row)}", LogType.DebugInfo, LogLevel.NoLogging);
 			if (row[0] == null)
 			{
 				return default;
@@ -227,7 +227,6 @@
 
 		public void SaveToProtocol(SLProtocol protocol)
 		{
-			protocol.Log($"QA{protocol.QActionID}|SaveToProtocol|{FullName}", LogType.DebugInfo, LogLevel.NoLogging);
 			if (!protocol.Exists(Parameter.Repositories.tablePid, FullName))
 			{
 				protocol.AddRow(Parameter.Repositories.tablePid, ToProtocolRow());

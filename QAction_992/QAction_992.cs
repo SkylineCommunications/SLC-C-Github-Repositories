@@ -96,7 +96,6 @@ public static class QAction
         }
 
         RepositoriesTable.GetTable().DeleteRow(protocol, reposToDelete);
-        protocol.Log($"QA{protocol.QActionID}|Delete|Repositories|Deleting '{reposToDelete.Count()}' rows", LogType.DebugInfo, LogLevel.NoLogging);
     }
 }
 
