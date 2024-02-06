@@ -1,0 +1,22 @@
+name: DataMiner CI Connector
+on:
+  push:
+    branches: []
+    tags:
+    - '[0-9]+.[0-9]+.[0-9]+.[0-9]+'
+    - '[0-9]+.[0-9]+.[0-9]+-[0-9a-zA-Z]+'
+  workflow_dispatch: 
+jobs:
+  CI:
+    name: CI
+    uses: SkylineCommunications/_ReusableWorkflows/.github/workflows/Connector Master Workflow.yml@main
+    with:
+      referenceName: ${{ github.ref_name }}
+      runNumber: ${{ github.run_number }}
+      referenceType: ${{ github.ref_type }}
+      repository: ${{ github.repository }}
+      owner: ${{ github.repository_owner }}
+      sonarCloudProjectName: SkylineCommunications_SLC-C-Github-Repositories
+    secrets:
+      api-key: ${{ secrets.DATAMINER_DEPLOY_KEY }}
+      sonarCloudToken: ${{ secrets.SONAR_TOKEN }}
