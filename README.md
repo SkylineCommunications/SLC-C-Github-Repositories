@@ -1,5 +1,7 @@
 # SLC-Connector-Github-Repositories
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=SkylineCommunications_SLC-C-Github-Repositories&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=SkylineCommunications_SLC-C-Github-Repositories)
+
 A DataMiner connector that retrieves information from github. It's used to monitor repositories.
 
 ![General](Documentation/GeneralPage.png)
