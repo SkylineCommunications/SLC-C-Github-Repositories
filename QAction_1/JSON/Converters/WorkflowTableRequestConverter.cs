@@ -4,14 +4,11 @@ namespace Skyline.Protocol.JSON.Converters
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 
 	using Newtonsoft.Json;
 	using Newtonsoft.Json.Linq;
 
-	using Skyline.Protocol.Tables.WorkflowsTable.Requests;
+	using Skyline.DataMiner.Utils.Github.Repositories.Core.Workflows;
 
 	public class WorkflowTableRequestConverter : JsonConverter
 	{
@@ -33,8 +30,16 @@ namespace Skyline.Protocol.JSON.Converters
 						result.Add(item.ToObject<AddAutomationScriptCIWorkflowRequest>());
 						continue;
 
-					case WorkflowType.AutomationScriptCD:
-						result.Add(item.ToObject<AddAutomationScriptCDWorkflowRequest>());
+					case WorkflowType.AutomationScriptCICD:
+						result.Add(item.ToObject<AddAutomationScriptCICDWorkflowRequest>());
+						continue;
+
+					case WorkflowType.ConnectorCI:
+						result.Add(item.ToObject<AddConnectorCIWorkflowRequest>());
+						continue;
+
+					case WorkflowType.NugetSolutionCICD:
+						result.Add(item.ToObject<AddNugetCICDWorkflowRequest>());
 						continue;
 
 					default:

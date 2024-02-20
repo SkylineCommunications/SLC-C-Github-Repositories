@@ -7,7 +7,7 @@ using System.Text;
 using Newtonsoft.Json;
 
 using Skyline.DataMiner.Scripting;
-using Skyline.Protocol.Extensions;
+using Skyline.DataMiner.Utils.Github.Repositories.Core.Repositories;
 using Skyline.Protocol.PollManager.RequestHandler.Organizations;
 using Skyline.Protocol.Tables;
 

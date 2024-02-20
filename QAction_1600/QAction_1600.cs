@@ -3,8 +3,7 @@ using System;
 using Newtonsoft.Json;
 
 using Skyline.DataMiner.Scripting;
-using Skyline.Protocol.PollManager.RequestHandler.Repositories;
-using Skyline.Protocol.Tables.WorkflowsTable.Requests;
+using Skyline.DataMiner.Utils.Github.Repositories.Core.Workflows;
 
 using Extensions = Skyline.Protocol.Extensions.Extensions;
 
@@ -53,22 +52,34 @@ public static class QAction
 				Parameter.addworkflowworkflow,
 			}), Convert.ToString);
 
-		IWorkflowsTableRequest request = new BaseWorkflowRequest(parameters[0], (WorkflowType)Convert.ToInt32(parameters[2]), WorkflowAction.Add);
+		// IWorkflowsTableRequest request = new BaseWorkflowRequest(parameters[0], (WorkflowType)Convert.ToInt32(parameters[2]), WorkflowAction.Add);
+		IWorkflowsTableRequest request = default(BaseWorkflowRequest);
 		switch ((WorkflowType)Convert.ToInt32(parameters[2]))
 		{
 			case WorkflowType.AutomationScriptCI:
-				request = new AddAutomationScriptCIWorkflowRequest(parameters[0], String.Empty, "d678176e8e7a4cd095dd75f1963a572a");
+				request = new AddAutomationScriptCIWorkflowRequest(parameters[0], String.Empty, String.Empty);
 				break;
 
-			case WorkflowType.AutomationScriptCD:
-				request = new AddAutomationScriptCDWorkflowRequest(parameters[0], String.Empty, "d678176e8e7a4cd095dd75f1963a572a");
+			case WorkflowType.AutomationScriptCICD:
+				request = new AddAutomationScriptCICDWorkflowRequest(parameters[0], String.Empty, String.Empty);
+				break;
+
+			case WorkflowType.ConnectorCI:
+				request = new AddConnectorCIWorkflowRequest(parameters[0], String.Empty, String.Empty);
+				break;
+
+			case WorkflowType.NugetSolutionCICD:
+				request = new AddNugetCICDWorkflowRequest(parameters[0], String.Empty, String.Empty);
 				break;
 
 			default:
-				// Nothing to do here
+				protocol.Log($"QA{protocol.QActionID}|AddWorkflow|This type of workflow is not supported yet.", LogType.Information, LogLevel.NoLogging);
 				break;
 		}
 
-		protocol.SetParameter(Parameter.repositoryworkflow_changerequest, JsonConvert.SerializeObject(new[] { request }));
+		if(request != default(BaseWorkflowRequest))
+		{
+			protocol.SetParameter(Parameter.repositoryworkflow_changerequest, JsonConvert.SerializeObject(new[] { request }));
+		}
 	}
 }

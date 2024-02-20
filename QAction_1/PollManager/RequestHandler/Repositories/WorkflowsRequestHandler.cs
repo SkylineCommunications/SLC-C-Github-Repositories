@@ -7,11 +7,11 @@ namespace Skyline.Protocol.PollManager.RequestHandler.Repositories
 	using Newtonsoft.Json;
 
 	using Skyline.DataMiner.Scripting;
+	using Skyline.DataMiner.Utils.Github.Repositories.Core.Workflows;
 	using Skyline.Protocol;
 	using Skyline.Protocol.API.Workflows;
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.Tables;
-	using Skyline.Protocol.Tables.WorkflowsTable.Requests;
 	using Skyline.Protocol.YAML;
 
 	public static partial class RepositoriesRequestHandler

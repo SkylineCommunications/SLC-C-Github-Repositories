@@ -5,8 +5,8 @@ namespace QAction_1590
 	using Newtonsoft.Json;
 
 	using Skyline.DataMiner.Scripting;
+	using Skyline.DataMiner.Utils.Github.Repositories.Core.Workflows;
 	using Skyline.DataMiner.Utils.Table.ContextMenu;
-	using Skyline.Protocol.Tables.WorkflowsTable.Requests;
 
 	using Extensions = Skyline.Protocol.Extensions.Extensions;
 

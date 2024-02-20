@@ -1,14 +1,16 @@
 ﻿namespace Skyline.Protocol.Tables
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
 
-    using Skyline.DataMiner.Scripting;
-    using Skyline.Protocol.Extensions;
-    using SLNetMessages = Skyline.DataMiner.Net.Messages;
+	using Skyline.DataMiner.Net.Helper;
+	using Skyline.DataMiner.Scripting;
+	using Skyline.Protocol.Extensions;
 
-    public class RepositoryTagsTableRow
+	using SLNetMessages = Skyline.DataMiner.Net.Messages;
+
+	public class RepositoryTagsTableRow
 	{
 		public RepositoryTagsTableRow() { }
 
@@ -122,9 +124,24 @@
 
 		public void SaveToProtocol(SLProtocol protocol, bool partial = false)
 		{
-			List<object[]> rows = Rows.Select(x => x.ToProtocolRow()).ToList();
-			NotifyProtocol.SaveOption option = partial ? NotifyProtocol.SaveOption.Partial : NotifyProtocol.SaveOption.Full;
-			protocol.FillArray(Parameter.Repositorytags.tablePid, rows, option);
+			// Calculate the batch size, recommended 25000 cells max per fill array.
+			var batchSize = 25000 / 4;
+
+			// If full then the first batch needs to be a SaveOption.Full.
+			var first = !partial;
+			foreach (var batch in Rows.Select(x => x.ToProtocolRow()).Batch(batchSize))
+			{
+				if (first)
+				{
+					protocol.FillArray(Parameter.Repositorytags.tablePid, batch.ToList(), NotifyProtocol.SaveOption.Full);
+				}
+				else
+				{
+					protocol.FillArray(Parameter.Repositorytags.tablePid, batch.ToList(), NotifyProtocol.SaveOption.Partial);
+				}
+
+				first = false;
+			}
 		}
 
 		#region IDisposable

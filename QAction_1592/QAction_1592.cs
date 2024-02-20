@@ -1,19 +1,16 @@
 // Ignore Spelling: Workflow
 
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
+using System.Linq;
+using System.Reflection;
 
 using Newtonsoft.Json;
 
 using Skyline.DataMiner.Scripting;
+using Skyline.DataMiner.Utils.Github.Repositories.Core.Workflows;
 using Skyline.Protocol.API.Workflows;
 using Skyline.Protocol.JSON.Converters;
-using Skyline.Protocol.PollManager;
 using Skyline.Protocol.PollManager.RequestHandler.Repositories;
-using Skyline.Protocol.Tables;
-using Skyline.Protocol.Tables.WorkflowsTable.Requests;
 
 /// <summary>
 /// DataMiner QAction Class.
@@ -51,7 +48,19 @@ public static class QAction
 
 	private static void Add(SLProtocol protocol, IWorkflowsTableRequest request)
 	{
-		var workflow = request.CreateWorkflow(protocol);
+		// Create workflow file
+		var workflow = WorkflowFactory.Create(request);
+
+		// Create the required secrets
+		var secrets = request.GetType().GetProperties()
+			.Where(prop => prop.GetCustomAttribute<WorkflowSecretAttribute>() != null);
+		foreach(var secret in secrets)
+		{
+			var attr = secret.GetCustomAttribute<WorkflowSecretAttribute>();
+			RepositoriesRequestHandler.CreateRepositorySecret(protocol, request.RepositoryId, attr.Name, Convert.ToString(secret.GetValue(request)));
+		}
+
+		// Do the actual commit to the repository
 		RepositoriesRequestHandler.CreateRepositoryWorkflow(protocol, request.RepositoryId, workflow);
 	}
 }

@@ -6,8 +6,8 @@
 
 	using Newtonsoft.Json;
 
+	using Skyline.DataMiner.Utils.Github.Repositories.Core.Workflows;
 	using Skyline.Protocol.JSON.Converters;
-	using Skyline.Protocol.Tables.WorkflowsTable.Requests;
 
 	[TestClass]
 	public class ExtensionsTests
@@ -34,14 +34,14 @@
 		public void WorkflowJsonConverter()
 		{
 			var request1 = new AddAutomationScriptCIWorkflowRequest("Arne/Repo1", "Arne_Repo1", "Somekey1");
-			var request2 = new AddAutomationScriptCDWorkflowRequest("Arne/Repo2", "Arne_Repo2", "Somekey2");
+			var request2 = new AddAutomationScriptCICDWorkflowRequest("Arne/Repo2", "Arne_Repo2", "Somekey2");
 
 			var input = JsonConvert.SerializeObject(new IWorkflowsTableRequest[] { request1, request2 });
 
 			var result = JsonConvert.DeserializeObject<IWorkflowsTableRequest[]>(input, new WorkflowTableRequestConverter());
 
 			Assert.IsTrue(result[0] is AddAutomationScriptCIWorkflowRequest);
-			Assert.IsTrue(result[1] is AddAutomationScriptCDWorkflowRequest);
+			Assert.IsTrue(result[1] is AddAutomationScriptCICDWorkflowRequest);
 		}
 	}
 }

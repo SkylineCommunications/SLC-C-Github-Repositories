@@ -47,7 +47,7 @@ Any inquiries can be addressed to:
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>Github Repositories</Name>
 	<Description>Github Repositories DataMiner connector</Description>
-	<Version>1.0.0.5</Version>
+	<Version>1.0.0.6</Version>
 	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Github</Vendor>
@@ -1396,8 +1396,16 @@ To get more request you can add an api key under General/Configuration page. To 
 						<Value>0</Value>
 					</Discreet>
 					<Discreet>
-						<Display>Automation Script CD</Display>
+						<Display>Automation Script CICD</Display>
 						<Value>1</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Connector CI</Display>
+						<Value>2</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Nuget Solution CICD</Display>
+						<Value>3</Value>
 					</Discreet>
 				</Discreets>
 			</Measurement>
@@ -1429,8 +1437,16 @@ To get more request you can add an api key under General/Configuration page. To 
 						<Value>0</Value>
 					</Discreet>
 					<Discreet>
-						<Display>Automation Script CD</Display>
+						<Display>Automation Script CICD</Display>
 						<Value>1</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Connector CI</Display>
+						<Value>2</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Nuget Solution CICD</Display>
+						<Value>3</Value>
 					</Discreet>
 				</Discreets>
 			</Measurement>
@@ -4183,12 +4199,12 @@ Are you sure you want to continue.]]>
 			<Type>clear</Type>
 		</Action>
 		<Action id="320">
-			<Name>Clear Repository Content Content</Name>
+			<Name>Clear Get Repository Content Content</Name>
 			<On id="220">parameter</On>
 			<Type>clear</Type>
 		</Action>
 		<Action id="321">
-			<Name>Clear Repository Content Content</Name>
+			<Name>Clear Put Repository Content Content</Name>
 			<On id="221">parameter</On>
 			<Type>clear</Type>
 		</Action>

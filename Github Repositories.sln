@@ -88,6 +88,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "native", "native", "{7DCF01
 		Dlls\LibSodium\1.0.19\win-x86\native\libsodium.dll = Dlls\LibSodium\1.0.19\win-x86\native\libsodium.dll
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QAction_1592Tests", "QAction_1592Tests\QAction_1592Tests.csproj", "{4893629A-1BD9-4BF3-B31F-65CA66D08F64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -154,6 +156,10 @@ Global
 		{F1CE5275-CE7E-47AA-BC5C-0C81E54896F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1CE5275-CE7E-47AA-BC5C-0C81E54896F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1CE5275-CE7E-47AA-BC5C-0C81E54896F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4893629A-1BD9-4BF3-B31F-65CA66D08F64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4893629A-1BD9-4BF3-B31F-65CA66D08F64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4893629A-1BD9-4BF3-B31F-65CA66D08F64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4893629A-1BD9-4BF3-B31F-65CA66D08F64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -181,6 +187,7 @@ Global
 		{0A7E9304-3E5B-4EEB-BF93-9287ECD26DF1} = {FE49D1C4-1847-4339-95BD-C4F9C5C5FFDE}
 		{A2B6AE78-419D-4524-BF80-C92ED4448619} = {087AADFD-C96F-4876-99EE-58156D0AD046}
 		{7DCF011B-A3C1-4E86-8DCC-76A7B0EA3A03} = {0A7E9304-3E5B-4EEB-BF93-9287ECD26DF1}
+		{4893629A-1BD9-4BF3-B31F-65CA66D08F64} = {867E9986-B183-4551-8A59-6334AC5B1522}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EFA33921-4F58-45A6-8D24-D32EC63BAF90}

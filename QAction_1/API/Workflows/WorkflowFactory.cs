@@ -1,11 +1,11 @@
-﻿// Ignore Spelling: Workflow Workflows API sonarcloud
+﻿// Ignore Spelling: Workflow Workflows API sonarcloud Nuget
 
 namespace Skyline.Protocol.API.Workflows
 {
 	using System;
 	using System.Collections.Generic;
 
-	using Skyline.Protocol.Tables.WorkflowsTable.Requests;
+	using Skyline.DataMiner.Utils.Github.Repositories.Core.Workflows;
 
 	public static class WorkflowFactory
 	{
@@ -14,19 +14,50 @@ namespace Skyline.Protocol.API.Workflows
 			switch (workflowType)
 			{
 				case WorkflowType.AutomationScriptCI:
-					return CreateCIWorkflow();
+					return CreateAutomationCIWorkflow();
 
-				case WorkflowType.AutomationScriptCD:
-					return CreateCDWorkflow();
+				case WorkflowType.AutomationScriptCICD:
+					return CreateAutomationCICDWorkflow();
+
+				case WorkflowType.ConnectorCI:
+					return CreateConnectorCIWorkflow();
+
+				case WorkflowType.NugetSolutionCICD:
+					return CreateNugetCICDWorkflow();
 
 				default:
 					throw new NotSupportedException("The current workflow type is not supported yet");
 			}
 		}
 
-		public static Workflow CreateCIWorkflow() => CreateCIWorkflow("# Grab your project id from https://sonarcloud.io/project/create.");
+		public static Workflow Create(IWorkflowsTableRequest request)
+		{
+			switch (request.WorkflowType)
+			{
+				case WorkflowType.AutomationScriptCI:
+					var automationCIRequest = (AddAutomationScriptCIWorkflowRequest)request;
+					return String.IsNullOrWhiteSpace(automationCIRequest.SonarCloudProjectID) ? CreateAutomationCIWorkflow() : CreateAutomationCIWorkflow(automationCIRequest.SonarCloudProjectID);
 
-		public static Workflow CreateCIWorkflow(string sonarcloudProjectName)
+				case WorkflowType.AutomationScriptCICD:
+					var automationCICDrequest = (AddAutomationScriptCICDWorkflowRequest)request;
+					return String.IsNullOrWhiteSpace(automationCICDrequest.SonarCloudProjectID) ? CreateAutomationCICDWorkflow() : CreateAutomationCICDWorkflow(automationCICDrequest.SonarCloudProjectID);
+
+				case WorkflowType.ConnectorCI:
+					var connectorCIRequest = (AddConnectorCIWorkflowRequest)request;
+					return String.IsNullOrWhiteSpace(connectorCIRequest.SonarCloudProjectID) ? CreateConnectorCIWorkflow() : CreateConnectorCIWorkflow(connectorCIRequest.SonarCloudProjectID);
+
+				case WorkflowType.NugetSolutionCICD:
+					var nugetCICDRequest = (AddNugetCICDWorkflowRequest)request;
+					return String.IsNullOrWhiteSpace(nugetCICDRequest.SonarCloudProjectID) ? CreateNugetCICDWorkflow() : CreateNugetCICDWorkflow(nugetCICDRequest.SonarCloudProjectID);
+
+				default:
+					throw new NotSupportedException("The current workflow type is not supported yet");
+			}
+		}
+
+		public static Workflow CreateAutomationCIWorkflow() => CreateAutomationCIWorkflow("# Grab your project id from https://sonarcloud.io/project/create.");
+
+		public static Workflow CreateAutomationCIWorkflow(string sonarcloudProjectName)
 		{
 			var flow = new Workflow
 			{
@@ -73,9 +104,9 @@ namespace Skyline.Protocol.API.Workflows
 			return flow;
 		}
 
-		public static Workflow CreateCDWorkflow() => CreateCDWorkflow("# Grab your project id from https://sonarcloud.io/project/create.");
+		public static Workflow CreateAutomationCICDWorkflow() => CreateAutomationCICDWorkflow("# Grab your project id from https://sonarcloud.io/project/create.");
 
-		public static Workflow CreateCDWorkflow(string sonarcloudProjectName)
+		public static Workflow CreateAutomationCICDWorkflow(string sonarcloudProjectName)
 		{
 			var flow = new Workflow
 			{
@@ -136,11 +167,115 @@ namespace Skyline.Protocol.API.Workflows
 									Uses = "SkylineCommunications/Skyline-DataMiner-Deploy-Action@v1",
 									With = new Dictionary<string, string>
 									{
-										{ "stage",			"Deploy" },
-										{ "api-key",		"${{ secrets.DATAMINER_DEPLOY_KEY }}" },
-										{ "artifact-id",	"${{ needs.CI.outputs.artifact-id }}" },
+										{ "stage",          "Deploy" },
+										{ "api-key",        "${{ secrets.DATAMINER_DEPLOY_KEY }}" },
+										{ "artifact-id",    "${{ needs.CI.outputs.artifact-id }}" },
 									},
 								},
+							},
+						}
+					},
+				},
+			};
+
+			return flow;
+		}
+
+		public static Workflow CreateNugetCICDWorkflow() => CreateNugetCICDWorkflow("# Grab your project id from https://sonarcloud.io/project/create.");
+
+		public static Workflow CreateNugetCICDWorkflow(string sonarcloudProjectName)
+		{
+			var flow = new Workflow
+			{
+				Name = "DataMiner CICD Nuget Solution",
+				On = new On
+				{
+					Push = new Push
+					{
+						Branches = new List<string>
+						{
+							"main",
+							"master",
+						},
+						Tags = new List<string>
+						{
+							"[0-9]+.[0-9]+.[0-9]+",
+							"[0-9]+.[0-9]+.[0-9]+-[0-9a-zA-Z]+",
+						},
+					},
+					CanRunManually = null,
+				},
+				Jobs = new Dictionary<string, Job>
+				{
+					{
+					"CICD", new Job
+						{
+							Name = "CICD",
+							Uses = "SkylineCommunications/_ReusableWorkflows/.github/workflows/NuGet Solution Master Workflow.yml@main",
+							With = new Dictionary<string, string>
+							{
+								{ "referenceName",          "${{ github.ref_name }}" },
+								{ "runNumber",              "${{ github.run_number }}" },
+								{ "referenceType",          "${{ github.ref_type }}" },
+								{ "repository",             "${{ github.repository }}" },
+								{ "owner",                  "${{ github.repository_owner }}" },
+								{ "sonarCloudProjectName",  sonarcloudProjectName },
+							},
+							Secrets = new Dictionary<string, string>
+							{
+								{ "sonarCloudToken",    "${{ secrets.SONAR_TOKEN }}" },
+								{ "pfx",                "${{ secrets.PFX }}" },
+								{ "pfxPassword",        "${{ secrets.PFXPASSWORD  }}" },
+								{ "nugetApiKey",        "${{ secrets.NUGETAPIKEY  }}" },
+							},
+						}
+					},
+				},
+			};
+
+			return flow;
+		}
+
+		public static Workflow CreateConnectorCIWorkflow() => CreateConnectorCIWorkflow("# Grab your project id from https://sonarcloud.io/project/create.");
+
+		public static Workflow CreateConnectorCIWorkflow(string sonarcloudProjectName)
+		{
+			var flow = new Workflow
+			{
+				Name = "DataMiner CI Connector",
+				On = new On
+				{
+					Push = new Push
+					{
+						Branches = new List<string>(),
+						Tags = new List<string>
+						{
+							"[0-9]+.[0-9]+.[0-9]+.[0-9]+",
+							"[0-9]+.[0-9]+.[0-9]+-[0-9a-zA-Z]+",
+						},
+					},
+					CanRunManually = null,
+				},
+				Jobs = new Dictionary<string, Job>
+				{
+					{
+					"CI", new Job
+						{
+							Name = "CI",
+							Uses = "SkylineCommunications/_ReusableWorkflows/.github/workflows/Connector Master Workflow.yml@main",
+							With = new Dictionary<string, string>
+							{
+								{ "referenceName",          "${{ github.ref_name }}" },
+								{ "runNumber",              "${{ github.run_number }}" },
+								{ "referenceType",          "${{ github.ref_type }}" },
+								{ "repository",             "${{ github.repository }}" },
+								{ "owner",                  "${{ github.repository_owner }}" },
+								{ "sonarCloudProjectName",  sonarcloudProjectName },
+							},
+							Secrets = new Dictionary<string, string>
+							{
+								{ "api-key",            "${{ secrets.DATAMINER_DEPLOY_KEY }}" },
+								{ "sonarCloudToken",    "${{ secrets.SONAR_TOKEN }}" },
 							},
 						}
 					},

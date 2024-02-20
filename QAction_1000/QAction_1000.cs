@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 
 using Skyline.DataMiner.Scripting;
+using Skyline.DataMiner.Utils.Github.Repositories.Core.Repositories;
 using Skyline.Protocol;
 using Skyline.Protocol.PollManager.RequestHandler.Organizations;
-using Skyline.Protocol.PollManager.ResponseHandler;
 using Skyline.Protocol.Tables;
 
 /// <summary>

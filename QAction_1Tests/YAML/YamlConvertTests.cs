@@ -16,7 +16,7 @@ namespace Skyline.Protocol.YAML.Tests
 		public void SerializeObjectTest()
 		{
 			// Arrange
-			var flow = WorkflowFactory.CreateCIWorkflow("SkylineCommunications_RBMU-AS-MCR-Swimlanes");
+			var flow = WorkflowFactory.CreateAutomationCICDWorkflow("SkylineCommunications_RBMU-AS-MCR-Swimlanes");
 
 			// Execute
 			var result = YamlConvert.SerializeObject(flow);
@@ -29,7 +29,7 @@ namespace Skyline.Protocol.YAML.Tests
 		public void DeserializeObjectTest()
 		{
 			// Arrange
-			var flow = WorkflowFactory.CreateCIWorkflow("SkylineCommunications_RBMU-AS-MCR-Swimlanes");
+			var flow = WorkflowFactory.CreateAutomationCICDWorkflow("SkylineCommunications_RBMU-AS-MCR-Swimlanes");
 
 			// Execute
 			var result = YamlConvert.SerializeObject(flow);
