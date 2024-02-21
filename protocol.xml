@@ -4430,6 +4430,19 @@ Are you sure you want to continue.]]>
 											<NewFeature>Added a way to create automation scripts workflows</NewFeature>
 										</Changes>
 									</MinorVersion>
+									<MinorVersion id="6" basedOn="1.0.0.5">
+										<Date>2024-02-21</Date>
+										<Provider>
+											<Author>AMA</Author>
+											<Company>Skyline Communications</Company>
+										</Provider>
+										<Changes>
+											<NewFeature>Added the Connector CI Workflow</NewFeature>
+											<NewFeature>Added the Nuget Solution CICD Workflow</NewFeature>
+											<NewFeature>Added the Internal Nuget Solution CICD Workflow</NewFeature>
+											<NewFeature>Added InterApp Functionality for adding/removing repositories, creating workflows</NewFeature>
+										</Changes>
+									</MinorVersion>
 								</MinorVersions>
 							</MajorVersion>
 						</MajorVersions>

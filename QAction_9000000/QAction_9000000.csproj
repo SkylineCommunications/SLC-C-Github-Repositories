@@ -10,7 +10,7 @@
     <ProjectReference Include="..\QAction_Helper\QAction_Helper.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Skyline.DataMiner.ConnectorAPI.Github.Repositories" Version="1.0.1-pre7" />
+    <PackageReference Include="Skyline.DataMiner.ConnectorAPI.Github.Repositories" Version="1.0.1" />
     <PackageReference Include="Skyline.DataMiner.Core.InterAppCalls.Common" Version="1.0.0.3" />
     <PackageReference Include="Skyline.DataMiner.Dev.Protocol" Version="10.3.9" />
   </ItemGroup>
