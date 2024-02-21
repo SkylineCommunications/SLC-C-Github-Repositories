@@ -1287,6 +1287,10 @@ To get more request you can add an api key under General/Configuration page. To 
 						<Display>Nuget Solution CICD</Display>
 						<Value>3</Value>
 					</Discreet>
+					<Discreet>
+						<Display>Internal Nuget Solution CICD</Display>
+						<Value>4</Value>
+					</Discreet>
 				</Discreets>
 			</Measurement>
 		</Param>
@@ -1327,6 +1331,10 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Discreet>
 						<Display>Nuget Solution CICD</Display>
 						<Value>3</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Internal Nuget Solution CICD</Display>
+						<Value>4</Value>
 					</Discreet>
 				</Discreets>
 			</Measurement>

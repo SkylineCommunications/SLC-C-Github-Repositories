@@ -21,6 +21,7 @@
 			{ typeof(AddAutomationScriptCICDWorkflowRequest),	typeof(AddAutomationScriptCICDWorkflowExecutor) },
 			{ typeof(AddConnectorCIWorkflowRequest),			typeof(AddConnectorCIWorkflowExecutor) },
 			{ typeof(AddNugetCICDWorkflowRequest),				typeof(AddNugetCICDWorkflowExecutor) },
+			{ typeof(AddInternalNugetCICDWorkflowRequest),      typeof(AddInternalNugetCICDWorkflowExecutor) },
 		};
 
 		public static IDictionary<Type, Type> MessageToExecutorMapping => InternalMessageToExecutorMapping;

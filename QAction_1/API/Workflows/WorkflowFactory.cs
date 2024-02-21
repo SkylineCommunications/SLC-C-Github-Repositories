@@ -25,6 +25,9 @@ namespace Skyline.Protocol.API.Workflows
 				case WorkflowType.NugetSolutionCICD:
 					return CreateNugetCICDWorkflow();
 
+				case WorkflowType.InternalNugetSolutionCICD:
+					return CreateInternalNugetCICDWorkflow();
+
 				default:
 					throw new NotSupportedException("The current workflow type is not supported yet");
 			}
@@ -251,6 +254,59 @@ namespace Skyline.Protocol.API.Workflows
 							{
 								{ "api-key",            "${{ secrets.DATAMINER_DEPLOY_KEY }}" },
 								{ "sonarCloudToken",    "${{ secrets.SONAR_TOKEN }}" },
+							},
+						}
+					},
+				},
+			};
+
+			return flow;
+		}
+
+		public static Workflow CreateInternalNugetCICDWorkflow() => CreateInternalNugetCICDWorkflow("# Grab your project id from https://sonarcloud.io/project/create.");
+
+		public static Workflow CreateInternalNugetCICDWorkflow(string sonarcloudProjectName)
+		{
+			var flow = new Workflow
+			{
+				Name = "DataMiner CICD Internal Nuget Solution",
+				On = new On
+				{
+					Push = new Push
+					{
+						Branches = new List<string>
+						{
+							"main",
+							"master",
+						},
+						Tags = new List<string>
+						{
+							"[0-9]+.[0-9]+.[0-9]+",
+							"[0-9]+.[0-9]+.[0-9]+-[0-9a-zA-Z]+",
+						},
+					},
+					CanRunManually = null,
+				},
+				Jobs = new Dictionary<string, Job>
+				{
+					{
+					"CICD", new Job
+						{
+							Name = "CICD",
+							Uses = "SkylineCommunications/_ReusableWorkflows/.github/workflows/Internal NuGet Solution Master Workflow.yml@main",
+							With = new Dictionary<string, string>
+							{
+								{ "referenceName",          "${{ github.ref_name }}" },
+								{ "runNumber",              "${{ github.run_number }}" },
+								{ "referenceType",          "${{ github.ref_type }}" },
+								{ "repository",             "${{ github.repository }}" },
+								{ "owner",                  "${{ github.repository_owner }}" },
+								{ "sonarCloudProjectName",  sonarcloudProjectName },
+							},
+							Secrets = new Dictionary<string, string>
+							{
+								{ "sonarCloudToken",    "${{ secrets.SONAR_TOKEN }}" },
+								{ "nugetApiKey",        "${{ secrets.NUGETAPIKEY_GITHUB  }}" },
 							},
 						}
 					},

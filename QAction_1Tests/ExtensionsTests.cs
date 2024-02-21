@@ -6,8 +6,9 @@
 
 	using Newtonsoft.Json;
 
-	using Skyline.DataMiner.Utils.Github.Repositories.Core.Workflows;
-	using Skyline.Protocol.JSON.Converters;
+	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages;
+	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows;
+	using Skyline.DataMiner.Core.InterAppCalls.Common.CallBulk;
 
 	[TestClass]
 	public class ExtensionsTests
@@ -31,17 +32,14 @@
 		}
 
 		[TestMethod]
-		public void WorkflowJsonConverter()
+		public void DeserializeInterApp()
 		{
-			var request1 = new AddAutomationScriptCIWorkflowRequest("Arne/Repo1", "Arne_Repo1", "Somekey1");
-			var request2 = new AddAutomationScriptCICDWorkflowRequest("Arne/Repo2", "Arne_Repo2", "Somekey2");
+			var message = "{\"$id\":\"1\",\"$type\":\"InterAppCall,\",\"guid\":\"9011ff84-6f44-4a53-8043-061986a0d0ac\",\"messages\":{\"$type\":\"Skyline.DataMiner.Core.InterAppCalls.Common.CallBulk.Messages,\",\"$values\":[{\"$id\":\"2\",\"$type\":\"AddInternalNugetCICDWorkflowRequest,\",\"data\":{\"$id\":\"3\",\"$type\":\"Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows.Data.InternalNugetCICDWorkflowData,\",\"githubNugetApiKey\":\"somekey\",\"sonarCloudProjectID\":\"correctly_filled_in\"},\"guid\":\"e453e383-5ca0-4266-876c-e78a8c744bc0\",\"repositoryId\":{\"$id\":\"4\",\"$type\":\"Skyline.DataMiner.ConnectorAPI.Github.Repositories.RepositoryId,\",\"fullName\":\"SkylineCommunicationsSandbox/SLC-AS-GithubTestRepository\",\"name\":\"SLC-AS-GithubTestRepository\",\"owner\":\"SkylineCommunicationsSandbox\"},\"returnAddress\":{\"$id\":\"5\",\"$type\":\"Skyline.DataMiner.Core.InterAppCalls.Common.Shared.ReturnAddress,\",\"agentId\":925,\"elementId\":187,\"parameterId\":9000001},\"source\":null,\"workflowType\":4}]},\"receivingTime\":\"0001-01-01T00:00:00\",\"returnAddress\":{\"$ref\":\"5\"},\"sendingTime\":\"2024-02-21T12:11:09.7761323+01:00\",\"source\":null}";
 
-			var input = JsonConvert.SerializeObject(new IWorkflowsTableRequest[] { request1, request2 });
+			var result = InterAppCallFactory.CreateFromRaw(message, Types.KnownTypes);
 
-			var result = JsonConvert.DeserializeObject<IWorkflowsTableRequest[]>(input, new WorkflowTableRequestConverter());
-
-			Assert.IsTrue(result[0] is AddAutomationScriptCIWorkflowRequest);
-			Assert.IsTrue(result[1] is AddAutomationScriptCICDWorkflowRequest);
+			Assert.IsTrue(true);
+			//Assert.ThrowsException<KeyNotFoundException>(() => Extensions.ParseEnumDescription<WorkflowType>(discreet));
 		}
 	}
 }

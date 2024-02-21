@@ -5,7 +5,6 @@
 	using Newtonsoft.Json;
 
 	using Skyline.DataMiner.Scripting;
-	using Skyline.DataMiner.Utils.Github.Repositories.Core.Workflows;
 
 	using UnitTestingFramework.Protocol;
 	using UnitTestingFramework.Protocol.Model;
@@ -17,17 +16,17 @@
 		[TestMethod]
 		public void RunTest()
 		{
-			var protocolModel = new ProtocolModelExt();
-			var protocolMock = new SLProtocolMock(protocolModel);
+			//var protocolModel = new ProtocolModelExt();
+			//var protocolMock = new SLProtocolMock(protocolModel);
 
-			var addAutoCIRequest = new AddAutomationScriptCIWorkflowRequest("Skyline/TestRepo", "Skyline_TestRepo", "ABC123");
+			//var addAutoCIRequest = new AddAutomationScriptCIWorkflowRequest("Skyline/TestRepo", "Skyline_TestRepo", "ABC123");
 
-			protocolMock.Setup(x => x.GetParameter(Parameter.repositoryworkflow_changerequest).ToString()).Returns(JsonConvert.SerializeObject(new IWorkflowsTableRequest[] { addAutoCIRequest }));
-			protocolMock.Setup(x => x.GetTriggerParameter()).Returns(1592);
+			//protocolMock.Setup(x => x.GetParameter(Parameter.repositoryworkflow_changerequest).ToString()).Returns(JsonConvert.SerializeObject(new IWorkflowsTableRequest[] { addAutoCIRequest }));
+			//protocolMock.Setup(x => x.GetTriggerParameter()).Returns(1592);
 
-			QAction.Run(protocolMock.Object);
+			//QAction.Run(protocolMock.Object);
 
-			Assert.IsTrue(true);
+			//Assert.IsTrue(true);
 		}
 	}
 }

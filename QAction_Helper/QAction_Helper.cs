@@ -1280,7 +1280,7 @@ public class WriteParameters
 	public System.Object Addworkflowrepository {get { return Protocol.GetParameter(651); }set { Protocol.SetParameter(651, value); }}
 	/// <summary>PID: 653  | Type: write</summary>
 	public System.Object Addworkflowbranch {get { return Protocol.GetParameter(653); }set { Protocol.SetParameter(653, value); }}
-	/// <summary>PID: 655  | Type: write | DISCREETS: Automation Script CI = 0, Automation Script CICD = 1, Connector CI = 2, Nuget Solution CICD = 3</summary>
+	/// <summary>PID: 655  | Type: write | DISCREETS: Automation Script CI = 0, Automation Script CICD = 1, Connector CI = 2, Nuget Solution CICD = 3, Internal Nuget Solution CICD = 4</summary>
 	public System.Object Addworkflowworkflow {get { return Protocol.GetParameter(655); }set { Protocol.SetParameter(655, value); }}
 	/// <summary>PID: 990  | Type: write | DISCREETS: Add... = 1, Delete selected row(s) = 2</summary>
 	public System.Object Repositories_contextmenu {get { return Protocol.GetParameter(990); }set { Protocol.SetParameter(990, value); }}
@@ -1931,10 +1931,10 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Addworkflowbranch_discreetlist_554 {get { return GetParameter(554); }set { SetParameter(554, value); }}
 	/// <summary>PID: 554  | Type: read</summary>
 	public System.Object Addworkflowbranch_discreetlist {get { return GetParameter(554); }set { SetParameter(554, value); }}
-	/// <summary>PID: 555  | Type: read | DISCREETS: Automation Script CI = 0, Automation Script CICD = 1, Connector CI = 2, Nuget Solution CICD = 3</summary>
+	/// <summary>PID: 555  | Type: read | DISCREETS: Automation Script CI = 0, Automation Script CICD = 1, Connector CI = 2, Nuget Solution CICD = 3, Internal Nuget Solution CICD = 4</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Addworkflowworkflow_555 {get { return GetParameter(555); }set { SetParameter(555, value); }}
-	/// <summary>PID: 555  | Type: read | DISCREETS: Automation Script CI = 0, Automation Script CICD = 1, Connector CI = 2, Nuget Solution CICD = 3</summary>
+	/// <summary>PID: 555  | Type: read | DISCREETS: Automation Script CI = 0, Automation Script CICD = 1, Connector CI = 2, Nuget Solution CICD = 3, Internal Nuget Solution CICD = 4</summary>
 	public System.Object Addworkflowworkflow {get { return GetParameter(555); }set { SetParameter(555, value); }}
 	/// <summary>PID: 601  | Type: write</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
@@ -1948,7 +1948,7 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	/// <summary>PID: 653  | Type: write</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Addworkflowbranch_653 {get { return GetParameter(653); }set { SetParameter(653, value); }}
-	/// <summary>PID: 655  | Type: write | DISCREETS: Automation Script CI = 0, Automation Script CICD = 1, Connector CI = 2, Nuget Solution CICD = 3</summary>
+	/// <summary>PID: 655  | Type: write | DISCREETS: Automation Script CI = 0, Automation Script CICD = 1, Connector CI = 2, Nuget Solution CICD = 3, Internal Nuget Solution CICD = 4</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Addworkflowworkflow_655 {get { return GetParameter(655); }set { SetParameter(655, value); }}
 	/// <summary>PID: 990  | Type: write | DISCREETS: Add... = 1, Delete selected row(s) = 2</summary>
