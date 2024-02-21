@@ -58,7 +58,6 @@
 
 			if(table.Rows.Count > 0)
 			{
-				protocol.SetParameter(Parameter.addorganizationrepositories_discreetlist_507, String.Join(";", table.Rows.Select(org => org.Instance)));
 				table.SaveToProtocol(protocol);
 			}
 

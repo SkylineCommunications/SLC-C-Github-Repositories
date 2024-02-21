@@ -6,8 +6,8 @@ namespace Skyline.Protocol.PollManager.RequestHandler.Repositories
 
 	using Newtonsoft.Json;
 
+	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows;
 	using Skyline.DataMiner.Scripting;
-	using Skyline.DataMiner.Utils.Github.Repositories.Core.Workflows;
 	using Skyline.Protocol;
 	using Skyline.Protocol.API.Workflows;
 	using Skyline.Protocol.Extensions;

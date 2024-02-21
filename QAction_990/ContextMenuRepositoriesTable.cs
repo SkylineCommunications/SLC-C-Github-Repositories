@@ -1,10 +1,14 @@
 namespace QAction_990
 {
+	using System;
+
 	using Newtonsoft.Json;
 
+	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Repositories;
+	using Skyline.DataMiner.ConnectorAPI.Github.Repositories;
 	using Skyline.DataMiner.Scripting;
-	using Skyline.DataMiner.Utils.Github.Repositories.Core.Repositories;
 	using Skyline.DataMiner.Utils.Table.ContextMenu;
+	using Skyline.Protocol.InterApp;
 
 	internal enum Action
 	{
@@ -24,16 +28,42 @@ namespace QAction_990
 			switch (Action)
 			{
 				case Action.Add:
-					Protocol.SetParameter(Parameter.repositories_changerequest, JsonConvert.SerializeObject(new AddRepositoriesTableRequest(Data[1], Data[0])));
+					Add();
 					break;
 
 				case Action.Deleteselectedrow_40_s_41_:
-					Protocol.SetParameter(Parameter.repositories_changerequest, JsonConvert.SerializeObject(new RemoveRepositoriesTableRequest(IndividualOrOrganization.Individual, Data)));
+					Remove();
 					break;
 
 				default:
 					Protocol.Log("QA" + Protocol.QActionID + "|ContextMenuRepositoriesTable|Process|Unexpected ContextMenu value '" + ActionRaw + "'", LogType.Error, LogLevel.NoLogging);
 					break;
+			}
+		}
+
+		protected void Add()
+		{
+			// Add through name and owner
+			var request = new AddRepositoryRequest
+			{
+				RepositoryId = new RepositoryId(Data[1], Data[0]),
+			};
+
+			request.TryExecute(Protocol, Protocol, Mapping.MessageToExecutorMapping, out _);
+		}
+
+		protected void Remove()
+		{
+			foreach(var row in Data)
+			{
+				var owner = row.Split('/')[0];
+				var name = row.Split('/')[1];
+				var request = new RemoveRepositoryRequest
+				{
+					RepositoryId = new RepositoryId(owner, name),
+				};
+
+				request.TryExecute(Protocol, Protocol, Mapping.MessageToExecutorMapping, out _);
 			}
 		}
 	}

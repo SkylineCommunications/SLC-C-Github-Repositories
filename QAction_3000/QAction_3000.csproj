@@ -13,7 +13,6 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Skyline.DataMiner.Dev.Protocol" Version="10.3.9" />
-    <PackageReference Include="Skyline.DataMiner.Utils.Github.Repositories.Core" Version="1.54778.7-main.7" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

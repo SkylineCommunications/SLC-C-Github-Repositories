@@ -4,20 +4,19 @@
     <Company>Skyline Communications</Company>
     <Copyright>© Skyline Communications</Copyright>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\QAction_1\QAction_1.csproj" />
     <ProjectReference Include="..\QAction_Helper\QAction_Helper.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Skyline.DataMiner.ConnectorAPI.Github.Repositories" Version="1.0.1-pre4" />
+    <PackageReference Include="Skyline.DataMiner.Core.InterAppCalls.Common" Version="1.0.0.3" />
     <PackageReference Include="Skyline.DataMiner.Dev.Protocol" Version="10.3.9" />
-    <PackageReference Include="Skyline.DataMiner.Utils.Github.Repositories.Core" Version="1.54778.7-main.7" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties DisLinkedXmlFile="..\protocol.xml" DisProjectType="qactionProject" DisLinkId="1592" />
+      <UserProperties DisLinkedXmlFile="..\protocol.xml" DisProjectType="qactionProject" DisLinkId="9000000" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

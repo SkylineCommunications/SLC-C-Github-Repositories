@@ -23,6 +23,7 @@ public static class QAction
             RepositoryReleasesTable.GetTable(protocol);
             RepositoryIssuesTable.GetTable(protocol);
             RepositoryWorkflowsTable.GetTable(protocol);
+            IAC_MessagesTable.GetTable(protocol);
 		}
         catch (Exception ex)
         {

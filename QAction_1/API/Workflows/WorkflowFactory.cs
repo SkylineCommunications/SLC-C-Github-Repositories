@@ -5,7 +5,7 @@ namespace Skyline.Protocol.API.Workflows
 	using System;
 	using System.Collections.Generic;
 
-	using Skyline.DataMiner.Utils.Github.Repositories.Core.Workflows;
+	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows;
 
 	public static class WorkflowFactory
 	{
@@ -24,31 +24,6 @@ namespace Skyline.Protocol.API.Workflows
 
 				case WorkflowType.NugetSolutionCICD:
 					return CreateNugetCICDWorkflow();
-
-				default:
-					throw new NotSupportedException("The current workflow type is not supported yet");
-			}
-		}
-
-		public static Workflow Create(IWorkflowsTableRequest request)
-		{
-			switch (request.WorkflowType)
-			{
-				case WorkflowType.AutomationScriptCI:
-					var automationCIRequest = (AddAutomationScriptCIWorkflowRequest)request;
-					return String.IsNullOrWhiteSpace(automationCIRequest.SonarCloudProjectID) ? CreateAutomationCIWorkflow() : CreateAutomationCIWorkflow(automationCIRequest.SonarCloudProjectID);
-
-				case WorkflowType.AutomationScriptCICD:
-					var automationCICDrequest = (AddAutomationScriptCICDWorkflowRequest)request;
-					return String.IsNullOrWhiteSpace(automationCICDrequest.SonarCloudProjectID) ? CreateAutomationCICDWorkflow() : CreateAutomationCICDWorkflow(automationCICDrequest.SonarCloudProjectID);
-
-				case WorkflowType.ConnectorCI:
-					var connectorCIRequest = (AddConnectorCIWorkflowRequest)request;
-					return String.IsNullOrWhiteSpace(connectorCIRequest.SonarCloudProjectID) ? CreateConnectorCIWorkflow() : CreateConnectorCIWorkflow(connectorCIRequest.SonarCloudProjectID);
-
-				case WorkflowType.NugetSolutionCICD:
-					var nugetCICDRequest = (AddNugetCICDWorkflowRequest)request;
-					return String.IsNullOrWhiteSpace(nugetCICDRequest.SonarCloudProjectID) ? CreateNugetCICDWorkflow() : CreateNugetCICDWorkflow(nugetCICDRequest.SonarCloudProjectID);
 
 				default:
 					throw new NotSupportedException("The current workflow type is not supported yet");

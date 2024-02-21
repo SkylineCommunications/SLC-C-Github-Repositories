@@ -11,16 +11,17 @@
 	{
 		private static IReadOnlyDictionary<RequestType, Action<SLProtocol>> handlers = new Dictionary<RequestType, Action<SLProtocol>>
 		{
-			{ RequestType.Repositories_Repositories,        RepositoriesResponseHandler.HandleRepositoriesResponse },
-			{ RequestType.Repositories_Tags,                RepositoriesResponseHandler.HandleRepositoriesTagsResponse },
-			{ RequestType.Repositories_Releases,            RepositoriesResponseHandler.HandleRepositoriesReleasesResponse },
-			{ RequestType.Repository_Issues,                RepositoriesResponseHandler.HandleRepositoriesIssuesResponse },
-			{ RequestType.Repositories_Workflows,           RepositoriesResponseHandler.HandleRepositoriesWorkflowsResponse },
+			{ RequestType.Repositories_Repositories,			RepositoriesResponseHandler.HandleRepositoriesResponse },
+			{ RequestType.Repositories_Tags,					RepositoriesResponseHandler.HandleRepositoriesTagsResponse },
+			{ RequestType.Repositories_Releases,				RepositoriesResponseHandler.HandleRepositoriesReleasesResponse },
+			{ RequestType.Repository_Issues,					RepositoriesResponseHandler.HandleRepositoriesIssuesResponse },
+			{ RequestType.Repositories_Workflows,				RepositoriesResponseHandler.HandleRepositoriesWorkflowsResponse },
 
-			{ RequestType.Organizations_User,               OrganizationsResponseHandler.HandleUserOrganizationsResponse },
-			{ RequestType.Organizations_Repositories,       OrganizationsResponseHandler.HandleOrganizationRepositoriesResponse },
+			{ RequestType.Organizations_User,					OrganizationsResponseHandler.HandleUserOrganizationsResponse },
+			{ RequestType.Organizations_Repositories,			OrganizationsResponseHandler.HandleOrganizationRepositoriesResponse },
 
-			{ RequestType.Repositories_PublicKey,           RepositoriesResponseHandler.HandleRepositoriesPublicKeysResponse },
+			{ RequestType.Repositories_CreateOrUpdateContent,	RepositoriesResponseHandler.HandleRepositoryContentResponse },
+			{ RequestType.Repositories_PublicKey,				RepositoriesResponseHandler.HandleRepositoriesPublicKeysResponse },
 		};
 
 		public static IReadOnlyDictionary<RequestType, Action<SLProtocol>> Handlers => handlers;

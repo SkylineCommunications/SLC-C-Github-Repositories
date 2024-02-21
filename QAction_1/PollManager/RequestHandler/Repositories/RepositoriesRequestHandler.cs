@@ -42,7 +42,7 @@
 
 		public static void CreateRepositoryContent(SLProtocol protocol, string repositoryId, string path, string content, string commitMessage)
 		{
-			var body = new PutRepositoryContent
+			var body = new PutRepositoryContentRequest
 			{
 				Message = commitMessage,
 				Content = content.Base64Encode(),

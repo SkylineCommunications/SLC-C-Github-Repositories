@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
 
-using Newtonsoft.Json;
-
+using Skyline.DataMiner.ConnectorAPI.Github.Repositories;
+using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Repositories;
 using Skyline.DataMiner.Scripting;
-using Skyline.DataMiner.Utils.Github.Repositories.Core.Repositories;
 using Skyline.Protocol;
-using Skyline.Protocol.PollManager.RequestHandler.Organizations;
-using Skyline.Protocol.Tables;
+using Skyline.Protocol.InterApp;
 
 /// <summary>
 /// DataMiner QAction Class.
@@ -17,7 +15,6 @@ public static class QAction
     private static Dictionary<int, Action<SLProtocol>> Handlers = new Dictionary<int, Action<SLProtocol>>
     {
         { Parameter.Write.addrepositorybutton_500, HandleIndividualAdd },
-        { Parameter.Write.addorganizationrepositoriesbutton_505, HandleOrganizationAdd },
     };
 
     /// <summary>
@@ -54,24 +51,13 @@ public static class QAction
         var parameters = (object[])protocol.GetParameters(Array.ConvertAll(ids, Convert.ToUInt32));
 
         // Add through name and owner
-        var row = new RepositoriesTableRow
+        var request = new AddRepositoryRequest
         {
-            FullName = $"{parameters[1]}/{parameters[0]}",
-            Name = Convert.ToString(parameters[0]),
-            Owner = Convert.ToString(parameters[1]),
+            RepositoryId = new RepositoryId(Convert.ToString(parameters[1]), Convert.ToString(parameters[0])),
         };
 
-        row.SaveToProtocol(protocol);
+        request.TryExecute(protocol, protocol, Mapping.MessageToExecutorMapping, out _);
 
         protocol.SetParameters(ids, new object[] { Exceptions.NotAvailable, Exceptions.NotAvailable });
-    }
-
-    private static void HandleOrganizationAdd(SLProtocol protocol)
-    {
-        var org = Convert.ToString(protocol.GetParameter(Parameter.addorganizationrepositories_506));
-        protocol.SetParameterIndexByKey(Parameter.Organizations.tablePid, org, Parameter.Organizations.Idx.organizationstrackrepositories + 1, Convert.ToDouble(true));
-        OrganizationsRequestHandler.HandleOrganizationRepositoriesRequest(protocol, org);
-
-        protocol.SetParameter(Parameter.repositories_changerequest, JsonConvert.SerializeObject(new AddRepositoriesTableRequest(org)));
     }
 }

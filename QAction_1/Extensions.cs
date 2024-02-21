@@ -23,7 +23,7 @@
 			var code = Convert.ToInt32(match.Groups[1].Value);
 			var message = match.Groups[2].Value.Trim();
 
-			if (code <= 200 && code < 300)
+			if (code >= 200 && code < 300)
 			{
 				return true;
 			}
