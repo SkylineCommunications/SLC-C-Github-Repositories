@@ -12,7 +12,7 @@
         public string Login { get; set; }
 
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("node_id")]
         public string NodeId { get; set; }
@@ -69,7 +69,7 @@
         public string Login { get; set; }
 
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("node_id")]
         public string NodeId { get; set; }
@@ -126,7 +126,7 @@
         public string Login { get; set; }
 
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("node_id")]
         public string NodeId { get; set; }
@@ -213,7 +213,7 @@
         public string LabelsUrl { get; set; }
 
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("node_id")]
         public string NodeId { get; set; }
@@ -270,7 +270,7 @@
     public class RepositoryIssuesResponse
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("node_id")]
         public string NodeId { get; set; }
@@ -357,7 +357,7 @@
         public string Login { get; set; }
 
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("node_id")]
         public string NodeId { get; set; }
