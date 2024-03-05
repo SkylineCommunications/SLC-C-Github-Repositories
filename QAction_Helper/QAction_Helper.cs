@@ -2035,20 +2035,20 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoriesdefaultbranch_1014 {get { return GetParameter(1014); }set { SetParameter(1014, value); }}
 	/// <summary>PID: 1014  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	public System.Object Repositoriesdefaultbranch {get { return GetParameter(1014); }set { SetParameter(1014, value); }}
-	/// <summary>PID: 1015  | Type: read | DISCREETS: Automation = 1, Connector = 2 | EXCEPTIONS: Other = 0</summary>
+	/// <summary>PID: 1015  | Type: read | DISCREETS: Automation = 1, Connector = 2 | EXCEPTIONS: Other = 0, N/A = -2</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoriestype_1015 {get { return GetParameter(1015); }set { SetParameter(1015, value); }}
-	/// <summary>PID: 1015  | Type: read | DISCREETS: Automation = 1, Connector = 2 | EXCEPTIONS: Other = 0</summary>
+	/// <summary>PID: 1015  | Type: read | DISCREETS: Automation = 1, Connector = 2 | EXCEPTIONS: Other = 0, N/A = -2</summary>
 	public System.Object Repositoriestype {get { return GetParameter(1015); }set { SetParameter(1015, value); }}
-	/// <summary>PID: 1016  | Type: read</summary>
+	/// <summary>PID: 1016  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoriespublickeyid_1016 {get { return GetParameter(1016); }set { SetParameter(1016, value); }}
-	/// <summary>PID: 1016  | Type: read</summary>
+	/// <summary>PID: 1016  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	public System.Object Repositoriespublickeyid {get { return GetParameter(1016); }set { SetParameter(1016, value); }}
-	/// <summary>PID: 1017  | Type: read</summary>
+	/// <summary>PID: 1017  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoriespublickey_1017 {get { return GetParameter(1017); }set { SetParameter(1017, value); }}
-	/// <summary>PID: 1017  | Type: read</summary>
+	/// <summary>PID: 1017  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	public System.Object Repositoriespublickey {get { return GetParameter(1017); }set { SetParameter(1017, value); }}
 	/// <summary>PID: 1201  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]

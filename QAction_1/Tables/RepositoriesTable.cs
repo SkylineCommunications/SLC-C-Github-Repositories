@@ -30,6 +30,8 @@
 		private DateTime pushedAt;
 		private double pushedAtOA = Exceptions.IntNotAvailable;
 		private string language = Exceptions.NotAvailable;
+		private string defaultBranch = Exceptions.NotAvailable;
+		private double type = Exceptions.IntNotAvailable;
 
 		public RepositoriesTableRow() { }
 
@@ -37,19 +39,19 @@
 		{
 			FullName = Convert.ToString(row[0]);
 			Name = Convert.ToString(row[1]);
-			Private = Convert.ToBoolean(row[2]);
-			description = Convert.ToString(row[3]);
+			isPrivate = row[2] != null ? Convert.ToDouble(row[2]) : Exceptions.IntNotAvailable;
+			Description = Convert.ToString(row[3]);
 			Owner = Convert.ToString(row[4]);
-			Fork = Convert.ToBoolean(row[5]);
-			CreatedAt = DateTime.FromOADate(Convert.ToDouble(row[6]));
-			UpdatedAt = DateTime.FromOADate(Convert.ToDouble(row[7]));
-			PushedAt = DateTime.FromOADate(Convert.ToDouble(row[8]));
-			Size = Convert.ToInt64(row[9]);
-			Stars = Convert.ToInt32(row[10]);
-			Watcher = Convert.ToInt32(row[11]);
-			language = Convert.ToString(row[12]);
+			isFork = row[5] != null ? Convert.ToDouble(row[5]) : Exceptions.IntNotAvailable;
+			createdAtOA = row[6] != null ? Convert.ToDouble(row[6]) : Exceptions.IntNotAvailable;
+			updatedAtOA = row[7] != null ? Convert.ToDouble(row[7]) : Exceptions.IntNotAvailable;
+			pushedAtOA = row[8] != null ? Convert.ToDouble(row[8]) : Exceptions.IntNotAvailable;
+			Size = row[9] != null ? Convert.ToInt64(row[9]) : Exceptions.IntNotAvailable;
+			Stars = row[10] != null ? Convert.ToInt32(row[10]) : Exceptions.IntNotAvailable;
+			Watcher = row[11] != null ? Convert.ToInt32(row[11]) : Exceptions.IntNotAvailable;
+			Language = Convert.ToString(row[12]);
 			DefaultBranch = Convert.ToString(row[13]);
-			Type = (RepositoryType)Convert.ToInt16(row[14]);
+			type = row[14] != null ? Convert.ToInt32(row[14]) : Exceptions.IntNotAvailable;
 			PublicKeyID = Convert.ToString(row[15]);
 			PublicKey = Convert.ToString(row[16]);
 		}
@@ -95,13 +97,26 @@
 		{
 			get
 			{
+				if(Convert.ToInt32(createdAtOA) == Exceptions.IntNotAvailable)
+				{
+					return default;
+				}
+
 				return createdAt;
 			}
 
 			set
 			{
-				createdAt = value;
-				createdAtOA = value.ToOADate();
+				if(value == default)
+				{
+					createdAt = value;
+					createdAtOA = Exceptions.IntNotAvailable;
+				}
+				else
+				{
+					createdAt = value;
+					createdAtOA = value.ToOADate();
+				}
 			}
 		}
 
@@ -109,13 +124,26 @@
 		{
 			get
 			{
+				if (Convert.ToInt32(updatedAtOA) == Exceptions.IntNotAvailable)
+				{
+					return default;
+				}
+
 				return updatedAt;
 			}
 
 			set
 			{
-				updatedAt = value;
-				updatedAtOA = value.ToOADate();
+				if(value == default)
+				{
+					updatedAt = value;
+					updatedAtOA = Exceptions.IntNotAvailable;
+				}
+				else
+				{
+					updatedAt = value;
+					updatedAtOA = value.ToOADate();
+				}
 			}
 		}
 
@@ -123,13 +151,26 @@
 		{
 			get
 			{
+				if (Convert.ToInt32(pushedAtOA) == Exceptions.IntNotAvailable)
+				{
+					return default;
+				}
+
 				return pushedAt;
 			}
 
 			set
 			{
-				pushedAt = value;
-				pushedAtOA = value.ToOADate();
+				if(value == default)
+				{
+					pushedAt = value;
+					pushedAtOA = Exceptions.IntNotAvailable;
+				}
+				else
+				{
+					pushedAt = value;
+					pushedAtOA = value.ToOADate();
+				}
 			}
 		}
 
@@ -166,9 +207,50 @@
 			}
 		}
 
-		public string DefaultBranch { get; set; } = Exceptions.NotAvailable;
+		public string DefaultBranch
+		{
+			get
+			{
+				if (defaultBranch == Exceptions.NotAvailable)
+				{
+					return String.Empty;
+				}
+				else
+				{
+					return defaultBranch;
+				}
+			}
 
-		public RepositoryType Type { get; set; } = RepositoryType.Other;
+			set
+			{
+				if (String.IsNullOrWhiteSpace(value))
+				{
+					defaultBranch = Exceptions.NotAvailable;
+				}
+				else
+				{
+					defaultBranch = value;
+				}
+			}
+		}
+
+		public RepositoryType Type
+		{
+			get
+			{
+				if(Convert.ToInt32(type) == Exceptions.IntNotAvailable)
+				{
+					return RepositoryType.Other;
+				}
+
+				return (RepositoryType)Convert.ToInt32(type);
+			}
+
+			set
+			{
+				type = Convert.ToInt32(value);
+			}
+		}
 
 		public string PublicKeyID { get; set; } = Exceptions.NotAvailable;
 
@@ -218,8 +300,8 @@
 				Repositoriesstars = Convert.ToDouble(Stars),
 				Repositorieswatcher = Convert.ToDouble(Watcher),
 				Repositorieslanguage = language,
-				Repositoriesdefaultbranch = DefaultBranch,
-				Repositoriestype = Convert.ToInt16(Type),
+				Repositoriesdefaultbranch = defaultBranch,
+				Repositoriestype = type,
 				Repositoriespublickeyid = PublicKeyID,
 				Repositoriespublickey = PublicKey,
 			};
@@ -235,6 +317,22 @@
 			{
 				protocol.SetRow(Parameter.Repositories.tablePid, FullName, ToProtocolRow());
 			}
+		}
+
+		public void SetToNotAvailable()
+		{
+			isPrivate = Exceptions.IntNotAvailable;
+			Description = Exceptions.NotAvailable;
+			isFork = Exceptions.IntNotAvailable;
+			createdAtOA = Exceptions.IntNotAvailable;
+			updatedAtOA = Exceptions.IntNotAvailable;
+			pushedAtOA = Exceptions.IntNotAvailable;
+			Size = Exceptions.IntNotAvailable;
+			Stars = Exceptions.IntNotAvailable;
+			Watcher = Exceptions.IntNotAvailable;
+			Language = Exceptions.NotAvailable;
+			DefaultBranch = Exceptions.NotAvailable;
+			type = Exceptions.IntNotAvailable;
 		}
 	}
 

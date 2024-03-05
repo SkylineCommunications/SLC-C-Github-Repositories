@@ -47,7 +47,7 @@ Any inquiries can be addressed to:
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>Github Repositories</Name>
 	<Description>Github Repositories DataMiner connector</Description>
-	<Version>1.0.0.6</Version>
+	<Version>1.0.0.7</Version>
 	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Github</Vendor>
@@ -1852,6 +1852,10 @@ To get more request you can add an api key under General/Configuration page. To 
 						<Display state="disabled">Other</Display>
 						<Value>0</Value>
 					</Exception>
+					<Exception id="2" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
 				</Exceptions>
 			</Interprete>
 			<Display>
@@ -1882,6 +1886,12 @@ To get more request you can add an api key under General/Configuration page. To 
 				<RawType>other</RawType>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="2" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -1901,6 +1911,12 @@ To get more request you can add an api key under General/Configuration page. To 
 				<RawType>other</RawType>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="2" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -3576,7 +3592,7 @@ Are you sure you want to continue.]]>
 
 		<QAction id="20000" name="HTTP Request Handling" encoding="csharp" triggers="30" />
 		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211;220;221;226;228"></QAction>
-		<QAction id="20002" name="HTTP Poll Manager Updates" encoding="csharp" row="true" triggers="21006" />
+		<QAction id="20002" name="HTTP Poll Manager Updates" encoding="csharp" row="true" triggers="21006;21053" />
 
 		<QAction id="9000000" name="Process Incoming InterApp Messages" encoding="csharp" triggers="9000000"/>
 	</QActions>

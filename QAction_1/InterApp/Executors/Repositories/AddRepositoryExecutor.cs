@@ -8,6 +8,7 @@ namespace Skyline.Protocol.InterApp.Executors.Repositories
 	using Skyline.DataMiner.Core.InterAppCalls.Common.CallSingle;
 	using Skyline.DataMiner.Core.InterAppCalls.Common.MessageExecution;
 	using Skyline.DataMiner.Scripting;
+	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;
 
 	public class AddRepositoryExecutor : SimpleMessageExecutor<AddRepositoryRequest>
@@ -55,6 +56,10 @@ namespace Skyline.Protocol.InterApp.Executors.Repositories
 			};
 
 			row.SaveToProtocol(protocol);
+
+			// Poll the repository
+			RepositoriesRequestHandler.HandleRepositoriesRequest(protocol, Message.RepositoryId.Owner, Message.RepositoryId.Name);
+			RepositoriesRequestHandler.HandleRepositoriesPublicKeysRequest(protocol, Message.RepositoryId.Owner, Message.RepositoryId.Name);
 
 			// Return message
 			returnMessage.Success = true;

@@ -35,9 +35,14 @@
 			// Fetch all the repositories that are not fetch throught the organization.
 			foreach (var row in table.Rows.Where(repo => !trackedOrganizations.Contains(repo.Owner)))
 			{
-				protocol.SetParameter(Parameter.getrepositoryurl, $"repos/{row.Owner}/{row.Name}");
-				protocol.CheckTrigger(201);
+				HandleRepositoriesRequest(protocol, row.Owner, row.Name);
 			}
+		}
+
+		public static void HandleRepositoriesRequest(SLProtocol protocol, string owner, string name)
+		{
+			protocol.SetParameter(Parameter.getrepositoryurl, $"repos/{owner}/{name}");
+			protocol.CheckTrigger(201);
 		}
 
 		public static void CreateRepositoryContent(SLProtocol protocol, string repositoryId, string path, string content, string commitMessage)

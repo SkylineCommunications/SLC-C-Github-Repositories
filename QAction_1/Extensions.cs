@@ -8,6 +8,7 @@
 	using System.Text.RegularExpressions;
 
 	using Skyline.DataMiner.Scripting;
+	using Skyline.Protocol.PollManager;
 
 	public static class Extensions
 	{
@@ -44,6 +45,19 @@
 			var code = Convert.ToInt32(match.Groups[1].Value);
 
 			return code;
+		}
+
+		public static int GetTableID<T>(this T requestType) where T : Enum
+		{
+			var name = requestType.ToString();
+			FieldInfo field = typeof(T).GetField(name);
+			object[] attribs = field.GetCustomAttributes(typeof(TableAttribute), false);
+			if (attribs.Length > 0)
+			{
+				return ((TableAttribute)attribs[0]).TableID;
+			}
+
+			return -1;
 		}
 
 		public static string FriendlyDescription<T>(this T requestType) where T : Enum

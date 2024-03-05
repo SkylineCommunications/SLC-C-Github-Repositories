@@ -3,18 +3,49 @@ namespace Skyline.Protocol.PollManager
 {
 	using System.ComponentModel;
 
+	using Skyline.DataMiner.Scripting;
+
 	public enum RequestType
 	{
-		[Description("Repositories/Repositories")] Repositories_Repositories = 201,
-		[Description("Repositories/Issues")] Repository_Issues = 202,
-		[Description("Repositories/Tags")] Repositories_Tags = 203,
-		[Description("Repositories/Releases")] Repositories_Releases = 204,
-		[Description("Repositories/Workflows")] Repositories_Workflows = 205,
+		[Table(Parameter.Repositories.tablePid)]
+		[Description("Repositories/Repositories")] 
+		Repositories_Repositories = 201,
 
-		[Description("Organizations/User")] Organizations_User = 210,
-		[Description("Organizations/Repositories")] Organizations_Repositories = 211,
+		[Table(Parameter.Repositoryissues.tablePid)]
+		[Description("Repositories/Issues")]
+		Repository_Issues = 202,
 
-		[Description("Repositories/Create or Update Content")] Repositories_CreateOrUpdateContent = 221,
-		[Description("Repositories/Public Keys")] Repositories_PublicKey = 228,
+		[Table(Parameter.Repositorytags.tablePid)]
+		[Description("Repositories/Tags")]
+		Repositories_Tags = 203,
+
+		[Table(Parameter.Repositoryreleases.tablePid)]
+		[Description("Repositories/Releases")]
+		Repositories_Releases = 204,
+
+		[Table(Parameter.Repositoryworkflows.tablePid)]
+		[Description("Repositories/Workflows")]
+		Repositories_Workflows = 205,
+
+		[Table(Parameter.Organizations.tablePid)]
+		[Description("Organizations/User")]
+		Organizations_User = 210,
+
+		[Table(Parameter.Repositories.tablePid)]
+		[Description("Organizations/Repositories")]
+		Organizations_Repositories = 211,
+
+		[Description("Repositories/Create or Update Content")]
+		Repositories_CreateOrUpdateContent = 221,
+
+		[Table(Parameter.Repositories.tablePid)]
+		[Description("Repositories/Public Keys")]
+		Repositories_PublicKey = 228,
+	}
+
+	public enum PollState
+	{
+		Disabled = 0,
+		Enabled = 1,
 	}
 }
