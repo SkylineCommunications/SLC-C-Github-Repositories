@@ -1,15 +1,16 @@
 ﻿namespace Skyline.Protocol.Tables
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
 
-    using Skyline.DataMiner.Net;
-    using Skyline.DataMiner.Scripting;
-    using Skyline.Protocol.Extensions;
-    using SLNetMessages = Skyline.DataMiner.Net.Messages;
+	using Skyline.DataMiner.Net;
+	using Skyline.DataMiner.Scripting;
+	using Skyline.Protocol.Extensions;
 
-    public enum IssueState
+	using SLNetMessages = Skyline.DataMiner.Net.Messages;
+
+	public enum IssueState
 	{
 		Closed,
 		Open,

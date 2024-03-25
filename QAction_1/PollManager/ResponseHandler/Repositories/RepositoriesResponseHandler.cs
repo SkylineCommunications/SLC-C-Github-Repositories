@@ -37,9 +37,7 @@
 			row.Description = response.Description;
 			row.Fork = response.Fork;
 			row.CreatedAt = response.CreatedAt;
-			protocol.Log($"QA{protocol.QActionID}|HandleRepositoriesResponse.UpdatedAt|{response.UpdatedAt}", LogType.DebugInfo, LogLevel.NoLogging);
 			row.UpdatedAt = response.UpdatedAt;
-			protocol.Log($"QA{protocol.QActionID}|HandleRepositoriesResponse.PushedAt|{response.PushedAt}", LogType.DebugInfo, LogLevel.NoLogging);
 			row.PushedAt = response.PushedAt;
 			row.Size = response.Size;
 			row.Stars = response.StargazersCount;

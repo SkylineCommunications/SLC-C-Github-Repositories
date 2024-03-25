@@ -129,6 +129,12 @@
 
 			// If full then the first batch needs to be a SaveOption.Full.
 			var first = !partial;
+			if(!Rows.Any() && !partial)
+			{
+				protocol.ClearAllKeys(Parameter.Repositorytags.tablePid);
+				return;
+			}
+
 			foreach (var batch in Rows.Select(x => x.ToProtocolRow()).Batch(batchSize))
 			{
 				if (first)

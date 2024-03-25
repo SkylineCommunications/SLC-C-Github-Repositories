@@ -18,6 +18,8 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 	{
 		private AddWorkflowResponse result;
 
+		private RepositoriesTableRow repo;
+
 		public AddAutomationScriptCICDWorkflowExecutor(AddAutomationScriptCICDWorkflowRequest message) : base(message)
 		{
 			result = new AddWorkflowResponse
@@ -28,7 +30,14 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 			};
 		}
 
-		public override void DataGets(object dataSource) { }
+		public override void DataGets(object dataSource)
+		{
+			// Setup
+			var protocol = (SLProtocol)dataSource;
+
+			// Fetch the requested repository information
+			repo = RepositoriesTableRow.FromPK(protocol, Message.RepositoryId.FullName);
+		}
 
 		public override void Parse() { }
 
@@ -59,6 +68,23 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 				return false;
 			}
 
+			// Check if the repository exists in the connector
+			if (repo == default)
+			{
+				result.Success = false;
+				result.Description = $"The given repository '{Message.RepositoryId.FullName}', is not tracked by this element";
+				return false;
+			}
+
+			// Check if the public keys are fetched
+			if (repo.PublicKey == Exceptions.NotAvailable ||
+				repo.PublicKeyID == Exceptions.NotAvailable)
+			{
+				result.Success = false;
+				result.Description = $"The public keys are not available for '{Message.RepositoryId.FullName}'. Either the configured API Token does not have permission to the repository, or the public keys for the repository are not fetched yet.";
+				return false;
+			}
+
 			return true;
 		}
 
@@ -70,7 +96,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 			var protocol = (SLProtocol)dataDestination;
 
 			// Create workflow file
-			var workflow = WorkflowFactory.CreateAutomationCICDWorkflow();
+			var workflow = WorkflowFactory.CreateAutomationCICDWorkflow(Message.Data.SonarCloudProjectID);
 
 			// Add to the InterApp Queue
 			new IAC_MessagesTableRow
