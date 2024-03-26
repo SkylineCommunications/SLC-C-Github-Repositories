@@ -4459,6 +4459,20 @@ Are you sure you want to continue.]]>
 											<NewFeature>Added InterApp Functionality for adding/removing repositories, creating workflows</NewFeature>
 										</Changes>
 									</MinorVersion>
+									<MinorVersion id="7" basedOn="1.0.0.6">
+										<Date>2024-03-26</Date>
+										<Provider>
+											<Author>AMA</Author>
+											<Company>Skyline Communications</Company>
+										</Provider>
+										<Changes>
+											<Fix>Made id&#39;s type long because it was causing int overflows</Fix>
+											<Fix>Changed the workflow tag versioning regex, to be more consistent.</Fix>
+											<Change>Clear tables that are no longer polled, to not have out dated information</Change>
+											<Change>Added a decent error message when trying to add a workflow to a repository that the public keys are not yet available</Change>
+											<NewFeature>Added support for ConnectorAPI version 1.0.2+</NewFeature>
+										</Changes>
+									</MinorVersion>
 								</MinorVersions>
 							</MajorVersion>
 						</MajorVersions>
