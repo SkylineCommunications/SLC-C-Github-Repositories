@@ -112,6 +112,10 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 
 			// Create the required secrets
 			RepositoriesRequestHandler.CreateRepositorySecret(protocol, Message.RepositoryId.FullName, "NUGETAPIKEY_GITHUB", Message.Data.GithubNugetApiKey);
+			if (!String.IsNullOrWhiteSpace(Message.Data.SonarToken))
+			{
+				RepositoriesRequestHandler.CreateRepositorySecret(protocol, Message.RepositoryId.FullName, "SONAR_TOKEN", Message.Data.SonarToken);
+			}
 
 			// Do the actual commit to the repository
 			RepositoriesRequestHandler.CreateRepositoryWorkflow(protocol, Message.RepositoryId.FullName, workflow);

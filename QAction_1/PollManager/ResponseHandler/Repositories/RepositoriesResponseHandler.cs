@@ -8,12 +8,14 @@
 
 	using Newtonsoft.Json;
 
+	using Skyline.DataMiner.ConnectorAPI.Github.Repositories;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
 	using Skyline.Protocol.API.Content;
 	using Skyline.Protocol.Extensions;
+	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;
 
 	public static partial class RepositoriesResponseHandler
@@ -94,6 +96,8 @@
 					iacRow.Request.Reply(protocol.SLNet.RawConnection, returnMessage, Types.KnownTypes);
 					iacRow.Status = IAC_MessageStatus.Confirmed;
 					iacRow.SaveToProtocol(protocol);
+
+					RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, request.RepositoryId.Owner, request.RepositoryId.Name, PollingConstants.PerPage, 1);
 				}
 			}
 		}
