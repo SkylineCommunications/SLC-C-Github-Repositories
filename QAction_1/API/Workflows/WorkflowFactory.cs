@@ -48,7 +48,7 @@ namespace Skyline.Protocol.API.Workflows
 						Tags = new List<string>
 						{
 							"[0-9]+.[0-9]+.[0-9]+.[0-9]+",
-							"[0-9]+.[0-9]+.[0-9]+-[0-9a-zA-Z]+",
+							"[0-9]+.[0-9]+.[0-9]+.[0-9]+-[0-9a-zA-Z]+",
 						},
 					},
 					CanRunManually = null,
@@ -97,7 +97,7 @@ namespace Skyline.Protocol.API.Workflows
 						Tags = new List<string>
 						{
 							"[0-9]+.[0-9]+.[0-9]+.[0-9]+",
-							"[0-9]+.[0-9]+.[0-9]+-[0-9a-zA-Z]+",
+							"[0-9]+.[0-9]+.[0-9]+.[0-9]+-[0-9a-zA-Z]+",
 						},
 					},
 					CanRunManually = null,
@@ -229,7 +229,7 @@ namespace Skyline.Protocol.API.Workflows
 						Tags = new List<string>
 						{
 							"[0-9]+.[0-9]+.[0-9]+.[0-9]+",
-							"[0-9]+.[0-9]+.[0-9]+-[0-9a-zA-Z]+",
+							"[0-9]+.[0-9]+.[0-9]+.[0-9]+-[0-9a-zA-Z]+",
 						},
 					},
 					CanRunManually = null,
