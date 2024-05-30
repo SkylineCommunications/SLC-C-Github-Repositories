@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 
 using Skyline.DataMiner.ConnectorAPI.Github.Repositories;
+using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages;
 using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Repositories;
 using Skyline.DataMiner.Scripting;
 using Skyline.Protocol;
@@ -51,10 +52,11 @@ public static class QAction
         var parameters = (object[])protocol.GetParameters(Array.ConvertAll(ids, Convert.ToUInt32));
 
         // Add through name and owner
-        var request = new AddRepositoryRequest
-        {
-            RepositoryId = new RepositoryId(Convert.ToString(parameters[1]), Convert.ToString(parameters[0])),
-        };
+        var request = new GenericInterAppMessage<AddRepositoryRequest>(
+			new AddRepositoryRequest
+			{
+				RepositoryId = new RepositoryId(Convert.ToString(parameters[1]), Convert.ToString(parameters[0])),
+			});
 
         request.TryExecute(protocol, protocol, Mapping.MessageToExecutorMapping, out _);
 

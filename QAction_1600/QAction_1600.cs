@@ -61,51 +61,55 @@ public static class QAction
 		switch ((WorkflowType)Convert.ToInt32(parameters[2]))
 		{
 			case WorkflowType.AutomationScriptCI:
-				request = new AddAutomationScriptCIWorkflowRequest
-				{
-					RepositoryId = new RepositoryId(owner, name),
-					Data = new AutomationScriptCIWorkflowData
+				request = new GenericInterAppMessage<AddAutomationScriptCIWorkflowRequest>(
+					new AddAutomationScriptCIWorkflowRequest
 					{
-						SonarCloudProjectID = String.Empty,
-						DataMinerKey = String.Empty,
-					},
-				};
+						RepositoryId = new RepositoryId(owner, name),
+						Data = new AutomationScriptCIWorkflowData
+						{
+							SonarCloudProjectID = String.Empty,
+							DataMinerKey = String.Empty,
+						},
+					});
 				break;
 
 			case WorkflowType.AutomationScriptCICD:
-				request = new AddAutomationScriptCICDWorkflowRequest
-				{
-					RepositoryId = new RepositoryId(owner, name),
-					Data = new AutomationScriptCICDWorkflowData
+				request = new GenericInterAppMessage<AddAutomationScriptCICDWorkflowRequest>(
+					new AddAutomationScriptCICDWorkflowRequest
 					{
-						SonarCloudProjectID = String.Empty,
-						DataMinerKey = String.Empty,
-					},
-				};
+						RepositoryId = new RepositoryId(owner, name),
+						Data = new AutomationScriptCICDWorkflowData
+						{
+							SonarCloudProjectID = String.Empty,
+							DataMinerKey = String.Empty,
+						},
+					});
 				break;
 
 			case WorkflowType.ConnectorCI:
-				request = new AddConnectorCIWorkflowRequest
-				{
-					RepositoryId = new RepositoryId(owner, name),
-					Data = new ConnectorCIWorkflowData
+				request = new GenericInterAppMessage<AddConnectorCIWorkflowRequest>(
+					new AddConnectorCIWorkflowRequest
 					{
-						SonarCloudProjectID = String.Empty,
-						DataMinerKey = String.Empty,
-					},
-				};
+						RepositoryId = new RepositoryId(owner, name),
+						Data = new ConnectorCIWorkflowData
+						{
+							SonarCloudProjectID = String.Empty,
+							DataMinerKey = String.Empty,
+						},
+					});
 				break;
 
 			case WorkflowType.NugetSolutionCICD:
-				request = new AddNugetCICDWorkflowRequest
-				{
-					RepositoryId = new RepositoryId(owner, name),
-					Data = new NugetCICDWorkflowData
+				request = new GenericInterAppMessage<AddNugetCICDWorkflowRequest>(
+					new AddNugetCICDWorkflowRequest
 					{
-						SonarCloudProjectID = String.Empty,
-						NugetApiKey = String.Empty,
-					},
-				};
+						RepositoryId = new RepositoryId(owner, name),
+						Data = new NugetCICDWorkflowData
+						{
+							SonarCloudProjectID = String.Empty,
+							NugetApiKey = String.Empty,
+						},
+					});
 				break;
 
 			default:

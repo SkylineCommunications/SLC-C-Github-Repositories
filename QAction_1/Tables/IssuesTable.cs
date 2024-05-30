@@ -260,6 +260,16 @@
 			return instance;
 		}
 
+		public void DeleteRow(SLProtocol protocol, params string[] rowsToDelete)
+		{
+			if (rowsToDelete.Length <= 0)
+				return;
+
+			// Remove from DateMiner and local instance
+			protocol.DeleteRow(Parameter.Repositoryissues.tablePid, rowsToDelete);
+			instance.Rows.RemoveAll(x => rowsToDelete.ToList().Contains(x.Instance));
+		}
+
 		public void SaveToProtocol(SLProtocol protocol, bool partial = false)
 		{
 			List<object[]> rows = Rows.Select(x => x.ToProtocolRow()).ToList();
@@ -300,7 +310,7 @@
 				.Where(row => e.Repositories.Contains(row[1]))
 				.Select(row => row[0]);
 
-			e.Protocol.DeleteRow(Parameter.Repositoryissues.tablePid, issuesRows.ToArray());
+			RepositoryIssuesTable.GetTable().DeleteRow(e.Protocol, issuesRows.ToArray());
 		}
 	}
 }

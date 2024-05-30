@@ -1,4 +1,4 @@
-﻿// Ignore Spelling: Pid
+﻿// Ignore Spelling: Pids
 
 namespace Skyline.Protocol.PollManager
 {
@@ -7,11 +7,11 @@ namespace Skyline.Protocol.PollManager
 	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
 	public sealed class TableAttribute : Attribute
 	{
-		public TableAttribute(int tablePid)
+		public TableAttribute(params int[] tablePids)
 		{
-			TableID = tablePid;
+			TableIDs = tablePids;
 		}
 
-		public int TableID { get; set; }
+		public int[] TableIDs { get; set; }
 	}
 }

@@ -3,6 +3,7 @@
 	using System;
 	using System.Collections.Generic;
 
+	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Repositories;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows;
 	using Skyline.Protocol.InterApp.Executors.Repositories;
@@ -13,15 +14,18 @@
 		private static readonly IDictionary<Type, Type> InternalMessageToExecutorMapping = new Dictionary<Type, Type>
 		{
 			// Repositories
-			{ typeof(AddRepositoryRequest),						typeof(AddRepositoryExecutor) },
-			{ typeof(RemoveRepositoryRequest),					typeof(RemoveRepositoryExecutor) },
+			{ typeof(GenericInterAppMessage<AddRepositoryRequest>),						typeof(AddRepositoryExecutor) },
+			{ typeof(GenericInterAppMessage<CreateRepositoryRequest>),                  typeof(CreateRepositoryExecutor) },
+			{ typeof(GenericInterAppMessage<CreateRepositoryContentRequest>),           typeof(CreateRepositoryContentExecutor) },
+			{ typeof(GenericInterAppMessage<AddRepositoryCollaboratorRequest>),         typeof(AddRepositoryCollaboratorExecutor) },
+			{ typeof(GenericInterAppMessage<RemoveRepositoryRequest>),					typeof(RemoveRepositoryExecutor) },
 
 			// Workflows
-			{ typeof(AddAutomationScriptCIWorkflowRequest),		typeof(AddAutomationScriptCIWorkflowExecutor) },
-			{ typeof(AddAutomationScriptCICDWorkflowRequest),	typeof(AddAutomationScriptCICDWorkflowExecutor) },
-			{ typeof(AddConnectorCIWorkflowRequest),			typeof(AddConnectorCIWorkflowExecutor) },
-			{ typeof(AddNugetCICDWorkflowRequest),				typeof(AddNugetCICDWorkflowExecutor) },
-			{ typeof(AddInternalNugetCICDWorkflowRequest),      typeof(AddInternalNugetCICDWorkflowExecutor) },
+			{ typeof(GenericInterAppMessage<AddAutomationScriptCIWorkflowRequest>),		typeof(AddAutomationScriptCIWorkflowExecutor) },
+			{ typeof(GenericInterAppMessage<AddAutomationScriptCICDWorkflowRequest>),	typeof(AddAutomationScriptCICDWorkflowExecutor) },
+			{ typeof(GenericInterAppMessage<AddConnectorCIWorkflowRequest>),			typeof(AddConnectorCIWorkflowExecutor) },
+			{ typeof(GenericInterAppMessage<AddNugetCICDWorkflowRequest>),				typeof(AddNugetCICDWorkflowExecutor) },
+			{ typeof(GenericInterAppMessage<AddInternalNugetCICDWorkflowRequest>),      typeof(AddInternalNugetCICDWorkflowExecutor) },
 		};
 
 		public static IDictionary<Type, Type> MessageToExecutorMapping => InternalMessageToExecutorMapping;

@@ -1,4 +1,6 @@
-﻿namespace Skyline.Protocol.Extensions
+﻿// Ignore Spelling: Github
+
+namespace Skyline.Protocol.Extensions
 {
 	using System;
 	using System.Collections.Generic;
@@ -7,6 +9,7 @@
 	using System.Reflection;
 	using System.Text.RegularExpressions;
 
+	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Repositories;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.Protocol.PollManager;
 
@@ -47,17 +50,17 @@
 			return code;
 		}
 
-		public static int GetTableID<T>(this T requestType) where T : Enum
+		public static int[] GetTableIDs<T>(this T requestType) where T : Enum
 		{
 			var name = requestType.ToString();
 			FieldInfo field = typeof(T).GetField(name);
 			object[] attribs = field.GetCustomAttributes(typeof(TableAttribute), false);
 			if (attribs.Length > 0)
 			{
-				return ((TableAttribute)attribs[0]).TableID;
+				return ((TableAttribute)attribs[0]).TableIDs;
 			}
 
-			return -1;
+			return new int[0];
 		}
 
 		public static string FriendlyDescription<T>(this T requestType) where T : Enum
@@ -105,6 +108,30 @@
 		{
 			var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
 			return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+		}
+
+		public static string GetGithubPermission(this PermissionType type)
+		{
+			switch(type)
+			{
+				case PermissionType.Read:
+					return "pull";
+
+				case PermissionType.Triage:
+					return "triage";
+
+				case PermissionType.Write:
+					return "push";
+
+				case PermissionType.Maintain:
+					return "maintain";
+
+				case PermissionType.Admin:
+					return "admin";
+
+				default:
+					throw new NotSupportedException("The given PermissionType is not supported.");
+			}
 		}
 	}
 }

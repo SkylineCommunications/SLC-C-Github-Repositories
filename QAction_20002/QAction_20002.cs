@@ -50,6 +50,7 @@ public static class QAction
 			return;
 		}
 
+		protocol.Log($"QA{protocol.QActionID}|RefreshPollItem|Polling '{requestType.FriendlyDescription()}'.", LogType.Information, LogLevel.Level2);
 		PollManager.ManualRefreshDeviceObject(protocol, requestType, DateTime.UtcNow);
 	}
 
@@ -65,12 +66,22 @@ public static class QAction
 		}
 
 		// If table is no longer polled clear it. This is to not have outdated information and to not have hanging alarms
-		var tableId = requestType.GetTableID();
-		if(tableId == -1)
+		var tableIds = requestType.GetTableIDs();
+		if(tableIds.Length <= 0)
 		{
 			// No table id defined in the QAction1/PollManager/RequestType.cs
 			return;
 		}
+
+		foreach(var tableId in tableIds)
+		{
+			ClearTable(protocol, tableId);
+		}
+	}
+
+	private static void ClearTable(SLProtocol protocol, int tableId)
+	{
+		var requestType = (RequestType)Convert.ToInt32(protocol.RowKey());
 
 		// The repositories table is a special one, since there you can specify things manually and it get populated by multiple things
 		// We can't just clear it when the polling is disabled
@@ -82,26 +93,26 @@ public static class QAction
 			if (requestType == RequestType.Repositories_PublicKey)
 			{
 				// Remove all the public keys
-				foreach(var row in table.Rows)
+				foreach (var row in table.Rows)
 				{
 					row.PublicKeyID = Exceptions.NotAvailable;
 					row.PublicKey = Exceptions.NotAvailable;
 				}
 			}
-			else if(requestType == RequestType.Repositories_Repositories)
+			else if (requestType == RequestType.Repositories_Repositories)
 			{
 				// If the Organization/Repositories is disabled then the orgs list should be empty.
 				var orgRepoPolled = pollTable.Rows.Single(pollRow => pollRow.RequestType == RequestType.Organizations_Repositories).PollState == PollState.Enabled;
 				var orgs = OrganizationsTable.GetTable().Rows.Where(x => x.Tracked && orgRepoPolled).Select(x => x.Instance);
-				foreach(var row in table.Rows.Where(x => !orgs.Contains(x.Owner)))
+				foreach (var row in table.Rows.Where(x => !orgs.Contains(x.Owner)))
 				{
 					row.SetToNotAvailable();
 				}
 			}
-			else if(requestType == RequestType.Organizations_Repositories)
+			else if (requestType == RequestType.Organizations_Repositories)
 			{
 				var orgs = OrganizationsTable.GetTable().Rows.Where(x => x.Tracked).Select(x => x.Instance);
-				foreach(var row in table.Rows.Where(x => orgs.Contains(x.Owner)))
+				foreach (var row in table.Rows.Where(x => orgs.Contains(x.Owner)))
 				{
 					row.SetToNotAvailable();
 				}

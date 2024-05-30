@@ -1,4 +1,6 @@
-﻿namespace Skyline.DataMiner.Utils.Github.API.V20221128.Organizations
+﻿// Ignore Spelling: Utils Github API Repos
+
+namespace Skyline.DataMiner.Utils.Github.API.V20221128.Organizations
 {
     using System;
 
@@ -17,7 +19,7 @@
         public string NodeId { get; set; }
 
         [JsonProperty("url")]
-        public Uri Url { get; set; } 
+        public Uri Url { get; set; }
 
         [JsonProperty("repos_url")]
         public Uri ReposUrl { get; set; }

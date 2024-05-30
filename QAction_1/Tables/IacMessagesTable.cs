@@ -66,9 +66,9 @@ namespace Skyline.Protocol.Tables
 			{
 				Iac_messagesguid_9000101 = Guid.ToString(),
 				Iac_messagesstatus_9000102 = (int)Status,
-				Iac_messagesrequest_9000103 = SerializerFactory.CreateInterAppSerializer(new List<Type> { RequestType }).SerializeToString(Request),
+				Iac_messagesrequest_9000103 = SerializerFactory.CreateInterAppSerializer(new List<Type>()).SerializeToString(Request),
 				Iac_messagesrequesttype_9000104 = RequestType.AssemblyQualifiedName,
-				Iac_messagesresponse_9000105 = SerializerFactory.CreateInterAppSerializer(new List<Type> { ResponseType }).SerializeToString(Response),
+				Iac_messagesresponse_9000105 = SerializerFactory.CreateInterAppSerializer(new List<Type>()).SerializeToString(Response),
 				Iac_messagesresponsetype_9000106 = ResponseType.AssemblyQualifiedName,
 				Iac_messagesinfo_9000107 = Info,
 			};

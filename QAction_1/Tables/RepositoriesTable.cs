@@ -54,6 +54,7 @@
 			type = row[14] != null ? Convert.ToInt32(row[14]) : Exceptions.IntNotAvailable;
 			PublicKeyID = Convert.ToString(row[15]);
 			PublicKey = Convert.ToString(row[16]);
+			Id = row[17] != null ? Convert.ToInt64(row[17]) : Exceptions.IntNotAvailable;
 		}
 
 		public string Name { get; set; }
@@ -256,6 +257,8 @@
 
 		public string PublicKey { get; set; } = Exceptions.NotAvailable;
 
+		public long Id { get; set; } = Exceptions.IntNotAvailable;
+
 		public static RepositoryType GetTypeFromTopics(IEnumerable<string> topics)
 		{
 			if (topics.Contains("dataminer-automation-script"))
@@ -304,6 +307,7 @@
 				Repositoriestype = type,
 				Repositoriespublickeyid = PublicKeyID,
 				Repositoriespublickey = PublicKey,
+				Repositoriesid = Id,
 			};
 		}
 
@@ -364,6 +368,7 @@
 				Parameter.Repositories.Idx.repositoriestype,
 				Parameter.Repositories.Idx.repositoriespublickeyid,
 				Parameter.Repositories.Idx.repositoriespublickey,
+				Parameter.Repositories.Idx.repositoriesid,
 			};
 			object[] repositoriestable = (object[])protocol.NotifyProtocol((int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Repositories.tablePid, repositoriesTableIdx);
 			object[] fullName = (object[])repositoriestable[0];
@@ -383,6 +388,7 @@
 			object[] type = (object[])repositoriestable[14];
 			object[] publicKeyId = (object[])repositoriestable[15];
 			object[] publicKey = (object[])repositoriestable[16];
+			object[] id = (object[])repositoriestable[17];
 
 			for (int i = 0; i < name.Length; i++)
 			{
@@ -403,7 +409,8 @@
 				defaultBranch[i],
 				type[i],
 				publicKeyId[i],
-				publicKey[i]));
+				publicKey[i],
+				id[i]));
 			}
 		}
 		#endregion
@@ -427,6 +434,7 @@
 		public void DeleteRow(SLProtocol protocol, params string[] rowsToDelete)
 		{
 			protocol.DeleteRow(Parameter.Repositories.tablePid, rowsToDelete);
+			var result = instance.Rows.RemoveAll(row => rowsToDelete.Contains(row.FullName));
 			RepositoriesChanged?.Invoke(instance, new RepositoryEventArgs(protocol, RepositoryChange.Remove, rowsToDelete));
 		}
 

@@ -1,6 +1,8 @@
 ﻿namespace Skyline.Protocol.Extensions.Tests
 {
 	using System.Collections.Generic;
+	using System.IO;
+	using System.Web;
 
 	using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -9,6 +11,7 @@
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows;
 	using Skyline.DataMiner.Core.InterAppCalls.Common.CallBulk;
+	using Skyline.DataMiner.Net.Messages.SLDataGateway;
 
 	[TestClass]
 	public class ExtensionsTests
@@ -40,6 +43,18 @@
 
 			Assert.IsTrue(true);
 			//Assert.ThrowsException<KeyNotFoundException>(() => Extensions.ParseEnumDescription<WorkflowType>(discreet));
+		}
+
+		[TestMethod]
+		public void WorkflowNameParsing()
+		{
+			var name = "DataMiner CI Automation";
+			var file = "DataMiner+CI+Automation.yml";
+
+			var fileName = Path.GetFileNameWithoutExtension(file);
+			var iacFileName = HttpUtility.UrlEncode(name);
+
+			Assert.IsTrue(fileName == iacFileName);
 		}
 	}
 }

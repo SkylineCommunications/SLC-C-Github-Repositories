@@ -19,6 +19,8 @@
 
 			{ RequestType.Organizations_User,               OrganizationsRequestHandler.HandleUserOrganizationsRequest },
 			{ RequestType.Organizations_Repositories,       OrganizationsRequestHandler.HandleOrganizationRepositoriesRequest },
+			{ RequestType.Organizations_Teams,				OrganizationsRequestHandler.HandleOrganizationsTeamsRequest },
+			{ RequestType.Organizations_Members,			OrganizationsRequestHandler.HandleOrganizationsMembersRequest },
 
 			{ RequestType.Repositories_PublicKey,           RepositoriesRequestHandler.HandleRepositoriesPublicKeysRequest },
 		};

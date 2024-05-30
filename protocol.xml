@@ -47,7 +47,7 @@ Any inquiries can be addressed to:
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>Github Repositories</Name>
 	<Description>Github Repositories DataMiner connector</Description>
-	<Version>1.0.0.7</Version>
+	<Version>1.0.0.8</Version>
 	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Github</Vendor>
@@ -55,7 +55,14 @@ Any inquiries can be addressed to:
 	<DeviceOID>0</DeviceOID>
 	<ElementType>Github Repositories</ElementType>
 	<Type relativeTimers="true">http</Type>
-	<Display defaultPage="General" pageOrder="General;Organizations;----------;Repositories - Overview;Repositories;Issues;Workflows;----------;Inter-App Communication" wideColumnPages=""/>
+	<Display defaultPage="General" pageOrder="General;----------;Organizations - Overview;Organizations;Teams;Members;----------;Repositories - Overview;Repositories;Issues;Workflows;----------;Inter-App Communication;Linker Tables" wideColumnPages="">
+		<Pages>
+			<Page>
+				<Name>Linker Tables</Name>
+				<Visibility default="false" overridePID="6" value="1" />
+			</Page>
+		</Pages>
+	</Display>
 	<SNMP includepages="true">auto</SNMP>
 
 	<Compliancies>
@@ -69,6 +76,12 @@ Any inquiries can be addressed to:
 		<Relation name="Repository Releases" path="1000;1400"/>
 		<Relation name="Repository Workflows" path="1000;1600"/>
 		<Relation name="Tags Releases" path="1200;1400"/>
+
+		<Relation name="Organizations Statistics" path="3000;3200"/>
+		<Relation name="Organizations Teams" path="3000;3400"/>
+
+		<Relation name="Organizations Members - Organization" path="3000;22000;3600"/>
+		<Relation name="Organizations Members - Teams" path="3400;22100;3600"/>
 	</Relations>
 
 	<TreeControls>
@@ -81,6 +94,15 @@ Any inquiries can be addressed to:
 				<Tab title="Releases" tableId="1000" type="relation" parameter="1413"/>
 				<Tab title="Issues" tableId="1000" type="relation" parameter="2011"/>
 				<Tab title="Workflows" tableId="1000" type="relation" parameter="1602"/>
+			</ExtraTabs>
+		</TreeControl>
+		<TreeControl parameterId="2996">
+			<Hierarchy>
+				<Table id="3000"/>
+			</Hierarchy>
+			<ExtraTabs>
+				<Tab title="Teams" tableId="3000" type="relation" parameter="3403"/>
+				<Tab title="Members" tableId="3000" type="relation" parameter="22002"/>
 			</ExtraTabs>
 		</TreeControl>
 	</TreeControls>
@@ -122,6 +144,76 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Display>
 			<Measurement>
 				<Type lines="15">string</Type>
+			</Measurement>
+		</Param>
+		<Param id="6" trending="false" save="true">
+			<Name>DebugPages</Name>
+			<Description>Debug Pages</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Toggle to show/hide Debug Pages.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<DefaultValue>0</DefaultValue>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Configuration</Page>
+						<Column>0</Column>
+						<Row>2</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Disabled</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Enabled</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="7" setter="true">
+			<Name>DebugPages</Name>
+			<Description>Debug Pages</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Configuration</Page>
+						<Column>0</Column>
+						<Row>2</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>togglebutton</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Disabled</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Enabled</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
 			</Measurement>
 		</Param>
 		
@@ -598,6 +690,36 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
+		<Param id="112">
+			<Name>GetOrganizationTeamsUrl</Name>
+			<Description>Get Organization Teams Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="113">
+			<Name>GetOrganizationMembersUrl</Name>
+			<Description>Get Organization Members Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="163">
+			<Name>GetOrganizationMembersQueue</Name>
+			<Description>Get Organization Members Queue</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
 		<Param id="120">
 			<Name>GetRepositoryContentUrl</Name>
 			<Description>Get Repository Content Url</Description>
@@ -621,6 +743,66 @@ To get more request you can add an api key under General/Configuration page. To 
 		<Param id="171">
 			<Name>PutRepositoryContentBody</Name>
 			<Description>Create/Update Repository Content Body</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="122">
+			<Name>PostRepositoryUrl</Name>
+			<Description>Create Repository Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="172">
+			<Name>PostRepositoryBody</Name>
+			<Description>Create Repository Body</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="123">
+			<Name>PutRepositoryUserCollaboratorUrl</Name>
+			<Description>Create Repository User Collaborator Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="173">
+			<Name>PutRepositoryUserCollaboratorBody</Name>
+			<Description>Create Repository User Collaborator Body</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="124">
+			<Name>PutRepositoryTeamCollaboratorUrl</Name>
+			<Description>Create Repository Team Collaborator Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="174">
+			<Name>PutRepositoryTeamCollaboratorBody</Name>
+			<Description>Create Repository Team Collaborator Body</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -809,6 +991,46 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
+		<Param id="212">
+			<Name>GetOrganizationTeamsContent</Name>
+			<Description>Get Organization Teams Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="262">
+			<Name>GetOrganizationTeamsLinkHeader</Name>
+			<Description>Get Organization Teams Link Header</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="213">
+			<Name>GetOrganizationMembersContent</Name>
+			<Description>Get Organization Members Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="263">
+			<Name>GetOrganizationMembersLinkHeader</Name>
+			<Description>Get Organization Members Link Header</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
 		<Param id="220">
 			<Name>GetRepositoryContentContent</Name>
 			<Description>Get Repository Content Content</Description>
@@ -842,6 +1064,66 @@ To get more request you can add an api key under General/Configuration page. To 
 		<Param id="271">
 			<Name>PutRepositoryContentLinkHeader</Name>
 			<Description>Create/Update Repository Content Link Header</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="222">
+			<Name>PostRepositoryContent</Name>
+			<Description>Create Repository Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="272">
+			<Name>PostRepositoryLinkHeader</Name>
+			<Description>Create Repository Link Header</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="223">
+			<Name>PutRepositoryUserCollaboratorContent</Name>
+			<Description>Create Repository User Collaborator Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="273">
+			<Name>PutRepositoryUserCollaboratorLinkHeader</Name>
+			<Description>Create Repository User Collaborator Link Header</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="224">
+			<Name>PutRepositoryTeamCollaboratorContent</Name>
+			<Description>Create Repository Team Collaborator Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="274">
+			<Name>PutRepositoryTeamCollaboratorLinkHeader</Name>
+			<Description>Create Repository Team Collaborator Link Header</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -1422,6 +1704,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<ColumnOption idx="14" pid="1015" type="retrieved" options="" />
 				<ColumnOption idx="15" pid="1016" type="retrieved" options="" />
 				<ColumnOption idx="16" pid="1017" type="retrieved" options="" />
+				<ColumnOption idx="17" pid="1018" type="retrieved" options=";save" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>A list of all the tracked repositories.</Subtext>
@@ -1437,7 +1720,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3-1005|4-1006|5-1007|6-1008|7-1009|8-1010|9-1011|10-1012|11-1013|12-1014|13-1015|14-1016|15-1017|16,width:100-134-157-140-165-137-144-160-165-157-123-128-147-103-100-0-0,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT-INT-INT-STRING-STRING-STRING-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3-1005|4-1006|5-1007|6-1008|7-1009|8-1010|9-1011|10-1012|11-1013|12-1014|13-1015|14-1016|15-1017|16-1018|17,width:100-134-157-140-165-137-144-160-165-157-123-128-147-103-100-0-0-0,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT-INT-INT-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1001" trending="false">
@@ -1923,6 +2206,36 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Display>
 			<Measurement>
 				<Type options="password">string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1018" trending="false">
+			<Name>RepositoriesId</Name>
+			<Description>Id (Repositories)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The numeric id of the repository.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="2" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<!-- SuppressValidator 2.9.7 An id doesn't have a Unit. -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Range>
+					<Low>1</Low>
+				</Range>
+			</Display>
+			<!-- /SuppressValidator 2.9.7 -->
+			<Measurement>
+				<Type>number</Type>
 			</Measurement>
 		</Param>
 		
@@ -2901,6 +3214,27 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Measurement>
 		</Param>
 		
+		
+		<Param id="2996">
+			<Name>OrganizationsOverview</Name>
+			<Description>Organizations Overview</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Organizations - Overview</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+		</Param>
 		<Param id="3000">
 			<Name>Organizations</Name>
 			<Description>Organizations</Description>
@@ -3076,6 +3410,659 @@ Are you sure you want to continue.]]>
 						<Value>1</Value>
 					</Discreet>
 				</Discreets>
+			</Measurement>
+		</Param>
+		
+		<Param id="3200">
+			<Name>OrganizationStatistics</Name>
+			<Description>Organization Statistics</Description>
+			<Type>array</Type>
+			<ArrayOptions index="0">
+				<ColumnOption idx="0" pid="3201" type="retrieved" options=""/>
+				<ColumnOption idx="1" pid="3202" type="retrieved" options=";foreignKey=3000" />
+			</ArrayOptions>
+			<Information>
+				<Subtext>Contains some metrics about the given organizations.</Subtext>
+			</Information>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:3201|0,width:100,sort:STRING,lines:25,filter:true">table</Type>
+			</Measurement>
+		</Param>
+		<Param id="3201" trending="false">
+			<Name>OrganizationStatisticsInstance</Name>
+			<Description>Instance (Organization Statistics)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>This is the key used internally by DataMiner to identify the table entries.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="3202" trending="false">
+			<Name>OrganizationStatisticsOrganization</Name>
+			<Description>Organization (Organization Statistics)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The primary key of the organization this team is linked too.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		
+		<Param id="3400">
+			<Name>OrganizationTeams</Name>
+			<Description>Teams</Description>
+			<Type>array</Type>
+			<ArrayOptions index="0">
+				<ColumnOption idx="0" pid="3401" type="retrieved" options=""/>
+				<ColumnOption idx="1" pid="3402" type="retrieved" options="" />
+				<ColumnOption idx="2" pid="3403" type="retrieved" options=";foreignKey=3000" />
+				<ColumnOption idx="3" pid="3404" type="retrieved" options="" />
+				<ColumnOption idx="4" pid="3405" type="retrieved" options="" />
+				<ColumnOption idx="5" pid="3406" type="retrieved" options="" />
+				<ColumnOption idx="6" pid="3407" type="retrieved" options="" />
+				<ColumnOption idx="7" pid="3408" type="retrieved" options="" />
+				<ColumnOption idx="8" pid="3409" type="retrieved" options="" />
+			</ArrayOptions>
+			<Information>
+				<Subtext>Table containing a list of teams per organization.</Subtext>
+			</Information>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Teams</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:3401|0-3402|1-3403|2-3405|4-3404|3-3406|5-3407|6-3408|7-3409|8,width:0-0-125-200-200-300-100-140-100,sort:STRING|ASC|0-INT-STRING-STRING-STRING-STRING-STRING-STRING-STRING,lines:25,filter:true">table</Type>
+			</Measurement>
+		</Param>
+		<Param id="3401" trending="false">
+			<Name>OrganizationTeamsInstance</Name>
+			<Description>Instance (Teams)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>This is the key used internally by DataMiner to identify the table entries.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="3402" trending="false">
+			<Name>OrganizationTeamsId</Name>
+			<Description>Id (Teams)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The ID used by GitHub to identify the team.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<!-- SuppressValidator 2.9.7 An ID doesn't have a unit. -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Range>
+					<Low>0</Low>
+				</Range>
+			</Display>
+			<!-- /SuppressValidator 2.9.7 -->
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="3403" trending="false">
+			<Name>OrganizationTeamsOrganization</Name>
+			<Description>Organization (Teams)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The primary key of the organization this team is linked too.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="3404" trending="false">
+			<Name>OrganizationTeamsName</Name>
+			<Description>Name (Teams)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The team name.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="3405" trending="false">
+			<Name>OrganizationTeamsSlug</Name>
+			<Description>Slug (Teams)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The slug of the team name.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="3406" trending="false">
+			<Name>OrganizationTeamsDescription</Name>
+			<Description>Description (Teams)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>A description for the team.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="3407" trending="false">
+			<Name>OrganizationTeamsPrivacy</Name>
+			<Description>Privacy (Teams)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The level of privacy this team should have</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Closed</Display>
+						<Value>closed</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Secret</Display>
+						<Value>secret</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="3408" trending="false">
+			<Name>OrganizationTeamsNotificationsEnabled</Name>
+			<Description>Notifications Enabled (Teams)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The notification setting the team has set.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Enabled</Display>
+						<Value>notifications_enabled</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Disabled</Display>
+						<Value>notifications_disabled</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="3409" trending="false">
+			<Name>OrganizationTeamsPermission</Name>
+			<Description>Permission (Teams)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Permission that the team will have for its repositories</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		
+		<Param id="3600">
+			<Name>OrganizationMembers</Name>
+			<Description>Members</Description>
+			<Type>array</Type>
+			<ArrayOptions index="0">
+				<ColumnOption idx="0" pid="3601" type="retrieved" options=""/>
+				<ColumnOption idx="1" pid="3602" type="retrieved" options="" />
+				<ColumnOption idx="2" pid="3603" type="retrieved" options="" />
+				<ColumnOption idx="3" pid="3604" type="retrieved" options="" />
+				<ColumnOption idx="4" pid="3605" type="retrieved" options="" />
+				<ColumnOption idx="5" pid="3606" type="retrieved" options="" />
+				<ColumnOption idx="6" pid="3607" type="retrieved" options="" />
+				<ColumnOption idx="7" pid="3608" type="retrieved" options="" />
+			</ArrayOptions>
+			<Information>
+				<Subtext>Table containing a list of members per organization.</Subtext>
+			</Information>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Members</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:3601|0-3602|1-3603|2-3604|3-3605|4-3606|5-3607|6-3608|7,width:0-100-100-100-100-0-0-0,sort:STRING-INT-STRING-STRING-STRING-STRING-STRING-STRING,lines:25,filter:true">table</Type>
+			</Measurement>
+		</Param>
+		<Param id="3601" trending="false">
+			<Name>OrganizationMembersInstance</Name>
+			<Description>Instance (Members)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>This is the key used internally by DataMiner to identify the table entries.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="3602" trending="false">
+			<Name>OrganizationMembersId</Name>
+			<Description>Id (Members)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The ID used by GitHub to identify the member.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<!-- SuppressValidator 2.9.7 An ID doesn't have a unit. -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Range>
+					<Low>0</Low>
+				</Range>
+			</Display>
+			<!-- /SuppressValidator 2.9.7 -->
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="3603" trending="false">
+			<Name>OrganizationMembersLogin</Name>
+			<Description>Login (Members)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The login name of the member.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="3604" trending="false">
+			<Name>OrganizationMembersType</Name>
+			<Description>Type (Members)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The type of the Member, for example: User</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="3605" trending="false">
+			<Name>OrganizationMembersSiteAdmin</Name>
+			<Description>Site Admin (Members)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Indicates whether the member is a GitHub admin.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Enabled</Display>
+						<Value>1</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Disabled</Display>
+						<Value>0</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="3606" trending="false">
+			<Name>OrganizationMembersUrl</Name>
+			<Description>Url (Members)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The API url to fetch specific user information from.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="3607" trending="false">
+			<Name>OrganizationMembersHtmlUrl</Name>
+			<Description>Html Url (Members)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The browser url that will take you to the member's GitHub page.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="3608" trending="false">
+			<Name>OrganizationMembersAvatarUrl</Name>
+			<Description>Avatar Url (Members)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The url to the member's avatar image.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		
+		<Param id="22000">
+			<Name>MemberOrganizationLinks</Name>
+			<Description>Member Organization Links</Description>
+			<Type>array</Type>
+			<ArrayOptions index="0">
+				<ColumnOption idx="0" pid="22001" type="retrieved" options=""/>
+				<ColumnOption idx="1" pid="22002" type="retrieved" options=";foreignKey=3000" />
+				<ColumnOption idx="2" pid="22003" type="retrieved" options=";foreignKey=3600" />
+			</ArrayOptions>
+			<Information>
+				<Subtext>Contains links between a member and 0 or more organizations.</Subtext>
+			</Information>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Linker Tables</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:22001|0-22002|1-22003|2,width:100-107-100,sort:STRING-STRING-STRING,lines:25,filter:true">table</Type>
+			</Measurement>
+		</Param>
+		<Param id="22001" trending="false">
+			<Name>MemberOrganizationLinksInstance</Name>
+			<Description>Instance (Member Organization Links)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>This is the key used internally by DataMiner to identify the table entries.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="22002" trending="false">
+			<Name>MemberOrganizationLinksOrganization</Name>
+			<Description>Organization (Member Organization Links)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The primary key of the organization this member is linked too.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="22003" trending="false">
+			<Name>MemberOrganizationLinksMember</Name>
+			<Description>Member (Member Organization Links)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The primary key of the member</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		
+		<Param id="22100">
+			<Name>MemberTeamLinks</Name>
+			<Description>Member Team Links</Description>
+			<Type>array</Type>
+			<ArrayOptions index="0">
+				<ColumnOption idx="0" pid="22101" type="retrieved" options=""/>
+				<ColumnOption idx="1" pid="22102" type="retrieved" options=";foreignKey=3400" />
+				<ColumnOption idx="2" pid="22103" type="retrieved" options=";foreignKey=3600" />
+			</ArrayOptions>
+			<Information>
+				<Subtext>Contains links between a member and 0 or more teams.</Subtext>
+			</Information>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Linker Tables</Page>
+						<Column>1</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:22101|0-22102|1-22103|2,width:100-100-100,sort:STRING-STRING-STRING,lines:25,filter:true">table</Type>
+			</Measurement>
+		</Param>
+		<Param id="22101" trending="false">
+			<Name>MemberTeamLinksInstance</Name>
+			<Description>Instance (Member Team Links)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>This is the key used internally by DataMiner to identify the table entries.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="22102" trending="false">
+			<Name>MemberTeamLinksTeam</Name>
+			<Description>Team (Member Team Links)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The primary key of the team this member is linked too.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="22103" trending="false">
+			<Name>MemberTeamLinksMember</Name>
+			<Description>Member (Member Team Links)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The primary key of the member</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
 			</Measurement>
 		</Param>
 		
@@ -3591,7 +4578,7 @@ Are you sure you want to continue.]]>
 		<QAction id="3000" name="Organizations Table - Changes" encoding="csharp" triggers="3105" row="true" />
 
 		<QAction id="20000" name="HTTP Request Handling" encoding="csharp" triggers="30" />
-		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211;220;221;226;228"></QAction>
+		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211;212;213;220;221;222;223;224;226;228"></QAction>
 		<QAction id="20002" name="HTTP Poll Manager Updates" encoding="csharp" row="true" triggers="21006;21053" />
 
 		<QAction id="9000000" name="Process Incoming InterApp Messages" encoding="csharp" triggers="9000000"/>
@@ -3760,6 +4747,52 @@ Are you sure you want to continue.]]>
 				</Response>
 			</Connection>
 		</Session>
+		<Session id="12" name="Get Organization Teams">
+			<Connection id="12" name="Get Organization Teams">
+				<Request verb="GET" pid="112">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Authorization" pid="12"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="212"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="262"/>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
+		<Session id="13" name="Get Organization Members">
+			<Connection id="13" name="Get Organization Members">
+				<Request verb="GET" pid="113">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Authorization" pid="12"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="213"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="263"/>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
 
 		<Session id="20" name="Get Repository Content">
 			<Connection id="20" name="Get Repository Content">
@@ -3805,6 +4838,81 @@ Are you sure you want to continue.]]>
 						<Header key="x-ratelimit-used" pid="17"></Header>
 						<Header key="x-ratelimit-reset" pid="19"></Header>
 						<Header key="Link" pid="271"/>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
+		<Session id="22" name="Create Repository">
+			<Connection id="22" name="Create Repository">
+				<Request verb="POST" pid="122">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Content-Type">application/json</Header>
+						<Header key="Authorization" pid="12"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+					<Data pid="172"/>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="222"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="272"/>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
+		<Session id="23" name="Add Repository User Collaborator">
+			<Connection id="23" name="Add Repository User Collaborator">
+				<Request verb="PUT" pid="123">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Content-Type">application/json</Header>
+						<Header key="Authorization" pid="12"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+					<Data pid="173"/>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="223"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="273"/>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
+		<Session id="24" name="Add Repository Team Collaborator">
+			<Connection id="24" name="Add Repository Team Collaborator">
+				<Request verb="PUT" pid="124">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Content-Type">application/json</Header>
+						<Header key="Authorization" pid="12"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+					<Data pid="174"/>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="224"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="274"/>
 					</Headers>
 				</Response>
 			</Connection>
@@ -3939,6 +5047,22 @@ Are you sure you want to continue.]]>
 				<Session>11</Session>
 			</Content>
 		</Group>
+		<Group id="212">
+			<Name>PollOrganizationTeams</Name>
+			<Description>Poll Organization Teams</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>12</Session>
+			</Content>
+		</Group>
+		<Group id="213">
+			<Name>PollOrganizationMembers</Name>
+			<Description>Poll Organization Members</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>13</Session>
+			</Content>
+		</Group>
 
 		<Group id="220">
 			<Name>PollRepositoryContent</Name>
@@ -3954,6 +5078,30 @@ Are you sure you want to continue.]]>
 			<Type>poll</Type>
 			<Content>
 				<Session>21</Session>
+			</Content>
+		</Group>
+		<Group id="222">
+			<Name>CreateRepository</Name>
+			<Description>Create Repository</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>22</Session>
+			</Content>
+		</Group>
+		<Group id="223">
+			<Name>AddRepositoryUserCollaborator</Name>
+			<Description>Add Repository User Collaborator</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>23</Session>
+			</Content>
+		</Group>
+		<Group id="224">
+			<Name>AddRepositoryTeamCollaborator</Name>
+			<Description>Add Repository Team Collaborator</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>24</Session>
 			</Content>
 		</Group>
 		<Group id="226">
@@ -4034,6 +5182,20 @@ Are you sure you want to continue.]]>
 				<Id>211</Id>
 			</Content>
 		</Trigger>
+		<Trigger id="212">
+			<Name>Start GetOrganization Teams</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>212</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="213">
+			<Name>Start GetOrganization Members</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>213</Id>
+			</Content>
+		</Trigger>
 		<Trigger id="220">
 			<Name>Start GetRepository Content</Name>
 			<Type>action</Type>
@@ -4046,6 +5208,27 @@ Are you sure you want to continue.]]>
 			<Type>action</Type>
 			<Content>
 				<Id>221</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="222">
+			<Name>Start PostRepository</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>222</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="223">
+			<Name>Start PutRepository User Collaborator</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>223</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="224">
+			<Name>Start PutRepository Team Collaborator</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>224</Id>
 			</Content>
 		</Trigger>
 		<Trigger id="226">
@@ -4133,6 +5316,26 @@ Are you sure you want to continue.]]>
 				<Id>311</Id>
 			</Content>
 		</Trigger>
+		<Trigger id="262">
+			<Name>After GetOrganizations Teams</Name>
+			<On id="212">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>262</Id>
+				<Id>312</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="263">
+			<Name>After GetOrganizations Members</Name>
+			<On id="213">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>263</Id>
+				<Id>313</Id>
+			</Content>
+		</Trigger>
 		<Trigger id="270">
 			<Name>After GetRepository Content</Name>
 			<On id="220">group</On>
@@ -4151,6 +5354,36 @@ Are you sure you want to continue.]]>
 			<Content>
 				<Id>271</Id>
 				<Id>321</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="272">
+			<Name>After PostRepository</Name>
+			<On id="222">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>272</Id>
+				<Id>322</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="273">
+			<Name>After PutRepositoryUserCollaborator</Name>
+			<On id="223">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>273</Id>
+				<Id>323</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="274">
+			<Name>After PutRepositoryTeamCollaborator</Name>
+			<On id="224">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>274</Id>
+				<Id>324</Id>
 			</Content>
 		</Trigger>
 		<Trigger id="276">
@@ -4228,6 +5461,16 @@ Are you sure you want to continue.]]>
 			<On id="211">group</On>
 			<Type>execute next</Type>
 		</Action>
+		<Action id="212">
+			<Name>Get Organization Teams</Name>
+			<On id="212">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="213">
+			<Name>Get Organization Members</Name>
+			<On id="213">group</On>
+			<Type>execute next</Type>
+		</Action>
 		<Action id="220">
 			<Name>Get Repository Content</Name>
 			<On id="220">group</On>
@@ -4236,6 +5479,21 @@ Are you sure you want to continue.]]>
 		<Action id="221">
 			<Name>Put Repository Content</Name>
 			<On id="221">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="222">
+			<Name>Post Repository</Name>
+			<On id="222">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="223">
+			<Name>Put Repository User Collaborator</Name>
+			<On id="223">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="224">
+			<Name>Put Repository Team Collaborator</Name>
+			<On id="224">group</On>
 			<Type>execute next</Type>
 		</Action>
 		<Action id="226">
@@ -4284,6 +5542,16 @@ Are you sure you want to continue.]]>
 			<On id="261">parameter</On>
 			<Type>clear</Type>
 		</Action>
+		<Action id="262">
+			<Name>Clear Get Organization Teams Link Header</Name>
+			<On id="262">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="263">
+			<Name>Clear Get Organization Members Link Header</Name>
+			<On id="263">parameter</On>
+			<Type>clear</Type>
+		</Action>
 		<Action id="270">
 			<Name>Clear Get Repository Content Link Header</Name>
 			<On id="270">parameter</On>
@@ -4292,6 +5560,21 @@ Are you sure you want to continue.]]>
 		<Action id="271">
 			<Name>Clear Put Repository Content Link Header</Name>
 			<On id="271">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="272">
+			<Name>Clear Post Repository Link Header</Name>
+			<On id="272">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="273">
+			<Name>Clear Put Repository User Collaborator Link Header</Name>
+			<On id="273">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="274">
+			<Name>Clear Put Repository Team CollaboratorLink Header</Name>
+			<On id="274">parameter</On>
 			<Type>clear</Type>
 		</Action>
 		<Action id="276">
@@ -4336,8 +5619,18 @@ Are you sure you want to continue.]]>
 			<Type>clear</Type>
 		</Action>
 		<Action id="311">
-			<Name>Clear Organization Repositories</Name>
+			<Name>Clear Organization Repositories Content</Name>
 			<On id="211">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="312">
+			<Name>Clear Organization Teams Content</Name>
+			<On id="212">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="313">
+			<Name>Clear Organization Members Content</Name>
+			<On id="213">parameter</On>
 			<Type>clear</Type>
 		</Action>
 		<Action id="320">
@@ -4348,6 +5641,21 @@ Are you sure you want to continue.]]>
 		<Action id="321">
 			<Name>Clear Put Repository Content Content</Name>
 			<On id="221">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="322">
+			<Name>Clear Post Repository Content</Name>
+			<On id="222">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="323">
+			<Name>Clear Put Repository User Collaborator Content</Name>
+			<On id="223">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="324">
+			<Name>Clear Put Repository Team Collaborator Content</Name>
+			<On id="224">parameter</On>
 			<Type>clear</Type>
 		</Action>
 		<Action id="326">

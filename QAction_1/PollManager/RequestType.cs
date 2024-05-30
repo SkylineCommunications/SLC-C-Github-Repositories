@@ -35,8 +35,27 @@ namespace Skyline.Protocol.PollManager
 		[Description("Organizations/Repositories")]
 		Organizations_Repositories = 211,
 
+		[Table(Parameter.Organizationteams.tablePid)]
+		[Description("Organizations/Teams")]
+		Organizations_Teams = 212,
+
+		[Table( Parameter.Organizationmembers.tablePid,
+				Parameter.Memberorganizationlinks.tablePid,
+				Parameter.Memberteamlinks.tablePid)]
+		[Description("Organizations/Members")]
+		Organizations_Members = 213,
+
 		[Description("Repositories/Create or Update Content")]
 		Repositories_CreateOrUpdateContent = 221,
+
+		[Description("Organizations/Create Repository")]
+		Organizations_CreateRepository = 222,
+
+		[Description("Repositories/Add Repository User Collaborator")]
+		Repositories_AddUserCollaborator = 223,
+
+		[Description("Organizations/Add Repository Team Collaborator")]
+		Organizations_AddTeamCollaborator = 224,
 
 		[Table(Parameter.Repositories.tablePid)]
 		[Description("Repositories/Public Keys")]

@@ -2,19 +2,20 @@
 
 namespace Skyline.Protocol.Tables
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
 
 	using Newtonsoft.Json;
 
 	using Skyline.DataMiner.Net;
 	using Skyline.DataMiner.Net.Helper;
 	using Skyline.DataMiner.Scripting;
-    using Skyline.Protocol.Extensions;
-    using SLNetMessages = Skyline.DataMiner.Net.Messages;
+	using Skyline.Protocol.Extensions;
 
-    public class RepositoryWorkflowsTableRow
+	using SLNetMessages = Skyline.DataMiner.Net.Messages;
+
+	public class RepositoryWorkflowsTableRow
 	{
 		private DateTime createdAt;
 		private double createdAtOA = Exceptions.IntNotAvailable;
@@ -241,7 +242,7 @@ namespace Skyline.Protocol.Tables
 				RepositoryID = String.Join("/", x.Split('/')[0], x.Split('/')[1]),
 			}).GroupBy(x => x.RepositoryID);
 
-			foreach(var group in workflowPerRepo)
+			foreach (var group in workflowPerRepo)
 			{
 				var repo = group.Key;
 				var repoWorkflowsToRemove = group.Select(x => x.WorkflowID).ToArray();
@@ -289,7 +290,7 @@ namespace Skyline.Protocol.Tables
 				.Where(row => e.Repositories.Contains(row[1]))
 				.Select(row => row[0]);
 
-			e.Protocol.DeleteRow(Parameter.Repositoryworkflows.tablePid, workflowsRows.ToArray());
+			RepositoryWorkflowsTable.GetTable().DeleteRow(e.Protocol, workflowsRows.ToArray());
 		}
 	}
 }

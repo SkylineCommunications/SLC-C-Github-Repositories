@@ -19,8 +19,13 @@
 
 			{ RequestType.Organizations_User,					OrganizationsResponseHandler.HandleUserOrganizationsResponse },
 			{ RequestType.Organizations_Repositories,			OrganizationsResponseHandler.HandleOrganizationRepositoriesResponse },
+			{ RequestType.Organizations_Teams,					OrganizationsResponseHandler.HandleOrganizationTeamsResponse },
+			{ RequestType.Organizations_Members,                OrganizationsResponseHandler.HandleOrganizationMembersResponse },
 
 			{ RequestType.Repositories_CreateOrUpdateContent,	RepositoriesResponseHandler.HandleRepositoryContentResponse },
+			{ RequestType.Organizations_CreateRepository,       OrganizationsResponseHandler.HandleOrganizationCreateRepositoryResponse },
+			{ RequestType.Repositories_AddUserCollaborator,     RepositoriesResponseHandler.HandleRepositoriesAddRepositoryCollaboratorResponse },
+			{ RequestType.Organizations_AddTeamCollaborator,    OrganizationsResponseHandler.HandleOrganizationAddRepositoryCollaboratorResponse },
 			{ RequestType.Repositories_PublicKey,				RepositoriesResponseHandler.HandleRepositoriesPublicKeysResponse },
 		};
 

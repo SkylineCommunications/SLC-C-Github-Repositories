@@ -150,6 +150,16 @@
 			}
 		}
 
+		public void DeleteRow(SLProtocol protocol, params string[] rowsToDelete)
+		{
+			if (rowsToDelete.Length <= 0)
+				return;
+
+			// Remove from DateMiner and local instance
+			protocol.DeleteRow(Parameter.Repositorytags.tablePid, rowsToDelete);
+			instance.Rows.RemoveAll(x => rowsToDelete.ToList().Contains(x.ID));
+		}
+
 		#region IDisposable
 		public void Dispose()
 		{
@@ -183,7 +193,7 @@
 				.Where(row => e.Repositories.Contains(row[1]))
 				.Select(row => row[0]);
 
-			e.Protocol.DeleteRow(Parameter.Repositorytags.tablePid, tagRows.ToArray());
+			RepositoryTagsTable.GetTable().DeleteRow(e.Protocol, tagRows.ToArray());
 		}
 	}
 }
