@@ -10,6 +10,7 @@ namespace Skyline.Protocol.Extensions
 	using System.Text.RegularExpressions;
 
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Repositories;
+	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.Protocol.PollManager;
 
@@ -132,6 +133,11 @@ namespace Skyline.Protocol.Extensions
 				default:
 					throw new NotSupportedException("The given PermissionType is not supported.");
 			}
+		}
+
+		public static T Execute<T>(this WorkflowType workflowType, Func<T> execute)
+		{
+			return execute();
 		}
 	}
 }

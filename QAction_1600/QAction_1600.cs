@@ -57,65 +57,8 @@ public static class QAction
 
 		var owner = parameters[0].Split('/')[0];
 		var name = parameters[0].Split('/')[1];
-		Message request = default;
-		switch ((WorkflowType)Convert.ToInt32(parameters[2]))
-		{
-			case WorkflowType.AutomationScriptCI:
-				request = new GenericInterAppMessage<AddAutomationScriptCIWorkflowRequest>(
-					new AddAutomationScriptCIWorkflowRequest
-					{
-						RepositoryId = new RepositoryId(owner, name),
-						Data = new AutomationScriptCIWorkflowData
-						{
-							SonarCloudProjectID = String.Empty,
-							DataMinerKey = String.Empty,
-						},
-					});
-				break;
-
-			case WorkflowType.AutomationScriptCICD:
-				request = new GenericInterAppMessage<AddAutomationScriptCICDWorkflowRequest>(
-					new AddAutomationScriptCICDWorkflowRequest
-					{
-						RepositoryId = new RepositoryId(owner, name),
-						Data = new AutomationScriptCICDWorkflowData
-						{
-							SonarCloudProjectID = String.Empty,
-							DataMinerKey = String.Empty,
-						},
-					});
-				break;
-
-			case WorkflowType.ConnectorCI:
-				request = new GenericInterAppMessage<AddConnectorCIWorkflowRequest>(
-					new AddConnectorCIWorkflowRequest
-					{
-						RepositoryId = new RepositoryId(owner, name),
-						Data = new ConnectorCIWorkflowData
-						{
-							SonarCloudProjectID = String.Empty,
-							DataMinerKey = String.Empty,
-						},
-					});
-				break;
-
-			case WorkflowType.NugetSolutionCICD:
-				request = new GenericInterAppMessage<AddNugetCICDWorkflowRequest>(
-					new AddNugetCICDWorkflowRequest
-					{
-						RepositoryId = new RepositoryId(owner, name),
-						Data = new NugetCICDWorkflowData
-						{
-							SonarCloudProjectID = String.Empty,
-							NugetApiKey = String.Empty,
-						},
-					});
-				break;
-
-			default:
-				protocol.Log($"QA{protocol.QActionID}|AddWorkflow|This type of workflow is not supported yet.", LogType.Information, LogLevel.NoLogging);
-				break;
-		}
+		var workflowType = (WorkflowType)Convert.ToInt32(parameters[2]);
+		Message request = WorkflowMapping.CreateEmptyWorkflowMessage(workflowType, owner, name);
 
 		if(request != default)
 		{

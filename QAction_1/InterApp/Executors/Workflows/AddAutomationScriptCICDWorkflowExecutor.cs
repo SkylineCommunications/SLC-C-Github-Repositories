@@ -8,6 +8,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows;
 	using Skyline.DataMiner.Core.InterAppCalls.Common.CallSingle;
 	using Skyline.DataMiner.Core.InterAppCalls.Common.MessageExecution;
+	using Skyline.DataMiner.Net.Messages.SLDataGateway;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.Protocol.API.Workflows;
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
@@ -44,45 +45,11 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 
 		public override bool Validate()
 		{
-			// Check given repository id
-			if (String.IsNullOrWhiteSpace(Message.Data.RepositoryId.Owner) ||
-				String.IsNullOrWhiteSpace(Message.Data.RepositoryId.Name))
+			// Validate the request
+			if(!WorkflowValidation.Validate(Message.Data, repo, out var error))
 			{
 				result.Success = false;
-				result.Description = "The Owner and Name of the repository cannot be left empty.";
-				return false;
-			}
-
-			// Check sonarcloud project id
-			if (String.IsNullOrWhiteSpace(Message.Data.Data.SonarCloudProjectID))
-			{
-				result.Success = false;
-				result.Description = "The sonar cloud project id cannot be left blank. Go to https://sonarcloud.io/ to retrieve the id.";
-				return false;
-			}
-
-			// Check dataminer deploy key
-			if (String.IsNullOrWhiteSpace(Message.Data.Data.DataMinerKey))
-			{
-				result.Success = false;
-				result.Description = "The DataMiner Deploy key cannot be left blank. Go to https://admin.dataminer.services/ the get one.";
-				return false;
-			}
-
-			// Check if the repository exists in the connector
-			if (repo == default)
-			{
-				result.Success = false;
-				result.Description = $"The given repository '{Message.Data.RepositoryId.FullName}', is not tracked by this element";
-				return false;
-			}
-
-			// Check if the public keys are fetched
-			if (repo.PublicKey == Exceptions.NotAvailable ||
-				repo.PublicKeyID == Exceptions.NotAvailable)
-			{
-				result.Success = false;
-				result.Description = $"The public keys are not available for '{Message.Data.RepositoryId.FullName}'. Either the configured API Token does not have permission to the repository, or the public keys for the repository are not fetched yet.";
+				result.Description = error;
 				return false;
 			}
 
