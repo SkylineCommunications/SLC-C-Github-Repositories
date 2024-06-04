@@ -15,7 +15,12 @@
 		public static void HandleRepositoriesPublicKeysRequest(SLProtocol protocol)
 		{
 			var table = RepositoriesTable.GetTable(protocol);
-			var first = table.Rows[0];
+			var first = table.Rows.FirstOrDefault();
+			if (first == null)
+			{
+				return;
+			}
+
 			protocol.SetParameter(Parameter.getrepositorypublickeyqueue, JsonConvert.SerializeObject(table.Rows.Select(x => x.FullName).Skip(1)));
 			HandleRepositoriesPublicKeysRequest(protocol, first.Owner, first.Name);
 		}

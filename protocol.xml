@@ -5781,6 +5781,25 @@ Are you sure you want to continue.]]>
 											<NewFeature>Added support for ConnectorAPI version 1.0.2+</NewFeature>
 										</Changes>
 									</MinorVersion>
+									<MinorVersion id="8" basedOn="1.0.0.7">
+										<Date>2024-05-30</Date>
+										<Provider>
+											<Author>AMA</Author>
+											<Company>Skyline Communications</Company>
+										</Provider>
+										<Changes>
+											<Fix>Fixed bug where some lingering rows would come back.</Fix>
+											<Fix>Fixed IndexOutOfRange exception when no repositories are present</Fix>
+											<Change>Updated all QActions to net48</Change>
+											<Change>Updated to InterApp Library 1.0.1.1</Change>
+											<Change>Updated Github ConnectorAPI to 1.0.4</Change>
+											<NewFeature>Added Teams page</NewFeature>
+											<NewFeature>Added Members page</NewFeature>
+											<NewFeature>Added Create Repository InterApp Request</NewFeature>
+											<NewFeature>Added Create Content InterApp Request</NewFeature>
+											<NewFeature>Added Add Collaborator InterApp Request</NewFeature>
+										</Changes>
+									</MinorVersion>
 								</MinorVersions>
 							</MajorVersion>
 						</MajorVersions>
