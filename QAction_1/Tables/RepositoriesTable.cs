@@ -55,6 +55,7 @@
 			PublicKeyID = Convert.ToString(row[15]);
 			PublicKey = Convert.ToString(row[16]);
 			Id = row[17] != null ? Convert.ToInt64(row[17]) : Exceptions.IntNotAvailable;
+			Topics = Convert.ToString(row[18]).Split(',').ToList();
 		}
 
 		public string Name { get; set; }
@@ -259,6 +260,8 @@
 
 		public long Id { get; set; } = Exceptions.IntNotAvailable;
 
+		public List<string> Topics { get; } = new List<string>();
+
 		public static RepositoryType GetTypeFromTopics(IEnumerable<string> topics)
 		{
 			if (topics.Contains("dataminer-automation-script"))
@@ -308,6 +311,7 @@
 				Repositoriespublickeyid = PublicKeyID,
 				Repositoriespublickey = PublicKey,
 				Repositoriesid = Id,
+				Repositoriestopics = String.Join(",", Topics),
 			};
 		}
 
@@ -369,6 +373,7 @@
 				Parameter.Repositories.Idx.repositoriespublickeyid,
 				Parameter.Repositories.Idx.repositoriespublickey,
 				Parameter.Repositories.Idx.repositoriesid,
+				Parameter.Repositories.Idx.repositoriestopics,
 			};
 			object[] repositoriestable = (object[])protocol.NotifyProtocol((int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Repositories.tablePid, repositoriesTableIdx);
 			object[] fullName = (object[])repositoriestable[0];
@@ -389,6 +394,7 @@
 			object[] publicKeyId = (object[])repositoriestable[15];
 			object[] publicKey = (object[])repositoriestable[16];
 			object[] id = (object[])repositoriestable[17];
+			object[] topics = (object[])repositoriestable[18];
 
 			for (int i = 0; i < name.Length; i++)
 			{
@@ -410,7 +416,8 @@
 				type[i],
 				publicKeyId[i],
 				publicKey[i],
-				id[i]));
+				id[i],
+				topics[i]));
 			}
 		}
 		#endregion

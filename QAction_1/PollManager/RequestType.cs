@@ -60,6 +60,12 @@ namespace Skyline.Protocol.PollManager
 		[Table(Parameter.Repositories.tablePid)]
 		[Description("Repositories/Public Keys")]
 		Repositories_PublicKey = 228,
+
+		[Description("Repositories/Topics")]
+		Repositories_Topics = 229,
+
+		[Description("Repositories/Create or Update Topics")]
+		Repositories_CreateOrUpdateTopics = 230,
 	}
 
 	public enum PollState

@@ -1,4 +1,6 @@
-﻿namespace Skyline.DataMiner.Utils.Github.API.V20221128.Repositories
+﻿// Ignore Spelling: API Utils Github
+
+namespace Skyline.DataMiner.Utils.Github.API.V20221128.Repositories
 {
     using Newtonsoft.Json;
 

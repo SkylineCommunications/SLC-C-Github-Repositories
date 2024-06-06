@@ -850,6 +850,46 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
+		<Param id="129">
+			<Name>GetRepositoryTopicsUrl</Name>
+			<Description>Get Repository Topics Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="179">
+			<Name>GetRepositoryTopicsQueue</Name>
+			<Description>Get Repository Topics Queue</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="130">
+			<Name>PutRepositoryTopicsUrl</Name>
+			<Description>Put Repository Topics Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="180">
+			<Name>PutRepositoryTopicsBody</Name>
+			<Description>Put Repository Topics Body</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
 		
 		<Param id="201">
 			<Name>GetRepositoryContent</Name>
@@ -1171,7 +1211,46 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
-		
+		<Param id="229">
+			<Name>GetRepositoryTopicsContent</Name>
+			<Description>GetRepositoryTopicsContent</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="279">
+			<Name>GetRepositoryTopicsLinkHeader</Name>
+			<Description>GetRepositoryTopicsLinkHeader</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="230">
+			<Name>PutRepositoryTopicsContent</Name>
+			<Description>PutRepositoryTopicsContent</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="280">
+			<Name>PutRepositoryTopicsLinkHeader</Name>
+			<Description>PutRepositoryTopicsLinkHeader</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
 		<Param id="300">
 			<Name>Title_End_Generic</Name>
 			<Type>fixed</Type>
@@ -1705,6 +1784,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<ColumnOption idx="15" pid="1016" type="retrieved" options="" />
 				<ColumnOption idx="16" pid="1017" type="retrieved" options="" />
 				<ColumnOption idx="17" pid="1018" type="retrieved" options=";save" />
+				<ColumnOption idx="18" pid="1019" type="retrieved" options="" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>A list of all the tracked repositories.</Subtext>
@@ -1720,7 +1800,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3-1005|4-1006|5-1007|6-1008|7-1009|8-1010|9-1011|10-1012|11-1013|12-1014|13-1015|14-1016|15-1017|16-1018|17,width:100-134-157-140-165-137-144-160-165-157-123-128-147-103-100-0-0-0,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT-INT-INT-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3-1005|4-1006|5-1007|6-1008|7-1009|8-1010|9-1011|10-1012|11-1013|12-1014|13-1015|14-1016|15-1017|16-1018|17-1019|18,width:100-134-157-140-165-137-144-160-165-157-123-128-147-103-100-0-0-0-0,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT-INT-INT-STRING-STRING-STRING-STRING-INT-STRING,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1001" trending="false">
@@ -2236,6 +2316,25 @@ To get more request you can add an api key under General/Configuration page. To 
 			<!-- /SuppressValidator 2.9.7 -->
 			<Measurement>
 				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="1019" trending="false">
+			<Name>RepositoriesTopics</Name>
+			<Description>Topics (Repositories)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>comma separated list of the topics assigned to the repository.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
 			</Measurement>
 		</Param>
 		
@@ -4578,7 +4677,7 @@ Are you sure you want to continue.]]>
 		<QAction id="3000" name="Organizations Table - Changes" encoding="csharp" triggers="3105" row="true" />
 
 		<QAction id="20000" name="HTTP Request Handling" encoding="csharp" triggers="30" />
-		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211;212;213;220;221;222;223;224;226;228"></QAction>
+		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211;212;213;220;221;222;223;224;226;228;229;230"></QAction>
 		<QAction id="20002" name="HTTP Poll Manager Updates" encoding="csharp" row="true" triggers="21006;21053" />
 
 		<QAction id="9000000" name="Process Incoming InterApp Messages" encoding="csharp" triggers="9000000"/>
@@ -4970,6 +5069,52 @@ Are you sure you want to continue.]]>
 				</Response>
 			</Connection>
 		</Session>
+		<Session id="29" name="Get Repository Topics">
+			<Connection id="29" name="Get Repository Topics">
+				<Request verb="GET" pid="129">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Authorization" pid="12"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="229"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="279"/>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
+		<Session id="30" name="Put Repository Topics">
+			<Connection id="30" name="Put Repository Topics">
+				<Request verb="GET" pid="130">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Authorization" pid="12"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="230"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="280"/>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
 	</HTTP>
 
 	<Groups>
@@ -5120,6 +5265,22 @@ Are you sure you want to continue.]]>
 				<Session>28</Session>
 			</Content>
 		</Group>
+		<Group id="229">
+			<Name>GetRepositoryTopics</Name>
+			<Description>Get Repository Topics</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>29</Session>
+			</Content>
+		</Group>
+		<Group id="230">
+			<Name>PutRepositoryTopics</Name>
+			<Description>Put Repository Topics</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>30</Session>
+			</Content>
+		</Group>
 	</Groups>
 
 	<Triggers>
@@ -5243,6 +5404,20 @@ Are you sure you want to continue.]]>
 			<Type>action</Type>
 			<Content>
 				<Id>228</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="229">
+			<Name>Start GetRepository Topics</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>229</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="230">
+			<Name>Start PutRepository Topics</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>230</Id>
 			</Content>
 		</Trigger>
 
@@ -5402,8 +5577,28 @@ Are you sure you want to continue.]]>
 			<Time>after</Time>
 			<Type>action</Type>
 			<Content>
-				<Id>276</Id>
+				<Id>278</Id>
 				<Id>328</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="279">
+			<Name>After GetRepository Topics</Name>
+			<On id="229">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>279</Id>
+				<Id>329</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="280">
+			<Name>After PutRepository Topics</Name>
+			<On id="230">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>280</Id>
+				<Id>330</Id>
 			</Content>
 		</Trigger>
 	</Triggers>
@@ -5506,6 +5701,16 @@ Are you sure you want to continue.]]>
 			<On id="228">group</On>
 			<Type>execute next</Type>
 		</Action>
+		<Action id="229">
+			<Name>Get Repository Topics</Name>
+			<On id="229">group</On>
+			<Type>execute next</Type>
+		</Action>
+			<Action id="230">
+			<Name>Put Repository Topics</Name>
+			<On id="230">group</On>
+			<Type>execute next</Type>
+		</Action>
 
 		<Action id="251">
 			<Name>Clear Get Repository Link Header</Name>
@@ -5587,6 +5792,16 @@ Are you sure you want to continue.]]>
 			<On id="278">parameter</On>
 			<Type>clear</Type>
 		</Action>
+		<Action id="279">
+			<Name>Clear Get Repository Topics Link Header</Name>
+			<On id="279">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="280">
+			<Name>Clear Put Repository Topics Link Header</Name>
+			<On id="280">parameter</On>
+			<Type>clear</Type>
+		</Action>
 
 		<Action id="301">
 			<Name>Clear Repository Content</Name>
@@ -5666,6 +5881,16 @@ Are you sure you want to continue.]]>
 		<Action id="328">
 			<Name>Clear Get Repository Public Key Content</Name>
 			<On id="228">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="329">
+			<Name>Clear Get Repository Topics Content</Name>
+			<On id="229">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="330">
+			<Name>Clear Put Repository Topics Content</Name>
+			<On id="230">parameter</On>
 			<Type>clear</Type>
 		</Action>
 	</Actions>

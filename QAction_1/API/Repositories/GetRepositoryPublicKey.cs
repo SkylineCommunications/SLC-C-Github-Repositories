@@ -1,6 +1,6 @@
-﻿// Ignore Spelling: API
+﻿// Ignore Spelling: API Utils Github
 
-namespace Skyline.Protocol.API.Repositories
+namespace Skyline.DataMiner.Utils.Github.API.V20221128.Repositories
 {
 	using System;
 

@@ -50,6 +50,8 @@
 			row.DefaultBranch = response.DefaultBranch;
 			row.Type = RepositoriesTableRow.GetTypeFromTopics(response.Topics);
 			row.Id = response.Id;
+			row.Topics.Clear();
+			row.Topics.AddRange(response.Topics);
 
 			// If its a new row fill in ID and add it to the table.
 			if (row.FullName == Exceptions.NotAvailable)

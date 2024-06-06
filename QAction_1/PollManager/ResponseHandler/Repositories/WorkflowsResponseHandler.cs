@@ -1,4 +1,6 @@
-﻿namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
+﻿// Ignore Spelling: Workflows
+
+namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 {
 	using System;
 	using System.Collections.Generic;

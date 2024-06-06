@@ -9,7 +9,7 @@
 	using Newtonsoft.Json;
 
 	using Skyline.DataMiner.Scripting;
-	using Skyline.Protocol.API.Repositories;
+	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;

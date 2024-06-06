@@ -27,6 +27,8 @@
 			{ RequestType.Repositories_AddUserCollaborator,     RepositoriesResponseHandler.HandleRepositoriesAddRepositoryCollaboratorResponse },
 			{ RequestType.Organizations_AddTeamCollaborator,    OrganizationsResponseHandler.HandleOrganizationAddRepositoryCollaboratorResponse },
 			{ RequestType.Repositories_PublicKey,				RepositoriesResponseHandler.HandleRepositoriesPublicKeysResponse },
+			{ RequestType.Repositories_Topics,					RepositoriesResponseHandler.HandleRepositoriesTopicsResponse },
+			{ RequestType.Repositories_CreateOrUpdateTopics,    RepositoriesResponseHandler.HandleRepositoriesCreateOrUpdateTopicsResponse },
 		};
 
 		public static IReadOnlyDictionary<RequestType, Action<SLProtocol>> Handlers => handlers;
