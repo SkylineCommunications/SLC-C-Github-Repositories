@@ -5097,6 +5097,7 @@ Are you sure you want to continue.]]>
 				<Request verb="PUT" pid="130">
 					<Headers>
 						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Content-Type">application/json</Header>
 						<Header key="Authorization" pid="12"></Header>
 						<!-- SuppressValidator 8.3.1 Required github header -->
 						<Header key="X-GitHub-Api-Version" pid="13"></Header>
