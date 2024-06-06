@@ -16,6 +16,7 @@
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Organizations;
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
+	using Skyline.Protocol.PollManager.ResponseHandler.Repositories;
 	using Skyline.Protocol.Tables;
 
 	public static partial class OrganizationsResponseHandler
@@ -142,6 +143,7 @@
 			RepositoriesRequestHandler.HandleRepositoriesPublicKeysRequest(protocol, response.Owner.Login, response.Name);
 
 			HandleInterAppResponses(protocol, response);
+			RepositoriesResponseHandler.HandleTopicsInterApp(protocol, response.Name, response.Owner.Login, response.Topics);
 		}
 
 		private static void HandleInterAppResponses(SLProtocol protocol, RepositoryResponse response)

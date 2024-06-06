@@ -61,6 +61,8 @@
 			}
 
 			table.SaveToProtocol(protocol);
+
+			RepositoriesResponseHandler.HandleTopicsInterApp(protocol, response.Name, response.Owner.Login, response.Topics);
 		}
 
 		public static void HandleRepositoryContentResponse(SLProtocol protocol)

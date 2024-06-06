@@ -34,7 +34,7 @@
 			protocol.CheckTrigger(229);
 		}
 
-		public static void CreateOrUpdateRepositoriesTopicRequest(SLProtocol protocol, string owner, string name, IEnumerable<string> topics)
+		public static void CreateOrUpdateRepositoriesTopicsRequest(SLProtocol protocol, string owner, string name, IEnumerable<string> topics)
 		{
 			var request = new RepositoryTopics
 			{

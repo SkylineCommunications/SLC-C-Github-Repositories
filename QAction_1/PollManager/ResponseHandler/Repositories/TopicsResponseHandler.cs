@@ -3,14 +3,15 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using System.Security.Policy;
-	using System.Text;
 	using System.Text.RegularExpressions;
-	using System.Threading.Tasks;
+
 	using Newtonsoft.Json;
 
+	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages;
+	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Repositories;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
+
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;
@@ -93,6 +94,8 @@
 			repo.Topics.Clear();
 			repo.Topics.AddRange(response.Names);
 			repo.SaveToProtocol(protocol);
+
+			HandleTopicsInterApp(protocol, owner, name, repo.Topics);
 		}
 
 		private static void HandleNextRepositoryTopics(SLProtocol protocol)
@@ -111,6 +114,46 @@
 			var nextOwner = next.Split('/')[0];
 			var nextName = next.Split('/')[1];
 			RepositoriesRequestHandler.HandleRepositoriesTopicsRequest(protocol, nextOwner, nextName, PollingConstants.PerPage, 1);
+		}
+
+		public static void HandleTopicsInterApp(SLProtocol protocol, string owner, string name, IEnumerable<string> topics)
+		{
+			// Check if there are Topics InterApp messages waiting on content creation
+			var table = IAC_MessagesTable.GetTable(protocol);
+
+			foreach (var iacRow in table.Rows.Where(iac => iac.ResponseType.AssemblyQualifiedName == typeof(AddRepositoryTopicsResponse).AssemblyQualifiedName))
+			{
+				// Check if for the given repo all the topics are added.
+				var request = (GenericInterAppMessage<AddRepositoryTopicsRequest>)iacRow.Request;
+				if (request.Data.RepositoryId.Owner == owner &&
+					request.Data.RepositoryId.Name == name &&
+					request.Data.Topics.All(topic => topics.Contains(topic)))
+				{
+					var returnMessage = (GenericInterAppMessage<AddRepositoryTopicsResponse>)iacRow.Response;
+					returnMessage.Data.Success = true;
+					returnMessage.Data.Description = $"Successfully added the following topics: {String.Join("\t", request.Data.Topics.Select(topic => $"'{topic}'"))}.";
+					iacRow.Request.Reply(protocol.SLNet.RawConnection, returnMessage, Types.KnownTypes);
+					iacRow.Status = IAC_MessageStatus.Confirmed;
+					iacRow.SaveToProtocol(protocol);
+				}
+			}
+
+			foreach (var iacRow in table.Rows.Where(iac => iac.ResponseType.AssemblyQualifiedName == typeof(RemoveRepositoryTopicsResponse).AssemblyQualifiedName))
+			{
+				// Check if for the given repo all the topics are removed.
+				var request = (GenericInterAppMessage<RemoveRepositoryTopicsRequest>)iacRow.Request;
+				if (request.Data.RepositoryId.Owner == owner &&
+					request.Data.RepositoryId.Name == name &&
+					!request.Data.Topics.Any(topic => topics.Contains(topic)))
+				{
+					var returnMessage = (GenericInterAppMessage<RemoveRepositoryTopicsResponse>)iacRow.Response;
+					returnMessage.Data.Success = true;
+					returnMessage.Data.Description = $"Successfully removed the following topics: {String.Join("\t", request.Data.Topics.Select(topic => $"'{topic}'"))}.";
+					iacRow.Request.Reply(protocol.SLNet.RawConnection, returnMessage, Types.KnownTypes);
+					iacRow.Status = IAC_MessageStatus.Confirmed;
+					iacRow.SaveToProtocol(protocol);
+				}
+			}
 		}
 	}
 }

@@ -47,7 +47,7 @@ Any inquiries can be addressed to:
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>Github Repositories</Name>
 	<Description>Github Repositories DataMiner connector</Description>
-	<Version>1.0.0.8</Version>
+	<Version>1.0.0.9</Version>
 	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Github</Vendor>
@@ -5094,7 +5094,7 @@ Are you sure you want to continue.]]>
 		</Session>
 		<Session id="30" name="Put Repository Topics">
 			<Connection id="30" name="Put Repository Topics">
-				<Request verb="GET" pid="130">
+				<Request verb="PUT" pid="130">
 					<Headers>
 						<Header key="Accept">application/vnd.github+json</Header>
 						<Header key="Authorization" pid="12"></Header>
@@ -5102,6 +5102,7 @@ Are you sure you want to continue.]]>
 						<Header key="X-GitHub-Api-Version" pid="13"></Header>
 						<!-- /SuppressValidator 8.3.1 -->
 					</Headers>
+					<Data pid="180"/>
 				</Request>
 				<Response statusCode="100">
 					<Content pid="230"></Content>
