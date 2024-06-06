@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using Skyline.Protocol.YAML;
+﻿// Ignore Spelling: YAML
 
 namespace Skyline.Protocol.YAML.Tests
 {
@@ -25,7 +23,7 @@ namespace Skyline.Protocol.YAML.Tests
 			Assert.IsNotNull(result);
 		}
 
-		[TestMethod()]
+		[TestMethod]
 		public void DeserializeObjectTest()
 		{
 			// Arrange
