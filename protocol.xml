@@ -47,7 +47,7 @@ Any inquiries can be addressed to:
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>Github Repositories</Name>
 	<Description>Github Repositories DataMiner connector</Description>
-	<Version>1.0.0.9</Version>
+	<Version>1.0.0.10</Version>
 	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Github</Vendor>
@@ -1859,6 +1859,11 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Exception>
 				</Exceptions>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -1894,6 +1899,11 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Exception>
 				</Exceptions>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -1913,6 +1923,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -1938,6 +1953,11 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Exception>
 				</Exceptions>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -1973,6 +1993,11 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Exception>
 				</Exceptions>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Decimals>8</Decimals>
@@ -1999,6 +2024,11 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Exception>
 				</Exceptions>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Decimals>8</Decimals>
@@ -2025,6 +2055,11 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Exception>
 				</Exceptions>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Decimals>8</Decimals>
@@ -2221,6 +2256,11 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Exception>
 				</Exceptions>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -2330,6 +2370,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -2396,6 +2441,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depend on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -2533,6 +2583,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depend on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -2552,6 +2607,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depend on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -2571,6 +2631,10 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<Normal>main</Normal>
+			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -2609,6 +2673,10 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<Normal>0</Normal>
+			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -2638,6 +2706,10 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<Normal>0</Normal>
+			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -2667,6 +2739,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depend on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -2686,6 +2763,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depend on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -2705,6 +2787,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depend on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -2724,6 +2811,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depend on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -2970,6 +3062,11 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Exception>
 				</Exceptions>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depend on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3126,6 +3223,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depend on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3145,6 +3247,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depend on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3164,6 +3271,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depend on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3223,6 +3335,11 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Exception>
 				</Exceptions>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depend on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3242,6 +3359,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depend on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3261,6 +3383,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depend on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3286,6 +3413,11 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Exception>
 				</Exceptions>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depend on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3423,6 +3555,11 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Exception>
 				</Exceptions>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3461,6 +3598,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3656,6 +3798,11 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3675,6 +3822,11 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3694,6 +3846,11 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3713,6 +3870,11 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3732,6 +3894,11 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3761,6 +3928,11 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3790,6 +3962,11 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3884,6 +4061,11 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3903,6 +4085,11 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
@@ -3922,6 +4109,11 @@ Are you sure you want to continue.]]>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
 			</Display>
