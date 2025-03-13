@@ -37,7 +37,7 @@ This DataMiner connector allows you to monitor and control GitHub repositories. 
 
 ## Use Cases
 
-### Tracking issues
+### Tracking issues across repositories
 
 A simple use case could be creating an alarm template to notify you when issues or pull requests come in for you repositories. You could create 1 element per group of related repositories. For example you have a Connector repo, Connector Api repo and an automation script repo that all work together.
 
