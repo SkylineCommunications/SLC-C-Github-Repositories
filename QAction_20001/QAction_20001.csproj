@@ -1,4 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
     <Company>Skyline Communications</Company>
@@ -17,6 +18,14 @@
     <PackageReference Include="Skyline.DataMiner.Dev.Protocol" Version="10.3.9" />
   </ItemGroup>
   <ProjectExtensions>
-    <VisualStudio><UserProperties DisLinkedXmlFile="..\protocol.xml" DisLinkId="20001" DisProjectType="qactionProject" /></VisualStudio>
+    <VisualStudio>
+      <UserProperties DisLinkedXmlFile="..\protocol.xml" DisLinkId="20001" DisProjectType="qactionProject" />
+    </VisualStudio>
   </ProjectExtensions>
+  <ItemGroup>
+    <PackageReference Include="Skyline.DataMiner.Utils.SecureCoding.Analyzers" Version="1.2.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 </Project>
