@@ -1,0 +1,87 @@
+name: Update Catalog Details
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow from another workflow
+  workflow_call:
+    inputs:
+      debug:
+        required: false
+        type: boolean
+      workspace:
+        required: true
+        type: string
+    secrets:
+      api-key:
+        required: true
+
+jobs:
+  update_catalog_details:
+      name: Update Catalog Details
+      runs-on: ubuntu-latest
+      permissions:
+        contents: write
+      steps:
+        - uses: actions/checkout@v4
+                       
+        - name: Install .NET Tools
+          run: |
+            dotnet tool install -g Skyline.DataMiner.CICD.Tools.CatalogUpload --version 3.0.*
+            dotnet tool install -g Skyline.DataMiner.CICD.Tools.GitHubToCatalogYaml --version 2.0.*
+        
+        - name: Create or Extend Catalog.yml
+          run: |
+            github-to-catalog-yaml --workspace "${{ github.workspace }}${{ inputs.workspace }}" --github-token ${{ secrets.GITHUB_TOKEN }} --github-repository "${{ github.repository }}" --catalog-identifier "${{ vars.catalogIdentifier }}" --debug "${{ inputs.debug }}"
+       
+        - name: Check if catalog.yml or manifest.yml exists
+          id: check_files
+          shell: pwsh
+          run: |
+            if (Test-Path "${{ github.workspace }}${{ inputs.workspace }}/catalog.yml") {
+              echo "catalogDetails=catalog.yml" >> $env:GITHUB_ENV
+            }
+            elseif (Test-Path "${{ github.workspace }}${{ inputs.workspace }}/manifest.yml") {
+              echo "catalogDetails=manifest.yml" >> $env:GITHUB_ENV
+            }
+            else {
+              Write-Host "No valid file found!"
+              exit 1
+            }
+        
+        - uses: actions/upload-artifact@v4
+          if: env.catalogDetails != ''
+          with:
+            name: Catalog Details
+            path: "${{ github.workspace }}${{ inputs.workspace }}/${{ env.catalogDetails }}"
+
+        - name: Commit .githubtocatalog/auto-generated-catalog
+          shell: pwsh
+          run: |
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            git add "${{ github.workspace }}${{ inputs.workspace }}/.githubtocatalog/auto-generated-catalog.yml"
+            
+            # Check if there are any changes to be committed
+            git diff --staged --quiet
+            if ($LASTEXITCODE -ne 0) {
+              git commit -m "auto-generated"
+            }
+            else {
+              Write-Host "No changes to commit."
+            }
+          
+        - name: Push .githubtocatalog/auto-generated-catalog
+          run: |
+            git push
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+        - name: Upload to Catalog
+          id: uploadToCatalog
+          shell: pwsh
+          run: |
+            dataminer-catalog-upload update-catalog-details `
+              --path-to-catalog-yml "${{ github.workspace }}${{ inputs.workspace }}/${{ env.catalogDetails }}" `
+              --dm-catalog-token "${{ secrets.api-key }}" `
+              --debug "${{ inputs.debug }}"
+  
