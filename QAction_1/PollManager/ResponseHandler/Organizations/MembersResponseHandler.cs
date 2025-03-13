@@ -9,6 +9,7 @@
 
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Organizations;
+	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 	using Skyline.Protocol.API.Headers;
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Organizations;
@@ -35,7 +36,8 @@
 			}
 
 			// Parse response
-			var response = JsonConvert.DeserializeObject<List<Member>>(Convert.ToString(protocol.GetParameter(Parameter.getorganizationmemberscontent)));
+			var response = SecureNewtonsoftDeserialization.DeserializeObject<List<Member>>(
+				Convert.ToString(protocol.GetParameter(Parameter.getorganizationmemberscontent)));
 			var url = Convert.ToString(protocol.GetParameter(Parameter.getorganizationmembersurl));
 
 			if (response == null)
@@ -125,7 +127,8 @@
 		private static void HandleNextOrganizationMembers(SLProtocol protocol)
 		{
 			// Get the next repo in the queue to fetch
-			var queue = JsonConvert.DeserializeObject<List<string>>(Convert.ToString(protocol.GetParameter(Parameter.getorganizationmembersqueue)));
+			var queue = SecureNewtonsoftDeserialization.DeserializeObject<List<string>>(
+				Convert.ToString(protocol.GetParameter(Parameter.getorganizationmembersqueue)));
 			var next = queue?.FirstOrDefault();
 
 			if (next == null)

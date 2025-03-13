@@ -9,6 +9,7 @@
 
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
+	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 	using Skyline.Protocol;
 	using Skyline.Protocol.API.Headers;
 	using Skyline.Protocol.Extensions;
@@ -26,7 +27,8 @@
 			}
 
 			// Parse response
-			var response = JsonConvert.DeserializeObject<List<RepositoryReleasesResponse>>(Convert.ToString(protocol.GetParameter(Parameter.getrepositoryreleasescontent)));
+			var response = SecureNewtonsoftDeserialization.DeserializeObject<List<RepositoryReleasesResponse>>(
+				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryreleasescontent)));
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|response was null.", LogType.Error, LogLevel.Level1);

@@ -14,6 +14,7 @@
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
+	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 	using Skyline.Protocol.API.Content;
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.InterApp;
@@ -31,7 +32,8 @@
 			}
 
 			// Parse response
-			var response = JsonConvert.DeserializeObject<RepositoryResponse>(Convert.ToString(protocol.GetParameter(Parameter.getrepositorycontent)));
+			var response = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryResponse>(
+				Convert.ToString(protocol.GetParameter(Parameter.getrepositorycontent)));
 
 			var table = RepositoriesTable.GetTable();
 			var row = table.Rows.Find(repository => repository.FullName == response.FullName) ?? new RepositoriesTableRow();

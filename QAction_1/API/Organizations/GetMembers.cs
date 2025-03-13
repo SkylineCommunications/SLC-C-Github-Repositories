@@ -1,4 +1,4 @@
-﻿// Ignore Spelling: API Gravatar Admin utils Github
+﻿// Ignore Spelling: API Gravatar Admin utils Github Repos
 
 namespace Skyline.DataMiner.Utils.Github.API.V20221128.Organizations
 {

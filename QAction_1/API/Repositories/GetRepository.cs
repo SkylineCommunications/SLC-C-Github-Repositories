@@ -1,4 +1,4 @@
-﻿// Ignore Spelling: API Utils Github
+﻿// Ignore Spelling: API Utils Github Spdx
 
 namespace Skyline.DataMiner.Utils.Github.API.V20221128.Repositories
 {
