@@ -4,7 +4,7 @@
 
 A DataMiner connector that retrieves information from github. It's used to monitor repositories.
 
-![General](./images/GeneralPage.png)
+![General](../Images/GeneralPage.png)
 
 ## Installation
 
@@ -29,27 +29,27 @@ You can do a manual install by downloading the .dmprotocol package file from the
 You can configure an API Key under General/Configuration. By default this element runs without an api key. This means that the element can only sent 60 request per hour before being blocked out by Github.
 To get more request you can add an api key under General/Configuration page. To generate such a token you can go to Github.com -> Settings -> Developer settings -> Personal access tokens -> tokens (classic), to generate one. After setting a personal api key, you'll get 5000 request per hour.
 
-![Configuration](./images/General_ConfigurationPage.png)
+![Configuration](../Images/General_ConfigurationPage.png)
 
 
 You can configure the polling timers under General/Poll Manager. Here you can enable or disable certain calls, do a manual refresh and set the poll frequency.
 
-![Poll Manager](./images/General_PollManagerPage.png)
+![Poll Manager](../Images/General_PollManagerPage.png)
 
 ### Organizations
 On the Organizations page you get an overview of the organizations the configured token is part of. You can enable repository tracking from this page. This will add all the repositories under the repository to the repositories table and start polling them.
 
-![Organizations - Overview](./images/OrganizationsOverviewPage.png)
-![Organizations](./images/OrganizationsPage.png)
+![Organizations - Overview](../Images/OrganizationsOverviewPage.png)
+![Organizations](../Images/OrganizationsPage.png)
 
 
 ### Teams
 The teams table contains all the teams for the organizations where the api key has access to.
-![Teams](./images/TeamsPage.png)
+![Teams](../Images/TeamsPage.png)
 
 ### Members
 The members table contains all the memebers for the organizations where the api key has access to.
-![Members](./images/MembersPage.png)
+![Members](../Images/MembersPage.png)
 
 ### Repositories 
 On the Repositories - Overview page you get a tree control that shows all the configured repositories. You can view everything thats tracked from here. 
@@ -59,13 +59,13 @@ On the Repositories - Overview page you get a tree control that shows all the co
 1. Issues
 1. Workflows
 
-![Repositories - Overview](./images/RepositoriesOverviewPage.png)
+![Repositories - Overview](../Images/RepositoriesOverviewPage.png)
 
 
 ### Tags
 The tags table contains all the tags from all the tracked repositories. Here you can find the tag name the repository it's linked with and the commit ID it was placed on.
 
-![Repositories](./images/RepositoriesPage.png)
+![Repositories](../Images/RepositoriesPage.png)
 
 ### Releases 
 The releases page contains 2 table:
@@ -83,7 +83,7 @@ The **release assets** table contains all the assets linked to the releases from
 1. Number of downloads
 1. ...
 
-![Repositories](./images/ReleasesPage.png)
+![Repositories](../Images/ReleasesPage.png)
 
 ### Issues
 The issues table contains all the issues from all the tracked repositories. Here you can find some general information about the issues, for example:
@@ -93,7 +93,7 @@ The issues table contains all the issues from all the tracked repositories. Here
 1. when it was created
 1. ...
 
-![Issues](./images/IssuesPage.png)
+![Issues](../Images/IssuesPage.png)
 
 ### Workflows
 The workflows table contains all the workflows from all the tracked repositories. Here you can find some general information about the workflows, for example:
@@ -103,9 +103,9 @@ The workflows table contains all the workflows from all the tracked repositories
 1. when it was created
 1. ...
 
-![Workflows](./images/WorkflowsPage.png)
+![Workflows](../Images/WorkflowsPage.png)
 
-![Add Workflow](./images/Workflows_AddWorkflowPage.png)
+![Add Workflow](../Images/Workflows_AddWorkflowPage.png)
 
 ## About DataMiner
 

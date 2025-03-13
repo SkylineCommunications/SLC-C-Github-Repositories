@@ -4,7 +4,7 @@
 
 This DataMiner connector allows you to monitor and control GitHub repositories. It uses the GitHub API to poll the repos and execute actions on them.
 
-![General](./Documentation/images/GeneralPage.png)
+![General](./Images/GeneralPage.png)
 
 ## Getting Started
 
