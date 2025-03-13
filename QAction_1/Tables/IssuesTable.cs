@@ -239,12 +239,6 @@
 				repositoryID[i]));
 			}
 		}
-
-		~RepositoryIssuesTable()
-		{
-			// Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-			Dispose(disposing: false);
-		}
 		#endregion
 
 		public List<RepositoryIssuesRow> Rows { get; private set; } = new List<RepositoryIssuesRow>();

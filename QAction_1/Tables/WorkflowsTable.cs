@@ -201,12 +201,6 @@ namespace Skyline.Protocol.Tables
 				deletedAt[i]));
 			}
 		}
-
-		~RepositoryWorkflowsTable()
-		{
-			// Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-			Dispose(false);
-		}
 		#endregion
 
 		#region Events

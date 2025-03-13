@@ -195,12 +195,6 @@
 				repositoryId[i]));
 			}
 		}
-
-		~RepositoryReleasesTable()
-		{
-			// Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-			Dispose(false);
-		}
 		#endregion
 
 		public List<RepositoryReleasesTableRow> Rows { get; private set; } = new List<RepositoryReleasesTableRow>();

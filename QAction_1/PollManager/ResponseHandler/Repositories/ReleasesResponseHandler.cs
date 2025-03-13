@@ -93,6 +93,8 @@
 				table.SaveToProtocol(protocol, true);
 			}
 
+			HandleRepositoryReleaseAssetsResponse(protocol);
+
 			// Check if there are more releases to fetch
 			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryreleaseslinkheader));
 			if (string.IsNullOrEmpty(linkHeader)) return;
@@ -105,6 +107,88 @@
 			if (link.HasNext)
 			{
 				RepositoriesRequestHandler.HandleRepositoriesReleasesRequest(protocol, owner, name, PollingConstants.PerPage, link.NextPage);
+			}
+		}
+
+		public static void HandleRepositoryReleaseAssetsResponse(SLProtocol protocol)
+		{
+			// Check status code
+			if (!protocol.IsSuccessStatusCode())
+			{
+				return;
+			}
+
+			// Parse response
+			var response = JsonConvert.DeserializeObject<List<RepositoryReleasesResponse>>(Convert.ToString(protocol.GetParameter(Parameter.getrepositoryreleasescontent)));
+			if (response == null)
+			{
+				protocol.Log($"QA{protocol.QActionID}|HandleRepositoryReleaseAssetsResponse|response was null.", LogType.Error, LogLevel.Level1);
+				return;
+			}
+
+			if (!response.Any())
+			{
+				// No releases for the repository
+				protocol.Log($"QA{protocol.QActionID}|HandleRepositoryReleaseAssetsResponse|No releases for the repo.", LogType.Information, LogLevel.Level2);
+				return;
+			}
+
+			// Parse url to check which respository this issue is linked to
+			var pattern = "https:\\/\\/api.github.com\\/repos\\/(.*)\\/(.*)\\/releases\\/(\\d+)";
+			var options = RegexOptions.Multiline;
+
+			var match = Regex.Match(response[0]?.Url, pattern, options);
+			var owner = match.Groups[1].Value;
+			var name = match.Groups[2].Value;
+
+			// Update the releases table
+			var table = ReleaseAssetsTable.GetTable();
+			foreach (var release in response)
+			{
+				if (release == null)
+				{
+					protocol.Log($"QA{protocol.QActionID}|HandleRepositoryReleaseAssetsResponse|Release was null.", LogType.Error, LogLevel.Level1);
+					continue;
+				}
+
+				if (release.Url == null)
+				{
+					protocol.Log($"QA{protocol.QActionID}|HandleRepositoryReleaseAssetsResponse|Release url null.", LogType.Error, LogLevel.Level1);
+					continue;
+				}
+
+				foreach(var asset in release.Assets)
+				{
+					// Update existing release if found, otherwise create new one
+					var id = $"{owner}/{name}/releases/{release.Id}/{asset.Id}";
+					var row = table.Rows.Find(rel => rel.Instance == id) ?? new ReleaseAssetsTableRow();
+					row.AssetId = asset.Id;
+					row.RepositoryID = $"{owner}/{name}";
+					row.Release = $"{owner}/{name}/releases/{release.Id}";
+					row.Uploader = asset.Uploader.Login;
+					row.NodeID = asset.NodeId;
+					row.Name = asset.Name;
+					row.Label = asset.Label;
+					row.ContentType = asset.ContentType;
+					row.State = asset.State;
+					row.Size = asset.Size;
+					row.DownloadCount = asset.DownloadCount;
+					row.CreatedAt = asset.CreatedAt;
+					row.UpdatedAt = asset.UpdatedAt;
+					row.BrowserDownloadUrl = asset.BrowserDownloadUrl;
+
+					// If its a new row fill in ID and add it to the table.
+					if (String.IsNullOrEmpty(row.Instance))
+					{
+						row.Instance = id;
+						table.Rows.Add(row);
+					}
+				}
+			}
+
+			if (table.Rows.Count > 0)
+			{
+				table.SaveToProtocol(protocol, true);
 			}
 		}
 	}

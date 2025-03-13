@@ -102,11 +102,6 @@
 			}
 		}
 
-		~RepositoryTagsTable()
-		{
-			// Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-			Dispose(false);
-		}
 		#endregion
 
 		public List<RepositoryTagsTableRow> Rows { get; private set; } = new List<RepositoryTagsTableRow>();

@@ -1058,6 +1058,174 @@ public static class Parameter
 			public const int repositoryworkflowsdeletedat = 7;
 		}
 	}
+	public class Repositoryreleaseassets
+	{
+		/// <summary>PID: 1800</summary>
+		public const int tablePid = 1800;
+		/// <summary>IDX: 0</summary>
+		public const int indexColumn = 0;
+		/// <summary>PID: 1801</summary>
+		public const int indexColumnPid = 1801;
+		public class Pid
+		{
+			/// <summary>PID: 1801 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsinstance_1801 = 1801;
+			/// <summary>PID: 1801 | Type: read</summary>
+			public const int repositoryreleaseassetsinstance = 1801;
+			/// <summary>PID: 1802 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsid_1802 = 1802;
+			/// <summary>PID: 1802 | Type: read</summary>
+			public const int repositoryreleaseassetsid = 1802;
+			/// <summary>PID: 1803 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsrepositoryid_1803 = 1803;
+			/// <summary>PID: 1803 | Type: read</summary>
+			public const int repositoryreleaseassetsrepositoryid = 1803;
+			/// <summary>PID: 1804 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsrelease_1804 = 1804;
+			/// <summary>PID: 1804 | Type: read</summary>
+			public const int repositoryreleaseassetsrelease = 1804;
+			/// <summary>PID: 1805 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsuploader_1805 = 1805;
+			/// <summary>PID: 1805 | Type: read</summary>
+			public const int repositoryreleaseassetsuploader = 1805;
+			/// <summary>PID: 1806 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsnodeid_1806 = 1806;
+			/// <summary>PID: 1806 | Type: read</summary>
+			public const int repositoryreleaseassetsnodeid = 1806;
+			/// <summary>PID: 1807 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsname_1807 = 1807;
+			/// <summary>PID: 1807 | Type: read</summary>
+			public const int repositoryreleaseassetsname = 1807;
+			/// <summary>PID: 1808 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetslabel_1808 = 1808;
+			/// <summary>PID: 1808 | Type: read</summary>
+			public const int repositoryreleaseassetslabel = 1808;
+			/// <summary>PID: 1809 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetscontenttype_1809 = 1809;
+			/// <summary>PID: 1809 | Type: read</summary>
+			public const int repositoryreleaseassetscontenttype = 1809;
+			/// <summary>PID: 1810 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsstate_1810 = 1810;
+			/// <summary>PID: 1810 | Type: read</summary>
+			public const int repositoryreleaseassetsstate = 1810;
+			/// <summary>PID: 1811 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetssize_1811 = 1811;
+			/// <summary>PID: 1811 | Type: read</summary>
+			public const int repositoryreleaseassetssize = 1811;
+			/// <summary>PID: 1812 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsdownloadcount_1812 = 1812;
+			/// <summary>PID: 1812 | Type: read</summary>
+			public const int repositoryreleaseassetsdownloadcount = 1812;
+			/// <summary>PID: 1813 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetscreatedat_1813 = 1813;
+			/// <summary>PID: 1813 | Type: read</summary>
+			public const int repositoryreleaseassetscreatedat = 1813;
+			/// <summary>PID: 1814 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsupdatedat_1814 = 1814;
+			/// <summary>PID: 1814 | Type: read</summary>
+			public const int repositoryreleaseassetsupdatedat = 1814;
+			/// <summary>PID: 1815 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsbrowserdownloadurl_1815 = 1815;
+			/// <summary>PID: 1815 | Type: read</summary>
+			public const int repositoryreleaseassetsbrowserdownloadurl = 1815;
+			public class Write
+			{
+			}
+		}
+		public class Idx
+		{
+			/// <summary>IDX: 0 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsinstance_1801 = 0;
+			/// <summary>IDX: 0 | Type: read</summary>
+			public const int repositoryreleaseassetsinstance = 0;
+			/// <summary>IDX: 1 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsid_1802 = 1;
+			/// <summary>IDX: 1 | Type: read</summary>
+			public const int repositoryreleaseassetsid = 1;
+			/// <summary>IDX: 2 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsrepositoryid_1803 = 2;
+			/// <summary>IDX: 2 | Type: read</summary>
+			public const int repositoryreleaseassetsrepositoryid = 2;
+			/// <summary>IDX: 3 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsrelease_1804 = 3;
+			/// <summary>IDX: 3 | Type: read</summary>
+			public const int repositoryreleaseassetsrelease = 3;
+			/// <summary>IDX: 4 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsuploader_1805 = 4;
+			/// <summary>IDX: 4 | Type: read</summary>
+			public const int repositoryreleaseassetsuploader = 4;
+			/// <summary>IDX: 5 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsnodeid_1806 = 5;
+			/// <summary>IDX: 5 | Type: read</summary>
+			public const int repositoryreleaseassetsnodeid = 5;
+			/// <summary>IDX: 6 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsname_1807 = 6;
+			/// <summary>IDX: 6 | Type: read</summary>
+			public const int repositoryreleaseassetsname = 6;
+			/// <summary>IDX: 7 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetslabel_1808 = 7;
+			/// <summary>IDX: 7 | Type: read</summary>
+			public const int repositoryreleaseassetslabel = 7;
+			/// <summary>IDX: 8 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetscontenttype_1809 = 8;
+			/// <summary>IDX: 8 | Type: read</summary>
+			public const int repositoryreleaseassetscontenttype = 8;
+			/// <summary>IDX: 9 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsstate_1810 = 9;
+			/// <summary>IDX: 9 | Type: read</summary>
+			public const int repositoryreleaseassetsstate = 9;
+			/// <summary>IDX: 10 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetssize_1811 = 10;
+			/// <summary>IDX: 10 | Type: read</summary>
+			public const int repositoryreleaseassetssize = 10;
+			/// <summary>IDX: 11 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsdownloadcount_1812 = 11;
+			/// <summary>IDX: 11 | Type: read</summary>
+			public const int repositoryreleaseassetsdownloadcount = 11;
+			/// <summary>IDX: 12 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetscreatedat_1813 = 12;
+			/// <summary>IDX: 12 | Type: read</summary>
+			public const int repositoryreleaseassetscreatedat = 12;
+			/// <summary>IDX: 13 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsupdatedat_1814 = 13;
+			/// <summary>IDX: 13 | Type: read</summary>
+			public const int repositoryreleaseassetsupdatedat = 13;
+			/// <summary>IDX: 14 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetsbrowserdownloadurl_1815 = 14;
+			/// <summary>IDX: 14 | Type: read</summary>
+			public const int repositoryreleaseassetsbrowserdownloadurl = 14;
+		}
+	}
 	public class Repositoryissues
 	{
 		/// <summary>PID: 2000</summary>
@@ -1822,6 +1990,8 @@ public interface SLProtocolExt : SLProtocol
 	RepositoryreleasesQActionTable repositoryreleases { get; set; }
 	/// <summary>PID: 1600</summary>
 	RepositoryworkflowsQActionTable repositoryworkflows { get; set; }
+	/// <summary>PID: 1800</summary>
+	RepositoryreleaseassetsQActionTable repositoryreleaseassets { get; set; }
 	/// <summary>PID: 2000</summary>
 	RepositoryissuesQActionTable repositoryissues { get; set; }
 	/// <summary>PID: 3000</summary>
@@ -2125,6 +2295,36 @@ public interface SLProtocolExt : SLProtocol
 	object Repositoryworkflowsupdatedat { get; set; }
 	object Repositoryworkflowsdeletedat_1608 { get; set; }
 	object Repositoryworkflowsdeletedat { get; set; }
+	object Repositoryreleaseassetsinstance_1801 { get; set; }
+	object Repositoryreleaseassetsinstance { get; set; }
+	object Repositoryreleaseassetsid_1802 { get; set; }
+	object Repositoryreleaseassetsid { get; set; }
+	object Repositoryreleaseassetsrepositoryid_1803 { get; set; }
+	object Repositoryreleaseassetsrepositoryid { get; set; }
+	object Repositoryreleaseassetsrelease_1804 { get; set; }
+	object Repositoryreleaseassetsrelease { get; set; }
+	object Repositoryreleaseassetsuploader_1805 { get; set; }
+	object Repositoryreleaseassetsuploader { get; set; }
+	object Repositoryreleaseassetsnodeid_1806 { get; set; }
+	object Repositoryreleaseassetsnodeid { get; set; }
+	object Repositoryreleaseassetsname_1807 { get; set; }
+	object Repositoryreleaseassetsname { get; set; }
+	object Repositoryreleaseassetslabel_1808 { get; set; }
+	object Repositoryreleaseassetslabel { get; set; }
+	object Repositoryreleaseassetscontenttype_1809 { get; set; }
+	object Repositoryreleaseassetscontenttype { get; set; }
+	object Repositoryreleaseassetsstate_1810 { get; set; }
+	object Repositoryreleaseassetsstate { get; set; }
+	object Repositoryreleaseassetssize_1811 { get; set; }
+	object Repositoryreleaseassetssize { get; set; }
+	object Repositoryreleaseassetsdownloadcount_1812 { get; set; }
+	object Repositoryreleaseassetsdownloadcount { get; set; }
+	object Repositoryreleaseassetscreatedat_1813 { get; set; }
+	object Repositoryreleaseassetscreatedat { get; set; }
+	object Repositoryreleaseassetsupdatedat_1814 { get; set; }
+	object Repositoryreleaseassetsupdatedat { get; set; }
+	object Repositoryreleaseassetsbrowserdownloadurl_1815 { get; set; }
+	object Repositoryreleaseassetsbrowserdownloadurl { get; set; }
 	object Repositoryissuesinstance_2001 { get; set; }
 	object Repositoryissuesinstance { get; set; }
 	object Repositoryissuesnumber_2002 { get; set; }
@@ -2256,6 +2456,8 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public RepositoryreleasesQActionTable repositoryreleases { get; set; }
 	/// <summary>PID: 1600</summary>
 	public RepositoryworkflowsQActionTable repositoryworkflows { get; set; }
+	/// <summary>PID: 1800</summary>
+	public RepositoryreleaseassetsQActionTable repositoryreleaseassets { get; set; }
 	/// <summary>PID: 2000</summary>
 	public RepositoryissuesQActionTable repositoryissues { get; set; }
 	/// <summary>PID: 3000</summary>
@@ -2982,6 +3184,81 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoryworkflowsdeletedat_1608 {get { return GetParameter(1608); }set { SetParameter(1608, value); }}
 	/// <summary>PID: 1608  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	public System.Object Repositoryworkflowsdeletedat {get { return GetParameter(1608); }set { SetParameter(1608, value); }}
+	/// <summary>PID: 1801  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsinstance_1801 {get { return GetParameter(1801); }set { SetParameter(1801, value); }}
+	/// <summary>PID: 1801  | Type: read</summary>
+	public System.Object Repositoryreleaseassetsinstance {get { return GetParameter(1801); }set { SetParameter(1801, value); }}
+	/// <summary>PID: 1802  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsid_1802 {get { return GetParameter(1802); }set { SetParameter(1802, value); }}
+	/// <summary>PID: 1802  | Type: read</summary>
+	public System.Object Repositoryreleaseassetsid {get { return GetParameter(1802); }set { SetParameter(1802, value); }}
+	/// <summary>PID: 1803  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsrepositoryid_1803 {get { return GetParameter(1803); }set { SetParameter(1803, value); }}
+	/// <summary>PID: 1803  | Type: read</summary>
+	public System.Object Repositoryreleaseassetsrepositoryid {get { return GetParameter(1803); }set { SetParameter(1803, value); }}
+	/// <summary>PID: 1804  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsrelease_1804 {get { return GetParameter(1804); }set { SetParameter(1804, value); }}
+	/// <summary>PID: 1804  | Type: read</summary>
+	public System.Object Repositoryreleaseassetsrelease {get { return GetParameter(1804); }set { SetParameter(1804, value); }}
+	/// <summary>PID: 1805  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsuploader_1805 {get { return GetParameter(1805); }set { SetParameter(1805, value); }}
+	/// <summary>PID: 1805  | Type: read</summary>
+	public System.Object Repositoryreleaseassetsuploader {get { return GetParameter(1805); }set { SetParameter(1805, value); }}
+	/// <summary>PID: 1806  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsnodeid_1806 {get { return GetParameter(1806); }set { SetParameter(1806, value); }}
+	/// <summary>PID: 1806  | Type: read</summary>
+	public System.Object Repositoryreleaseassetsnodeid {get { return GetParameter(1806); }set { SetParameter(1806, value); }}
+	/// <summary>PID: 1807  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsname_1807 {get { return GetParameter(1807); }set { SetParameter(1807, value); }}
+	/// <summary>PID: 1807  | Type: read</summary>
+	public System.Object Repositoryreleaseassetsname {get { return GetParameter(1807); }set { SetParameter(1807, value); }}
+	/// <summary>PID: 1808  | Type: read | EXCEPTIONS: N/A = -2</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetslabel_1808 {get { return GetParameter(1808); }set { SetParameter(1808, value); }}
+	/// <summary>PID: 1808  | Type: read | EXCEPTIONS: N/A = -2</summary>
+	public System.Object Repositoryreleaseassetslabel {get { return GetParameter(1808); }set { SetParameter(1808, value); }}
+	/// <summary>PID: 1809  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetscontenttype_1809 {get { return GetParameter(1809); }set { SetParameter(1809, value); }}
+	/// <summary>PID: 1809  | Type: read</summary>
+	public System.Object Repositoryreleaseassetscontenttype {get { return GetParameter(1809); }set { SetParameter(1809, value); }}
+	/// <summary>PID: 1810  | Type: read | DISCREETS: Uploaded = uploaded, Open = open</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsstate_1810 {get { return GetParameter(1810); }set { SetParameter(1810, value); }}
+	/// <summary>PID: 1810  | Type: read | DISCREETS: Uploaded = uploaded, Open = open</summary>
+	public System.Object Repositoryreleaseassetsstate {get { return GetParameter(1810); }set { SetParameter(1810, value); }}
+	/// <summary>PID: 1811  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetssize_1811 {get { return GetParameter(1811); }set { SetParameter(1811, value); }}
+	/// <summary>PID: 1811  | Type: read</summary>
+	public System.Object Repositoryreleaseassetssize {get { return GetParameter(1811); }set { SetParameter(1811, value); }}
+	/// <summary>PID: 1812  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsdownloadcount_1812 {get { return GetParameter(1812); }set { SetParameter(1812, value); }}
+	/// <summary>PID: 1812  | Type: read</summary>
+	public System.Object Repositoryreleaseassetsdownloadcount {get { return GetParameter(1812); }set { SetParameter(1812, value); }}
+	/// <summary>PID: 1813  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetscreatedat_1813 {get { return GetParameter(1813); }set { SetParameter(1813, value); }}
+	/// <summary>PID: 1813  | Type: read</summary>
+	public System.Object Repositoryreleaseassetscreatedat {get { return GetParameter(1813); }set { SetParameter(1813, value); }}
+	/// <summary>PID: 1814  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsupdatedat_1814 {get { return GetParameter(1814); }set { SetParameter(1814, value); }}
+	/// <summary>PID: 1814  | Type: read</summary>
+	public System.Object Repositoryreleaseassetsupdatedat {get { return GetParameter(1814); }set { SetParameter(1814, value); }}
+	/// <summary>PID: 1815  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsbrowserdownloadurl_1815 {get { return GetParameter(1815); }set { SetParameter(1815, value); }}
+	/// <summary>PID: 1815  | Type: read</summary>
+	public System.Object Repositoryreleaseassetsbrowserdownloadurl {get { return GetParameter(1815); }set { SetParameter(1815, value); }}
 	/// <summary>PID: 2001  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoryissuesinstance_2001 {get { return GetParameter(2001); }set { SetParameter(2001, value); }}
@@ -3287,6 +3564,7 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 		repositorytags = new RepositorytagsQActionTable(this, 1200, "repositorytags");
 		repositoryreleases = new RepositoryreleasesQActionTable(this, 1400, "repositoryreleases");
 		repositoryworkflows = new RepositoryworkflowsQActionTable(this, 1600, "repositoryworkflows");
+		repositoryreleaseassets = new RepositoryreleaseassetsQActionTable(this, 1800, "repositoryreleaseassets");
 		repositoryissues = new RepositoryissuesQActionTable(this, 2000, "repositoryissues");
 		organizations = new OrganizationsQActionTable(this, 3000, "organizations");
 		organizationstatistics = new OrganizationstatisticsQActionTable(this, 3200, "organizationstatistics");
@@ -3326,6 +3604,13 @@ public class RepositoryworkflowsQActionTable : QActionTable, IEnumerable<Reposit
 	public RepositoryworkflowsQActionTable(SLProtocol protocol, int tableId, string tableName) : base(protocol, tableId, tableName) { }
 	IEnumerator IEnumerable.GetEnumerator() { return (IEnumerator) GetEnumerator(); }
 	public IEnumerator<RepositoryworkflowsQActionRow> GetEnumerator() { return new QActionTableEnumerator<RepositoryworkflowsQActionRow>(this); }
+}
+/// <summary>IDX: 0</summary>
+public class RepositoryreleaseassetsQActionTable : QActionTable, IEnumerable<RepositoryreleaseassetsQActionRow>
+{
+	public RepositoryreleaseassetsQActionTable(SLProtocol protocol, int tableId, string tableName) : base(protocol, tableId, tableName) { }
+	IEnumerator IEnumerable.GetEnumerator() { return (IEnumerator) GetEnumerator(); }
+	public IEnumerator<RepositoryreleaseassetsQActionRow> GetEnumerator() { return new QActionTableEnumerator<RepositoryreleaseassetsQActionRow>(this); }
 }
 /// <summary>IDX: 0</summary>
 public class RepositoryissuesQActionTable : QActionTable, IEnumerable<RepositoryissuesQActionRow>
@@ -3495,6 +3780,7 @@ public class RepositoriesQActionRow : QActionTableRow
 	public System.String[] GetChildKeysRepositorytagsRepositorytagsrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 1203, Key); }
 	public System.String[] GetChildKeysRepositoryreleasesRepositoryreleasesrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 1413, Key); }
 	public System.String[] GetChildKeysRepositoryworkflowsRepositoryworkflowsrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 1602, Key); }
+	public System.String[] GetChildKeysRepositoryreleaseassetsRepositoryreleaseassetsrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 1803, Key); }
 	public System.String[] GetChildKeysRepositoryissuesRepositoryissuesrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 2011, Key); }
 }
 /// <summary>IDX: 0</summary>
@@ -3601,6 +3887,7 @@ public class RepositoryreleasesQActionRow : QActionTableRow
 	public static implicit operator System.Object[](RepositoryreleasesQActionRow source) { return source.ToObjectArray(); }
 	public System.Object[] GetParentRowRepositorytagsRepositoryreleasestagid(SLProtocol protocol) { return (System.Object[])protocol.GetRow(1200, (System.String)Repositoryreleasestagid); }
 	public System.Object[] GetParentRowRepositoriesRepositoryreleasesrepositoryid(SLProtocol protocol) { return (System.Object[])protocol.GetRow(1000, (System.String)Repositoryreleasesrepositoryid); }
+	public System.String[] GetChildKeysRepositoryreleaseassetsRepositoryreleaseassetsrelease(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 1804, Key); }
 }
 /// <summary>IDX: 0</summary>
 public class RepositoryworkflowsQActionRow : QActionTableRow
@@ -3650,6 +3937,91 @@ public class RepositoryworkflowsQActionRow : QActionTableRow
 	public static implicit operator RepositoryworkflowsQActionRow(System.Object[] source) { return new RepositoryworkflowsQActionRow(source); }
 	public static implicit operator System.Object[](RepositoryworkflowsQActionRow source) { return source.ToObjectArray(); }
 	public System.Object[] GetParentRowRepositoriesRepositoryworkflowsrepositoryid(SLProtocol protocol) { return (System.Object[])protocol.GetRow(1000, (System.String)Repositoryworkflowsrepositoryid); }
+}
+/// <summary>IDX: 0</summary>
+public class RepositoryreleaseassetsQActionRow : QActionTableRow
+{
+	/// <summary>PID: 1801 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsinstance_1801 { get { if (base.Columns.ContainsKey(0)) { return base.Columns[0]; } else { return null; } } set { if (base.Columns.ContainsKey(0)) { base.Columns[0] = value; } else { base.Columns.Add(0, value); } } }
+	/// <summary>PID: 1801 | Type: read</summary>
+	public System.Object Repositoryreleaseassetsinstance { get { if (base.Columns.ContainsKey(0)) { return base.Columns[0]; } else { return null; } } set { if (base.Columns.ContainsKey(0)) { base.Columns[0] = value; } else { base.Columns.Add(0, value); } } }
+	/// <summary>PID: 1802 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsid_1802 { get { if (base.Columns.ContainsKey(1)) { return base.Columns[1]; } else { return null; } } set { if (base.Columns.ContainsKey(1)) { base.Columns[1] = value; } else { base.Columns.Add(1, value); } } }
+	/// <summary>PID: 1802 | Type: read</summary>
+	public System.Object Repositoryreleaseassetsid { get { if (base.Columns.ContainsKey(1)) { return base.Columns[1]; } else { return null; } } set { if (base.Columns.ContainsKey(1)) { base.Columns[1] = value; } else { base.Columns.Add(1, value); } } }
+	/// <summary>PID: 1803 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsrepositoryid_1803 { get { if (base.Columns.ContainsKey(2)) { return base.Columns[2]; } else { return null; } } set { if (base.Columns.ContainsKey(2)) { base.Columns[2] = value; } else { base.Columns.Add(2, value); } } }
+	/// <summary>PID: 1803 | Type: read</summary>
+	public System.Object Repositoryreleaseassetsrepositoryid { get { if (base.Columns.ContainsKey(2)) { return base.Columns[2]; } else { return null; } } set { if (base.Columns.ContainsKey(2)) { base.Columns[2] = value; } else { base.Columns.Add(2, value); } } }
+	/// <summary>PID: 1804 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsrelease_1804 { get { if (base.Columns.ContainsKey(3)) { return base.Columns[3]; } else { return null; } } set { if (base.Columns.ContainsKey(3)) { base.Columns[3] = value; } else { base.Columns.Add(3, value); } } }
+	/// <summary>PID: 1804 | Type: read</summary>
+	public System.Object Repositoryreleaseassetsrelease { get { if (base.Columns.ContainsKey(3)) { return base.Columns[3]; } else { return null; } } set { if (base.Columns.ContainsKey(3)) { base.Columns[3] = value; } else { base.Columns.Add(3, value); } } }
+	/// <summary>PID: 1805 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsuploader_1805 { get { if (base.Columns.ContainsKey(4)) { return base.Columns[4]; } else { return null; } } set { if (base.Columns.ContainsKey(4)) { base.Columns[4] = value; } else { base.Columns.Add(4, value); } } }
+	/// <summary>PID: 1805 | Type: read</summary>
+	public System.Object Repositoryreleaseassetsuploader { get { if (base.Columns.ContainsKey(4)) { return base.Columns[4]; } else { return null; } } set { if (base.Columns.ContainsKey(4)) { base.Columns[4] = value; } else { base.Columns.Add(4, value); } } }
+	/// <summary>PID: 1806 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsnodeid_1806 { get { if (base.Columns.ContainsKey(5)) { return base.Columns[5]; } else { return null; } } set { if (base.Columns.ContainsKey(5)) { base.Columns[5] = value; } else { base.Columns.Add(5, value); } } }
+	/// <summary>PID: 1806 | Type: read</summary>
+	public System.Object Repositoryreleaseassetsnodeid { get { if (base.Columns.ContainsKey(5)) { return base.Columns[5]; } else { return null; } } set { if (base.Columns.ContainsKey(5)) { base.Columns[5] = value; } else { base.Columns.Add(5, value); } } }
+	/// <summary>PID: 1807 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsname_1807 { get { if (base.Columns.ContainsKey(6)) { return base.Columns[6]; } else { return null; } } set { if (base.Columns.ContainsKey(6)) { base.Columns[6] = value; } else { base.Columns.Add(6, value); } } }
+	/// <summary>PID: 1807 | Type: read</summary>
+	public System.Object Repositoryreleaseassetsname { get { if (base.Columns.ContainsKey(6)) { return base.Columns[6]; } else { return null; } } set { if (base.Columns.ContainsKey(6)) { base.Columns[6] = value; } else { base.Columns.Add(6, value); } } }
+	/// <summary>PID: 1808 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetslabel_1808 { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
+	/// <summary>PID: 1808 | Type: read</summary>
+	public System.Object Repositoryreleaseassetslabel { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
+	/// <summary>PID: 1809 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetscontenttype_1809 { get { if (base.Columns.ContainsKey(8)) { return base.Columns[8]; } else { return null; } } set { if (base.Columns.ContainsKey(8)) { base.Columns[8] = value; } else { base.Columns.Add(8, value); } } }
+	/// <summary>PID: 1809 | Type: read</summary>
+	public System.Object Repositoryreleaseassetscontenttype { get { if (base.Columns.ContainsKey(8)) { return base.Columns[8]; } else { return null; } } set { if (base.Columns.ContainsKey(8)) { base.Columns[8] = value; } else { base.Columns.Add(8, value); } } }
+	/// <summary>PID: 1810 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsstate_1810 { get { if (base.Columns.ContainsKey(9)) { return base.Columns[9]; } else { return null; } } set { if (base.Columns.ContainsKey(9)) { base.Columns[9] = value; } else { base.Columns.Add(9, value); } } }
+	/// <summary>PID: 1810 | Type: read</summary>
+	public System.Object Repositoryreleaseassetsstate { get { if (base.Columns.ContainsKey(9)) { return base.Columns[9]; } else { return null; } } set { if (base.Columns.ContainsKey(9)) { base.Columns[9] = value; } else { base.Columns.Add(9, value); } } }
+	/// <summary>PID: 1811 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetssize_1811 { get { if (base.Columns.ContainsKey(10)) { return base.Columns[10]; } else { return null; } } set { if (base.Columns.ContainsKey(10)) { base.Columns[10] = value; } else { base.Columns.Add(10, value); } } }
+	/// <summary>PID: 1811 | Type: read</summary>
+	public System.Object Repositoryreleaseassetssize { get { if (base.Columns.ContainsKey(10)) { return base.Columns[10]; } else { return null; } } set { if (base.Columns.ContainsKey(10)) { base.Columns[10] = value; } else { base.Columns.Add(10, value); } } }
+	/// <summary>PID: 1812 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsdownloadcount_1812 { get { if (base.Columns.ContainsKey(11)) { return base.Columns[11]; } else { return null; } } set { if (base.Columns.ContainsKey(11)) { base.Columns[11] = value; } else { base.Columns.Add(11, value); } } }
+	/// <summary>PID: 1812 | Type: read</summary>
+	public System.Object Repositoryreleaseassetsdownloadcount { get { if (base.Columns.ContainsKey(11)) { return base.Columns[11]; } else { return null; } } set { if (base.Columns.ContainsKey(11)) { base.Columns[11] = value; } else { base.Columns.Add(11, value); } } }
+	/// <summary>PID: 1813 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetscreatedat_1813 { get { if (base.Columns.ContainsKey(12)) { return base.Columns[12]; } else { return null; } } set { if (base.Columns.ContainsKey(12)) { base.Columns[12] = value; } else { base.Columns.Add(12, value); } } }
+	/// <summary>PID: 1813 | Type: read</summary>
+	public System.Object Repositoryreleaseassetscreatedat { get { if (base.Columns.ContainsKey(12)) { return base.Columns[12]; } else { return null; } } set { if (base.Columns.ContainsKey(12)) { base.Columns[12] = value; } else { base.Columns.Add(12, value); } } }
+	/// <summary>PID: 1814 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsupdatedat_1814 { get { if (base.Columns.ContainsKey(13)) { return base.Columns[13]; } else { return null; } } set { if (base.Columns.ContainsKey(13)) { base.Columns[13] = value; } else { base.Columns.Add(13, value); } } }
+	/// <summary>PID: 1814 | Type: read</summary>
+	public System.Object Repositoryreleaseassetsupdatedat { get { if (base.Columns.ContainsKey(13)) { return base.Columns[13]; } else { return null; } } set { if (base.Columns.ContainsKey(13)) { base.Columns[13] = value; } else { base.Columns.Add(13, value); } } }
+	/// <summary>PID: 1815 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetsbrowserdownloadurl_1815 { get { if (base.Columns.ContainsKey(14)) { return base.Columns[14]; } else { return null; } } set { if (base.Columns.ContainsKey(14)) { base.Columns[14] = value; } else { base.Columns.Add(14, value); } } }
+	/// <summary>PID: 1815 | Type: read</summary>
+	public System.Object Repositoryreleaseassetsbrowserdownloadurl { get { if (base.Columns.ContainsKey(14)) { return base.Columns[14]; } else { return null; } } set { if (base.Columns.ContainsKey(14)) { base.Columns[14] = value; } else { base.Columns.Add(14, value); } } }
+	public RepositoryreleaseassetsQActionRow() : base(0, 15) { }
+	public RepositoryreleaseassetsQActionRow(System.Object[] oRow) : base(0, 15, oRow) { }
+	public static implicit operator RepositoryreleaseassetsQActionRow(System.Object[] source) { return new RepositoryreleaseassetsQActionRow(source); }
+	public static implicit operator System.Object[](RepositoryreleaseassetsQActionRow source) { return source.ToObjectArray(); }
+	public System.Object[] GetParentRowRepositoriesRepositoryreleaseassetsrepositoryid(SLProtocol protocol) { return (System.Object[])protocol.GetRow(1000, (System.String)Repositoryreleaseassetsrepositoryid); }
+	public System.Object[] GetParentRowRepositoryreleasesRepositoryreleaseassetsrelease(SLProtocol protocol) { return (System.Object[])protocol.GetRow(1400, (System.String)Repositoryreleaseassetsrelease); }
 }
 /// <summary>IDX: 0</summary>
 public class RepositoryissuesQActionRow : QActionTableRow

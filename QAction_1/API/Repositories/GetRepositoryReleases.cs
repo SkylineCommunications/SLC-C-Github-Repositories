@@ -23,7 +23,7 @@ namespace Skyline.DataMiner.Utils.Github.API.V20221128.Repositories
         public string Name { get; set; }
 
         [JsonProperty("label")]
-        public object Label { get; set; }
+        public string Label { get; set; }
 
         [JsonProperty("uploader")]
         public Uploader Uploader { get; set; }

@@ -55,7 +55,7 @@ Any inquiries can be addressed to:
 	<DeviceOID>0</DeviceOID>
 	<ElementType>Github Repositories</ElementType>
 	<Type relativeTimers="true">http</Type>
-	<Display defaultPage="General" pageOrder="General;----------;Organizations - Overview;Organizations;Teams;Members;----------;Repositories - Overview;Repositories;Issues;Workflows;----------;Inter-App Communication;Linker Tables" wideColumnPages="">
+	<Display defaultPage="General" pageOrder="General;----------;Organizations - Overview;Organizations;Teams;Members;----------;Repositories - Overview;Repositories;Releases;Issues;Workflows;----------;Inter-App Communication;Linker Tables" wideColumnPages="">
 		<Pages>
 			<Page>
 				<Name>Linker Tables</Name>
@@ -67,14 +67,17 @@ Any inquiries can be addressed to:
 
 	<Compliancies>
 		<CassandraReady>true</CassandraReady>
-		<MinimumRequiredVersion>10.1.0.0 - 9966</MinimumRequiredVersion>
+		<MinimumRequiredVersion>10.3.9.0 - 13293</MinimumRequiredVersion>
 	</Compliancies>
 
 	<Relations>
 		<Relation name="Repository Issues" path="1000;2000"/>
 		<Relation name="Repository Tags" path="1000;1200"/>
 		<Relation name="Repository Releases" path="1000;1400"/>
+		<Relation name="Repository Releases Assets" path="1000;1800"/>
 		<Relation name="Repository Workflows" path="1000;1600"/>
+		
+		<Relation name="Releases - Assets" path="1400;1800"/>
 		<Relation name="Tags Releases" path="1200;1400"/>
 
 		<Relation name="Organizations Statistics" path="3000;3200"/>
@@ -557,7 +560,7 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Position>
 						<Page>Repositories</Page>
 						<Column>0</Column>
-						<Row>4</Row>
+						<Row>2</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -1772,9 +1775,9 @@ To get more request you can add an api key under General/Configuration page. To 
 				<ColumnOption idx="3" pid="1004" type="retrieved" options="" />
 				<ColumnOption idx="4" pid="1005" type="retrieved" options=";save" />
 				<ColumnOption idx="5" pid="1006" type="retrieved" options="" />
-				<ColumnOption idx="6" pid="1007" type="retrieved" options="" />
-				<ColumnOption idx="7" pid="1008" type="retrieved" options="" />
-				<ColumnOption idx="8" pid="1009" type="retrieved" options="" />
+				<ColumnOption idx="6" pid="1007" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="7" pid="1008" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="8" pid="1009" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="9" pid="1010" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="10" pid="1011" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="11" pid="1012" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
@@ -1795,7 +1798,7 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Position>
 						<Page>Repositories</Page>
 						<Column>0</Column>
-						<Row>1</Row>
+						<Row>0</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -2402,7 +2405,7 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Position>
 						<Page>Repositories</Page>
 						<Column>0</Column>
-						<Row>2</Row>
+						<Row>1</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -2507,8 +2510,8 @@ To get more request you can add an api key under General/Configuration page. To 
 				<ColumnOption idx="7" pid="1408" type="retrieved" options="" />
 				<ColumnOption idx="8" pid="1409" type="retrieved" options="" />
 				<ColumnOption idx="9" pid="1410" type="retrieved" options="" />
-				<ColumnOption idx="10" pid="1411" type="retrieved" options="" />
-				<ColumnOption idx="11" pid="1412" type="retrieved" options="" />
+				<ColumnOption idx="10" pid="1411" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="11" pid="1412" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="12" pid="1413" type="retrieved" options=";foreignKey=1000" />
 			</ArrayOptions>
 			<Information>
@@ -2518,9 +2521,9 @@ To get more request you can add an api key under General/Configuration page. To 
 				<RTDisplay>true</RTDisplay>
 				<Positions>
 					<Position>
-						<Page>Repositories</Page>
+						<Page>Releases</Page>
 						<Column>0</Column>
-						<Row>3</Row>
+						<Row>0</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -2888,7 +2891,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<ColumnOption idx="2" pid="1603" type="retrieved" options="" />
 				<ColumnOption idx="3" pid="1604" type="retrieved" options="" />
 				<ColumnOption idx="4" pid="1605" type="retrieved" options="" />
-				<ColumnOption idx="5" pid="1606" type="retrieved" options="" />
+				<ColumnOption idx="5" pid="1606" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="6" pid="1607" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="7" pid="1608" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 			</ArrayOptions>
@@ -3134,6 +3137,419 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Measurement>
 		</Param>
 		
+		<Param id="1800">
+			<Name>RepositoryReleaseAssets</Name>
+			<Description>Release Assets</Description>
+			<Type>array</Type>
+			<ArrayOptions index="0">
+				<ColumnOption idx="0" pid="1801" type="retrieved" options=""/>
+				<ColumnOption idx="1" pid="1802" type="retrieved" options="" />
+				<ColumnOption idx="2" pid="1803" type="retrieved" options=";foreignKey=1000" />
+				<ColumnOption idx="3" pid="1804" type="retrieved" options=";foreignKey=1400" />
+				<ColumnOption idx="4" pid="1805" type="retrieved" options="" />
+				<ColumnOption idx="5" pid="1806" type="retrieved" options="" />
+				<ColumnOption idx="6" pid="1807" type="retrieved" options="" />
+				<ColumnOption idx="7" pid="1808" type="retrieved" options="" />
+				<ColumnOption idx="8" pid="1809" type="retrieved" options="" />
+				<ColumnOption idx="9" pid="1810" type="retrieved" options="" />
+				<ColumnOption idx="10" pid="1811" type="retrieved" options="" />
+				<ColumnOption idx="11" pid="1812" type="retrieved" options="" />
+				<ColumnOption idx="12" pid="1813" type="retrieved" options="" />
+				<ColumnOption idx="13" pid="1814" type="retrieved" options="" />
+				<ColumnOption idx="14" pid="1815" type="retrieved" options="" />
+			</ArrayOptions>
+			<Information>
+				<Subtext>A list of the assets for the releases.</Subtext>
+			</Information>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Releases</Page>
+						<Column>0</Column>
+						<Row>1</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:1801|0-1802|1-1803|2-1804|3-1805|4-1806|5-1807|6-1808|7-1809|8-1810|9-1811|10-1812|11-1813|12-1814|13-1815|14,width:100-100-100-100-100-100-100-100-100-113-144-144-145-145-145,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT-INT-INT-STRING-STRING|DESC-STRING,lines:25,filter:true">table</Type>
+			</Measurement>
+		</Param>
+		<Param id="1801" trending="false">
+			<Name>RepositoryReleaseAssetsInstance</Name>
+			<Description>Instance (Release Assets)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>This is the key used internally by DataMiner to identify the table entries.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1802" trending="false">
+			<Name>RepositoryReleaseAssetsId</Name>
+			<Description>ID (Release Assets)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The id of the asset.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<!-- SuppressValidator 2.9.7 An identifier does not have a unit -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Decimals>0</Decimals>
+				<Range>
+					<Low>0</Low>
+				</Range>
+			</Display>
+			<!-- /SuppressValidator 2.9.7 -->
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="1803" trending="false">
+			<Name>RepositoryReleaseAssetsRepositoryId</Name>
+			<Description>Repository ID (Release Assets)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The link to the repository the asset is linked to.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1804" trending="false">
+			<Name>RepositoryReleaseAssetsRelease</Name>
+			<Description>Release (Release Assets)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The release the asset is linked to.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1805" trending="false">
+			<Name>RepositoryReleaseAssetsUploader</Name>
+			<Description>Uploader (Release Assets)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The name of the person who uploaded the asset.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1806" trending="false">
+			<Name>RepositoryReleaseAssetsNodeId</Name>
+			<Description>Node ID (Release Assets)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The node id of the asset.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1807" trending="false">
+			<Name>RepositoryReleaseAssetsName</Name>
+			<Description>Name (Release Assets)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The name of the asset.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1808" trending="false">
+			<Name>RepositoryReleaseAssetsLabel</Name>
+			<Description>Label (Release Assets)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>An optional label to the asset.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="2" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1809" trending="false">
+			<Name>RepositoryReleaseAssetsContentType</Name>
+			<Description>Content Type (Release Assets)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The content type of the asset.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1810" trending="true">
+			<Name>RepositoryReleaseAssetsState</Name>
+			<Description>State (Release Assets)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The state of the asset.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<Normal>uploaded</Normal>
+			</Alarm>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Uploaded</Display>
+						<Value>uploaded</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Open</Display>
+						<Value>open</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="1811" trending="true">
+			<Name>RepositoryReleaseAssetsSize</Name>
+			<Description>Size (Release Assets)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The size of the asset.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<CL>0</CL>
+			</Alarm>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Decimals>0</Decimals>
+				<Range>
+					<Low>0</Low>
+				</Range>
+				<Units>B</Units>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="1812" trending="true">
+			<Name>RepositoryReleaseAssetsDownloadCount</Name>
+			<Description>Download Count (Release Assets)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The amount of time this asset has been downloaded.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
+			<!-- SuppressValidator 2.9.7 A counter does not have a Unit -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Decimals>0</Decimals>
+				<Range>
+					<Low>0</Low>
+				</Range>
+			</Display>
+			<!-- /SuppressValidator 2.9.7 -->
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="1813" trending="true">
+			<Name>RepositoryReleaseAssetsCreatedAt</Name>
+			<Description>Created At (Release Assets)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The datetime when the asset was first created.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
+				<Range>
+					<Low>0</Low>
+				</Range>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="1814" trending="true">
+			<Name>RepositoryReleaseAssetsUpdatedAt</Name>
+			<Description>Updated At (Release Assets)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The datetime when the asset was last updated.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
+				<Range>
+					<Low>0</Low>
+				</Range>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="1815" trending="false">
+			<Name>RepositoryReleaseAssetsBrowserDownloadUrl</Name>
+			<Description>Browser Download Url (Release Assets)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The url to download the asset in a browser.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<!-- SuppressValidator 2.5.1 Depends on the use case -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		
 		<Param id="2000">
 			<Name>RepositoryIssues</Name>
 			<Description>Repository Issues</Description>
@@ -3146,9 +3562,9 @@ To get more request you can add an api key under General/Configuration page. To 
 				<ColumnOption idx="4" pid="2005" type="retrieved" options="" />
 				<ColumnOption idx="5" pid="2006" type="retrieved" options="" />
 				<ColumnOption idx="6" pid="2007" type="retrieved" options="" />
-				<ColumnOption idx="7" pid="2008" type="retrieved" options="" />
-				<ColumnOption idx="8" pid="2009" type="retrieved" options="" />
-				<ColumnOption idx="9" pid="2010" type="retrieved" options="" />
+				<ColumnOption idx="7" pid="2008" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="8" pid="2009" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="9" pid="2010" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="10" pid="2011" type="retrieved" options=";foreignKey=1000" />
 			</ArrayOptions>
 			<Information>
