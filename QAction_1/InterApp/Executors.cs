@@ -28,6 +28,7 @@
 			{ typeof(GenericInterAppMessage<AddConnectorCIWorkflowRequest>),            typeof(AddConnectorCIWorkflowExecutor) },
 			{ typeof(GenericInterAppMessage<AddNugetCICDWorkflowRequest>),              typeof(AddNugetCICDWorkflowExecutor) },
 			{ typeof(GenericInterAppMessage<AddInternalNugetCICDWorkflowRequest>),      typeof(AddInternalNugetCICDWorkflowExecutor) },
+			{ typeof(GenericInterAppMessage<ExecuteWorkflowRequest>),					typeof(ExecuteWorkflowExecutor) },
 		};
 
 		public static IDictionary<Type, Type> MessageToExecutorMapping => InternalMessageToExecutorMapping;
