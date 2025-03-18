@@ -155,9 +155,8 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 
             foreach (var iacRow in table.Rows.Where(iac => iac.ResponseType.AssemblyQualifiedName == typeof(ExecuteWorkflowResponse).AssemblyQualifiedName))
             {
-                
                 var request = (GenericInterAppMessage<ExecuteWorkflowRequest>)iacRow.Request;
-                protocol.Log($"QA{protocol.QActionID}|matching {request.Data.RepositoryId.Owner} to {owner}|{request.Data.RepositoryId.Name} == {name}| {request.Data.WorkflowId} == {workflowId}| status: {iacRow.Status}", LogType.DebugInfo, LogLevel.NoLogging);
+
                 if (request.Data.RepositoryId.Owner == owner &&
                     request.Data.RepositoryId.Name == name &&
                     request.Data.WorkflowId == workflowId &&
