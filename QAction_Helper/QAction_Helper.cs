@@ -2062,6 +2062,7 @@ public interface SLProtocolExt : SLProtocol
 	object Addrepositorypagebutton { get; set; }
 	object Addworkflowpagebutton_52 { get; set; }
 	object Addworkflowpagebutton { get; set; }
+	object Processworkflowexecution_dummy { get; set; }
 	object Statuscode_100 { get; set; }
 	object Statuscode { get; set; }
 	object Getrepositoryurl_101 { get; set; }
@@ -2582,6 +2583,8 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Addworkflowpagebutton_52 {get { return GetParameter(52); }set { SetParameter(52, value); }}
 	/// <summary>PID: 52  | Type: write | DISCREETS: Add Workflow... = Add Workflow</summary>
 	public System.Object Addworkflowpagebutton {get { return Write.Addworkflowpagebutton; }set { Write.Addworkflowpagebutton = value; }}
+	/// <summary>PID: 81  | Type: dummy</summary>
+	public System.Object Processworkflowexecution_dummy {get { return GetParameter(81); }set { SetParameter(81, value); }}
 	/// <summary>PID: 100  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Statuscode_100 {get { return GetParameter(100); }set { SetParameter(100, value); }}

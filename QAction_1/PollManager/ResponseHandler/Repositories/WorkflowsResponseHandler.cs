@@ -95,7 +95,6 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
         public static void HandleExecuteWorkflowResponse(SLProtocol protocol)
         {
             // Check status code
-            protocol.Log($"QA{protocol.QActionID}|workflow executed|Message", LogType.DebugInfo, LogLevel.NoLogging);
             if (!protocol.IsSuccessStatusCode())
             {
                 return;
@@ -151,16 +150,18 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 
         public static void HandleWorkflowExeuctionInterApp(SLProtocol protocol, string owner, string name, string workflowId)
         {
-            // Check if there are Topics InterApp messages waiting on content creation
+            // Check if there are Topics InterApp messages waiting for confirmation
             var table = IAC_MessagesTable.GetTable(protocol);
 
             foreach (var iacRow in table.Rows.Where(iac => iac.ResponseType.AssemblyQualifiedName == typeof(ExecuteWorkflowResponse).AssemblyQualifiedName))
             {
-                // Check if for the given repo all the topics are added.
+                
                 var request = (GenericInterAppMessage<ExecuteWorkflowRequest>)iacRow.Request;
+                protocol.Log($"QA{protocol.QActionID}|matching {request.Data.RepositoryId.Owner} to {owner}|{request.Data.RepositoryId.Name} == {name}| {request.Data.WorkflowId} == {workflowId}| status: {iacRow.Status}", LogType.DebugInfo, LogLevel.NoLogging);
                 if (request.Data.RepositoryId.Owner == owner &&
                     request.Data.RepositoryId.Name == name &&
-                    request.Data.WorkflowId == workflowId)
+                    request.Data.WorkflowId == workflowId &&
+                    iacRow.Status == IAC_MessageStatus.InProgress)
                 {
                     var returnMessage = (GenericInterAppMessage<ExecuteWorkflowResponse>)iacRow.Response;
                     returnMessage.Data.Success = true;

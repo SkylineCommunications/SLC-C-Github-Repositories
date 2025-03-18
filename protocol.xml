@@ -602,7 +602,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Discreets>
 			</Measurement>
 		</Param>
-
+		<Param id="81">
+			<Name>ProcessWorkflowExecution</Name>
+			<Description>Process Workflow Execution</Description>
+			<Type>dummy</Type>
+		</Param>
 		<Param id="100" trending="false">
 			<Name>StatusCode</Name>
 			<Description>Status Code</Description>
@@ -5325,7 +5329,7 @@ Are you sure you want to continue.]]>
 		<QAction id="3000" name="Organizations Table - Changes" encoding="csharp" triggers="3105" row="true" />
 
 		<QAction id="20000" name="HTTP Request Handling" encoding="csharp" triggers="30" />
-		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211;212;213;220;221;222;223;224;226;228;229;230;231"></QAction>
+		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211;212;213;220;221;222;223;224;226;228;229;230;81"></QAction>
 		<QAction id="20002" name="HTTP Poll Manager Updates" encoding="csharp" row="true" triggers="21006;21053" />
 
 		<QAction id="9000000" name="Process Incoming InterApp Messages" encoding="csharp" triggers="9000000"/>
@@ -6291,6 +6295,15 @@ Are you sure you want to continue.]]>
 				<Id>330</Id>
 			</Content>
 		</Trigger>
+		<Trigger id="281">
+			<Name>After Post Workflow Execution</Name>
+			<On id="231">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>281</Id>
+			</Content>
+		</Trigger>
 	</Triggers>
 
 	<Actions>
@@ -6496,6 +6509,11 @@ Are you sure you want to continue.]]>
 			<Name>Clear Put Repository Topics Link Header</Name>
 			<On id="280">parameter</On>
 			<Type>clear</Type>
+		</Action>
+		<Action id="281">
+			<Name>Process Workflow Execution</Name>
+			<On id="81">parameter</On>
+			<Type>run actions</Type>
 		</Action>
 
 		<Action id="301">

@@ -76,7 +76,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 
             var jsonBody = new
             {
-                @ref = "main",
+                @ref = Message.Data.WorkflowReference,
                 inputs = Message.Data.WorkflowInputs,
             };
 
@@ -85,7 +85,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
                 { Parameter.postworkflowexecutionurl_131, url },
                 { Parameter.postworkflowexecutionbody_181, JsonConvert.SerializeObject(jsonBody) },
             };
-            protocol.Log($"QA{protocol.QActionID}|workflow execute bodY: {JsonConvert.SerializeObject(jsonBody)}", LogType.DebugInfo, LogLevel.NoLogging);
+
             protocol.SetParameters(setParams.Keys.ToArray(), setParams.Values.ToArray());
             protocol.CheckTrigger(231);
 
