@@ -2,11 +2,16 @@
 
 namespace Skyline.Protocol.PollManager.RequestHandler.Repositories
 {
+	using System;
+	using System.Collections.Generic;
 	using System.Linq;
+	using System.Web.UI.WebControls.WebParts;
+	using System.Web;
 
 	using Newtonsoft.Json;
 
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows;
+	using Skyline.DataMiner.Core.InterAppCalls.Common.CallSingle;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.Protocol;
 	using Skyline.Protocol.API.Workflows;
@@ -58,6 +63,24 @@ namespace Skyline.Protocol.PollManager.RequestHandler.Repositories
 				$".github/workflows/{workflow.Name}.yml",
 				YamlConvert.SerializeObject(workflow),
 				$"Adding a new workflow: {workflow.Name}");
+		}
+
+		public static void ExecuteWorkflow(SLProtocol protocol, string repositoryId, string reference, string workflowIdOrName, Dictionary<string, object> inputs)
+		{
+			var body = new WorkflowExecutionRequest
+			{
+				Reference = reference,
+				Inputs = inputs ?? new Dictionary<string, object>(),
+			};
+
+			var sets = new Dictionary<int, object>
+			{
+				{ Parameter.postworkflowexecutionurl_131, $"repos/{repositoryId}/actions/workflows/{HttpUtility.UrlEncode(workflowIdOrName)}/dispatches" },
+				{ Parameter.postworkflowexecutionbody_181, JsonConvert.SerializeObject(body) },
+			};
+
+			protocol.SetParameters(sets.Keys.ToArray(), sets.Values.ToArray());
+			protocol.CheckTrigger(231);
 		}
 	}
 }
