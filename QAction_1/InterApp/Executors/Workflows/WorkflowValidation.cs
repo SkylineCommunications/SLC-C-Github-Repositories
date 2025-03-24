@@ -91,14 +91,6 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
                 return false;
             }
 
-            // Check if the public keys are fetched
-            if (repo.PublicKey == Exceptions.NotAvailable ||
-                repo.PublicKeyID == Exceptions.NotAvailable)
-            {
-                result = $"The public keys are not available for '{workflowRequest.RepositoryId.FullName}'. Either the configured API Token does not have permission to the repository, or the public keys for the repository are not fetched yet.";
-                return false;
-            }
-
             return true;
         }
 
