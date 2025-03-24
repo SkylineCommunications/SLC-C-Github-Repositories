@@ -2056,6 +2056,7 @@ public interface SLProtocolExt : SLProtocol
 	object Ratelimitresetepochseconds { get; set; }
 	object Triggerrequesthandling_30 { get; set; }
 	object Triggerrequesthandling { get; set; }
+	object Processworkflowexecution_dummy { get; set; }
 	object Generalpagebuttons_50 { get; set; }
 	object Generalpagebuttons { get; set; }
 	object Addrepositorypagebutton_51 { get; set; }
@@ -2570,6 +2571,8 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Triggerrequesthandling_30 {get { return GetParameter(30); }set { SetParameter(30, value); }}
 	/// <summary>PID: 30  | Type: read</summary>
 	public System.Object Triggerrequesthandling {get { return GetParameter(30); }set { SetParameter(30, value); }}
+	/// <summary>PID: 31  | Type: dummy</summary>
+	public System.Object Processworkflowexecution_dummy {get { return GetParameter(31); }set { SetParameter(31, value); }}
 	/// <summary>PID: 50  | Type: write | DISCREETS: Configuration... = Configuration, Poll Manager... = Poll Manager</summary>
 	public System.Object Generalpagebuttons_50 {get { return GetParameter(50); }set { SetParameter(50, value); }}
 	/// <summary>PID: 50  | Type: write | DISCREETS: Configuration... = Configuration, Poll Manager... = Poll Manager</summary>

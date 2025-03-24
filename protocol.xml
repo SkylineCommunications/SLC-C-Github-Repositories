@@ -513,7 +513,11 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Interprete>
 		</Param>
-
+		<Param id="31">
+			<Name>ProcessWorkflowExecution</Name>
+			<Description>Process Workflow Execution</Description>
+			<Type>dummy</Type>
+		</Param>
 		<Param id="50">
 			<Name>GeneralPageButtons</Name>
 			<Type>write</Type>
@@ -5324,7 +5328,7 @@ Are you sure you want to continue.]]>
 		<QAction id="3000" name="Organizations Table - Changes" encoding="csharp" triggers="3105" row="true" />
 
 		<QAction id="20000" name="HTTP Request Handling" encoding="csharp" triggers="30" />
-		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211;212;213;220;221;222;223;224;226;228;229;230;231"></QAction>
+		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211;212;213;220;221;222;223;224;226;228;229;230;31"></QAction>
 		<QAction id="20002" name="HTTP Poll Manager Updates" encoding="csharp" row="true" triggers="21006;21053" />
 
 		<QAction id="9000000" name="Process Incoming InterApp Messages" encoding="csharp" triggers="9000000"/>
@@ -6296,6 +6300,7 @@ Are you sure you want to continue.]]>
 			<Time>after</Time>
 			<Type>action</Type>
 			<Content>
+				<Id>16</Id>
 				<Id>281</Id>
 				<Id>331</Id>
 			</Content>
@@ -6317,6 +6322,11 @@ Are you sure you want to continue.]]>
 		<Action id="15">
 			<Name>PollManager</Name>
 			<On id="30">parameter</On>
+			<Type>run actions</Type>
+		</Action>
+		<Action id="16">
+			<Name>Process Workflow Execution</Name>
+			<On id="31">parameter</On>
 			<Type>run actions</Type>
 		</Action>
 
