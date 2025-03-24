@@ -97,9 +97,11 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 		public static void HandleExecuteWorkflowResponse(SLProtocol protocol)
 		{
 			// Check status code
+			var message = $"Successfully executed the given workflow.";
 			if (!protocol.IsSuccessStatusCode())
 			{
-				return;
+				var statusCode = Convert.ToString(protocol.GetParameter(Parameter.statuscode));
+				message = $"Received error code {statusCode} from the attempt to execute the workflow";
 			}
 
 			// Parse response
@@ -114,7 +116,7 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			var name = match.Groups[2].Value;
 			var workflowId = match.Groups[3].Value;
 
-			HandleWorkflowExeuctionInterApp(protocol, owner, name, workflowId);
+			HandleWorkflowExeuctionInterApp(protocol, owner, name, workflowId, message);
 		}
 
 		private static void HandleNextRepositoryWorkflow(SLProtocol protocol, string owner, string name)
@@ -156,7 +158,7 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, nextOwner, nextName, PollingConstants.PerPage, 1);
 		}
 
-		public static void HandleWorkflowExeuctionInterApp(SLProtocol protocol, string owner, string name, string workflowId)
+		public static void HandleWorkflowExeuctionInterApp(SLProtocol protocol, string owner, string name, string workflowId, string message)
 		{
 			// Check if there are Topics InterApp messages waiting for confirmation
 			var table = IAC_MessagesTable.GetTable(protocol);
@@ -172,7 +174,7 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 				{
 					var returnMessage = (GenericInterAppMessage<ExecuteWorkflowResponse>)iacRow.Response;
 					returnMessage.Data.Success = true;
-					returnMessage.Data.Description = $"Successfully executed the given workflow.";
+					returnMessage.Data.Description = message;
 					iacRow.Request.Reply(protocol.SLNet.RawConnection, returnMessage, Types.KnownTypes);
 					iacRow.Status = IAC_MessageStatus.Confirmed;
 					iacRow.SaveToProtocol(protocol);
