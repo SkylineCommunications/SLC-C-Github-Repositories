@@ -14,6 +14,7 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Skyline.DataMiner.Dev.Protocol" Version="10.3.9" />
+    <PackageReference Include="Skyline.DataMiner.Utils.Protocol.Extension" Version="1.0.0.3" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

@@ -6,13 +6,17 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Text.RegularExpressions;
+	using System.Web;
 
 	using Newtonsoft.Json;
 
+	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages;
+	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
 	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 	using Skyline.Protocol;
+	using Skyline.Protocol.API;
 	using Skyline.Protocol.API.Headers;
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
@@ -29,8 +33,9 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			}
 
 			// Parse response
-			var response = JsonConvert.DeserializeObject<RepositoryWorkflowsResponse>(Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowscontent)));
-			var url = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowsurl));
+			var response = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryWorkflowsResponse>(
+				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowscontent_205)));
+			var url = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowsurl_105));
 			var table = RepositoryWorkflowsTable.GetTable();
 
 			// Parse url to check which respository this issue is linked to
@@ -92,6 +97,32 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			HandleNextRepositoryWorkflow(protocol, owner, name);
 		}
 
+		public static void HandleExecuteWorkflowResponse(SLProtocol protocol)
+		{
+			// Check status code
+			var message = $"Successfully executed the given workflow.";
+			if (!protocol.IsSuccessStatusCode())
+			{
+				var errorResponse = Convert.ToString(protocol.GetParameter(Parameter.postexecuteworkflowcontent_231));
+				var error = SecureNewtonsoftDeserialization.DeserializeObject<GithubError>(errorResponse);
+				message = $"Received error code {error.Status}: {error.Message}";
+			}
+
+			// Parse response
+			var url = Convert.ToString(protocol.GetParameter(Parameter.postworkflowexecutionurl_131));
+
+			// Parse url to check which respository this issue is linked to
+			var pattern = "repos\\/(.*)\\/(.*)\\/actions\\/workflows\\/(.*)\\/dispatches";
+			var options = RegexOptions.Multiline;
+
+			var match = Regex.Match(url, pattern, options);
+			var owner = match.Groups[1].Value;
+			var name = match.Groups[2].Value;
+			var workflowId = HttpUtility.UrlDecode(match.Groups[3].Value);
+
+			HandleWorkflowExecutionInterApp(protocol, owner, name, workflowId, message);
+		}
+
 		private static void HandleNextRepositoryWorkflow(SLProtocol protocol, string owner, string name)
 		{
 			// Check if there are more workflows to fetch
@@ -130,6 +161,30 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			var nextOwner = next.Split('/')[0];
 			var nextName = next.Split('/')[1];
 			RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, nextOwner, nextName, PollingConstants.PerPage, 1);
+		}
+
+		public static void HandleWorkflowExecutionInterApp(SLProtocol protocol, string owner, string name, string workflowId, string message)
+		{
+			// Check if there are Topics InterApp messages waiting for confirmation
+			var table = IAC_MessagesTable.GetTable(protocol);
+
+			foreach (var iacRow in table.Rows.Where(iac => iac.ResponseType.AssemblyQualifiedName == typeof(ExecuteWorkflowResponse).AssemblyQualifiedName))
+			{
+				var request = (GenericInterAppMessage<ExecuteWorkflowRequest>)iacRow.Request;
+
+				if (request.Data.RepositoryId.Owner == owner &&
+					request.Data.RepositoryId.Name == name &&
+					request.Data.WorkflowId == workflowId &&
+					iacRow.Status == IAC_MessageStatus.InProgress)
+				{
+					var returnMessage = (GenericInterAppMessage<ExecuteWorkflowResponse>)iacRow.Response;
+					returnMessage.Data.Success = true;
+					returnMessage.Data.Description = message;
+					iacRow.Request.Reply(protocol.SLNet.RawConnection, returnMessage, Types.KnownTypes);
+					iacRow.Status = IAC_MessageStatus.Confirmed;
+					iacRow.SaveToProtocol(protocol);
+				}
+			}
 		}
 	}
 }
