@@ -23,6 +23,11 @@
   <ItemGroup>
     <Reference Include="System.Web" />
   </ItemGroup>
+  <ItemGroup>
+    <SonarQubeSetting Include="sonar.cpd.exclusions">
+    <Value>API/Workflows/WorkflowFactory.cs,InterApp/Executors/**</Value>
+  </SonarQubeSetting>
+  </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties DisLinkId="1" DisProjectType="qactionProject" DisLinkedXmlFile="..\protocol.xml" />
