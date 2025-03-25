@@ -33,9 +33,9 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			}
 
 			// Parse response
-			var parameters = (object[])protocol.GetParameters(new uint[] { Parameter.getrepositoryworkflowscontent_205, Parameter.getrepositoryworkflowsurl_105 });
-			var response = JsonConvert.DeserializeObject<RepositoryWorkflowsResponse>(Convert.ToString(parameters[0]));
-			var url = Convert.ToString(parameters[1]);
+			var response = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryWorkflowsResponse>(
+				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowscontent_205)));
+			var url = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowsurl_105));
 			var table = RepositoryWorkflowsTable.GetTable();
 
 			// Parse url to check which respository this issue is linked to
