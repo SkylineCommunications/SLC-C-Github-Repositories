@@ -6,9 +6,6 @@
 	using System.Text.RegularExpressions;
 	using System.Web;
 
-	using Newtonsoft.Json;
-
-	using Skyline.DataMiner.ConnectorAPI.Github.Repositories;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Repositories;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows;
@@ -76,7 +73,8 @@
 			}
 
 			// Parse response
-			var response = JsonConvert.DeserializeObject<PutRepositoryContentResponse>(Convert.ToString(protocol.GetParameter(Parameter.putrepositorycontentcontent)));
+			var response = SecureNewtonsoftDeserialization.DeserializeObject<PutRepositoryContentResponse>(
+				Convert.ToString(protocol.GetParameter(Parameter.putrepositorycontentcontent)));
 			var url = response.Content.Url;
 			var table = IAC_MessagesTable.GetTable(protocol);
 

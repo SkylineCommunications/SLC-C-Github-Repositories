@@ -4,10 +4,9 @@
 	using System.Collections.Generic;
 	using System.Linq;
 
-	using Newtonsoft.Json;
-
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Organizations;
+	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 	using Skyline.Protocol.API.Headers;
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Organizations;
@@ -24,7 +23,8 @@
 			}
 
 			// Parse response
-			var response = JsonConvert.DeserializeObject<List<Organization>>(Convert.ToString(protocol.GetParameter(Parameter.getuserorganizationscontent_210)));
+			var response = SecureNewtonsoftDeserialization.DeserializeObject<List<Organization>>(
+				Convert.ToString(protocol.GetParameter(Parameter.getuserorganizationscontent_210)));
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|HandleUserOrganizationsResponse|response was null.", LogType.Error, LogLevel.Level1);

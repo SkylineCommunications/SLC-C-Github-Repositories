@@ -11,6 +11,7 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
+	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 	using Skyline.Protocol;
 	using Skyline.Protocol.API.Headers;
 	using Skyline.Protocol.Extensions;
@@ -115,7 +116,8 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			}
 
 			// If no more workflows for this repo fetch the next repository in the queue.
-			var queue = JsonConvert.DeserializeObject<List<string>>(Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowsqueue)));
+			var queue = SecureNewtonsoftDeserialization.DeserializeObject<List<string>>(
+				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowsqueue)));
 			var next = queue?.FirstOrDefault();
 
 			if (next == null)

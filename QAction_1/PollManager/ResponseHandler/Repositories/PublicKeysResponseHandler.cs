@@ -1,7 +1,6 @@
 ﻿namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 {
 	using System;
-	using System.CodeDom;
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Text.RegularExpressions;
@@ -10,6 +9,7 @@
 
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
+	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;
@@ -32,7 +32,8 @@
 			}
 
 			// Parse response
-			var response = JsonConvert.DeserializeObject<PublicKey>(Convert.ToString(protocol.GetParameter(Parameter.getrepositorypublickeycontent)));
+			var response = SecureNewtonsoftDeserialization.DeserializeObject<PublicKey>(
+				Convert.ToString(protocol.GetParameter(Parameter.getrepositorypublickeycontent)));
 			var url = Convert.ToString(protocol.GetParameter(Parameter.getrepositorypublickeyurl));
 
 			if (response == null)
@@ -66,7 +67,8 @@
 		private static void HandleNextRepositoryPublicKey(SLProtocol protocol)
 		{
 			// Get the next repo in the queue to fetch
-			var queue = JsonConvert.DeserializeObject<List<string>>(Convert.ToString(protocol.GetParameter(Parameter.getrepositorypublickeyqueue)));
+			var queue = SecureNewtonsoftDeserialization.DeserializeObject<List<string>>(
+				Convert.ToString(protocol.GetParameter(Parameter.getrepositorypublickeyqueue)));
 			var next = queue?.FirstOrDefault();
 
 			if (next == null)

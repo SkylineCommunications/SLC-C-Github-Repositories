@@ -6,7 +6,7 @@ namespace Skyline.Protocol.API.Content
 
 	using Newtonsoft.Json;
 
-	// Root myDeserializedClass = JsonConvert.DeserializeObject<PutRepositoryContentResponse>(myJsonResponse);
+	// Root myDeserializedClass = SecureNewtonsoftDeserialization.DeserializeObject<PutRepositoryContentResponse>(myJsonResponse);
 	public class PutRepositoryContentResponse
 	{
 		[JsonProperty("content")]

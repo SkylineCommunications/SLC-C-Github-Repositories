@@ -4,11 +4,10 @@ namespace Skyline.DataMiner.Utils.Github.API.V20221128.Repositories
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Web.UI.WebControls;
 
 	using Newtonsoft.Json;
 
-	// Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+	// Root myDeserializedClass = SecureNewtonsoftDeserialization.DeserializeObject<Root>(myJsonResponse);
 	public class AdvancedSecurity
 	{
 		[JsonProperty("status")]

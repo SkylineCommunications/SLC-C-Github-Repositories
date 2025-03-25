@@ -1,11 +1,13 @@
-﻿namespace Skyline.DataMiner.Utils.Github.API.V20221128.Repositories
+﻿// Ignore Spelling: Utils Github API Workflows
+
+namespace Skyline.DataMiner.Utils.Github.API.V20221128.Repositories
 {
 	using System;
 	using System.Collections.Generic;
 
 	using Newtonsoft.Json;
 
-	// Root myDeserializedClass = JsonConvert.DeserializeObject<RepositoryWorkflowsResponse>(myJsonResponse);
+	// Root myDeserializedClass = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryWorkflowsResponse>(myJsonResponse);
 	public class RepositoryWorkflowsResponse
 	{
 		[JsonProperty("total_count")]
@@ -42,12 +44,18 @@
 		public DateTime DeletedAt { get; set; }
 
 		[JsonProperty("url")]
+#pragma warning disable S3996 // URI properties should not be strings
 		public string Url { get; set; }
+#pragma warning restore S3996 // URI properties should not be strings
 
 		[JsonProperty("html_url")]
+#pragma warning disable S3996 // URI properties should not be strings
 		public string HtmlUrl { get; set; }
+#pragma warning restore S3996 // URI properties should not be strings
 
 		[JsonProperty("badge_url")]
+#pragma warning disable S3996 // URI properties should not be strings
 		public string BadgeUrl { get; set; }
+#pragma warning restore S3996 // URI properties should not be strings
 	}
 }

@@ -7,7 +7,7 @@ namespace Skyline.DataMiner.Utils.Github.API.V20221128.Repositories
 
 	using Newtonsoft.Json;
 
-	// var myDeserializedClass = JsonConvert.DeserializeObject<RepositoryTopics>(myJsonResponse);
+	// var myDeserializedClass = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryTopics>(myJsonResponse);
 	[Serializable]
 	public class RepositoryTopics
 	{

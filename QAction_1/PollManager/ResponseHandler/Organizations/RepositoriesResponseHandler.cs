@@ -4,14 +4,12 @@
 	using System.Collections.Generic;
 	using System.Linq;
 
-	using Newtonsoft.Json;
-
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Repositories;
-	using Skyline.DataMiner.Core.InterAppCalls.Common.CallSingle;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
+	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 	using Skyline.Protocol.API.Headers;
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Organizations;
@@ -30,7 +28,8 @@
 			}
 
 			// Parse response
-			var response = JsonConvert.DeserializeObject<List<RepositoryResponse>>(Convert.ToString(protocol.GetParameter(Parameter.getorganizationrepositoriescontent)));
+			var response = SecureNewtonsoftDeserialization.DeserializeObject<List<RepositoryResponse>>(
+				Convert.ToString(protocol.GetParameter(Parameter.getorganizationrepositoriescontent)));
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|ParseGetOrganizationRepositoriesResponse|response was null.", LogType.Error, LogLevel.Level1);
@@ -99,7 +98,8 @@
 			}
 
 			// Parse response
-			var response = JsonConvert.DeserializeObject<RepositoryResponse>(Convert.ToString(protocol.GetParameter(Parameter.postrepositorycontent)));
+			var response = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryResponse>(
+				Convert.ToString(protocol.GetParameter(Parameter.postrepositorycontent)));
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|HandleOrganizationCreateRepositoryResponse|response was null.", LogType.Error, LogLevel.Level1);

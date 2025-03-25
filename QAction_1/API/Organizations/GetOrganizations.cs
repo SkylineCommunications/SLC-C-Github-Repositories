@@ -6,8 +6,8 @@ namespace Skyline.DataMiner.Utils.Github.API.V20221128.Organizations
 
     using Newtonsoft.Json;
 
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<List<Organization>>(myJsonResponse);
-    public class Organization
+	// Root myDeserializedClass = SecureNewtonsoftDeserialization.DeserializeObject<List<Organization>>(myJsonResponse);
+	public class Organization
     {
         [JsonProperty("login")]
         public string Login { get; set; }

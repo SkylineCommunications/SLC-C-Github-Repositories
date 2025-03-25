@@ -5,10 +5,9 @@
 	using System.Linq;
 	using System.Text.RegularExpressions;
 
-	using Newtonsoft.Json;
-
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
+	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 	using Skyline.Protocol;
 	using Skyline.Protocol.API.Headers;
 	using Skyline.Protocol.Extensions;
@@ -26,7 +25,8 @@
 			}
 
 			// Parse response
-			var response = JsonConvert.DeserializeObject<List<RepositoryTagsResponse>>(Convert.ToString(protocol.GetParameter(Parameter.getrepositorytagscontent)));
+			var response = SecureNewtonsoftDeserialization.DeserializeObject<List<RepositoryTagsResponse>>(
+				Convert.ToString(protocol.GetParameter(Parameter.getrepositorytagscontent)));
 
 			if (response == null)
 			{
