@@ -47,7 +47,7 @@ Any inquiries can be addressed to:
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>Github Repositories</Name>
 	<Description>Github Repositories DataMiner connector</Description>
-	<Version>1.0.0.10</Version>
+	<Version>1.0.0.11</Version>
 	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Github</Vendor>
@@ -76,7 +76,7 @@ Any inquiries can be addressed to:
 		<Relation name="Repository Releases" path="1000;1400"/>
 		<Relation name="Repository Releases Assets" path="1000;1800"/>
 		<Relation name="Repository Workflows" path="1000;1600"/>
-		
+
 		<Relation name="Releases - Assets" path="1400;1800"/>
 		<Relation name="Tags Releases" path="1200;1400"/>
 
@@ -219,7 +219,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Discreets>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="10" save="true">
 			<Name>ApiKey</Name>
 			<Description>API Key</Description>
@@ -347,7 +347,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Discreets>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="15" trending="true">
 			<Name>RateLimit</Name>
 			<Description>Rate Limit</Description>
@@ -513,7 +513,6 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Interprete>
 		</Param>
-		
 		<Param id="50">
 			<Name>GeneralPageButtons</Name>
 			<Type>write</Type>
@@ -602,7 +601,6 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Discreets>
 			</Measurement>
 		</Param>
-		
 		<Param id="100" trending="false">
 			<Name>StatusCode</Name>
 			<Description>Status Code</Description>
@@ -893,7 +891,27 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
-		
+		<Param id="131">
+			<Name>PostWorkflowExecutionUrl</Name>
+			<Description>Post Workflow Execution Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="181">
+			<Name>PostWorkflowExecutionBody</Name>
+			<Description>Post Workflow Execution Body</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+
 		<Param id="201">
 			<Name>GetRepositoryContent</Name>
 			<Description>Get Repository Content</Description>
@@ -1216,7 +1234,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="229">
 			<Name>GetRepositoryTopicsContent</Name>
-			<Description>GetRepositoryTopicsContent</Description>
+			<Description>Get Repository Topics Content</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -1226,7 +1244,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="279">
 			<Name>GetRepositoryTopicsLinkHeader</Name>
-			<Description>GetRepositoryTopicsLinkHeader</Description>
+			<Description>Get Repository Topics Link Header</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -1236,7 +1254,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="230">
 			<Name>PutRepositoryTopicsContent</Name>
-			<Description>PutRepositoryTopicsContent</Description>
+			<Description>Put Repository Topics Content</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -1246,13 +1264,28 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="280">
 			<Name>PutRepositoryTopicsLinkHeader</Name>
-			<Description>PutRepositoryTopicsLinkHeader</Description>
+			<Description>Put Repository Topics Link Header</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+		</Param>
+		<Param id="231">
+			<Name>PostExecuteWorkflowContent</Name>
+			<Description>Post Execute Workflow Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="281">
+			<Name>ProcessPostExecuteWorkflow</Name>
+			<Description>Process Post Execute Workflow</Description>
+			<Type>dummy</Type>
 		</Param>
 		<Param id="300">
 			<Name>Title_End_Generic</Name>
@@ -1292,7 +1325,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type options="begin">title</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="500">
 			<Name>AddRepositoryButton</Name>
 			<Type>write</Type>
@@ -1436,7 +1469,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="550">
 			<Name>AddWorkflowButton</Name>
 			<Type>write</Type>
@@ -1703,7 +1736,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Discreets>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="990">
 			<Name>Repositories_ContextMenu</Name>
 			<Description>Context Menu for Repositories Table</Description>
@@ -1763,7 +1796,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Positions>
 			</Display>
 		</Param>
-		
+
 		<Param id="1000">
 			<Name>Repositories</Name>
 			<Description>Repositories</Description>
@@ -2385,7 +2418,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="1200">
 			<Name>RepositoryTags</Name>
 			<Description>Repository Tags</Description>
@@ -2494,7 +2527,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="1400">
 			<Name>RepositoryReleases</Name>
 			<Description>Repository Releases</Description>
@@ -2845,7 +2878,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="1590">
 			<Name>RepositoryWorkflows_ContextMenu</Name>
 			<Description>Context Menu for Repository Workflows Table</Description>
@@ -3136,7 +3169,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type options="datetime">number</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="1800">
 			<Name>RepositoryReleaseAssets</Name>
 			<Description>Release Assets</Description>
@@ -3549,7 +3582,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="2000">
 			<Name>RepositoryIssues</Name>
 			<Description>Repository Issues</Description>
@@ -3860,8 +3893,8 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
-		
+
+
 		<Param id="2996">
 			<Name>OrganizationsOverview</Name>
 			<Description>Organizations Overview</Description>
@@ -4069,7 +4102,7 @@ Are you sure you want to continue.]]>
 				</Discreets>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="3200">
 			<Name>OrganizationStatistics</Name>
 			<Description>Organization Statistics</Description>
@@ -4126,7 +4159,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="3400">
 			<Name>OrganizationTeams</Name>
 			<Description>Teams</Description>
@@ -4390,7 +4423,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="3600">
 			<Name>OrganizationMembers</Name>
 			<Description>Members</Description>
@@ -4604,7 +4637,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="22000">
 			<Name>MemberOrganizationLinks</Name>
 			<Description>Member Organization Links</Description>
@@ -4688,7 +4721,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="22100">
 			<Name>MemberTeamLinks</Name>
 			<Description>Member Team Links</Description>
@@ -4772,7 +4805,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="21000">
 			<Name>PollManager</Name>
 			<Description>Poll Manager</Description>
@@ -5031,7 +5064,7 @@ Are you sure you want to continue.]]>
 				<Type options="datetime">number</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="9000000" trending="false">
 			<Name>IAC_Receiver</Name>
 			<Description>Inter App Receiver</Description>
@@ -5086,7 +5119,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="9000100">
 			<Name>IAC_Messages</Name>
 			<Description>IAC_Messages</Description>
@@ -5285,7 +5318,7 @@ Are you sure you want to continue.]]>
 		<QAction id="3000" name="Organizations Table - Changes" encoding="csharp" triggers="3105" row="true" />
 
 		<QAction id="20000" name="HTTP Request Handling" encoding="csharp" triggers="30" />
-		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211;212;213;220;221;222;223;224;226;228;229;230"></QAction>
+		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211;212;213;220;221;222;223;224;226;228;229;230;281"></QAction>
 		<QAction id="20002" name="HTTP Poll Manager Updates" encoding="csharp" row="true" triggers="21006;21053" />
 
 		<QAction id="9000000" name="Process Incoming InterApp Messages" encoding="csharp" triggers="9000000"/>
@@ -5725,6 +5758,30 @@ Are you sure you want to continue.]]>
 				</Response>
 			</Connection>
 		</Session>
+		<Session id="31" name="Post Workflow Execution">
+			<Connection id="31" name="Post Workflow Execution">
+				<Request verb="POST" pid="131">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Content-Type">application/json</Header>
+						<Header key="Authorization" pid="12"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+					<Data pid="181"/>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="231"/>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
 	</HTTP>
 
 	<Groups>
@@ -5891,6 +5948,14 @@ Are you sure you want to continue.]]>
 				<Session>30</Session>
 			</Content>
 		</Group>
+		<Group id="231">
+			<Name>PostWorkflowExecution</Name>
+			<Description>PostWorkflowExecution</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>31</Session>
+			</Content>
+		</Group>
 	</Groups>
 
 	<Triggers>
@@ -6028,6 +6093,13 @@ Are you sure you want to continue.]]>
 			<Type>action</Type>
 			<Content>
 				<Id>230</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="231">
+			<Name>Start PostWorkflow Execution</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>231</Id>
 			</Content>
 		</Trigger>
 
@@ -6211,6 +6283,15 @@ Are you sure you want to continue.]]>
 				<Id>330</Id>
 			</Content>
 		</Trigger>
+		<Trigger id="281">
+			<Name>After PostWorkflow Execution</Name>
+			<On id="231">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>281</Id>
+			</Content>
+		</Trigger>
 	</Triggers>
 
 	<Actions>
@@ -6230,7 +6311,7 @@ Are you sure you want to continue.]]>
 			<On id="30">parameter</On>
 			<Type>run actions</Type>
 		</Action>
-
+		
 		<Action id="201">
 			<Name>Get Repository</Name>
 			<On id="201">group</On>
@@ -6316,9 +6397,14 @@ Are you sure you want to continue.]]>
 			<On id="229">group</On>
 			<Type>execute next</Type>
 		</Action>
-			<Action id="230">
+		<Action id="230">
 			<Name>Put Repository Topics</Name>
 			<On id="230">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="231">
+			<Name>Post Workflow Execution</Name>
+			<On id="231">group</On>
 			<Type>execute next</Type>
 		</Action>
 
@@ -6411,6 +6497,11 @@ Are you sure you want to continue.]]>
 			<Name>Clear Put Repository Topics Link Header</Name>
 			<On id="280">parameter</On>
 			<Type>clear</Type>
+		</Action>
+		<Action id="281">
+			<Name>Process Post Workflow Execution</Name>
+			<On id="281">parameter</On>
+			<Type>run actions</Type>
 		</Action>
 
 		<Action id="301">
@@ -6634,6 +6725,31 @@ Are you sure you want to continue.]]>
 											<NewFeature>Added Create Content InterApp Request</NewFeature>
 											<NewFeature>Added Add Collaborator InterApp Request</NewFeature>
 										</Changes>
+									</MinorVersion>
+									<MinorVersion id="10" basedOn="1.0.0.8">
+										<Date>2025-03-14</Date>
+										<Provider>
+											<Author>AMA</Author>
+											<Company>Skyline Communications</Company>
+										</Provider>
+										<Changes>
+											<NewFeature>Added more option for alarming</NewFeature>
+											<NewFeature>Added Release Assets table</NewFeature>
+											<Change>Updated Github ConnectorAPI to 1.0.6</Change>
+										</Changes>
+									</MinorVersion>
+									<MinorVersion id="11" basedOn="1.0.0.10">
+										<Date>2025-03-14</Date>
+										<Provider>
+											<Author>BSM</Author>
+											<Company>Skyline Communications</Company>
+										</Provider>
+										<Changes>
+											<Change>Add the ability to execute workflows via InterApp</Change>
+										</Changes>
+										<References>
+											<TaskId>263850</TaskId>
+										</References>
 									</MinorVersion>
 								</MinorVersions>
 							</MajorVersion>

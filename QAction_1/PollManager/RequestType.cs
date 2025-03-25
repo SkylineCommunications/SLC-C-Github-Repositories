@@ -66,7 +66,10 @@ namespace Skyline.Protocol.PollManager
 
 		[Description("Repositories/Create or Update Topics")]
 		Repositories_CreateOrUpdateTopics = 230,
-	}
+
+        [Description("Repositories/Workflow Execution")]
+        Repositories_WorkflowExecution = 281,
+    }
 
 	public enum PollState
 	{
