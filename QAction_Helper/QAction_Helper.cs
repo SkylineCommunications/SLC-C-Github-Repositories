@@ -403,11 +403,6 @@ public static class Parameter
 	public const int putrepositorytopicslinkheader_280 = 280;
 	/// <summary>PID: 280 | Type: read</summary>
 	public const int putrepositorytopicslinkheader = 280;
-	/// <summary>PID: 281 | Type: read</summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public const int postexecuteworkflowheader_281 = 281;
-	/// <summary>PID: 281 | Type: read</summary>
-	public const int postexecuteworkflowheader = 281;
 	/// <summary>PID: 501 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int addrepositoryname_501 = 501;
@@ -2056,7 +2051,6 @@ public interface SLProtocolExt : SLProtocol
 	object Ratelimitresetepochseconds { get; set; }
 	object Triggerrequesthandling_30 { get; set; }
 	object Triggerrequesthandling { get; set; }
-	object Processworkflowexecution_dummy { get; set; }
 	object Generalpagebuttons_50 { get; set; }
 	object Generalpagebuttons { get; set; }
 	object Addrepositorypagebutton_51 { get; set; }
@@ -2199,8 +2193,7 @@ public interface SLProtocolExt : SLProtocol
 	object Getrepositorytopicslinkheader { get; set; }
 	object Putrepositorytopicslinkheader_280 { get; set; }
 	object Putrepositorytopicslinkheader { get; set; }
-	object Postexecuteworkflowheader_281 { get; set; }
-	object Postexecuteworkflowheader { get; set; }
+	object Processpostexecuteworkflow_dummy { get; set; }
 	object Title_end_generic__fixed { get; set; }
 	object Title_begin_singlerepository__fixed { get; set; }
 	object Addrepositorybutton_500 { get; set; }
@@ -2571,8 +2564,6 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Triggerrequesthandling_30 {get { return GetParameter(30); }set { SetParameter(30, value); }}
 	/// <summary>PID: 30  | Type: read</summary>
 	public System.Object Triggerrequesthandling {get { return GetParameter(30); }set { SetParameter(30, value); }}
-	/// <summary>PID: 31  | Type: dummy</summary>
-	public System.Object Processworkflowexecution_dummy {get { return GetParameter(31); }set { SetParameter(31, value); }}
 	/// <summary>PID: 50  | Type: write | DISCREETS: Configuration... = Configuration, Poll Manager... = Poll Manager</summary>
 	public System.Object Generalpagebuttons_50 {get { return GetParameter(50); }set { SetParameter(50, value); }}
 	/// <summary>PID: 50  | Type: write | DISCREETS: Configuration... = Configuration, Poll Manager... = Poll Manager</summary>
@@ -2925,11 +2916,8 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Putrepositorytopicslinkheader_280 {get { return GetParameter(280); }set { SetParameter(280, value); }}
 	/// <summary>PID: 280  | Type: read</summary>
 	public System.Object Putrepositorytopicslinkheader {get { return GetParameter(280); }set { SetParameter(280, value); }}
-	/// <summary>PID: 281  | Type: read</summary>
-	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Postexecuteworkflowheader_281 {get { return GetParameter(281); }set { SetParameter(281, value); }}
-	/// <summary>PID: 281  | Type: read</summary>
-	public System.Object Postexecuteworkflowheader {get { return GetParameter(281); }set { SetParameter(281, value); }}
+	/// <summary>PID: 281  | Type: dummy</summary>
+	public System.Object Processpostexecuteworkflow_dummy {get { return GetParameter(281); }set { SetParameter(281, value); }}
 	/// <summary>PID: 300  | Type: fixed</summary>
 	public System.Object Title_end_generic__fixed {get { return GetParameter(300); }set { SetParameter(300, value); }}
 	/// <summary>PID: 301  | Type: fixed</summary>

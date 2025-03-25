@@ -6,6 +6,7 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Text.RegularExpressions;
+	using System.Web;
 
 	using Newtonsoft.Json;
 
@@ -13,7 +14,9 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
+	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 	using Skyline.Protocol;
+	using Skyline.Protocol.API;
 	using Skyline.Protocol.API.Headers;
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
@@ -100,8 +103,9 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			var message = $"Successfully executed the given workflow.";
 			if (!protocol.IsSuccessStatusCode())
 			{
-				var statusCode = Convert.ToString(protocol.GetParameter(Parameter.statuscode));
-				message = $"Received error code {statusCode} from the attempt to execute the workflow";
+				var errorResponse = Convert.ToString(protocol.GetParameter(Parameter.postexecuteworkflowcontent_231));
+				var error = SecureNewtonsoftDeserialization.DeserializeObject<GithubError>(errorResponse);
+				message = $"Received error code {error.Status}: {error.Message}";
 			}
 
 			// Parse response
@@ -114,9 +118,9 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			var match = Regex.Match(url, pattern, options);
 			var owner = match.Groups[1].Value;
 			var name = match.Groups[2].Value;
-			var workflowId = match.Groups[3].Value;
+			var workflowId = HttpUtility.UrlDecode(match.Groups[3].Value);
 
-			HandleWorkflowExeuctionInterApp(protocol, owner, name, workflowId, message);
+			HandleWorkflowExecutionInterApp(protocol, owner, name, workflowId, message);
 		}
 
 		private static void HandleNextRepositoryWorkflow(SLProtocol protocol, string owner, string name)
@@ -158,7 +162,7 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, nextOwner, nextName, PollingConstants.PerPage, 1);
 		}
 
-		public static void HandleWorkflowExeuctionInterApp(SLProtocol protocol, string owner, string name, string workflowId, string message)
+		public static void HandleWorkflowExecutionInterApp(SLProtocol protocol, string owner, string name, string workflowId, string message)
 		{
 			// Check if there are Topics InterApp messages waiting for confirmation
 			var table = IAC_MessagesTable.GetTable(protocol);
