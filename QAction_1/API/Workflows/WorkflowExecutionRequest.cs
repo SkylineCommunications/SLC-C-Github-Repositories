@@ -14,6 +14,6 @@ namespace Skyline.Protocol.API.Workflows
 		public string Reference { get; set; }
 
 		[JsonProperty("inputs")]
-		public Dictionary<string, object> Inputs { get; set; }
+		public Dictionary<string, string> Inputs { get; set; }
 	}
 }

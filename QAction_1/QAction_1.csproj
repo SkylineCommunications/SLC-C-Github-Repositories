@@ -13,30 +13,28 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Skyline.DataMiner.ConnectorAPI.Github.Repositories" Version="1.0.7" />
+    <PackageReference Include="Skyline.DataMiner.ConnectorAPI.Github.Repositories" Version="1.0.8" />
     <PackageReference Include="Skyline.DataMiner.Core.InterAppCalls.Common" Version="1.0.1.1" />
     <PackageReference Include="Skyline.DataMiner.Dev.Protocol" Version="10.3.9" />
-    <PackageReference Include="Skyline.DataMiner.Utils.SecureCoding" Version="1.2.5" />
     <PackageReference Include="YamlDotNet" Version="15.1.4" />
     <PackageReference Include="Skyline.DataMiner.Utils.Protocol.Extension" Version="1.0.0.3" />
+    <PackageReference Include="Skyline.DataMiner.Utils.SecureCoding.Analyzers" Version="2.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Skyline.DataMiner.Utils.SecureCoding" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <SonarQubeSetting Include="sonar.cpd.exclusions">
-    <Value>API/Workflows/WorkflowFactory.cs,InterApp/Executors/**</Value>
-  </SonarQubeSetting>
+      <Value>API/Workflows/WorkflowFactory.cs,InterApp/Executors/**</Value>
+    </SonarQubeSetting>
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties DisLinkId="1" DisProjectType="qactionProject" DisLinkedXmlFile="..\protocol.xml" />
     </VisualStudio>
   </ProjectExtensions>
-  <ItemGroup>
-    <PackageReference Include="Skyline.DataMiner.Utils.SecureCoding.Analyzers" Version="1.2.5">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
 </Project>
