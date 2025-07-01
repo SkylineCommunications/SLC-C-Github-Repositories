@@ -16,11 +16,11 @@
     <PackageReference Include="Skyline.DataMiner.ConnectorAPI.Github.Repositories" Version="1.0.8" />
     <PackageReference Include="Skyline.DataMiner.Dev.Protocol" Version="10.3.9" />
     <PackageReference Include="Skyline.DataMiner.Utils.Table.ContextMenu" Version="1.0.0.1" />
-    <PackageReference Include="Skyline.DataMiner.Utils.Protocol.Extension" Version="1.0.0.3" />
-    <PackageReference Include="Skyline.DataMiner.Utils.SecureCoding.Analyzers" Version="2.0.1">
+    <PackageReference Include="Skyline.DataMiner.Utils.SecureCoding.Analyzers" Version="2.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Skyline.DataMiner.Utils.Protocol.Extension" Version="1.0.0.4" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
