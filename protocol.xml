@@ -47,7 +47,7 @@ Any inquiries can be addressed to:
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>Github Repositories</Name>
 	<Description>Github Repositories DataMiner connector</Description>
-	<Version>1.0.0.12</Version>
+	<Version>1.0.0.13</Version>
 	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Github</Vendor>
@@ -6759,6 +6759,16 @@ Are you sure you want to continue.]]>
 										</Provider>
 										<Changes>
 											<Change>Changed the inputs dictionary for the execute workflow request to a Dictionary&lt;string, string&gt; to prevent serialization issues when using InterApp</Change>
+										</Changes>
+									</MinorVersion>
+									<MinorVersion id="13" basedOn="1.0.0.12">
+										<Date>2025-07-01</Date>
+										<Provider>
+											<Author>AMA</Author>
+											<Company>Skyline Communications</Company>
+										</Provider>
+										<Changes>
+											<Change>Changed the reusable dataminer workflows to match the latests versions</Change>
 										</Changes>
 									</MinorVersion>
 								</MinorVersions>
