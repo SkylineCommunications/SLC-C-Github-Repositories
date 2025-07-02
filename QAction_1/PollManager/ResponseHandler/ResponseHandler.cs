@@ -4,6 +4,7 @@
 	using System.Collections.Generic;
 
 	using Skyline.DataMiner.Scripting;
+	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.ResponseHandler.Organizations;
 	using Skyline.Protocol.PollManager.ResponseHandler.Repositories;
 
@@ -26,6 +27,10 @@
 			{ RequestType.Organizations_CreateRepository,       OrganizationsResponseHandler.HandleOrganizationCreateRepositoryResponse },
 			{ RequestType.Repositories_AddUserCollaborator,     RepositoriesResponseHandler.HandleRepositoriesAddRepositoryCollaboratorResponse },
 			{ RequestType.Organizations_AddTeamCollaborator,    OrganizationsResponseHandler.HandleOrganizationAddRepositoryCollaboratorResponse },
+
+			{ RequestType.Repositories_CreateOrUpdateSecret,    (protocol) => protocol.IsSuccessStatusCode() },
+			{ RequestType.Repositories_CreateVariable,			(protocol) => protocol.IsSuccessStatusCode() },
+
 			{ RequestType.Repositories_PublicKey,               RepositoriesResponseHandler.HandleRepositoriesPublicKeysResponse },
 			{ RequestType.Repositories_Topics,                  RepositoriesResponseHandler.HandleRepositoriesTopicsResponse },
 			{ RequestType.Repositories_CreateOrUpdateTopics,    RepositoriesResponseHandler.HandleRepositoriesCreateOrUpdateTopicsResponse },

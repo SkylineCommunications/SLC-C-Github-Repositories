@@ -28,7 +28,7 @@ namespace Skyline.Protocol.PollManager.RequestHandler.Repositories
 		{
 			var table = RepositoriesTable.GetTable(protocol);
 			var first = table.Rows.FirstOrDefault();
-			if(first == null)
+			if (first == null)
 			{
 				return;
 			}
@@ -55,12 +55,17 @@ namespace Skyline.Protocol.PollManager.RequestHandler.Repositories
 
 		public static void CreateRepositoryWorkflow(SLProtocol protocol, string repositoryId, Workflow workflow)
 		{
+			CreateRepositoryWorkflow(protocol, repositoryId, workflow.Name, YamlConvert.SerializeObject(workflow));
+		}
+
+		public static void CreateRepositoryWorkflow(SLProtocol protocol, string repositoryId, string workflowName, string workflowContent)
+		{
 			RepositoriesRequestHandler.CreateRepositoryContent(
 				protocol,
 				repositoryId,
-				$".github/workflows/{workflow.Name}.yml",
-				YamlConvert.SerializeObject(workflow),
-				$"Adding a new workflow: {workflow.Name}");
+				$".github/workflows/{workflowName}.yml",
+				workflowContent,
+				$"Adding a new workflow: {workflowName}");
 		}
 
 		public static void ExecuteWorkflow(SLProtocol protocol, string repositoryId, string reference, string workflowIdOrName, Dictionary<string, string> inputs)

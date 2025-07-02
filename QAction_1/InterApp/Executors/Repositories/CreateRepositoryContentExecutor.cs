@@ -71,7 +71,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 			}
 
 			// Check if file exists
-			if (Message.Data.Data.Method == UpdateMethod.File && !File.Exists(SecurePath.ConstructSecurePath(Message.Data.Data.Path)))
+			if (Message.Data.Data.Method == UpdateMethod.File && !File.Exists(SecurePath.CreateSecurePath(Message.Data.Data.Path)))
 			{
 				result.Success = false;
 				result.Description = "The given file does not exists on the system.";
@@ -104,7 +104,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 			}
 			else
 			{
-				content = File.ReadAllText(SecurePath.ConstructSecurePath(Message.Data.Data.Path));
+				content = File.ReadAllText(SecurePath.CreateSecurePath(Message.Data.Data.Path));
 			}
 
 			var commitMessage = $"Updating '{Message.Data.RepositoryPath}'";

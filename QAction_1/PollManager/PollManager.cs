@@ -14,6 +14,8 @@
 	{
 		private static readonly Dictionary<RequestType, PollSettings> InitialSettings = new Dictionary<RequestType, PollSettings>
 		{
+			{ RequestType.Table_Cleanup, new PollSettings { PollFrequency = TimeSpan.FromMinutes(10), Enabled = true } },
+
 			{ RequestType.Repositories_Repositories, new PollSettings { PollFrequency = TimeSpan.FromMinutes(10), Enabled = true } },
 			{ RequestType.Repositories_Tags, new PollSettings { PollFrequency = TimeSpan.FromMinutes(360), Enabled = true } },
 			{ RequestType.Repositories_Releases, new PollSettings { PollFrequency = TimeSpan.FromMinutes(360), Enabled = true } },

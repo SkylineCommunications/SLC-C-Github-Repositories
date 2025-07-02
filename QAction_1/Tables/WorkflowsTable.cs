@@ -1,4 +1,7 @@
-﻿// Ignore Spelling: Workflows
+﻿using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
+
+using System.Collections.Generic;
+// Ignore Spelling: Workflows
 
 namespace Skyline.Protocol.Tables
 {
@@ -218,6 +221,23 @@ namespace Skyline.Protocol.Tables
 			}
 
 			return instance;
+		}
+
+		public List<string> GetPkCache(SLProtocol protocol, string repositoryId)
+		{
+			var rawCache = Convert.ToString(protocol.GetParameter(Parameter.repositoryworkflow_pk_cache_1591));
+			if (String.IsNullOrEmpty(rawCache))
+			{
+				return new List<string>();
+			}
+
+			var pkCache = SecureNewtonsoftDeserialization.DeserializeObject<Dictionary<string, List<string>>>(rawCache);
+			if(pkCache is null || !pkCache.ContainsKey(repositoryId))
+			{
+				return new List<string>();
+			}
+
+			return pkCache[repositoryId];
 		}
 
 		public void DeleteRow(SLProtocol protocol, params string[] rowsToDelete)

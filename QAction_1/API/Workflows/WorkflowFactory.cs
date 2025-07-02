@@ -71,7 +71,7 @@ namespace Skyline.Protocol.API.Workflows
 							},
 							Secrets = new Dictionary<string, string>
 							{
-								{ "api-key",            "${{ secrets.DATAMINER_DEPLOY_KEY }}" },
+								{ "api-key",            "${{ secrets.DATAMINER_TOKEN }}" },
 								{ "sonarCloudToken",    "${{ secrets.SONAR_TOKEN }}" },
 							},
 						}
@@ -120,7 +120,7 @@ namespace Skyline.Protocol.API.Workflows
 							},
 							Secrets = new Dictionary<string, string>
 							{
-								{ "api-key",            "${{ secrets.DATAMINER_DEPLOY_KEY }}" },
+								{ "api-key",            "${{ secrets.DATAMINER_TOKEN }}" },
 								{ "sonarCloudToken",    "${{ secrets.SONAR_TOKEN }}" },
 							},
 						}
@@ -252,7 +252,7 @@ namespace Skyline.Protocol.API.Workflows
 							},
 							Secrets = new Dictionary<string, string>
 							{
-								{ "api-key",            "${{ secrets.DATAMINER_DEPLOY_KEY }}" },
+								{ "api-key",            "${{ secrets.DATAMINER_TOKEN }}" },
 								{ "sonarCloudToken",    "${{ secrets.SONAR_TOKEN }}" },
 							},
 						}

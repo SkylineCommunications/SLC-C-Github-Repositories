@@ -219,7 +219,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Discreets>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="10" save="true">
 			<Name>ApiKey</Name>
 			<Description>API Key</Description>
@@ -347,7 +347,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Discreets>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="15" trending="true">
 			<Name>RateLimit</Name>
 			<Description>Rate Limit</Description>
@@ -587,7 +587,7 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Position>
 						<Page>Workflows</Page>
 						<Column>0</Column>
-						<Row>3</Row>
+						<Row>2</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -911,7 +911,28 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
-
+		
+		<Param id="135">
+			<Name>PostRepositoryVariableUrl</Name>
+			<Description>Post Repository Variable Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="185">
+			<Name>PostRepositoryVariableBody</Name>
+			<Description>Post Repository Variable Body</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		
 		<Param id="201">
 			<Name>GetRepositoryContent</Name>
 			<Description>Get Repository Content</Description>
@@ -1287,6 +1308,18 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Description>Process Post Execute Workflow</Description>
 			<Type>dummy</Type>
 		</Param>
+		
+		<Param id="235">
+			<Name>PostRepositoryVariableContent</Name>
+			<Description>Post Repository Variable Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		
 		<Param id="300">
 			<Name>Title_End_Generic</Name>
 			<Type>fixed</Type>
@@ -1325,7 +1358,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type options="begin">title</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="500">
 			<Name>AddRepositoryButton</Name>
 			<Type>write</Type>
@@ -1469,7 +1502,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="550">
 			<Name>AddWorkflowButton</Name>
 			<Type>write</Type>
@@ -1736,7 +1769,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Discreets>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="990">
 			<Name>Repositories_ContextMenu</Name>
 			<Description>Context Menu for Repositories Table</Description>
@@ -1762,6 +1795,22 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Discreet>
 				</Discreets>
 			</Measurement>
+		</Param>
+		<Param id="991">
+			<Name>Repositories_PK_Cache</Name>
+			<Description>Repositories PK Cache</Description>
+			<Information>
+				<Subtext>
+					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
+At the end of the cycle this parameter should contains the entire list of still existing repositories. This list is used to for cleanup at the end]]>
+				</Subtext>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
 		</Param>
 		<Param id="992">
 			<Name>Repositories_ChangeRequest</Name>
@@ -1796,7 +1845,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Positions>
 			</Display>
 		</Param>
-
+		
 		<Param id="1000">
 			<Name>Repositories</Name>
 			<Description>Repositories</Description>
@@ -1836,7 +1885,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3-1005|4-1006|5-1007|6-1008|7-1009|8-1010|9-1011|10-1012|11-1013|12-1014|13-1015|14-1016|15-1017|16-1018|17-1019|18,width:100-134-157-140-165-137-144-160-165-157-123-128-147-103-100-0-0-0-0,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT-INT-INT-STRING-STRING-STRING-STRING-INT-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3-1005|4-1006|5-1007|6-1008|7-1009|8-1010|9-1011|10-1012|11-1013|12-1014|13-1015|14-1016|15-1017|16-1018|17-1019|18,width:100-134-157-140-165-137-156-160-165-157-123-128-147-103-100-0-0-0-0,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT-INT-INT-STRING-STRING-STRING-STRING-INT-STRING,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1001" trending="false">
@@ -2418,7 +2467,24 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
+		
+		<Param id="1191">
+			<Name>RepositoryTags_PK_Cache</Name>
+			<Description>Repository Tags PK Cache</Description>
+			<Information>
+				<Subtext>
+					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
+At the end of the cycle this parameter should contains the entire list of still existing tags. This list is used to for cleanup at the end]]>
+				</Subtext>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
 		<Param id="1200">
 			<Name>RepositoryTags</Name>
 			<Description>Repository Tags</Description>
@@ -2443,7 +2509,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1201|0-1202|1-1203|2-1204|3,width:100-100-111-100,sort:STRING-STRING-STRING-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1201|0-1202|1-1203|2-1204|3,width:400-150-200-300,sort:STRING-STRING-STRING-STRING,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1201" trending="false">
@@ -2527,7 +2593,23 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
+		<Param id="1391">
+			<Name>RepositoryReleases_PK_Cache</Name>
+			<Description>Repository Releases PK Cache</Description>
+			<Information>
+				<Subtext>
+					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
+At the end of the cycle this parameter should contains the entire list of still existing releases. This list is used to for cleanup at the end]]>
+				</Subtext>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
 		<Param id="1400">
 			<Name>RepositoryReleases</Name>
 			<Description>Repository Releases</Description>
@@ -2561,7 +2643,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1401|0-1402|1-1403|2-1404|3-1405|4-1406|5-1407|6-1408|7-1409|8-1410|9-1411|10-1412|11-1413|12,width:100-100-100-0-118-100-100-100-100-100-144-144-111,sort:STRING|ASC|1-INT-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1401|0-1402|1-1403|2-1404|3-1405|4-1406|5-1407|6-1408|7-1409|8-1410|9-1411|10-1412|11-1413|12,width:100-100-100-0-118-100-100-100-100-100-156-156-111,sort:STRING|ASC|1-INT-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-STRING,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1401" trending="false">
@@ -2878,7 +2960,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="1590">
 			<Name>RepositoryWorkflows_ContextMenu</Name>
 			<Description>Context Menu for Repository Workflows Table</Description>
@@ -2900,6 +2982,22 @@ To get more request you can add an api key under General/Configuration page. To 
 					</Discreet>
 				</Discreets>
 			</Measurement>
+		</Param>
+		<Param id="1591">
+			<Name>RepositoryWorkflow_PK_Cache</Name>
+			<Description>Repository Workflow PK Cache</Description>
+			<Information>
+				<Subtext>
+					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
+At the end of the cycle this parameter should contains the entire list of still existing workflows. This list is used to for cleanup at the end]]>
+				</Subtext>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
 		</Param>
 		<Param id="1592">
 			<Name>RepositoryWorkflow_ChangeRequest</Name>
@@ -2943,7 +3041,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Display>
 			<Measurement>
 				<!-- SuppressValidator 2.31.9 More important to be grouped by repository then by datetime column -->
-				<Type options="tab=columns:1601|0-1602|1-1603|2-1604|3-1605|4-1606|5-1607|6-1608|7,width:100-0-100-108-100-144-144-144,sort:STRING|ASC|0-STRING-STRING-STRING-STRING-INT|ASC|1-INT-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1601|0-1602|1-1603|2-1604|3-1605|4-1606|5-1607|6-1608|7,width:0-200-100-108-100-156-156-156,sort:STRING|ASC|0-STRING-STRING-STRING-STRING-INT|ASC|1-INT-INT,lines:25,filter:true">table</Type>
 				<!-- /SuppressValidator 2.31.9 -->
 			</Measurement>
 		</Param>
@@ -3169,7 +3267,23 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type options="datetime">number</Type>
 			</Measurement>
 		</Param>
-
+		
+		<Param id="1791">
+			<Name>RepositoryReleaseAssets_PK_Cache</Name>
+			<Description>Repository Release Assets PK Cache</Description>
+			<Information>
+				<Subtext>
+					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
+At the end of the cycle this parameter should contains the entire list of still existing release assets. This list is used to for cleanup at the end]]>
+				</Subtext>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
 		<Param id="1800">
 			<Name>RepositoryReleaseAssets</Name>
 			<Description>Release Assets</Description>
@@ -3185,10 +3299,10 @@ To get more request you can add an api key under General/Configuration page. To 
 				<ColumnOption idx="7" pid="1808" type="retrieved" options="" />
 				<ColumnOption idx="8" pid="1809" type="retrieved" options="" />
 				<ColumnOption idx="9" pid="1810" type="retrieved" options="" />
-				<ColumnOption idx="10" pid="1811" type="retrieved" options="" />
-				<ColumnOption idx="11" pid="1812" type="retrieved" options="" />
-				<ColumnOption idx="12" pid="1813" type="retrieved" options="" />
-				<ColumnOption idx="13" pid="1814" type="retrieved" options="" />
+				<ColumnOption idx="10" pid="1811" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="11" pid="1812" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="12" pid="1813" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="13" pid="1814" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="14" pid="1815" type="retrieved" options="" />
 			</ArrayOptions>
 			<Information>
@@ -3205,7 +3319,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1801|0-1802|1-1803|2-1804|3-1805|4-1806|5-1807|6-1808|7-1809|8-1810|9-1811|10-1812|11-1813|12-1814|13-1815|14,width:100-100-100-100-100-100-100-100-100-113-144-144-145-145-145,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT-INT-INT-STRING-STRING|DESC-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1801|0-1802|1-1803|2-1804|3-1805|4-1806|5-1807|6-1808|7-1809|8-1810|9-1811|10-1812|11-1813|12-1814|13-1815|14,width:100-100-100-100-100-100-100-100-100-113-144-144-156-156-145,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT-INT-INT-STRING-STRING|DESC-STRING,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1801" trending="false">
@@ -3582,7 +3696,23 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
+		<Param id="1991">
+			<Name>RepositoryIssues_PK_Cache</Name>
+			<Description>Repository Issues PK Cache</Description>
+			<Information>
+				<Subtext>
+					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
+At the end of the cycle this parameter should contains the entire list of still existing release assets. This list is used to for cleanup at the end]]>
+				</Subtext>
+			</Information>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
 		<Param id="2000">
 			<Name>RepositoryIssues</Name>
 			<Description>Repository Issues</Description>
@@ -3614,7 +3744,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:2001|0-2002|1-2003|2-2004|3-2005|4-2006|5-2007|6-2008|7-2009|8-2010|9-2011|10,width:100-100-100-100-100-100-144-144-144-144-111,sort:STRING|DESC|1-INT-STRING-STRING-STRING-STRING-STRING-INT|DESC|0-INT-INT-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:2001|0-2002|1-2003|2-2004|3-2005|4-2006|5-2007|6-2008|7-2009|8-2010|9-2011|10,width:100-100-200-200-100-100-144-156-156-156-111,sort:STRING|DESC|1-INT-STRING-STRING-STRING-STRING-STRING-INT|DESC|0-INT-INT-STRING,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="2001" trending="false">
@@ -3893,8 +4023,8 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
-
+		
+		
 		<Param id="2996">
 			<Name>OrganizationsOverview</Name>
 			<Description>Organizations Overview</Description>
@@ -4102,7 +4232,7 @@ Are you sure you want to continue.]]>
 				</Discreets>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="3200">
 			<Name>OrganizationStatistics</Name>
 			<Description>Organization Statistics</Description>
@@ -4159,7 +4289,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="3400">
 			<Name>OrganizationTeams</Name>
 			<Description>Teams</Description>
@@ -4423,7 +4553,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="3600">
 			<Name>OrganizationMembers</Name>
 			<Description>Members</Description>
@@ -4637,7 +4767,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="22000">
 			<Name>MemberOrganizationLinks</Name>
 			<Description>Member Organization Links</Description>
@@ -4721,7 +4851,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="22100">
 			<Name>MemberTeamLinks</Name>
 			<Description>Member Team Links</Description>
@@ -4805,7 +4935,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="21000">
 			<Name>PollManager</Name>
 			<Description>Poll Manager</Description>
@@ -4834,7 +4964,7 @@ Are you sure you want to continue.]]>
 			</Display>
 			<Measurement>
 				<!-- SuppressValidator 2.31.9 Poll Manager Table -->
-				<Type options="tab=columns:21001|0-21002|1-21003|2-21004|3-21005|4-21006|5-21007|6,width:0-200-80-138-144-100-0,sort:STRING|ASC-STRING-STRING-INT-INT-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:21001|0-21002|1-21003|2-21004|3-21005|4-21006|5-21007|6,width:0-200-80-138-156-100-0,sort:STRING|ASC-STRING-STRING-INT-INT-STRING-INT,lines:25,filter:true">table</Type>
 				<!-- /SuppressValidator 2.31.9 -->
 			</Measurement>
 		</Param>
@@ -5064,7 +5194,7 @@ Are you sure you want to continue.]]>
 				<Type options="datetime">number</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="9000000" trending="false">
 			<Name>IAC_Receiver</Name>
 			<Description>Inter App Receiver</Description>
@@ -5119,7 +5249,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="9000100">
 			<Name>IAC_Messages</Name>
 			<Description>IAC_Messages</Description>
@@ -5318,7 +5448,7 @@ Are you sure you want to continue.]]>
 		<QAction id="3000" name="Organizations Table - Changes" encoding="csharp" triggers="3105" row="true" />
 
 		<QAction id="20000" name="HTTP Request Handling" encoding="csharp" triggers="30" />
-		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211;212;213;220;221;222;223;224;226;228;229;230;281"></QAction>
+		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211;212;213;220;221;222;223;224;226;228;229;230;235;281"></QAction>
 		<QAction id="20002" name="HTTP Poll Manager Updates" encoding="csharp" row="true" triggers="21006;21053" />
 
 		<QAction id="9000000" name="Process Incoming InterApp Messages" encoding="csharp" triggers="9000000"/>
@@ -5782,6 +5912,35 @@ Are you sure you want to continue.]]>
 				</Response>
 			</Connection>
 		</Session>
+		
+		<!--ID 35 for Create Repository Variable-->
+		<!--ID 36 for Get Repository Variable-->
+		<!--ID 37 for Put Repository Variable-->
+		<!--ID 38 for Delete Repository Variable-->
+		<Session id="35" name="Create Repository Variable">
+			<Connection id="35" name="Create Repository Variable">
+				<Request verb="POST" pid="135">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Content-Type">application/json</Header>
+						<Header key="Authorization" pid="12"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+					<Data pid="185"/>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="235"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
 	</HTTP>
 
 	<Groups>
@@ -5950,10 +6109,18 @@ Are you sure you want to continue.]]>
 		</Group>
 		<Group id="231">
 			<Name>PostWorkflowExecution</Name>
-			<Description>PostWorkflowExecution</Description>
+			<Description>Post Workflow Execution</Description>
 			<Type>poll</Type>
 			<Content>
 				<Session>31</Session>
+			</Content>
+		</Group>
+		<Group id="235">
+			<Name>PostRepositoryVariable</Name>
+			<Description>Post Repository Variable</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>35</Session>
 			</Content>
 		</Group>
 	</Groups>
@@ -6100,6 +6267,13 @@ Are you sure you want to continue.]]>
 			<Type>action</Type>
 			<Content>
 				<Id>231</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="235">
+			<Name>Start PostRepository Variable</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>235</Id>
 			</Content>
 		</Trigger>
 
@@ -6292,6 +6466,15 @@ Are you sure you want to continue.]]>
 				<Id>281</Id>
 			</Content>
 		</Trigger>
+		<Trigger id="285">
+			<Name>After PostRepository Variable</Name>
+			<On id="235">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>335</Id>
+			</Content>
+		</Trigger>
 	</Triggers>
 
 	<Actions>
@@ -6405,6 +6588,11 @@ Are you sure you want to continue.]]>
 		<Action id="231">
 			<Name>Post Workflow Execution</Name>
 			<On id="231">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="235">
+			<Name>Post Repository Variable</Name>
+			<On id="235">group</On>
 			<Type>execute next</Type>
 		</Action>
 
@@ -6594,6 +6782,11 @@ Are you sure you want to continue.]]>
 			<On id="230">parameter</On>
 			<Type>clear</Type>
 		</Action>
+		<Action id="335">
+			<Name>Clear Post Repository Variable Content</Name>
+			<On id="235">parameter</On>
+			<Type>clear</Type>
+		</Action>
 	</Actions>
 
 	<Timers>
@@ -6768,7 +6961,9 @@ Are you sure you want to continue.]]>
 											<Company>Skyline Communications</Company>
 										</Provider>
 										<Changes>
-											<Change>Changed the reusable dataminer workflows to match the latests versions</Change>
+											<Change>Update to Github ConnectorAPI v1.0.9</Change>
+											<NewFeature>Handle the adding of custom workflows</NewFeature>
+											<NewFeature>Can now also add variables to repositories</NewFeature>
 										</Changes>
 									</MinorVersion>
 								</MinorVersions>

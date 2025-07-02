@@ -22,5 +22,20 @@ namespace Skyline.Protocol.YAML
             var result = deserializer.Deserialize<T>(obj);
             return result;
         }
+
+        public static bool IsValidYaml(string obj)
+        {
+			try
+			{
+				var deserializer = new DeserializerBuilder()
+					.Build();
+				deserializer.Deserialize<object>(obj);
+				return true;
+			}
+			catch
+			{
+				return false;
+			}
+		}
     }
 }

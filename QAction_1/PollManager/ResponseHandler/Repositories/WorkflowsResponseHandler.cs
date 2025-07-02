@@ -29,27 +29,32 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			// Check status code
 			if (!protocol.IsSuccessStatusCode())
 			{
+				HandleNextRepositoryWorkflow(protocol);
 				return;
 			}
 
 			// Parse response
 			var response = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryWorkflowsResponse>(
 				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowscontent_205)));
+			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowslinkheader_255));
+			var link = new LinkHeader(linkHeader);
 			var url = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowsurl_105));
 			var table = RepositoryWorkflowsTable.GetTable();
 
-			// Parse url to check which respository this issue is linked to
+			// Parse url to check which respository this workflow is linked to
 			var pattern = "repos\\/(.*)\\/(.*)\\/actions\\/workflows(.*)";
 			var options = RegexOptions.Multiline;
 
 			var match = Regex.Match(url, pattern, options);
 			var owner = match.Groups[1].Value;
 			var name = match.Groups[2].Value;
+			var repositoryId = $"{owner}/{name}";
 
 			// Sanity checks
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|response was null.", LogType.Error, LogLevel.Level1);
+				HandleNextRepositoryWorkflow(protocol);
 				return;
 			}
 
@@ -58,10 +63,11 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 				// No workflows for the repository
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|No workflows for the repo.", LogType.Information, LogLevel.Level2);
 				table.DeleteRow(protocol, table.Rows.Where(x => x.RepositoryID == $"{owner}/{name}").Select(x => x.ID).ToArray());
-				HandleNextRepositoryWorkflow(protocol, owner, name);
+				HandleNextRepositoryWorkflow(protocol);
 				return;
 			}
 
+			var pkCache = PkCache.GetCache(protocol, Parameter.Repositoryworkflows.tablePid);
 			foreach (var workflow in response.Workflows)
 			{
 				if (workflow == null)
@@ -73,7 +79,7 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 				// Update existing workflow if found, otherwise create new one
 				var id = $"{owner}/{name}/actions/workflows/{workflow.Id}";
 				var row = table.Rows.Find(wf => wf.ID == id) ?? new RepositoryWorkflowsTableRow();
-				row.RepositoryID = $"{owner}/{name}";
+				row.RepositoryID = repositoryId;
 				row.Name = workflow.Name;
 				row.State = workflow.State;
 				row.Path = workflow.Path;
@@ -87,6 +93,24 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 					row.ID = id;
 					table.Rows.Add(row);
 				}
+
+				pkCache[repositoryId].Add(row.ID);
+			}
+
+			// If not all workflows are polled for this repo, store the fetched ids and poll the next page.
+			if (link.HasNext)
+			{
+				pkCache.Store(protocol);
+			}
+
+			// If the last page is polled check to see if some workflows are removed.
+			if (link.IsLast)
+			{
+				var toBeRemoved = table.Rows.Where(r => r.RepositoryID == repositoryId).Select(r => r.ID).ToHashSet();
+				toBeRemoved.ExceptWith(pkCache[repositoryId]);
+				table.DeleteRow(protocol, toBeRemoved.ToArray());
+				pkCache[repositoryId].Clear();
+				pkCache.Store(protocol);
 			}
 
 			if (table.Rows.Count > 0)
@@ -94,7 +118,7 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 				table.SaveToProtocol(protocol, true);
 			}
 
-			HandleNextRepositoryWorkflow(protocol, owner, name);
+			HandleNextRepositoryWorkflowPage(protocol, owner, name);
 		}
 
 		public static void HandleExecuteWorkflowResponse(SLProtocol protocol)
@@ -123,7 +147,7 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			HandleWorkflowExecutionInterApp(protocol, owner, name, workflowId, message);
 		}
 
-		private static void HandleNextRepositoryWorkflow(SLProtocol protocol, string owner, string name)
+		private static void HandleNextRepositoryWorkflowPage(SLProtocol protocol, string owner, string name)
 		{
 			// Check if there are more workflows to fetch
 			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowslinkheader));
@@ -147,6 +171,11 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			}
 
 			// If no more workflows for this repo fetch the next repository in the queue.
+			HandleNextRepositoryWorkflow(protocol);
+		}
+
+		private static void HandleNextRepositoryWorkflow(SLProtocol protocol)
+		{
 			var queue = SecureNewtonsoftDeserialization.DeserializeObject<List<string>>(
 				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowsqueue)));
 			var next = queue?.FirstOrDefault();

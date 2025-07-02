@@ -5,6 +5,7 @@
 	using System.Linq;
 	using System.Text.RegularExpressions;
 
+	using Skyline.DataMiner.ConnectorAPI.Github.Repositories;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
 	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
@@ -27,6 +28,8 @@
 			// Parse response
 			var response = SecureNewtonsoftDeserialization.DeserializeObject<List<RepositoryReleasesResponse>>(
 				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryreleasescontent)));
+			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryreleaseslinkheader_254));
+			var link = new LinkHeader(linkHeader);
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|response was null.", LogType.Error, LogLevel.Level1);
@@ -47,9 +50,11 @@
 			var match = Regex.Match(response[0]?.Url, pattern, options);
 			var owner = match.Groups[1].Value;
 			var name = match.Groups[2].Value;
+			var repositoryId = $"{owner}/{name}";
 
 			// Update the releases table
 			var table = RepositoryReleasesTable.GetTable();
+			var pkCache = PkCache.GetCache(protocol, Parameter.Repositoryreleases.tablePid);
 			foreach (var release in response)
 			{
 				if (release == null)
@@ -86,6 +91,24 @@
 					row.Instance = id;
 					table.Rows.Add(row);
 				}
+
+				pkCache[repositoryId].Add(row.Instance);
+			}
+
+			// If not all releases are polled for this repo, store the fetched ids and poll the next page.
+			if (link.HasNext)
+			{
+				pkCache.Store(protocol);
+			}
+
+			// If the last page is polled check to see if some releases are removed.
+			if (link.IsLast)
+			{
+				var toBeRemoved = table.Rows.Where(r => r.RepositoryID == repositoryId).Select(r => r.Instance).ToHashSet();
+				toBeRemoved.ExceptWith(pkCache[repositoryId]);
+				table.DeleteRow(protocol, toBeRemoved.ToArray());
+				pkCache[repositoryId].Clear();
+				pkCache.Store(protocol);
 			}
 
 			if (table.Rows.Count > 0)
@@ -96,11 +119,6 @@
 			HandleRepositoryReleaseAssetsResponse(protocol);
 
 			// Check if there are more releases to fetch
-			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryreleaseslinkheader));
-			if (string.IsNullOrEmpty(linkHeader)) return;
-
-			var link = new LinkHeader(linkHeader);
-
 			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|Current page: {link.CurrentPage}", LogType.Information, LogLevel.Level2);
 			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|Has next page: {link.HasNext}", LogType.Information, LogLevel.Level2);
 
@@ -121,6 +139,8 @@
 			// Parse response
 			var response = SecureNewtonsoftDeserialization.DeserializeObject<List<RepositoryReleasesResponse>>(
 				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryreleasescontent)));
+			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.repositoryreleaseassets_pk_cache_1791));
+			var link = new LinkHeader(linkHeader);
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|HandleRepositoryReleaseAssetsResponse|response was null.", LogType.Error, LogLevel.Level1);
@@ -141,9 +161,11 @@
 			var match = Regex.Match(response[0]?.Url, pattern, options);
 			var owner = match.Groups[1].Value;
 			var name = match.Groups[2].Value;
+			var repositoryId = $"{owner}/{name}";
 
 			// Update the releases table
 			var table = ReleaseAssetsTable.GetTable();
+			var pkCache = PkCache.GetCache(protocol, Parameter.Repositoryreleaseassets.tablePid);
 			foreach (var release in response)
 			{
 				if (release == null)
@@ -184,7 +206,25 @@
 						row.Instance = id;
 						table.Rows.Add(row);
 					}
+
+					pkCache[repositoryId].Add(row.Instance);
 				}
+			}
+
+			// If not all release assets are polled for this repo, store the fetched ids and poll the next page.
+			if (link.HasNext)
+			{
+				pkCache.Store(protocol);
+			}
+
+			// If the last page is polled check to see if some release assets are removed.
+			if (link.IsLast)
+			{
+				var toBeRemoved = table.Rows.Where(r => r.RepositoryID == repositoryId).Select(r => r.Instance).ToHashSet();
+				toBeRemoved.ExceptWith(pkCache[repositoryId]);
+				table.DeleteRow(protocol, toBeRemoved.ToArray());
+				pkCache[repositoryId].Clear();
+				pkCache.Store(protocol);
 			}
 
 			if (table.Rows.Count > 0)

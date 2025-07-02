@@ -15,143 +15,34 @@
 
 	public class LinkHeader
 	{
-		private readonly string headerRaw;
+		private static readonly Regex relRegex = new Regex("(?<=rel=\").+?(?=\")", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+		private static readonly Regex linkRegex = new Regex("(?<=<).+?(?=>)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-		private readonly Dictionary<string, string> links = new Dictionary<string, string>();
+		private readonly string headerRaw;
 
 		public LinkHeader(string header)
 		{
 			headerRaw = header;
+			Parse();
 		}
 
-		public bool IsLast
-		{
-			get
-			{
-				Parse();
-				return !links.ContainsKey(LinkRel.Next);
-			}
-		}
+		public bool IsLast { get; private set; }
 
-		public bool IsFirst
-		{
-			get
-			{
-				Parse();
-				return !links.ContainsKey(LinkRel.Previous);
-			}
-		}
+		public bool IsFirst { get; private set; }
 
-		public bool HasNext
-		{
-			get
-			{
-				Parse();
-				return links.ContainsKey(LinkRel.Next);
-			}
-		}
+		public bool HasNext { get; private set; }
 
-		public bool HasPrevious
-		{
-			get
-			{
-				Parse();
-				return links.ContainsKey(LinkRel.Previous);
-			}
-		}
+		public bool HasPrevious { get; private set; }
 
-		public int NextPage
-		{
-			get
-			{
-				Parse();
-				if (links.TryGetValue(LinkRel.Next, out var next))
-				{
-					var page = GetPageFromUrl(next);
-					return page;
-				}
+		public int NextPage { get; private set; }
 
-				throw new InvalidOperationException("There is no next page.");
-			}
-		}
+		public int PreviousPage { get; private set; }
 
-		public int PreviousPage
-		{
-			get
-			{
-				Parse();
-				if (links.TryGetValue(LinkRel.Previous, out var prev))
-				{
-					var page = GetPageFromUrl(prev);
-					return page;
-				}
+		public int FirstPage { get; private set; }
 
-				throw new InvalidOperationException("There is no previous page.");
-			}
-		}
+		public int LastPage { get; private set; }
 
-		public int FirstPage
-		{
-			get
-			{
-				Parse();
-				if (links.TryGetValue(LinkRel.First, out var first))
-				{
-					var page = GetPageFromUrl(first);
-					return page;
-				}
-
-				if (links.TryGetValue(LinkRel.Next, out var next))
-				{
-					var page = GetPageFromUrl(next);
-					return page - 1;
-				}
-
-				throw new InvalidOperationException("There is no first page.");
-			}
-		}
-
-		public int LastPage
-		{
-			get
-			{
-				Parse();
-				if (links.TryGetValue(LinkRel.Last, out var last))
-				{
-					var page = GetPageFromUrl(last);
-					return page;
-				}
-
-				if (links.TryGetValue(LinkRel.Previous, out var prev))
-				{
-					var page = GetPageFromUrl(prev);
-					return page + 1;
-				}
-
-				throw new InvalidOperationException("There is no last page.");
-			}
-		}
-
-		public int CurrentPage
-		{
-			get
-			{
-				Parse();
-				if (links.TryGetValue(LinkRel.Previous, out var prev))
-				{
-					var page = GetPageFromUrl(prev);
-					return page + 1;
-				}
-
-				if (links.TryGetValue(LinkRel.Next, out var next))
-				{
-					var page = GetPageFromUrl(next);
-					return page - 1;
-				}
-
-				throw new InvalidOperationException("Cannot retrieve the current page.");
-			}
-		}
+		public int CurrentPage { get; private set; }
 
 		private static int GetPageFromUrl(string url)
 		{
@@ -162,13 +53,12 @@
 
 		private void Parse()
 		{
-			if (links.Count != 0) return;
-
 			var entries = headerRaw.Split(',');
+			var links = new Dictionary<string, string>();
 			foreach (var entry in entries)
 			{
-				var relMatch = Regex.Match(entry, "(?<=rel=\").+?(?=\")", RegexOptions.IgnoreCase);
-				var linkMatch = Regex.Match(entry, "(?<=<).+?(?=>)", RegexOptions.IgnoreCase);
+				var relMatch = relRegex.Match(entry);
+				var linkMatch = linkRegex.Match(entry);
 
 				if (relMatch.Success && linkMatch.Success)
 				{
@@ -177,6 +67,65 @@
 
 					links.Add(rel.ToUpper(), link);
 				}
+			}
+
+			IsLast = !links.ContainsKey(LinkRel.Next);
+			IsFirst = !links.ContainsKey(LinkRel.Previous);
+			HasNext = links.ContainsKey(LinkRel.Next);
+			HasPrevious = links.ContainsKey(LinkRel.Previous);
+
+			// Parse NextPage
+			if (links.TryGetValue(LinkRel.Next, out var next))
+			{
+				var page = GetPageFromUrl(next);
+				NextPage = page;
+			}
+			else
+			{
+				NextPage = -1;
+			}
+
+			// Parse PreviousPage
+			if (links.TryGetValue(LinkRel.Previous, out var previous))
+			{
+				var page = GetPageFromUrl(previous);
+				PreviousPage = page;
+			}
+			else
+			{
+				PreviousPage = -1;
+			}
+
+			// Parse FirstPage
+			if (links.TryGetValue(LinkRel.First, out var first))
+			{
+				var page = GetPageFromUrl(first);
+				FirstPage = page;
+			}
+			else if (links.TryGetValue(LinkRel.Next, out _))
+			{
+				var page = GetPageFromUrl(next);
+				FirstPage = page - 1;
+			}
+			else
+			{
+				FirstPage = -1;
+			}
+
+			// Parse LastPage
+			if (links.TryGetValue(LinkRel.Last, out var last))
+			{
+				var page = GetPageFromUrl(last);
+				LastPage = page;
+			}
+			else if (links.TryGetValue(LinkRel.Previous, out _))
+			{
+				var page = GetPageFromUrl(previous);
+				LastPage = page + 1;
+			}
+			else
+			{
+				LastPage = -1;
 			}
 		}
 	}

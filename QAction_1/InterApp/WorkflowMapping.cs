@@ -98,6 +98,9 @@
 				case GenericInterAppMessage<AddInternalNugetCICDWorkflowRequest> addInternalNugetCICDWorkflowRequest:
 					return addInternalNugetCICDWorkflowRequest.Data;
 
+				case GenericInterAppMessage<AddCustomWorkflowRequest> addCustomWorkflowRequest:
+					return addCustomWorkflowRequest.Data;
+
 				default:
 					throw new InvalidOperationException("Unknown workflow type");
 			}

@@ -34,7 +34,7 @@ namespace Skyline.Protocol.Extensions
 			}
 			else
 			{
-				protocol.Log($"QA{protocol.QActionID}|IsSuccessStatusCode|Error {code}: {message}", LogType.Error, LogLevel.NoLogging);
+				protocol.Log($"QA{protocol.QActionID}|{protocol.GetTriggerParameter()}|IsSuccessStatusCode|Error {code}: {message}", LogType.Error, LogLevel.NoLogging);
 				return false;
 			}
 		}

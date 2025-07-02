@@ -26,7 +26,10 @@
 
 			// Parse response
 			var response = SecureNewtonsoftDeserialization.DeserializeObject<List<RepositoryIssuesResponse>>(
-				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryissuescontent)));
+				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryissuescontent_202)));
+			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryissueslinkheader_252));
+			var link = new LinkHeader(linkHeader);
+
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|response was null.", LogType.Error, LogLevel.Level1);
@@ -47,9 +50,11 @@
 			var match = Regex.Match(response[0].Url, pattern, options);
 			var owner = match.Groups[1].Value;
 			var name = match.Groups[2].Value;
+			var repositoryId = $"{owner}/{name}";
 
 			// Update the issues table
 			var table = RepositoryIssuesTable.GetTable();
+			var pkCache = PkCache.GetCache(protocol, Parameter.Repositoryissues.tablePid);
 			foreach (var issue in response)
 			{
 				// Update existing issue if found, otherwise create new one
@@ -72,6 +77,24 @@
 					row.Instance = id;
 					table.Rows.Add(row);
 				}
+
+				pkCache[repositoryId].Add(row.Instance);
+			}
+
+			// If not all tags are polled for this repo, store the fetched ids and poll the next page.
+			if (link.HasNext)
+			{
+				pkCache.Store(protocol);
+			}
+
+			// If the last page is polled check to see if some tags are removed.
+			if (link.IsLast)
+			{
+				var toBeRemoved = table.Rows.Where(r => r.RepositoryID == repositoryId).Select(r => r.Instance).ToHashSet();
+				toBeRemoved.ExceptWith(pkCache[repositoryId]);
+				table.DeleteRow(protocol, toBeRemoved.ToArray());
+				pkCache[repositoryId].Clear();
+				pkCache.Store(protocol);
 			}
 
 			if (table.Rows.Count > 0)
@@ -80,11 +103,6 @@
 			}
 
 			// Check if there are more tags to fetch
-			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryissueslinkheader));
-			if (string.IsNullOrEmpty(linkHeader)) return;
-
-			var link = new LinkHeader(linkHeader);
-
 			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|Current page: {link.CurrentPage}", LogType.Information, LogLevel.Level2);
 			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|Has next page: {link.HasNext}", LogType.Information, LogLevel.Level2);
 

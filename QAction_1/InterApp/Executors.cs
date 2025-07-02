@@ -28,6 +28,7 @@
 			{ typeof(GenericInterAppMessage<AddConnectorCIWorkflowRequest>),            typeof(AddConnectorCIWorkflowExecutor) },
 			{ typeof(GenericInterAppMessage<AddNugetCICDWorkflowRequest>),              typeof(AddNugetCICDWorkflowExecutor) },
 			{ typeof(GenericInterAppMessage<AddInternalNugetCICDWorkflowRequest>),      typeof(AddInternalNugetCICDWorkflowExecutor) },
+			{ typeof(GenericInterAppMessage<AddCustomWorkflowRequest>),					typeof(AddCustomWorkflowExecutor) },
 			{ typeof(GenericInterAppMessage<ExecuteWorkflowRequest>),					typeof(ExecuteWorkflowExecutor) },
 		};
 

@@ -7,8 +7,11 @@ namespace Skyline.Protocol.PollManager
 
 	public enum RequestType
 	{
+		[Description("Table/Cleanup")]
+		Table_Cleanup = 200,
+
 		[Table(Parameter.Repositories.tablePid)]
-		[Description("Repositories/Repositories")] 
+		[Description("Repositories/Repositories")]
 		Repositories_Repositories = 201,
 
 		[Table(Parameter.Repositoryissues.tablePid)]
@@ -39,7 +42,7 @@ namespace Skyline.Protocol.PollManager
 		[Description("Organizations/Teams")]
 		Organizations_Teams = 212,
 
-		[Table( Parameter.Organizationmembers.tablePid,
+		[Table(Parameter.Organizationmembers.tablePid,
 				Parameter.Memberorganizationlinks.tablePid,
 				Parameter.Memberteamlinks.tablePid)]
 		[Description("Organizations/Members")]
@@ -57,6 +60,9 @@ namespace Skyline.Protocol.PollManager
 		[Description("Organizations/Add Repository Team Collaborator")]
 		Organizations_AddTeamCollaborator = 224,
 
+		[Description("Repositories/Create or Update Secret")]
+		Repositories_CreateOrUpdateSecret = 226,
+
 		[Table(Parameter.Repositories.tablePid)]
 		[Description("Repositories/Public Keys")]
 		Repositories_PublicKey = 228,
@@ -67,9 +73,12 @@ namespace Skyline.Protocol.PollManager
 		[Description("Repositories/Create or Update Topics")]
 		Repositories_CreateOrUpdateTopics = 230,
 
-        [Description("Repositories/Workflow Execution")]
-        Repositories_WorkflowExecution = 281,
-    }
+		[Description("Repositories/Create Variable")]
+		Repositories_CreateVariable = 235,
+
+		[Description("Repositories/Workflow Execution")]
+		Repositories_WorkflowExecution = 281,
+	}
 
 	public enum PollState
 	{

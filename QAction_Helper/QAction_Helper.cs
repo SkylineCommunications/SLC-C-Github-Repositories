@@ -163,6 +163,11 @@ public static class Parameter
 	public const int postworkflowexecutionurl_131 = 131;
 	/// <summary>PID: 131 | Type: read</summary>
 	public const int postworkflowexecutionurl = 131;
+	/// <summary>PID: 135 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int postrepositoryvariableurl_135 = 135;
+	/// <summary>PID: 135 | Type: read</summary>
+	public const int postrepositoryvariableurl = 135;
 	/// <summary>PID: 155 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int getrepositoryworkflowsqueue_155 = 155;
@@ -218,6 +223,11 @@ public static class Parameter
 	public const int postworkflowexecutionbody_181 = 181;
 	/// <summary>PID: 181 | Type: read</summary>
 	public const int postworkflowexecutionbody = 181;
+	/// <summary>PID: 185 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int postrepositoryvariablebody_185 = 185;
+	/// <summary>PID: 185 | Type: read</summary>
+	public const int postrepositoryvariablebody = 185;
 	/// <summary>PID: 201 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int getrepositorycontent_201 = 201;
@@ -313,6 +323,11 @@ public static class Parameter
 	public const int postexecuteworkflowcontent_231 = 231;
 	/// <summary>PID: 231 | Type: read</summary>
 	public const int postexecuteworkflowcontent = 231;
+	/// <summary>PID: 235 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int postrepositoryvariablecontent_235 = 235;
+	/// <summary>PID: 235 | Type: read</summary>
+	public const int postrepositoryvariablecontent = 235;
 	/// <summary>PID: 251 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int getrepositorylinkheader_251 = 251;
@@ -438,6 +453,11 @@ public static class Parameter
 	public const int addworkflowworkflow_555 = 555;
 	/// <summary>PID: 555 | Type: read</summary>
 	public const int addworkflowworkflow = 555;
+	/// <summary>PID: 991 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int repositories_pk_cache_991 = 991;
+	/// <summary>PID: 991 | Type: read</summary>
+	public const int repositories_pk_cache = 991;
 	/// <summary>PID: 992 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int repositories_changerequest_992 = 992;
@@ -448,11 +468,36 @@ public static class Parameter
 	public const int repositoriesoverview_996 = 996;
 	/// <summary>PID: 996 | Type: read</summary>
 	public const int repositoriesoverview = 996;
+	/// <summary>PID: 1191 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int repositorytags_pk_cache_1191 = 1191;
+	/// <summary>PID: 1191 | Type: read</summary>
+	public const int repositorytags_pk_cache = 1191;
+	/// <summary>PID: 1391 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int repositoryreleases_pk_cache_1391 = 1391;
+	/// <summary>PID: 1391 | Type: read</summary>
+	public const int repositoryreleases_pk_cache = 1391;
+	/// <summary>PID: 1591 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int repositoryworkflow_pk_cache_1591 = 1591;
+	/// <summary>PID: 1591 | Type: read</summary>
+	public const int repositoryworkflow_pk_cache = 1591;
 	/// <summary>PID: 1592 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int repositoryworkflow_changerequest_1592 = 1592;
 	/// <summary>PID: 1592 | Type: read</summary>
 	public const int repositoryworkflow_changerequest = 1592;
+	/// <summary>PID: 1791 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int repositoryreleaseassets_pk_cache_1791 = 1791;
+	/// <summary>PID: 1791 | Type: read</summary>
+	public const int repositoryreleaseassets_pk_cache = 1791;
+	/// <summary>PID: 1991 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int repositoryissues_pk_cache_1991 = 1991;
+	/// <summary>PID: 1991 | Type: read</summary>
+	public const int repositoryissues_pk_cache = 1991;
 	/// <summary>PID: 2996 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int organizationsoverview_2996 = 2996;
@@ -2097,6 +2142,8 @@ public interface SLProtocolExt : SLProtocol
 	object Putrepositorytopicsurl { get; set; }
 	object Postworkflowexecutionurl_131 { get; set; }
 	object Postworkflowexecutionurl { get; set; }
+	object Postrepositoryvariableurl_135 { get; set; }
+	object Postrepositoryvariableurl { get; set; }
 	object Getrepositoryworkflowsqueue_155 { get; set; }
 	object Getrepositoryworkflowsqueue { get; set; }
 	object Getorganizationmembersqueue_163 { get; set; }
@@ -2119,6 +2166,8 @@ public interface SLProtocolExt : SLProtocol
 	object Putrepositorytopicsbody { get; set; }
 	object Postworkflowexecutionbody_181 { get; set; }
 	object Postworkflowexecutionbody { get; set; }
+	object Postrepositoryvariablebody_185 { get; set; }
+	object Postrepositoryvariablebody { get; set; }
 	object Getrepositorycontent_201 { get; set; }
 	object Getrepositorycontent { get; set; }
 	object Getrepositoryissuescontent_202 { get; set; }
@@ -2157,6 +2206,8 @@ public interface SLProtocolExt : SLProtocol
 	object Putrepositorytopicscontent { get; set; }
 	object Postexecuteworkflowcontent_231 { get; set; }
 	object Postexecuteworkflowcontent { get; set; }
+	object Postrepositoryvariablecontent_235 { get; set; }
+	object Postrepositoryvariablecontent { get; set; }
 	object Getrepositorylinkheader_251 { get; set; }
 	object Getrepositorylinkheader { get; set; }
 	object Getrepositoryissueslinkheader_252 { get; set; }
@@ -2221,6 +2272,8 @@ public interface SLProtocolExt : SLProtocol
 	object Addworkflowworkflow_655 { get; set; }
 	object Repositories_contextmenu_990 { get; set; }
 	object Repositories_contextmenu { get; set; }
+	object Repositories_pk_cache_991 { get; set; }
+	object Repositories_pk_cache { get; set; }
 	object Repositories_changerequest_992 { get; set; }
 	object Repositories_changerequest { get; set; }
 	object Repositoriesoverview_996 { get; set; }
@@ -2263,6 +2316,8 @@ public interface SLProtocolExt : SLProtocol
 	object Repositoriesid { get; set; }
 	object Repositoriestopics_1019 { get; set; }
 	object Repositoriestopics { get; set; }
+	object Repositorytags_pk_cache_1191 { get; set; }
+	object Repositorytags_pk_cache { get; set; }
 	object Repositorytagsid_1201 { get; set; }
 	object Repositorytagsid { get; set; }
 	object Repositorytagsname_1202 { get; set; }
@@ -2271,6 +2326,8 @@ public interface SLProtocolExt : SLProtocol
 	object Repositorytagsrepositoryid { get; set; }
 	object Repositorytagscommitsha_1204 { get; set; }
 	object Repositorytagscommitsha { get; set; }
+	object Repositoryreleases_pk_cache_1391 { get; set; }
+	object Repositoryreleases_pk_cache { get; set; }
 	object Repositoryreleasesinstance_1401 { get; set; }
 	object Repositoryreleasesinstance { get; set; }
 	object Repositoryreleasesid_1402 { get; set; }
@@ -2299,6 +2356,8 @@ public interface SLProtocolExt : SLProtocol
 	object Repositoryreleasesrepositoryid { get; set; }
 	object Repositoryworkflows_contextmenu_1590 { get; set; }
 	object Repositoryworkflows_contextmenu { get; set; }
+	object Repositoryworkflow_pk_cache_1591 { get; set; }
+	object Repositoryworkflow_pk_cache { get; set; }
 	object Repositoryworkflow_changerequest_1592 { get; set; }
 	object Repositoryworkflow_changerequest { get; set; }
 	object Repositoryworkflowsid_1601 { get; set; }
@@ -2317,6 +2376,8 @@ public interface SLProtocolExt : SLProtocol
 	object Repositoryworkflowsupdatedat { get; set; }
 	object Repositoryworkflowsdeletedat_1608 { get; set; }
 	object Repositoryworkflowsdeletedat { get; set; }
+	object Repositoryreleaseassets_pk_cache_1791 { get; set; }
+	object Repositoryreleaseassets_pk_cache { get; set; }
 	object Repositoryreleaseassetsinstance_1801 { get; set; }
 	object Repositoryreleaseassetsinstance { get; set; }
 	object Repositoryreleaseassetsid_1802 { get; set; }
@@ -2347,6 +2408,8 @@ public interface SLProtocolExt : SLProtocol
 	object Repositoryreleaseassetsupdatedat { get; set; }
 	object Repositoryreleaseassetsbrowserdownloadurl_1815 { get; set; }
 	object Repositoryreleaseassetsbrowserdownloadurl { get; set; }
+	object Repositoryissues_pk_cache_1991 { get; set; }
+	object Repositoryissues_pk_cache { get; set; }
 	object Repositoryissuesinstance_2001 { get; set; }
 	object Repositoryissuesinstance { get; set; }
 	object Repositoryissuesnumber_2002 { get; set; }
@@ -2676,6 +2739,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Postworkflowexecutionurl_131 {get { return GetParameter(131); }set { SetParameter(131, value); }}
 	/// <summary>PID: 131  | Type: read</summary>
 	public System.Object Postworkflowexecutionurl {get { return GetParameter(131); }set { SetParameter(131, value); }}
+	/// <summary>PID: 135  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Postrepositoryvariableurl_135 {get { return GetParameter(135); }set { SetParameter(135, value); }}
+	/// <summary>PID: 135  | Type: read</summary>
+	public System.Object Postrepositoryvariableurl {get { return GetParameter(135); }set { SetParameter(135, value); }}
 	/// <summary>PID: 155  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Getrepositoryworkflowsqueue_155 {get { return GetParameter(155); }set { SetParameter(155, value); }}
@@ -2731,6 +2799,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Postworkflowexecutionbody_181 {get { return GetParameter(181); }set { SetParameter(181, value); }}
 	/// <summary>PID: 181  | Type: read</summary>
 	public System.Object Postworkflowexecutionbody {get { return GetParameter(181); }set { SetParameter(181, value); }}
+	/// <summary>PID: 185  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Postrepositoryvariablebody_185 {get { return GetParameter(185); }set { SetParameter(185, value); }}
+	/// <summary>PID: 185  | Type: read</summary>
+	public System.Object Postrepositoryvariablebody {get { return GetParameter(185); }set { SetParameter(185, value); }}
 	/// <summary>PID: 201  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Getrepositorycontent_201 {get { return GetParameter(201); }set { SetParameter(201, value); }}
@@ -2826,6 +2899,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Postexecuteworkflowcontent_231 {get { return GetParameter(231); }set { SetParameter(231, value); }}
 	/// <summary>PID: 231  | Type: read</summary>
 	public System.Object Postexecuteworkflowcontent {get { return GetParameter(231); }set { SetParameter(231, value); }}
+	/// <summary>PID: 235  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Postrepositoryvariablecontent_235 {get { return GetParameter(235); }set { SetParameter(235, value); }}
+	/// <summary>PID: 235  | Type: read</summary>
+	public System.Object Postrepositoryvariablecontent {get { return GetParameter(235); }set { SetParameter(235, value); }}
 	/// <summary>PID: 251  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Getrepositorylinkheader_251 {get { return GetParameter(251); }set { SetParameter(251, value); }}
@@ -2984,6 +3062,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositories_contextmenu_990 {get { return GetParameter(990); }set { SetParameter(990, value); }}
 	/// <summary>PID: 990  | Type: write | DISCREETS: Add... = 1, Delete selected row(s) = 2</summary>
 	public System.Object Repositories_contextmenu {get { return Write.Repositories_contextmenu; }set { Write.Repositories_contextmenu = value; }}
+	/// <summary>PID: 991  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositories_pk_cache_991 {get { return GetParameter(991); }set { SetParameter(991, value); }}
+	/// <summary>PID: 991  | Type: read</summary>
+	public System.Object Repositories_pk_cache {get { return GetParameter(991); }set { SetParameter(991, value); }}
 	/// <summary>PID: 992  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositories_changerequest_992 {get { return GetParameter(992); }set { SetParameter(992, value); }}
@@ -3089,6 +3172,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoriestopics_1019 {get { return GetParameter(1019); }set { SetParameter(1019, value); }}
 	/// <summary>PID: 1019  | Type: read</summary>
 	public System.Object Repositoriestopics {get { return GetParameter(1019); }set { SetParameter(1019, value); }}
+	/// <summary>PID: 1191  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorytags_pk_cache_1191 {get { return GetParameter(1191); }set { SetParameter(1191, value); }}
+	/// <summary>PID: 1191  | Type: read</summary>
+	public System.Object Repositorytags_pk_cache {get { return GetParameter(1191); }set { SetParameter(1191, value); }}
 	/// <summary>PID: 1201  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositorytagsid_1201 {get { return GetParameter(1201); }set { SetParameter(1201, value); }}
@@ -3109,6 +3197,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositorytagscommitsha_1204 {get { return GetParameter(1204); }set { SetParameter(1204, value); }}
 	/// <summary>PID: 1204  | Type: read</summary>
 	public System.Object Repositorytagscommitsha {get { return GetParameter(1204); }set { SetParameter(1204, value); }}
+	/// <summary>PID: 1391  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleases_pk_cache_1391 {get { return GetParameter(1391); }set { SetParameter(1391, value); }}
+	/// <summary>PID: 1391  | Type: read</summary>
+	public System.Object Repositoryreleases_pk_cache {get { return GetParameter(1391); }set { SetParameter(1391, value); }}
 	/// <summary>PID: 1401  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoryreleasesinstance_1401 {get { return GetParameter(1401); }set { SetParameter(1401, value); }}
@@ -3178,6 +3271,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoryworkflows_contextmenu_1590 {get { return GetParameter(1590); }set { SetParameter(1590, value); }}
 	/// <summary>PID: 1590  | Type: write | DISCREETS: Add... = 1</summary>
 	public System.Object Repositoryworkflows_contextmenu {get { return Write.Repositoryworkflows_contextmenu; }set { Write.Repositoryworkflows_contextmenu = value; }}
+	/// <summary>PID: 1591  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryworkflow_pk_cache_1591 {get { return GetParameter(1591); }set { SetParameter(1591, value); }}
+	/// <summary>PID: 1591  | Type: read</summary>
+	public System.Object Repositoryworkflow_pk_cache {get { return GetParameter(1591); }set { SetParameter(1591, value); }}
 	/// <summary>PID: 1592  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoryworkflow_changerequest_1592 {get { return GetParameter(1592); }set { SetParameter(1592, value); }}
@@ -3223,6 +3321,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoryworkflowsdeletedat_1608 {get { return GetParameter(1608); }set { SetParameter(1608, value); }}
 	/// <summary>PID: 1608  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	public System.Object Repositoryworkflowsdeletedat {get { return GetParameter(1608); }set { SetParameter(1608, value); }}
+	/// <summary>PID: 1791  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassets_pk_cache_1791 {get { return GetParameter(1791); }set { SetParameter(1791, value); }}
+	/// <summary>PID: 1791  | Type: read</summary>
+	public System.Object Repositoryreleaseassets_pk_cache {get { return GetParameter(1791); }set { SetParameter(1791, value); }}
 	/// <summary>PID: 1801  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoryreleaseassetsinstance_1801 {get { return GetParameter(1801); }set { SetParameter(1801, value); }}
@@ -3298,6 +3401,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoryreleaseassetsbrowserdownloadurl_1815 {get { return GetParameter(1815); }set { SetParameter(1815, value); }}
 	/// <summary>PID: 1815  | Type: read</summary>
 	public System.Object Repositoryreleaseassetsbrowserdownloadurl {get { return GetParameter(1815); }set { SetParameter(1815, value); }}
+	/// <summary>PID: 1991  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryissues_pk_cache_1991 {get { return GetParameter(1991); }set { SetParameter(1991, value); }}
+	/// <summary>PID: 1991  | Type: read</summary>
+	public System.Object Repositoryissues_pk_cache {get { return GetParameter(1991); }set { SetParameter(1991, value); }}
 	/// <summary>PID: 2001  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoryissuesinstance_2001 {get { return GetParameter(2001); }set { SetParameter(2001, value); }}
