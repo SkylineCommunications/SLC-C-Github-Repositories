@@ -5,7 +5,7 @@
     <Company>Skyline Communications</Company>
     <Copyright>© Skyline Communications</Copyright>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <AssemblyVersion>2023.1003.1224.22851</AssemblyVersion>
+    <AssemblyVersion>2025.0701.1339.32280</AssemblyVersion>
     <RootNamespace>Skyline.Protocol</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
@@ -13,7 +13,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Skyline.DataMiner.ConnectorAPI.Github.Repositories" Version="1.0.8" />
+    <PackageReference Include="Skyline.DataMiner.ConnectorAPI.Github.Repositories" Version="1.0.9" />
     <PackageReference Include="Skyline.DataMiner.Core.InterAppCalls.Common" Version="1.0.1.1" />
     <PackageReference Include="Skyline.DataMiner.Dev.Protocol" Version="10.3.9" />
     <PackageReference Include="YamlDotNet" Version="15.1.4" />
