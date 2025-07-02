@@ -87,46 +87,51 @@ public static class QAction
 		// We can't just clear it when the polling is disabled
 		if (tableId == Parameter.Repositories.tablePid)
 		{
-			var table = RepositoriesTable.GetTable();
-			var pollTable = PollManagerTable.GetTable(protocol);
-
-			if (requestType == RequestType.Repositories_PublicKey)
-			{
-				// Remove all the public keys
-				foreach (var row in table.Rows)
-				{
-					row.PublicKeyID = Exceptions.NotAvailable;
-					row.PublicKey = Exceptions.NotAvailable;
-				}
-			}
-			else if (requestType == RequestType.Repositories_Repositories)
-			{
-				// If the Organization/Repositories is disabled then the orgs list should be empty.
-				var orgRepoPolled = pollTable.Rows.Single(pollRow => pollRow.RequestType == RequestType.Organizations_Repositories).PollState == PollState.Enabled;
-				var orgs = OrganizationsTable.GetTable().Rows.Where(x => x.Tracked && orgRepoPolled).Select(x => x.Instance);
-				foreach (var row in table.Rows.Where(x => !orgs.Contains(x.Owner)))
-				{
-					row.SetToNotAvailable();
-				}
-			}
-			else if (requestType == RequestType.Organizations_Repositories)
-			{
-				var orgs = OrganizationsTable.GetTable().Rows.Where(x => x.Tracked).Select(x => x.Instance);
-				foreach (var row in table.Rows.Where(x => orgs.Contains(x.Owner)))
-				{
-					row.SetToNotAvailable();
-				}
-			}
-			else
-			{
-				// Nothing to do here.
-			}
-
-			table.SaveToProtocol(protocol);
+			ClearRepositoriesTable(protocol, requestType);
 		}
 		else
 		{
 			protocol.ClearAllKeys(tableId);
 		}
+	}
+
+	private static void ClearRepositoriesTable(SLProtocol protocol, RequestType requestType)
+	{
+		var table = RepositoriesTable.GetTable();
+		var pollTable = PollManagerTable.GetTable(protocol);
+
+		if (requestType == RequestType.Repositories_PublicKey)
+		{
+			// Remove all the public keys
+			foreach (var row in table.Rows)
+			{
+				row.PublicKeyID = Exceptions.NotAvailable;
+				row.PublicKey = Exceptions.NotAvailable;
+			}
+		}
+		else if (requestType == RequestType.Repositories_Repositories)
+		{
+			// If the Organization/Repositories is disabled then the orgs list should be empty.
+			var orgRepoPolled = pollTable.Rows.Single(pollRow => pollRow.RequestType == RequestType.Organizations_Repositories).PollState == PollState.Enabled;
+			var orgs = OrganizationsTable.GetTable().Rows.Where(x => x.Tracked && orgRepoPolled).Select(x => x.Instance);
+			foreach (var row in table.Rows.Where(x => !orgs.Contains(x.Owner)))
+			{
+				row.SetToNotAvailable();
+			}
+		}
+		else if (requestType == RequestType.Organizations_Repositories)
+		{
+			var orgs = OrganizationsTable.GetTable().Rows.Where(x => x.Tracked).Select(x => x.Instance);
+			foreach (var row in table.Rows.Where(x => orgs.Contains(x.Owner)))
+			{
+				row.SetToNotAvailable();
+			}
+		}
+		else
+		{
+			// Nothing to do here.
+		}
+
+		table.SaveToProtocol(protocol);
 	}
 }

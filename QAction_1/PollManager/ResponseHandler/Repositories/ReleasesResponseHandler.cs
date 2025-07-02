@@ -95,12 +95,6 @@
 				pkCache[repositoryId].Add(row.Instance);
 			}
 
-			// If not all releases are polled for this repo, store the fetched ids and poll the next page.
-			if (link.HasNext)
-			{
-				pkCache.Store(protocol);
-			}
-
 			// If the last page is polled check to see if some releases are removed.
 			if (link.IsLast)
 			{
@@ -124,6 +118,7 @@
 
 			if (link.HasNext)
 			{
+				pkCache.Store(protocol);
 				RepositoriesRequestHandler.HandleRepositoriesReleasesRequest(protocol, owner, name, PollingConstants.PerPage, link.NextPage);
 			}
 		}
@@ -168,15 +163,9 @@
 			var pkCache = PkCache.GetCache(protocol, Parameter.Repositoryreleaseassets.tablePid);
 			foreach (var release in response)
 			{
-				if (release == null)
+				if (release?.Url == null)
 				{
-					protocol.Log($"QA{protocol.QActionID}|HandleRepositoryReleaseAssetsResponse|Release was null.", LogType.Error, LogLevel.Level1);
-					continue;
-				}
-
-				if (release.Url == null)
-				{
-					protocol.Log($"QA{protocol.QActionID}|HandleRepositoryReleaseAssetsResponse|Release url null.", LogType.Error, LogLevel.Level1);
+					protocol.Log($"QA{protocol.QActionID}|HandleRepositoryReleaseAssetsResponse|Release or Release url is null.", LogType.Error, LogLevel.Level1);
 					continue;
 				}
 
