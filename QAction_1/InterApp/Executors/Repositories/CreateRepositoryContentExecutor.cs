@@ -123,6 +123,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 				Response = new GenericInterAppMessage<CreateRepositoryContentResponse>(result),
 				ResponseType = typeof(CreateRepositoryContentResponse),
 				Info = Message.Data.RepositoryPath,
+				RequestTime = DateTime.Now,
 			}.SaveToProtocol(protocol);
 
 			// Do the actual commit to the repository

@@ -68,6 +68,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 				Response = new GenericInterAppMessage<ExecuteWorkflowResponse>(result),
 				ResponseType = typeof(ExecuteWorkflowResponse),
 				Info = $"Executing workflow '{Message.Data.WorkflowId}'",
+				RequestTime = DateTime.Now,
 			}.SaveToProtocol(protocol);
 
 			// Execute the workflow

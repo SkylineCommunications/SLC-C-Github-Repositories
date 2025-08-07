@@ -114,6 +114,7 @@
 				Response = new GenericInterAppMessage<AddRepositoryTopicsResponse>(result),
 				ResponseType = typeof(AddRepositoryTopicsResponse),
 				Info = $"{Message.Data.RepositoryId.FullName}/{String.Join(",", totalTopics)}",
+				RequestTime = DateTime.Now,
 			}.SaveToProtocol(protocol);
 
 			// Do the actual create of the repository

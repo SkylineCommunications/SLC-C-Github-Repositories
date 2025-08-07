@@ -47,7 +47,7 @@ Any inquiries can be addressed to:
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>Github Repositories</Name>
 	<Description>Github Repositories DataMiner connector</Description>
-	<Version>1.0.0.13</Version>
+	<Version>1.0.0.14</Version>
 	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Github</Vendor>
@@ -5250,6 +5250,64 @@ Are you sure you want to continue.]]>
 			</Measurement>
 		</Param>
 		
+		<Param id="9000049" trending="false" save="true">
+			<Name>maxTimeForIACMessages</Name>
+			<Description>Max Time for IAC Messages</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>IAC Messages will be removed after the specified time interval.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<DefaultValue>86400</DefaultValue>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Range>
+					<Low>300</Low>
+				</Range>
+				<Steps>60</Steps>
+				<Positions>
+					<Position>
+						<Page>Inter-App Communication</Page>
+						<Column>0</Column>
+						<Row>2</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="time">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="9000099" setter="true">
+			<Name>maxTimeForIACMessages</Name>
+			<Description>Max Time for IAC Messages</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Range>
+					<Low>300</Low>
+				</Range>
+				<Steps>60</Steps>
+				<Positions>
+					<Position>
+						<Page>Inter-App Communication</Page>
+						<Column>0</Column>
+						<Row>2</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="time">number</Type>
+			</Measurement>
+		</Param>
 		<Param id="9000100">
 			<Name>IAC_Messages</Name>
 			<Description>IAC_Messages</Description>
@@ -5262,6 +5320,7 @@ Are you sure you want to continue.]]>
 				<ColumnOption idx="4" pid="9000105" type="retrieved" options="" />
 				<ColumnOption idx="5" pid="9000106" type="retrieved" options="" />
 				<ColumnOption idx="6" pid="9000107" type="retrieved" options="" />
+				<ColumnOption idx="7" pid="9000108" type="retrieved" options="" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>This table contains the list of received InterApp calls which are currently being processed.</Subtext>
@@ -5272,12 +5331,12 @@ Are you sure you want to continue.]]>
 					<Position>
 						<Page>Inter-App Communication</Page>
 						<Column>0</Column>
-						<Row>2</Row>
+						<Row>3</Row>
 					</Position>
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:9000101|0-9000102|1-9000103|2-9000104|3-9000105|4-9000106|5-9000107|6,width:200-200-100-109-100-109-100,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:9000101|0-9000102|1-9000103|2-9000104|3-9000105|4-9000106|5-9000107|6-9000108|7,width:200-200-100-109-100-109-100-156,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT|DESC|0,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="9000101" trending="false">
@@ -5432,6 +5491,27 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
+		<Param id="9000108" trending="false">
+			<Name>IAC_MessagesRequestTime</Name>
+			<Description>Request Time (IAC_Messages)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Time the InterApp message was received.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
 	</Params>
 
 	<QActions>
@@ -5452,6 +5532,7 @@ Are you sure you want to continue.]]>
 		<QAction id="20002" name="HTTP Poll Manager Updates" encoding="csharp" row="true" triggers="21006;21053" />
 
 		<QAction id="9000000" name="Process Incoming InterApp Messages" encoding="csharp" triggers="9000000"/>
+		<QAction id="9000049" name="IAC Messages Cleanup" encoding="csharp" triggers="9000049"/>
 	</QActions>
 
 	<HTTP>
@@ -5958,6 +6039,14 @@ Are you sure you want to continue.]]>
 			<Type>poll action</Type>
 			<Content>
 				<Action>15</Action>
+			</Content>
+		</Group>
+		<Group id="16">
+			<Name>IAC_Messages Cleanup</Name>
+			<Description>IAC_Messages Cleanup</Description>
+			<Type>poll action</Type>
+			<Content>
+				<Action>16</Action>
 			</Content>
 		</Group>
 
@@ -6494,6 +6583,11 @@ Are you sure you want to continue.]]>
 			<On id="30">parameter</On>
 			<Type>run actions</Type>
 		</Action>
+		<Action id="16">
+			<Name>IAC_Messages Cleanup</Name>
+			<On id="9000049">parameter</On>
+			<Type>run actions</Type>
+		</Action>
 		
 		<Action id="201">
 			<Name>Get Repository</Name>
@@ -6798,6 +6892,14 @@ Are you sure you want to continue.]]>
 				<Group>15</Group>
 			</Content>
 		</Timer>
+		<Timer id="2">
+			<Name>Medium Timer (60s)</Name>
+			<Time initial="true">60000</Time>
+			<Interval>75</Interval>
+			<Content>
+				<Group>16</Group>
+			</Content>
+		</Timer>
 	</Timers>
 
 	<PortSettings name="HTTP Connection">
@@ -6965,6 +7067,19 @@ Are you sure you want to continue.]]>
 											<NewFeature>Handle the adding of custom workflows</NewFeature>
 											<NewFeature>Can now also add variables to repositories</NewFeature>
 										</Changes>
+									</MinorVersion>
+									<MinorVersion id="14" basedOn="1.0.0.13">
+										<Date>2025-08-07</Date>
+										<Provider>
+											<Author>BSO</Author>
+											<Company>Skyline Communications</Company>
+										</Provider>
+										<Changes>
+											<NewFeature>Added Table Cleanup to IAC Messages Table</NewFeature>
+										</Changes>
+										<References>
+											<TaskId>276554</TaskId>
+										</References>
 									</MinorVersion>
 								</MinorVersions>
 							</MajorVersion>
