@@ -513,11 +513,21 @@ public static class Parameter
 	public const int iac_response_9000001 = 9000001;
 	/// <summary>PID: 9000001 | Type: read</summary>
 	public const int iac_response = 9000001;
-	/// <summary>PID: 9000049 | Type: read</summary>
+	/// <summary>PID: 9000093 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public const int maxtimeforiacmessages_9000049 = 9000049;
-	/// <summary>PID: 9000049 | Type: read</summary>
-	public const int maxtimeforiacmessages = 9000049;
+	public const int iac_messagesmaximumrowcount_9000093 = 9000093;
+	/// <summary>PID: 9000093 | Type: read</summary>
+	public const int iac_messagesmaximumrowcount = 9000093;
+	/// <summary>PID: 9000094 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int iac_messagesmaximumrowage_9000094 = 9000094;
+	/// <summary>PID: 9000094 | Type: read</summary>
+	public const int iac_messagesmaximumrowage = 9000094;
+	/// <summary>PID: 9000095 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int iac_messagescleanupmethod_9000095 = 9000095;
+	/// <summary>PID: 9000095 | Type: read</summary>
+	public const int iac_messagescleanupmethod = 9000095;
 	public class Write
 	{
 		/// <summary>PID: 7 | Type: write</summary>
@@ -610,11 +620,26 @@ public static class Parameter
 		public const int pollmanagerpollfrequency_21054 = 21054;
 		/// <summary>PID: 21054 | Type: write</summary>
 		public const int pollmanagerpollfrequency = 21054;
-		/// <summary>PID: 9000099 | Type: write</summary>
+		/// <summary>PID: 9000092 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public const int maxtimeforiacmessages_9000099 = 9000099;
-		/// <summary>PID: 9000099 | Type: write</summary>
-		public const int maxtimeforiacmessages = 9000099;
+		public const int iac_messagespagebuttons_9000092 = 9000092;
+		/// <summary>PID: 9000092 | Type: write</summary>
+		public const int iac_messagespagebuttons = 9000092;
+		/// <summary>PID: 9000143 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int iac_messagesmaximumrowcount_9000143 = 9000143;
+		/// <summary>PID: 9000143 | Type: write</summary>
+		public const int iac_messagesmaximumrowcount = 9000143;
+		/// <summary>PID: 9000144 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int iac_messagesmaximumrowage_9000144 = 9000144;
+		/// <summary>PID: 9000144 | Type: write</summary>
+		public const int iac_messagesmaximumrowage = 9000144;
+		/// <summary>PID: 9000145 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int iac_messagescleanupmethod_9000145 = 9000145;
+		/// <summary>PID: 9000145 | Type: write</summary>
+		public const int iac_messagescleanupmethod = 9000145;
 	}
 	public class Repositories
 	{
@@ -1962,9 +1987,9 @@ public static class Parameter
 			public const int iac_messagesinfo = 9000107;
 			/// <summary>PID: 9000108 | Type: read</summary>
 			[EditorBrowsable(EditorBrowsableState.Never)]
-			public const int iac_messagesrequesttime_9000108 = 9000108;
+			public const int iac_messagesreceivedat_9000108 = 9000108;
 			/// <summary>PID: 9000108 | Type: read</summary>
-			public const int iac_messagesrequesttime = 9000108;
+			public const int iac_messagesreceivedat = 9000108;
 			public class Write
 			{
 			}
@@ -2008,9 +2033,9 @@ public static class Parameter
 			public const int iac_messagesinfo = 6;
 			/// <summary>IDX: 7 | Type: read</summary>
 			[EditorBrowsable(EditorBrowsableState.Never)]
-			public const int iac_messagesrequesttime_9000108 = 7;
+			public const int iac_messagesreceivedat_9000108 = 7;
 			/// <summary>IDX: 7 | Type: read</summary>
-			public const int iac_messagesrequesttime = 7;
+			public const int iac_messagesreceivedat = 7;
 		}
 	}
 }
@@ -2054,8 +2079,14 @@ public class WriteParameters
 	public System.Object Pollmanagerpollstate {get { return Protocol.GetParameter(21053); }set { Protocol.SetParameter(21053, value); }}
 	/// <summary>PID: 21054  | Type: write</summary>
 	public System.Object Pollmanagerpollfrequency {get { return Protocol.GetParameter(21054); }set { Protocol.SetParameter(21054, value); }}
-	/// <summary>PID: 9000099  | Type: write</summary>
-	public System.Object Maxtimeforiacmessages {get { return Protocol.GetParameter(9000099); }set { Protocol.SetParameter(9000099, value); }}
+	/// <summary>PID: 9000092  | Type: write | DISCREETS: Table Cleanup... = Inter-App Cleanup</summary>
+	public System.Object Iac_messagespagebuttons {get { return Protocol.GetParameter(9000092); }set { Protocol.SetParameter(9000092, value); }}
+	/// <summary>PID: 9000143  | Type: write</summary>
+	public System.Object Iac_messagesmaximumrowcount {get { return Protocol.GetParameter(9000143); }set { Protocol.SetParameter(9000143, value); }}
+	/// <summary>PID: 9000144  | Type: write</summary>
+	public System.Object Iac_messagesmaximumrowage {get { return Protocol.GetParameter(9000144); }set { Protocol.SetParameter(9000144, value); }}
+	/// <summary>PID: 9000145  | Type: write | DISCREETS: Row Age and Row Count = 0, Row Age = 1, Row Count = 2</summary>
+	public System.Object Iac_messagescleanupmethod {get { return Protocol.GetParameter(9000145); }set { Protocol.SetParameter(9000145, value); }}
 	public SLProtocolExt Protocol;
 	public WriteParameters(SLProtocolExt protocol)
 	{
@@ -2537,9 +2568,14 @@ public interface SLProtocolExt : SLProtocol
 	object Iac_receiver { get; set; }
 	object Iac_response_9000001 { get; set; }
 	object Iac_response { get; set; }
-	object Maxtimeforiacmessages_9000049 { get; set; }
-	object Maxtimeforiacmessages { get; set; }
-	object Maxtimeforiacmessages_9000099 { get; set; }
+	object Iac_messagespagebuttons_9000092 { get; set; }
+	object Iac_messagespagebuttons { get; set; }
+	object Iac_messagesmaximumrowcount_9000093 { get; set; }
+	object Iac_messagesmaximumrowcount { get; set; }
+	object Iac_messagesmaximumrowage_9000094 { get; set; }
+	object Iac_messagesmaximumrowage { get; set; }
+	object Iac_messagescleanupmethod_9000095 { get; set; }
+	object Iac_messagescleanupmethod { get; set; }
 	object Iac_messagesguid_9000101 { get; set; }
 	object Iac_messagesguid { get; set; }
 	object Iac_messagesstatus_9000102 { get; set; }
@@ -2554,8 +2590,11 @@ public interface SLProtocolExt : SLProtocol
 	object Iac_messagesresponsetype { get; set; }
 	object Iac_messagesinfo_9000107 { get; set; }
 	object Iac_messagesinfo { get; set; }
-	object Iac_messagesrequesttime_9000108 { get; set; }
-	object Iac_messagesrequesttime { get; set; }
+	object Iac_messagesreceivedat_9000108 { get; set; }
+	object Iac_messagesreceivedat { get; set; }
+	object Iac_messagesmaximumrowcount_9000143 { get; set; }
+	object Iac_messagesmaximumrowage_9000144 { get; set; }
+	object Iac_messagescleanupmethod_9000145 { get; set; }
 	WriteParameters Write { get; set; }
 }
 public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
@@ -3696,14 +3735,25 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Iac_response_9000001 {get { return GetParameter(9000001); }set { SetParameter(9000001, value); }}
 	/// <summary>PID: 9000001  | Type: read</summary>
 	public System.Object Iac_response {get { return GetParameter(9000001); }set { SetParameter(9000001, value); }}
-	/// <summary>PID: 9000049  | Type: read</summary>
+	/// <summary>PID: 9000092  | Type: write | DISCREETS: Table Cleanup... = Inter-App Cleanup</summary>
+	public System.Object Iac_messagespagebuttons_9000092 {get { return GetParameter(9000092); }set { SetParameter(9000092, value); }}
+	/// <summary>PID: 9000092  | Type: write | DISCREETS: Table Cleanup... = Inter-App Cleanup</summary>
+	public System.Object Iac_messagespagebuttons {get { return Write.Iac_messagespagebuttons; }set { Write.Iac_messagespagebuttons = value; }}
+	/// <summary>PID: 9000093  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Maxtimeforiacmessages_9000049 {get { return GetParameter(9000049); }set { SetParameter(9000049, value); }}
-	/// <summary>PID: 9000049  | Type: read</summary>
-	public System.Object Maxtimeforiacmessages {get { return GetParameter(9000049); }set { SetParameter(9000049, value); }}
-	/// <summary>PID: 9000099  | Type: write</summary>
+	public System.Object Iac_messagesmaximumrowcount_9000093 {get { return GetParameter(9000093); }set { SetParameter(9000093, value); }}
+	/// <summary>PID: 9000093  | Type: read</summary>
+	public System.Object Iac_messagesmaximumrowcount {get { return GetParameter(9000093); }set { SetParameter(9000093, value); }}
+	/// <summary>PID: 9000094  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Maxtimeforiacmessages_9000099 {get { return GetParameter(9000099); }set { SetParameter(9000099, value); }}
+	public System.Object Iac_messagesmaximumrowage_9000094 {get { return GetParameter(9000094); }set { SetParameter(9000094, value); }}
+	/// <summary>PID: 9000094  | Type: read</summary>
+	public System.Object Iac_messagesmaximumrowage {get { return GetParameter(9000094); }set { SetParameter(9000094, value); }}
+	/// <summary>PID: 9000095  | Type: read | DISCREETS: Row Age and Row Count = 0, Row Age = 1, Row Count = 2</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Iac_messagescleanupmethod_9000095 {get { return GetParameter(9000095); }set { SetParameter(9000095, value); }}
+	/// <summary>PID: 9000095  | Type: read | DISCREETS: Row Age and Row Count = 0, Row Age = 1, Row Count = 2</summary>
+	public System.Object Iac_messagescleanupmethod {get { return GetParameter(9000095); }set { SetParameter(9000095, value); }}
 	/// <summary>PID: 9000101  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Iac_messagesguid_9000101 {get { return GetParameter(9000101); }set { SetParameter(9000101, value); }}
@@ -3741,9 +3791,18 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Iac_messagesinfo {get { return GetParameter(9000107); }set { SetParameter(9000107, value); }}
 	/// <summary>PID: 9000108  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Iac_messagesrequesttime_9000108 {get { return GetParameter(9000108); }set { SetParameter(9000108, value); }}
+	public System.Object Iac_messagesreceivedat_9000108 {get { return GetParameter(9000108); }set { SetParameter(9000108, value); }}
 	/// <summary>PID: 9000108  | Type: read</summary>
-	public System.Object Iac_messagesrequesttime {get { return GetParameter(9000108); }set { SetParameter(9000108, value); }}
+	public System.Object Iac_messagesreceivedat {get { return GetParameter(9000108); }set { SetParameter(9000108, value); }}
+	/// <summary>PID: 9000143  | Type: write</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Iac_messagesmaximumrowcount_9000143 {get { return GetParameter(9000143); }set { SetParameter(9000143, value); }}
+	/// <summary>PID: 9000144  | Type: write</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Iac_messagesmaximumrowage_9000144 {get { return GetParameter(9000144); }set { SetParameter(9000144, value); }}
+	/// <summary>PID: 9000145  | Type: write | DISCREETS: Row Age and Row Count = 0, Row Age = 1, Row Count = 2</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Iac_messagescleanupmethod_9000145 {get { return GetParameter(9000145); }set { SetParameter(9000145, value); }}
 	public WriteParameters Write { get; set; }
 	public ConcreteSLProtocolExt()
 	{
@@ -4566,9 +4625,9 @@ public class Iac_messagesQActionRow : QActionTableRow
 	public System.Object Iac_messagesinfo { get { if (base.Columns.ContainsKey(6)) { return base.Columns[6]; } else { return null; } } set { if (base.Columns.ContainsKey(6)) { base.Columns[6] = value; } else { base.Columns.Add(6, value); } } }
 	/// <summary>PID: 9000108 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public System.Object Iac_messagesrequesttime_9000108 { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
+	public System.Object Iac_messagesreceivedat_9000108 { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
 	/// <summary>PID: 9000108 | Type: read</summary>
-	public System.Object Iac_messagesrequesttime { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
+	public System.Object Iac_messagesreceivedat { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
 	public Iac_messagesQActionRow() : base(0, 8) { }
 	public Iac_messagesQActionRow(System.Object[] oRow) : base(0, 8, oRow) { }
 	public static implicit operator Iac_messagesQActionRow(System.Object[] source) { return new Iac_messagesQActionRow(source); }

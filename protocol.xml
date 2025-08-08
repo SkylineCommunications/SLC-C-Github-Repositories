@@ -5250,30 +5250,123 @@ Are you sure you want to continue.]]>
 			</Measurement>
 		</Param>
 		
-		<Param id="9000049" trending="false" save="true">
-			<Name>maxTimeForIACMessages</Name>
-			<Description>Max Time for IAC Messages</Description>
+		<Param id="9000092">
+			<Name>IAC_MessagesPageButtons</Name>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Inter-App Communication</Page>
+						<Column>0</Column>
+						<Row>3</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type width="110">pagebutton</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Table Cleanup...</Display>
+						<Value>Inter-App Cleanup</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="9000093" trending="true" save="true">
+			<Name>IAC_MessagesMaximumRowCount</Name>
+			<Description>Inter-App Table Maximum Row Count</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>IAC Messages will be removed after the specified time interval.</Subtext>
+				<Subtext>This is how many rows are allowed before rows are getting removed from the table. The oldest ones will be removed first.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
-				<DefaultValue>86400</DefaultValue>
+				<DefaultValue>500</DefaultValue>
+			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<Normal>500</Normal>
+			</Alarm>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Units>Rows</Units>
+				<Range>
+					<Low>1</Low>
+				</Range>
+				<Positions>
+					<Position>
+						<Page>Inter-App Cleanup</Page>
+						<Column>0</Column>
+						<Row>2</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="9000143" setter="true">
+			<Name>IAC_MessagesMaximumRowCount</Name>
+			<Description>Inter-App Table Maximum Row Count</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Units>Rows</Units>
 				<Range>
-					<Low>300</Low>
+					<Low>1</Low>
 				</Range>
-				<Steps>60</Steps>
 				<Positions>
 					<Position>
-						<Page>Inter-App Communication</Page>
+						<Page>Inter-App Cleanup</Page>
 						<Column>0</Column>
 						<Row>2</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>number</Type>
+			</Measurement>
+		</Param>
+		<Param id="9000094" trending="true" save="true">
+			<Name>IAC_MessagesMaximumRowAge</Name>
+			<Description>Inter-App Table Maximum Row Age</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>This is how long the row is allowed in the table before being removed.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<DefaultValue>604800</DefaultValue>
+			</Interprete>
+			<Alarm>
+				<Monitored>true</Monitored>
+				<Normal>604800</Normal>
+			</Alarm>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Range>
+					<Low>1</Low>
+				</Range>
+				<Positions>
+					<Position>
+						<Page>Inter-App Cleanup</Page>
+						<Column>0</Column>
+						<Row>1</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -5281,9 +5374,9 @@ Are you sure you want to continue.]]>
 				<Type options="time">number</Type>
 			</Measurement>
 		</Param>
-		<Param id="9000099" setter="true">
-			<Name>maxTimeForIACMessages</Name>
-			<Description>Max Time for IAC Messages</Description>
+		<Param id="9000144" setter="true">
+			<Name>IAC_MessagesMaximumRowAge</Name>
+			<Description>Inter-App Table Maximum Row Age</Description>
 			<Type>write</Type>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -5293,19 +5386,101 @@ Are you sure you want to continue.]]>
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Range>
-					<Low>300</Low>
+					<Low>1</Low>
 				</Range>
-				<Steps>60</Steps>
 				<Positions>
 					<Position>
-						<Page>Inter-App Communication</Page>
+						<Page>Inter-App Cleanup</Page>
 						<Column>0</Column>
-						<Row>2</Row>
+						<Row>1</Row>
 					</Position>
 				</Positions>
 			</Display>
 			<Measurement>
 				<Type options="time">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="9000095" trending="true" save="true">
+			<Name>IAC_MessagesCleanupMethod</Name>
+			<Description>Inter-App Table Cleanup Method</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Here you can choose how the tables have to be cleanup up.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<DefaultValue>0</DefaultValue>
+			</Interprete>
+			<!-- SuppressValidator 2.5.1 No default threshold, this is a choice for the user. -->
+			<Alarm>
+				<Monitored>true</Monitored>
+			</Alarm>
+			<!-- /SuppressValidator 2.5.1 -->
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Inter-App Cleanup</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Row Age and Row Count</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Row Age</Display>
+						<Value>1</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Row Count</Display>
+						<Value>2</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="9000145" setter="true">
+			<Name>IAC_MessagesCleanupMethod</Name>
+			<Description>Inter-App Table Cleanup Method</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Inter-App Cleanup</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Row Age and Row Count</Display>
+						<Value>0</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Row Age</Display>
+						<Value>1</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Row Count</Display>
+						<Value>2</Value>
+					</Discreet>
+				</Discreets>
 			</Measurement>
 		</Param>
 		<Param id="9000100">
@@ -5331,7 +5506,7 @@ Are you sure you want to continue.]]>
 					<Position>
 						<Page>Inter-App Communication</Page>
 						<Column>0</Column>
-						<Row>3</Row>
+						<Row>2</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -5492,8 +5667,8 @@ Are you sure you want to continue.]]>
 			</Measurement>
 		</Param>
 		<Param id="9000108" trending="false">
-			<Name>IAC_MessagesRequestTime</Name>
-			<Description>Request Time (IAC_Messages)</Description>
+			<Name>IAC_MessagesReceivedAt</Name>
+			<Description>Received At (IAC_Messages)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Time the InterApp message was received.</Subtext>
@@ -5532,7 +5707,6 @@ Are you sure you want to continue.]]>
 		<QAction id="20002" name="HTTP Poll Manager Updates" encoding="csharp" row="true" triggers="21006;21053" />
 
 		<QAction id="9000000" name="Process Incoming InterApp Messages" encoding="csharp" triggers="9000000"/>
-		<QAction id="9000049" name="IAC Messages Cleanup" encoding="csharp" triggers="9000049"/>
 	</QActions>
 
 	<HTTP>
@@ -6039,14 +6213,6 @@ Are you sure you want to continue.]]>
 			<Type>poll action</Type>
 			<Content>
 				<Action>15</Action>
-			</Content>
-		</Group>
-		<Group id="16">
-			<Name>IAC_Messages Cleanup</Name>
-			<Description>IAC_Messages Cleanup</Description>
-			<Type>poll action</Type>
-			<Content>
-				<Action>16</Action>
 			</Content>
 		</Group>
 
@@ -6583,11 +6749,6 @@ Are you sure you want to continue.]]>
 			<On id="30">parameter</On>
 			<Type>run actions</Type>
 		</Action>
-		<Action id="16">
-			<Name>IAC_Messages Cleanup</Name>
-			<On id="9000049">parameter</On>
-			<Type>run actions</Type>
-		</Action>
 		
 		<Action id="201">
 			<Name>Get Repository</Name>
@@ -6890,14 +7051,6 @@ Are you sure you want to continue.]]>
 			<Interval>75</Interval>
 			<Content>
 				<Group>15</Group>
-			</Content>
-		</Timer>
-		<Timer id="2">
-			<Name>Medium Timer (60s)</Name>
-			<Time initial="true">60000</Time>
-			<Interval>75</Interval>
-			<Content>
-				<Group>16</Group>
 			</Content>
 		</Timer>
 	</Timers>

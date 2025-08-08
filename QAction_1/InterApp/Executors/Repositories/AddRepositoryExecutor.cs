@@ -47,7 +47,7 @@ namespace Skyline.Protocol.InterApp.Executors.Repositories
 					Response = optionalReturnMessage,
 					ResponseType = typeof(AddRepositoryResponse),
 					Info = $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}",
-					RequestTime = DateTime.Now,
+					ReceivedAt = DateTime.Now,
 				}.SaveToProtocol(protocol);
 
 				return false;
@@ -70,7 +70,7 @@ namespace Skyline.Protocol.InterApp.Executors.Repositories
 					Response = optionalReturnMessage,
 					ResponseType = typeof(AddRepositoryResponse),
 					Info = $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}",
-					RequestTime = DateTime.Now,
+					ReceivedAt = DateTime.Now,
 				}.SaveToProtocol(protocol);
 
 				return true;
@@ -93,7 +93,7 @@ namespace Skyline.Protocol.InterApp.Executors.Repositories
 			// Return message
 			returnMessage.Success = true;
 			returnMessage.Description = "Successfully added a new tracked repository.";
-			optionalReturnMessage = new GenericInterAppMessage<AddRepositoryResponse>(returnMessage); ;
+			optionalReturnMessage = new GenericInterAppMessage<AddRepositoryResponse>(returnMessage);
 
 			// Add to the InterApp Queue
 			new IAC_MessagesTableRow
@@ -105,7 +105,7 @@ namespace Skyline.Protocol.InterApp.Executors.Repositories
 				Response = optionalReturnMessage,
 				ResponseType = typeof(AddRepositoryResponse),
 				Info = $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}",
-				RequestTime = DateTime.Now,
+				ReceivedAt = DateTime.Now,
 			}.SaveToProtocol(protocol);
 
 			return true;

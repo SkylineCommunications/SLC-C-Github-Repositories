@@ -33,7 +33,7 @@ namespace Skyline.Protocol.Tables
 			Response = MessageFactory.CreateFromRaw(Convert.ToString(row[4]), Types.KnownTypes);
 			ResponseType = Type.GetType(Convert.ToString(row[5]));
 			Info = Convert.ToString(row[6]);
-			RequestTime = DateTime.FromOADate(Convert.ToDouble(row[7]));
+			ReceivedAt = DateTime.FromOADate(Convert.ToDouble(row[7]));
 		}
 
 		public Guid Guid { get; set; }
@@ -50,7 +50,7 @@ namespace Skyline.Protocol.Tables
 
 		public string Info { get; set; }
 
-		public DateTime RequestTime { get; set; }
+		public DateTime ReceivedAt { get; set; }
 
 		public static IAC_MessagesTableRow FromPK(SLProtocol protocol, string pk)
 		{
@@ -74,7 +74,7 @@ namespace Skyline.Protocol.Tables
 				Iac_messagesresponse_9000105 = SerializerFactory.CreateInterAppSerializer(new List<Type>()).SerializeToString(Response),
 				Iac_messagesresponsetype_9000106 = ResponseType.AssemblyQualifiedName,
 				Iac_messagesinfo_9000107 = Info,
-				Iac_messagesrequesttime_9000108 = RequestTime.ToOADate(),
+				Iac_messagesreceivedat_9000108 = ReceivedAt.ToOADate(),
 			};
 		}
 
@@ -109,7 +109,7 @@ namespace Skyline.Protocol.Tables
 				Parameter.Iac_messages.Idx.iac_messagesresponse_9000105,
 				Parameter.Iac_messages.Idx.iac_messagesresponsetype_9000106,
 				Parameter.Iac_messages.Idx.iac_messagesinfo_9000107,
-				Parameter.Iac_messages.Idx.iac_messagesrequesttime_9000108,
+				Parameter.Iac_messages.Idx.iac_messagesreceivedat_9000108,
 			};
 			object[] iac_messages = (object[])protocol.NotifyProtocol((int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Iac_messages.tablePid, iAC_MessagesIdx);
 			object[] gUIDIDX = (object[])iac_messages[0];
@@ -155,7 +155,7 @@ namespace Skyline.Protocol.Tables
 		public void SaveToProtocol(SLProtocol protocol, bool partial = false)
 		{
 			// Calculate the batch size, recommended 25000 cells max per fill array, divided by the number of columns.
-			var batchSize = 25000 / 6;
+			var batchSize = 25000 / 8;
 
 			// If full then the first batch needs to be a SaveOption.Full.
 			var first = !partial;

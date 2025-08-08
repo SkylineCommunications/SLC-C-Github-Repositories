@@ -46,7 +46,7 @@ namespace Skyline.Protocol.InterApp.Executors.Repositories
 					Response = optionalReturnMessage,
 					ResponseType = typeof(RemoveRepositoryResponse),
 					Info = $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}",
-					RequestTime = DateTime.Now,
+					ReceivedAt = DateTime.Now,
 				}.SaveToProtocol(protocol);
 
 				return false;
@@ -69,7 +69,7 @@ namespace Skyline.Protocol.InterApp.Executors.Repositories
 					Response = optionalReturnMessage,
 					ResponseType = typeof(RemoveRepositoryResponse),
 					Info = $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}",
-					RequestTime = DateTime.Now,
+					ReceivedAt = DateTime.Now,
 				}.SaveToProtocol(protocol);
 
 				return true;
@@ -93,7 +93,7 @@ namespace Skyline.Protocol.InterApp.Executors.Repositories
 				Response = optionalReturnMessage,
 				ResponseType = typeof(RemoveRepositoryResponse),
 				Info = $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}",
-				RequestTime = DateTime.Now,
+				ReceivedAt = DateTime.Now,
 			}.SaveToProtocol(protocol);
 
 			return true;
