@@ -29,21 +29,49 @@ namespace Skyline.Protocol.InterApp.Executors.Repositories
 			};
 
 			// Validate request
-			if(String.IsNullOrWhiteSpace(Message.Data.RepositoryId.Owner) ||
+			if (String.IsNullOrWhiteSpace(Message.Data.RepositoryId.Owner) ||
 				String.IsNullOrWhiteSpace(Message.Data.RepositoryId.Name))
 			{
 				returnMessage.Success = false;
 				returnMessage.Description = "The Owner and Name of the repository cannot be left empty.";
 				optionalReturnMessage = new GenericInterAppMessage<RemoveRepositoryResponse>(returnMessage);
+
+				// Add to the InterApp Queue
+				new IAC_MessagesTableRow
+				{
+					Guid = Guid.Parse(Message.Guid),
+					Status = IAC_MessageStatus.Confirmed,
+					Request = Message,
+					RequestType = typeof(RemoveRepositoryRequest),
+					Response = optionalReturnMessage,
+					ResponseType = typeof(RemoveRepositoryResponse),
+					Info = $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}",
+					ReceivedAt = DateTime.Now,
+				}.SaveToProtocol(protocol);
+
 				return false;
 			}
 
 			// Check if it was already removed.
-			if(RepositoriesTableRow.FromPK(protocol, $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}") == default)
+			if (RepositoriesTableRow.FromPK(protocol, $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}") == default)
 			{
 				returnMessage.Success = true;
 				returnMessage.Description = "The repository is already removed.";
 				optionalReturnMessage = new GenericInterAppMessage<RemoveRepositoryResponse>(returnMessage);
+
+				// Add to the InterApp Queue
+				new IAC_MessagesTableRow
+				{
+					Guid = Guid.Parse(Message.Guid),
+					Status = IAC_MessageStatus.Confirmed,
+					Request = Message,
+					RequestType = typeof(RemoveRepositoryRequest),
+					Response = optionalReturnMessage,
+					ResponseType = typeof(RemoveRepositoryResponse),
+					Info = $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}",
+					ReceivedAt = DateTime.Now,
+				}.SaveToProtocol(protocol);
+
 				return true;
 			}
 
@@ -54,6 +82,20 @@ namespace Skyline.Protocol.InterApp.Executors.Repositories
 			returnMessage.Success = true;
 			returnMessage.Description = "Successfully removed the tracked repository.";
 			optionalReturnMessage = new GenericInterAppMessage<RemoveRepositoryResponse>(returnMessage);
+
+			// Add to the InterApp Queue
+			new IAC_MessagesTableRow
+			{
+				Guid = Guid.Parse(Message.Guid),
+				Status = IAC_MessageStatus.Confirmed,
+				Request = Message,
+				RequestType = typeof(RemoveRepositoryRequest),
+				Response = optionalReturnMessage,
+				ResponseType = typeof(RemoveRepositoryResponse),
+				Info = $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}",
+				ReceivedAt = DateTime.Now,
+			}.SaveToProtocol(protocol);
+
 			return true;
 		}
 	}

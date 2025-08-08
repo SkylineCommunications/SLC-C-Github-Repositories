@@ -111,6 +111,7 @@
 				Response = new GenericInterAppMessage<RemoveRepositoryTopicsResponse>(result),
 				ResponseType = typeof(RemoveRepositoryTopicsResponse),
 				Info = $"{Message.Data.RepositoryId.FullName}/{String.Join(",", totalTopics)}",
+				ReceivedAt = DateTime.Now,
 			}.SaveToProtocol(protocol);
 
 			// Do the actual create of the repository

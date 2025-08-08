@@ -5,6 +5,8 @@
 	using System.Linq;
 
 	using Skyline.DataMiner.Scripting;
+	using Skyline.DataMiner.Utils.TableCleanup;
+	using Skyline.DataMiner.Utils.TableCleanup.Filters;
 	using Skyline.Protocol.Extensions;
 
 	using SLNetMessages = Skyline.DataMiner.Net.Messages;
@@ -19,6 +21,7 @@
 			CleanupReleasesAssets(protocol, repos);
 			CleanupIssues(protocol, repos);
 			CleanupWorkflows(protocol, repos);
+			CleanupInterApp(protocol);
 		}
 
 		private static void CleanupTags(SLProtocol protocol, HashSet<string> repositoryIds)
@@ -109,6 +112,20 @@
 				.Select(row => row[0]);
 
 			RepositoryWorkflowsTable.GetTable().DeleteRow(protocol, toBeRemoved.ToArray());
+		}
+
+		private static void CleanupInterApp(SLProtocol protocol)
+		{
+			new TableCleaner(
+				protocol,
+				Parameter.Iac_messages.tablePid,
+				Parameter.Iac_messages.Idx.iac_messagesguid_9000101,
+				Parameter.Iac_messages.Idx.iac_messagesreceivedat_9000108)
+			.WithCondition(new TableMaxRowCondition(
+				Parameter.iac_messagescleanupmethod_9000095,
+				Parameter.iac_messagesmaximumrowcount_9000093,
+				Parameter.iac_messagesmaximumrowage_9000094))
+			.Cleanup();
 		}
 	}
 }

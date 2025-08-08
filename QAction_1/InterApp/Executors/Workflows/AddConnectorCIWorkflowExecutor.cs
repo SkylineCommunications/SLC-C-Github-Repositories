@@ -72,6 +72,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 				Response = new GenericInterAppMessage<AddWorkflowResponse>(result),
 				ResponseType = typeof(AddWorkflowResponse),
 				Info = workflow.Name,
+				ReceivedAt = DateTime.Now,
 			}.SaveToProtocol(protocol);
 
 			// Create the required secrets

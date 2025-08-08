@@ -138,6 +138,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 				Response = new GenericInterAppMessage<AddRepositoryCollaboratorResponse>(result),
 				ResponseType = typeof(AddRepositoryCollaboratorResponse),
 				Info = info,
+				ReceivedAt = DateTime.Now,
 			}.SaveToProtocol(protocol);
 
 			// Add the user/team to the repository

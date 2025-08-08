@@ -113,6 +113,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 				Response = new GenericInterAppMessage<CreateRepositoryResponse>(result),
 				ResponseType = typeof(CreateRepositoryResponse),
 				Info = $"{Message.Data.Data.OrganizationId}/{Message.Data.Data.Name}",
+				ReceivedAt = DateTime.Now,
 			}.SaveToProtocol(protocol);
 
 			// Do the actual create of the repository
