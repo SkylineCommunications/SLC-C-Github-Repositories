@@ -21,6 +21,7 @@
 			{ RequestType.Repositories_Releases, new PollSettings { PollFrequency = TimeSpan.FromMinutes(360), Enabled = true } },
 			{ RequestType.Repository_Issues, new PollSettings { PollFrequency = TimeSpan.FromMinutes(5), Enabled = true } },
 			{ RequestType.Repositories_Workflows, new PollSettings { PollFrequency = TimeSpan.FromMinutes(360), Enabled = true } },
+			{ RequestType.Repositories_SoftwareBillOfMaterials, new PollSettings { PollFrequency = TimeSpan.FromMinutes(360), Enabled = true } },
 
 			{ RequestType.Organizations_User, new PollSettings { PollFrequency = TimeSpan.FromHours(24), Enabled = true } },
 			{ RequestType.Organizations_Repositories, new PollSettings { PollFrequency = TimeSpan.FromHours(10), Enabled = true } },

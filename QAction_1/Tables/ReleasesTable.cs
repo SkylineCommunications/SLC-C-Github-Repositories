@@ -5,8 +5,11 @@
 	using System.Linq;
 
 	using Skyline.DataMiner.Net;
+	using Skyline.DataMiner.Net.Helper;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.Protocol.Extensions;
+	using Skyline.Protocol.PollManager;
+	using Skyline.Protocol.Tables.Events;
 
 	using SLNetMessages = Skyline.DataMiner.Net.Messages;
 
@@ -18,6 +21,7 @@
 		private double createdAtOA = Exceptions.IntNotAvailable;
 		private DateTime publishedAt;
 		private double publishedAtOA = Exceptions.IntNotAvailable;
+		private DateTime lastPolledAt;
 
 		public RepositoryReleasesTableRow() { }
 
@@ -36,6 +40,7 @@
 			CreatedAt = DateTime.FromOADate(Convert.ToDouble(row[10]));
 			PublishedAt = DateTime.FromOADate(Convert.ToDouble(row[11]));
 			RepositoryID = Convert.ToString(row[12]);
+			LastPolledAt = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[13])), DateTimeKind.Utc);
 		}
 
 		public string Instance { get; set; }
@@ -86,6 +91,24 @@
 			}
 		}
 
+		public DateTime LastPolledAt
+		{
+			get
+			{
+				return lastPolledAt;
+			}
+
+			set
+			{
+				if (value.Kind != DateTimeKind.Utc)
+				{
+					throw new ArgumentException("LastPolledAt must be in UTC.");
+				}
+
+				lastPolledAt = value;
+			}
+		}
+
 		public string RepositoryID { get; set; } = Exceptions.NotAvailable;
 
 		public static RepositoryReleasesTableRow FromPK(SLProtocol protocol, string pk)
@@ -116,6 +139,7 @@
 				Repositoryreleasescreatedat = createdAtOA,
 				Repositoryreleasespublishedat = publishedAtOA,
 				Repositoryreleasesrepositoryid = RepositoryID,
+				Repositoryreleaseslastpolledatutc = LastPolledAt.ToOADate(),
 			};
 		}
 
@@ -161,9 +185,10 @@
 				Parameter.Repositoryreleases.Idx.repositoryreleasescreatedat,
 				Parameter.Repositoryreleases.Idx.repositoryreleasespublishedat,
 				Parameter.Repositoryreleases.Idx.repositoryreleasesrepositoryid,
+				Parameter.Repositoryreleases.Idx.repositoryreleaseslastpolledatutc,
 			};
 			object[] repositoryreleases = (object[])protocol.NotifyProtocol((int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Repositoryreleases.tablePid, repositoryReleasesIdx);
-			object[] instance = (object[])repositoryreleases[0];
+			object[] pk = (object[])repositoryreleases[0];
 			object[] iD = (object[])repositoryreleases[1];
 			object[] tagName = (object[])repositoryreleases[2];
 			object[] tagId = (object[])repositoryreleases[3];
@@ -176,11 +201,12 @@
 			object[] createdAt = (object[])repositoryreleases[10];
 			object[] publishedAt = (object[])repositoryreleases[11];
 			object[] repositoryId = (object[])repositoryreleases[12];
+			object[] lastPolledAt = (object[])repositoryreleases[13];
 
-			for (int i = 0; i < instance.Length; i++)
+			for (int i = 0; i < pk.Length; i++)
 			{
 				Rows.Add(new RepositoryReleasesTableRow(
-				instance[i],
+				pk[i],
 				iD[i],
 				tagName[i],
 				tagId[i],
@@ -192,22 +218,52 @@
 				author[i],
 				createdAt[i],
 				publishedAt[i],
-				repositoryId[i]));
+				repositoryId[i],
+				lastPolledAt[i]));
 			}
 		}
 		#endregion
+
+		public static event EventHandler<TableEventArgs> ReleasesChanged;
 
 		public List<RepositoryReleasesTableRow> Rows { get; private set; } = new List<RepositoryReleasesTableRow>();
 
 		public static RepositoryReleasesTable GetTable(SLProtocol protocol = null)
 		{
-			if (protocol != null)
+			if (protocol is null)
 			{
-				instance.Dispose();
-				instance = new RepositoryReleasesTable(protocol);
+				return instance;
 			}
 
+			instance?.Dispose();
+			instance = new RepositoryReleasesTable(protocol);
 			return instance;
+		}
+
+		public void SaveToProtocol(SLProtocol protocol, bool partial = false)
+		{
+			// Calculate the batch size, recommended 25000 cells max per fill array, divided by the number of columns.
+			var batchSize = 25000 / 14;
+
+			// If full then the first batch needs to be a SaveOption.Full.
+			var first = !partial;
+			if (!Rows.Any() && !partial)
+			{
+				protocol.ClearAllKeys(Parameter.Repositoryreleases.tablePid);
+				return;
+			}
+
+			foreach (var batch in Rows.Select(x => x.ToProtocolRow()).Batch(batchSize))
+			{
+				if (first)
+				{
+					protocol.FillArray(Parameter.Repositoryreleases.tablePid, batch.ToList(), NotifyProtocol.SaveOption.Full);
+				}
+				else
+				{
+					protocol.FillArray(Parameter.Repositoryreleases.tablePid, batch.ToList(), NotifyProtocol.SaveOption.Partial);
+				}
+			}
 		}
 
 		public void DeleteRow(SLProtocol protocol, params string[] rowsToDelete)
@@ -218,13 +274,18 @@
 			// Remove from DateMiner and local instance
 			protocol.DeleteRow(Parameter.Repositoryreleases.tablePid, rowsToDelete);
 			instance.Rows.RemoveAll(x => rowsToDelete.ToList().Contains(x.Instance));
+			ReleasesChanged?.Invoke(null, new TableEventArgs(protocol, TableChange.Remove, rowsToDelete));
 		}
 
-		public void SaveToProtocol(SLProtocol protocol, bool partial = false)
+		public void Cleanup(SLProtocol protocol, string repositoryId)
 		{
-			List<object[]> rows = Rows.Select(x => x.ToProtocolRow()).ToList();
-			NotifyProtocol.SaveOption option = partial ? NotifyProtocol.SaveOption.Partial : NotifyProtocol.SaveOption.Full;
-			protocol.FillArray(Parameter.Repositoryreleases.tablePid, rows, option);
+			var pollRow = PollManagerTable.GetTable(protocol).Rows.FirstOrDefault(r => r.RequestType == RequestType.Repositories_Releases);
+			var toBeRemoved = Rows.Where(r => r.RepositoryID == repositoryId)
+				.Where(r => r.LastPolledAt < pollRow.LastPolledUTCTime)
+				.Select(r => r.Instance)
+				.ToArray();
+
+			DeleteRow(protocol, toBeRemoved);
 		}
 
 		#region IDisposable
@@ -260,7 +321,7 @@
 				.Where(row => e.Repositories.Contains(row[1]))
 				.Select(row => row[0]);
 
-			RepositoryReleasesTable.GetTable().DeleteRow(e.Protocol, releaseRows.ToArray());
+			DeleteRow(e.Protocol, releaseRows.ToArray());
 		}
 	}
 }

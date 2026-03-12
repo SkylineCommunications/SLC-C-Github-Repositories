@@ -17,6 +17,7 @@
 			{ RequestType.Repositories_Releases,                RepositoriesResponseHandler.HandleRepositoriesReleasesResponse },
 			{ RequestType.Repository_Issues,                    RepositoriesResponseHandler.HandleRepositoriesIssuesResponse },
 			{ RequestType.Repositories_Workflows,               RepositoriesResponseHandler.HandleRepositoriesWorkflowsResponse },
+			{ RequestType.Repositories_SoftwareBillOfMaterials, RepositoriesResponseHandler.HandleSoftwareBillOfMaterialsResponse },
 
 			{ RequestType.Organizations_User,                   OrganizationsResponseHandler.HandleUserOrganizationsResponse },
 			{ RequestType.Organizations_Repositories,           OrganizationsResponseHandler.HandleOrganizationRepositoriesResponse },

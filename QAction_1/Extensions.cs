@@ -1,4 +1,4 @@
-﻿// Ignore Spelling: Github
+﻿// Ignore Spelling: Github Nullable
 
 namespace Skyline.Protocol.Extensions
 {
@@ -88,6 +88,20 @@ namespace Skyline.Protocol.Extensions
 			}
 
 			throw new KeyNotFoundException("There is no value for the given description");
+		}
+
+		public static T? ParseNullableEnumDescription<T>(string description)
+			where T : struct, Enum
+		{
+			var enumType = typeof(T);
+			var descriptions = enumType.GetFields().ToDictionary(field => field, field => field.GetCustomAttribute<DescriptionAttribute>());
+			var @enum = descriptions.FirstOrDefault(desc => desc.Value != null && desc.Value.Description == description);
+			if (@enum.Value != null)
+			{
+				return (T)Enum.Parse(enumType, @enum.Key.Name);
+			}
+
+			return null;
 		}
 
 		public static List<List<T>> ToRows<T>(this IEnumerable<IEnumerable<T>> columns)

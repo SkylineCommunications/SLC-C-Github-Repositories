@@ -8,10 +8,12 @@ namespace Skyline.Protocol.Tables
 
 	using Skyline.DataMiner.Net.Helper;
 	using Skyline.DataMiner.Scripting;
-
-	using SLNetMessages = Skyline.DataMiner.Net.Messages;
-	using Extensions = Skyline.Protocol.Extensions.Extensions;
 	using Skyline.Protocol.Extensions;
+	using Skyline.Protocol.PollManager;
+	using Skyline.Protocol.Tables.Events;
+
+	using Extensions = Skyline.Protocol.Extensions.Extensions;
+	using SLNetMessages = Skyline.DataMiner.Net.Messages;
 
 	public enum PrivacySetting
 	{
@@ -33,6 +35,8 @@ namespace Skyline.Protocol.Tables
 
 	public class TeamsTableRow
 	{
+		private DateTime lastPolledAt;
+
 		public TeamsTableRow() { }
 
 		public TeamsTableRow(params object[] row)
@@ -43,9 +47,10 @@ namespace Skyline.Protocol.Tables
 			Name = Convert.ToString(row[3]);
 			Slug = Convert.ToString(row[4]);
 			Description = Convert.ToString(row[5]);
-			Privacy = Extensions.ParseEnumDescription<PrivacySetting>(Convert.ToString(row[6]));
-			NotificationsEnabled = Extensions.ParseEnumDescription<NotificationSetting>(Convert.ToString(row[7])); ;
+			Privacy = Extensions.ParseNullableEnumDescription<PrivacySetting>(Convert.ToString(row[6]));
+			NotificationsEnabled = Extensions.ParseNullableEnumDescription<NotificationSetting>(Convert.ToString(row[7])); ;
 			Permission = Convert.ToString(row[8]);
+			LastPolledAt = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[9])), DateTimeKind.Utc);
 		}
 
 		public string Instance { get; set; } = Exceptions.NotAvailable;
@@ -60,11 +65,29 @@ namespace Skyline.Protocol.Tables
 
 		public string Description { get; set; }
 
-		public PrivacySetting Privacy { get; set; }
+		public PrivacySetting? Privacy { get; set; }
 
-		public NotificationSetting NotificationsEnabled { get; set; }
+		public NotificationSetting? NotificationsEnabled { get; set; }
 
 		public string Permission { get; set; }
+
+		public DateTime LastPolledAt
+		{
+			get
+			{
+				return lastPolledAt;
+			}
+
+			set
+			{
+				if (value.Kind != DateTimeKind.Utc)
+				{
+					throw new ArgumentException("LastPolledAt must be in UTC.");
+				}
+
+				lastPolledAt = value;
+			}
+		}
 
 		public static TeamsTableRow FromPK(SLProtocol protocol, string pk)
 		{
@@ -87,9 +110,10 @@ namespace Skyline.Protocol.Tables
 				Organizationteamsname = Name,
 				Organizationteamsslug = Slug,
 				Organizationteamsdescription = Description,
-				Organizationteamsprivacy = Privacy.FriendlyDescription(),
-				Organizationteamsnotificationsenabled = NotificationsEnabled.FriendlyDescription(),
+				Organizationteamsprivacy = Privacy?.FriendlyDescription(),
+				Organizationteamsnotificationsenabled = NotificationsEnabled?.FriendlyDescription(),
 				Organizationteamspermission = Permission,
+				Organizationteamslastpolledatutc = LastPolledAt.ToOADate(),
 			};
 		}
 
@@ -125,6 +149,7 @@ namespace Skyline.Protocol.Tables
 				Parameter.Organizationteams.Idx.organizationteamsprivacy,
 				Parameter.Organizationteams.Idx.organizationteamsnotificationsenabled,
 				Parameter.Organizationteams.Idx.organizationteamspermission,
+				Parameter.Organizationteams.Idx.organizationteamslastpolledatutc,
 			};
 			object[] teams = (object[])protocol.NotifyProtocol((int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Organizationteams.tablePid, organizationTeamsIdx);
 			object[] instance = (object[])teams[0];
@@ -136,6 +161,7 @@ namespace Skyline.Protocol.Tables
 			object[] privacy = (object[])teams[6];
 			object[] notificationsEnabled = (object[])teams[7];
 			object[] permission = (object[])teams[8];
+			object[] lastPolledDateUtc = (object[])teams[9];
 
 			for (int i = 0; i < instance.Length; i++)
 			{
@@ -148,9 +174,12 @@ namespace Skyline.Protocol.Tables
 				description[i],
 				privacy[i],
 				notificationsEnabled[i],
-				permission[i]));
+				permission[i],
+				lastPolledDateUtc[i]));
 			}
 		}
+
+		public static event EventHandler<TableEventArgs> TeamsChanged;
 
 		public List<TeamsTableRow> Rows { get; set; } = new List<TeamsTableRow>();
 
@@ -167,7 +196,7 @@ namespace Skyline.Protocol.Tables
 		public void SaveToProtocol(SLProtocol protocol, bool partial = false)
 		{
 			// Calculate the batch size, recommended 25000 cells max per fill array, divided by the number of columns.
-			var batchSize = 25000 / 9;
+			var batchSize = 25000 / 10;
 
 			// If full then the first batch needs to be a SaveOption.Full.
 			var first = !partial;
@@ -189,6 +218,27 @@ namespace Skyline.Protocol.Tables
 				}
 			}
 		}
+
+		public void DeleteRow(SLProtocol protocol, params string[] rowsToDelete)
+		{
+			if (rowsToDelete.Length <= 0)
+				return;
+
+			// Remove from DataMiner and local instance
+			protocol.DeleteRow(Parameter.Organizationteams.tablePid, rowsToDelete);
+			instance.Rows.RemoveAll(x => rowsToDelete.ToHashSet().Contains(x.Instance));
+			TeamsChanged?.Invoke(instance, new TableEventArgs(protocol, TableChange.Remove, rowsToDelete));
+		}
+
+		public void Cleanup(SLProtocol protocol, string organization)
+		{
+			var pollRow = PollManagerTable.GetTable(protocol).Rows.FirstOrDefault(r => r.RequestType == RequestType.Organizations_Teams);
+			var toBeRemoved = Rows.Where(r => r.Organization == organization)
+				.Where(r => r.LastPolledAt < pollRow.LastPolledUTCTime)
+				.Select(r => r.Instance)
+				.ToArray();
+
+			DeleteRow(protocol, toBeRemoved);
+		}
 	}
 }
-

@@ -7,8 +7,11 @@ namespace Skyline.Protocol.Tables
 
 	using Skyline.DataMiner.Net.Helper;
 	using Skyline.DataMiner.Scripting;
+	using Skyline.DataMiner.Utils.Github.API.V20221128.Organizations;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
 	using Skyline.Protocol.Extensions;
+	using Skyline.Protocol.PollManager;
+	using Skyline.Protocol.Tables.Events;
 
 	using SLNetMessages = Skyline.DataMiner.Net.Messages;
 
@@ -19,6 +22,7 @@ namespace Skyline.Protocol.Tables
 		private string label;
 		private DateTime createdAt;
 		private DateTime updatedAt;
+		private DateTime lastPolledAt;
 
 		public ReleaseAssetsTableRow() { }
 
@@ -39,6 +43,7 @@ namespace Skyline.Protocol.Tables
 			CreatedAt = DateTime.FromOADate(Convert.ToDouble(row[12]));
 			UpdatedAt = DateTime.FromOADate(Convert.ToDouble(row[13]));
 			BrowserDownloadUrl = Convert.ToString(row[14]);
+			LastPolledAt = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[15])), DateTimeKind.Utc);
 		}
 
 		public string Instance { get; set; }
@@ -59,7 +64,7 @@ namespace Skyline.Protocol.Tables
 		{
 			get
 			{
-				if(label == Exceptions.NotAvailable)
+				if (label == Exceptions.NotAvailable)
 				{
 					return null;
 				}
@@ -69,7 +74,7 @@ namespace Skyline.Protocol.Tables
 
 			set
 			{
-				if(value == null || value == Exceptions.NotAvailable)
+				if (value == null || value == Exceptions.NotAvailable)
 				{
 					label = Exceptions.NotAvailable;
 				}
@@ -140,6 +145,24 @@ namespace Skyline.Protocol.Tables
 			}
 		}
 
+		public DateTime LastPolledAt
+		{
+			get
+			{
+				return lastPolledAt;
+			}
+
+			set
+			{
+				if (value.Kind != DateTimeKind.Utc)
+				{
+					throw new ArgumentException("LastPolledAt must be in UTC.");
+				}
+
+				lastPolledAt = value;
+			}
+		}
+
 		public string BrowserDownloadUrl { get; set; }
 
 		public static ReleaseAssetsTableRow FromPK(SLProtocol protocol, string pk)
@@ -172,6 +195,7 @@ namespace Skyline.Protocol.Tables
 				Repositoryreleaseassetscreatedat_1813 = CreatedAtOA,
 				Repositoryreleaseassetsupdatedat_1814 = UpdatedAtOA,
 				Repositoryreleaseassetsbrowserdownloadurl_1815 = BrowserDownloadUrl,
+				Repositoryreleaseassetslastpolledatutc_1799 = LastPolledAt.ToOADate(),
 			};
 		}
 
@@ -195,11 +219,13 @@ namespace Skyline.Protocol.Tables
 		public ReleaseAssetsTable()
 		{
 			RepositoriesTable.RepositoriesChanged += RepositoriesTable_RepositoriesChanged;
+			RepositoryReleasesTable.ReleasesChanged += RepositoryReleasesTable_ReleasesChanged;
 		}
 
 		public ReleaseAssetsTable(SLProtocol protocol)
 		{
 			RepositoriesTable.RepositoriesChanged += RepositoriesTable_RepositoriesChanged;
+			RepositoryReleasesTable.ReleasesChanged += RepositoryReleasesTable_ReleasesChanged;
 
 			uint[] repositoryReleaseAssetsIdx = new uint[]
 			{
@@ -218,6 +244,7 @@ namespace Skyline.Protocol.Tables
 				Parameter.Repositoryreleaseassets.Idx.repositoryreleaseassetscreatedat_1813,
 				Parameter.Repositoryreleaseassets.Idx.repositoryreleaseassetsupdatedat_1814,
 				Parameter.Repositoryreleaseassets.Idx.repositoryreleaseassetsbrowserdownloadurl_1815,
+				Parameter.Repositoryreleaseassets.Idx.repositoryreleaseassetslastpolledatutc_1799,
 			};
 			object[] releaseassets = (object[])protocol.NotifyProtocol((int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Repositoryreleaseassets.tablePid, repositoryReleaseAssetsIdx);
 			object[] instance = (object[])releaseassets[0];
@@ -235,6 +262,7 @@ namespace Skyline.Protocol.Tables
 			object[] createdAt = (object[])releaseassets[12];
 			object[] updatedAt = (object[])releaseassets[13];
 			object[] browserDownloadUrl = (object[])releaseassets[14];
+			object[] lastPolledAt = (object[])releaseassets[15];
 
 			for (int i = 0; i < instance.Length; i++)
 			{
@@ -253,20 +281,24 @@ namespace Skyline.Protocol.Tables
 				downloadCount[i],
 				createdAt[i],
 				updatedAt[i],
-				browserDownloadUrl[i]));
+				browserDownloadUrl[i],
+				lastPolledAt[i]));
 			}
 		}
-		
+
+		public static event EventHandler<TableEventArgs> ReleaseAssetsChanged;
+
 		public List<ReleaseAssetsTableRow> Rows { get; set; } = new List<ReleaseAssetsTableRow>();
 
 		public static ReleaseAssetsTable GetTable(SLProtocol protocol = null)
 		{
-			if (protocol != null)
+			if (protocol is null)
 			{
-				instance.Dispose();
-				instance = new ReleaseAssetsTable(protocol);
+				return instance;
 			}
 
+			instance.Dispose();
+			instance = new ReleaseAssetsTable(protocol);
 			return instance;
 		}
 
@@ -278,12 +310,13 @@ namespace Skyline.Protocol.Tables
 			// Remove from DateMiner and local instance
 			protocol.DeleteRow(Parameter.Repositoryreleaseassets.tablePid, rowsToDelete);
 			instance.Rows.RemoveAll(x => rowsToDelete.ToList().Contains(x.Instance));
+			ReleaseAssetsChanged?.Invoke(null, new TableEventArgs(protocol, TableChange.Remove, rowsToDelete));
 		}
 
 		public void SaveToProtocol(SLProtocol protocol, bool partial = false)
 		{
 			// Calculate the batch size, recommended 25000 cells max per fill array, divided by the number of columns.
-			var batchSize = 25000 / 14;
+			var batchSize = 25000 / 16;
 
 			// When full updating and the Rows are empty, clear the table.
 			if (!Rows.Any() && !partial)
@@ -307,6 +340,17 @@ namespace Skyline.Protocol.Tables
 			}
 		}
 
+		public void Cleanup(SLProtocol protocol, string repositoryId)
+		{
+			var pollRow = PollManagerTable.GetTable(protocol).Rows.FirstOrDefault(r => r.RequestType == RequestType.Repositories_Releases);
+			var toBeRemoved = Rows.Where(r => r.RepositoryID == repositoryId)
+				.Where(r => r.LastPolledAt < pollRow.LastPolledUTCTime)
+				.Select(r => r.Instance)
+				.ToArray();
+
+			DeleteRow(protocol, toBeRemoved);
+		}
+
 		private void RepositoriesTable_RepositoriesChanged(object sender, RepositoryEventArgs e)
 		{
 			// There only needs to happen something when removing a repository
@@ -326,7 +370,29 @@ namespace Skyline.Protocol.Tables
 				.Where(row => e.Repositories.Contains(row[1]))
 				.Select(row => row[0]);
 
-			ReleaseAssetsTable.GetTable().DeleteRow(e.Protocol, assetRows.ToArray());
+			DeleteRow(e.Protocol, assetRows.ToArray());
+		}
+
+		private void RepositoryReleasesTable_ReleasesChanged(object sender, TableEventArgs e)
+		{
+			// There only needs to happen something when removing a repository
+			if (e.Type != TableChange.Remove)
+				return;
+
+			// Delete Linked Release Assets
+			var releasesIdx = new uint[]
+			{
+				Parameter.Repositoryreleaseassets.Idx.repositoryreleaseassetsinstance,
+				Parameter.Repositoryreleaseassets.Idx.repositoryreleaseassetsrelease,
+			};
+
+			var assetRows = ((object[])e.Protocol.NotifyProtocol((int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Repositoryreleaseassets.tablePid, releasesIdx))
+				.Select(col => Array.ConvertAll((object[])col, Convert.ToString))
+				.ToRows()
+				.Where(row => e.PrimaryKeys.Contains(row[1]))
+				.Select(row => row[0]);
+
+			DeleteRow(e.Protocol, assetRows.ToArray());
 		}
 
 		#region IDisposable
@@ -340,6 +406,7 @@ namespace Skyline.Protocol.Tables
 		protected virtual void Dispose(bool disposing)
 		{
 			RepositoriesTable.RepositoriesChanged -= RepositoriesTable_RepositoriesChanged;
+			RepositoryReleasesTable.ReleasesChanged -= RepositoryReleasesTable_ReleasesChanged;
 		}
 		#endregion
 	}

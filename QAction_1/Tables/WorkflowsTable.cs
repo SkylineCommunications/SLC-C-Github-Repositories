@@ -15,6 +15,7 @@ namespace Skyline.Protocol.Tables
 	using Skyline.DataMiner.Net.Helper;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.Protocol.Extensions;
+	using Skyline.Protocol.PollManager;
 
 	using SLNetMessages = Skyline.DataMiner.Net.Messages;
 
@@ -26,6 +27,7 @@ namespace Skyline.Protocol.Tables
 		private double updatedAtOA = Exceptions.IntNotAvailable;
 		private DateTime deletedAt;
 		private double deletedAtOA = Exceptions.IntNotAvailable;
+		private DateTime lastPolledAt;
 
 		public RepositoryWorkflowsTableRow() { }
 
@@ -39,6 +41,7 @@ namespace Skyline.Protocol.Tables
 			CreatedAt = DateTime.FromOADate(Convert.ToDouble(row[5]));
 			UpdatedAt = DateTime.FromOADate(Convert.ToDouble(row[6]));
 			DeletedAt = DateTime.FromOADate(Convert.ToDouble(row[7]));
+			LastPolledAt = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[8])), DateTimeKind.Utc);
 		}
 
 		public string ID { get; set; }
@@ -117,6 +120,24 @@ namespace Skyline.Protocol.Tables
 			}
 		}
 
+		public DateTime LastPolledAt
+		{
+			get
+			{
+				return lastPolledAt;
+			}
+
+			set
+			{
+				if (value.Kind != DateTimeKind.Utc)
+				{
+					throw new ArgumentException("LastPolledAt must be in UTC.");
+				}
+
+				lastPolledAt = value;
+			}
+		}
+
 		public static RepositoryWorkflowsTableRow FromPK(SLProtocol protocol, string pk)
 		{
 			var row = (object[])protocol.GetRow(Parameter.Repositoryworkflows.tablePid, pk);
@@ -140,6 +161,7 @@ namespace Skyline.Protocol.Tables
 				Repositoryworkflowscreatedat_1606 = createdAtOA,
 				Repositoryworkflowsupdatedat_1607 = updatedAtOA,
 				Repositoryworkflowsdeletedat_1608 = deletedAtOA,
+				Repositoryworkflowslastpolledatutc_1599 = LastPolledAt.ToOADate(),
 			};
 		}
 
@@ -180,6 +202,7 @@ namespace Skyline.Protocol.Tables
 				Parameter.Repositoryworkflows.Idx.repositoryworkflowscreatedat_1606,
 				Parameter.Repositoryworkflows.Idx.repositoryworkflowsupdatedat_1607,
 				Parameter.Repositoryworkflows.Idx.repositoryworkflowsdeletedat_1608,
+				Parameter.Repositoryworkflows.Idx.repositoryworkflowslastpolledatutc_1599,
 			};
 			object[] repositoryworkflows = (object[])protocol.NotifyProtocol((int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Repositoryworkflows.tablePid, repositoryWorkflowsIdx);
 			object[] iD = (object[])repositoryworkflows[0];
@@ -190,6 +213,7 @@ namespace Skyline.Protocol.Tables
 			object[] createdAt = (object[])repositoryworkflows[5];
 			object[] updatedAt = (object[])repositoryworkflows[6];
 			object[] deletedAt = (object[])repositoryworkflows[7];
+			object[] lastPolledAt = (object[])repositoryworkflows[8];
 
 			for (int i = 0; i < iD.Length; i++)
 			{
@@ -201,7 +225,8 @@ namespace Skyline.Protocol.Tables
 				path[i],
 				createdAt[i],
 				updatedAt[i],
-				deletedAt[i]));
+				deletedAt[i],
+				lastPolledAt));
 			}
 		}
 		#endregion
@@ -214,30 +239,14 @@ namespace Skyline.Protocol.Tables
 
 		public static RepositoryWorkflowsTable GetTable(SLProtocol protocol = null)
 		{
-			if (protocol != null)
+			if (protocol is null)
 			{
-				instance.Dispose();
-				instance = new RepositoryWorkflowsTable(protocol);
+				return instance;
 			}
 
+			instance.Dispose();
+			instance = new RepositoryWorkflowsTable(protocol);
 			return instance;
-		}
-
-		public List<string> GetPkCache(SLProtocol protocol, string repositoryId)
-		{
-			var rawCache = Convert.ToString(protocol.GetParameter(Parameter.repositoryworkflow_pk_cache_1591));
-			if (String.IsNullOrEmpty(rawCache))
-			{
-				return new List<string>();
-			}
-
-			var pkCache = SecureNewtonsoftDeserialization.DeserializeObject<Dictionary<string, List<string>>>(rawCache);
-			if(pkCache is null || !pkCache.ContainsKey(repositoryId))
-			{
-				return new List<string>();
-			}
-
-			return pkCache[repositoryId];
 		}
 
 		public void DeleteRow(SLProtocol protocol, params string[] rowsToDelete)
@@ -269,6 +278,40 @@ namespace Skyline.Protocol.Tables
 			List<object[]> rows = Rows.Select(x => x.ToProtocolRow()).ToList();
 			NotifyProtocol.SaveOption option = partial ? NotifyProtocol.SaveOption.Partial : NotifyProtocol.SaveOption.Full;
 			protocol.FillArray(Parameter.Repositoryworkflows.tablePid, rows, option);
+
+			// Calculate the batch size, recommended 25000 cells max per fill array, divided by the number of columns.
+			var batchSize = 25000 / 9;
+
+			// If full then the first batch needs to be a SaveOption.Full.
+			var first = !partial;
+			if (!Rows.Any() && !partial)
+			{
+				protocol.ClearAllKeys(Parameter.Repositoryworkflows.tablePid);
+				return;
+			}
+
+			foreach (var batch in Rows.Select(x => x.ToProtocolRow()).Batch(batchSize))
+			{
+				if (first)
+				{
+					protocol.FillArray(Parameter.Repositoryworkflows.tablePid, batch.ToList(), NotifyProtocol.SaveOption.Full);
+				}
+				else
+				{
+					protocol.FillArray(Parameter.Repositoryworkflows.tablePid, batch.ToList(), NotifyProtocol.SaveOption.Partial);
+				}
+			}
+		}
+
+		public void Cleanup(SLProtocol protocol, string repositoryId)
+		{
+			var pollRow = PollManagerTable.GetTable(protocol).Rows.FirstOrDefault(r => r.RequestType == RequestType.Repositories_Workflows);
+			var toBeRemoved = Rows.Where(r => r.RepositoryID == repositoryId)
+				.Where(r => r.LastPolledAt < pollRow.LastPolledUTCTime)
+				.Select(r => r.ID)
+				.ToArray();
+
+			DeleteRow(protocol, toBeRemoved);
 		}
 
 		#region IDisposable

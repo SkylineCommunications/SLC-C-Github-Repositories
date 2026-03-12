@@ -57,6 +57,7 @@
 			var pattern = "orgs\\/(?<Organization>.*)\\/members";
 			var options = RegexOptions.Multiline;
 
+			var utcNow = DateTime.UtcNow;
 			var match = Regex.Match(url, pattern, options);
 			var org = match.Groups["Organization"].Value;
 
@@ -74,6 +75,7 @@
 				row.Url = member.Url;
 				row.HtmlUrl = member.HtmlUrl;
 				row.AvatarUrl = member.AvatarUrl;
+				row.LastPolledAt = utcNow;
 
 				// If its a new row fill in ID and add it to the table.
 				if (row.Instance == Exceptions.NotAvailable)
@@ -86,6 +88,7 @@
 				var linkerRow = linkerTable.Rows.Find(l => l.Instance == id) ?? new MemberOrganizationLinksTableRow();
 				linkerRow.Organization = org;
 				linkerRow.Member = member.Login;
+				linkerRow.LastPolledAt = utcNow;
 
 				// If its a new row fill in ID and add it to the table.
 				if (linkerRow.Instance == Exceptions.NotAvailable)
@@ -110,10 +113,12 @@
 			if (string.IsNullOrEmpty(linkHeader))
 			{
 				HandleNextOrganizationMembers(protocol);
+				MembersTable.GetTable(protocol).Cleanup(protocol);
+				MemberOrganizationLinksTable.GetTable(protocol).Cleanup(protocol, org);
+				return;
 			}
 
 			var link = new LinkHeader(linkHeader);
-
 			if (link.HasNext)
 			{
 				OrganizationsRequestHandler.HandleOrganizationMembersRequest(protocol, org, PollingConstants.PerPage, link.NextPage);
@@ -121,6 +126,8 @@
 			else
 			{
 				HandleNextOrganizationMembers(protocol);
+				MembersTable.GetTable(protocol).Cleanup(protocol);
+				MemberOrganizationLinksTable.GetTable(protocol).Cleanup(protocol, org);
 			}
 		}
 

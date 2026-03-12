@@ -26,8 +26,8 @@ namespace Skyline.Protocol.Tables
 			Name = Convert.ToString(row[1]);
 			PollState = (PollState)Convert.ToInt16(row[2]);
 			PollFrequency = TimeSpan.FromSeconds(Convert.ToInt64(row[3]));
-			LastPolledUTCTime = DateTime.FromOADate(Convert.ToDouble(row[4]));
-			PreviouslyPolledUTCTime = DateTime.FromOADate(Convert.ToDouble(row[5]));
+			LastPolledUTCTime = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[4])), DateTimeKind.Utc);
+			PreviouslyPolledUTCTime = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[5])), DateTimeKind.Utc);
 		}
 
 		public RequestType RequestType { get; set; }
@@ -52,6 +52,11 @@ namespace Skyline.Protocol.Tables
 
 			set
 			{
+				if (value.Kind != DateTimeKind.Utc)
+				{
+					throw new ArgumentException("LastPolledUTCTime must be in UTC.");
+				}
+
 				if (value == default)
 				{
 					lastPolledUTCTime = value;
@@ -79,6 +84,11 @@ namespace Skyline.Protocol.Tables
 
 			set
 			{
+				if (value.Kind != DateTimeKind.Utc)
+				{
+					throw new ArgumentException("PreviouslyPolledUTCTime must be in UTC.");
+				}
+
 				if (value == default)
 				{
 					previouslyPolledUTCTime = value;

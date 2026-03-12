@@ -10,6 +10,7 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 
 	using Newtonsoft.Json;
 
+	using Skyline.DataMiner.ConnectorAPI.Github.Repositories;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows;
 	using Skyline.DataMiner.Scripting;
@@ -45,6 +46,7 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			var pattern = "repos\\/(.*)\\/(.*)\\/actions\\/workflows(.*)";
 			var options = RegexOptions.Multiline;
 
+			var utcNow = DateTime.UtcNow;
 			var match = Regex.Match(url, pattern, options);
 			var owner = match.Groups[1].Value;
 			var name = match.Groups[2].Value;
@@ -67,7 +69,6 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 				return;
 			}
 
-			var pkCache = PkCache.GetCache(protocol, Parameter.Repositoryworkflows.tablePid);
 			foreach (var workflow in response.Workflows)
 			{
 				if (workflow == null)
@@ -86,6 +87,7 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 				row.CreatedAt = workflow.CreatedAt;
 				row.UpdatedAt = workflow.UpdatedAt;
 				row.DeletedAt = workflow.DeletedAt;
+				row.LastPolledAt = utcNow;
 
 				// If its a new row fill in ID and add it to the table.
 				if (String.IsNullOrEmpty(row.ID))
@@ -93,24 +95,6 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 					row.ID = id;
 					table.Rows.Add(row);
 				}
-
-				pkCache[repositoryId].Add(row.ID);
-			}
-
-			// If not all workflows are polled for this repo, store the fetched ids and poll the next page.
-			if (link.HasNext)
-			{
-				pkCache.Store(protocol);
-			}
-
-			// If the last page is polled check to see if some workflows are removed.
-			if (link.IsLast)
-			{
-				var toBeRemoved = table.Rows.Where(r => r.RepositoryID == repositoryId).Select(r => r.ID).ToHashSet();
-				toBeRemoved.ExceptWith(pkCache[repositoryId]);
-				table.DeleteRow(protocol, toBeRemoved.ToArray());
-				pkCache[repositoryId].Clear();
-				pkCache.Store(protocol);
 			}
 
 			if (table.Rows.Count > 0)
@@ -167,6 +151,10 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 				{
 					RepositoriesRequestHandler.HandleRepositoriesTagsRequest(protocol, owner, name, PollingConstants.PerPage, link.NextPage);
 					return;
+				}
+				else
+				{
+					RepositoryWorkflowsTable.GetTable(protocol).Cleanup(protocol, $"{owner}/{name}");
 				}
 			}
 

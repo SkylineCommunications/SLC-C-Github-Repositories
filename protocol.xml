@@ -47,7 +47,7 @@ Any inquiries can be addressed to:
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>Github Repositories</Name>
 	<Description>Github Repositories DataMiner connector</Description>
-	<Version>1.0.0.14</Version>
+	<Version>1.0.0.15</Version>
 	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Github</Vendor>
@@ -55,7 +55,7 @@ Any inquiries can be addressed to:
 	<DeviceOID>0</DeviceOID>
 	<ElementType>Github Repositories</ElementType>
 	<Type relativeTimers="true">http</Type>
-	<Display defaultPage="General" pageOrder="General;----------;Organizations - Overview;Organizations;Teams;Members;----------;Repositories - Overview;Repositories;Releases;Issues;Workflows;----------;Inter-App Communication;Linker Tables" wideColumnPages="">
+	<Display defaultPage="General" pageOrder="General;----------;Organizations - Overview;Organizations;Teams;Members;----------;Repositories - Overview;Repositories;Releases;Issues;Workflows;Software Bill of Materials;----------;Inter-App Communication;Linker Tables" wideColumnPages="">
 		<Pages>
 			<Page>
 				<Name>Linker Tables</Name>
@@ -76,6 +76,9 @@ Any inquiries can be addressed to:
 		<Relation name="Repository Releases" path="1000;1400"/>
 		<Relation name="Repository Releases Assets" path="1000;1800"/>
 		<Relation name="Repository Workflows" path="1000;1600"/>
+		<Relation name="Repository Software Bill of Materials" path="1000;2200"/>
+		<Relation name="Repository Software Bill of Materials - Packages" path="1000;2200;2400"/>
+		<Relation name="Repository Software Bill of Materials - Relationships" path="1000;2200;2600"/>
 
 		<Relation name="Releases - Assets" path="1400;1800"/>
 		<Relation name="Tags Releases" path="1200;1400"/>
@@ -91,12 +94,16 @@ Any inquiries can be addressed to:
 		<TreeControl parameterId="996">
 			<Hierarchy>
 				<Table id="1000"/>
+				<Table id="2200" parent="1000"/>
 			</Hierarchy>
 			<ExtraTabs>
 				<Tab title="Tags" tableId="1000" type="relation" parameter="1203"/>
 				<Tab title="Releases" tableId="1000" type="relation" parameter="1413"/>
 				<Tab title="Issues" tableId="1000" type="relation" parameter="2011"/>
 				<Tab title="Workflows" tableId="1000" type="relation" parameter="1602"/>
+				<Tab title="Software Bill of Materials" tableId="1000" type="relation" parameter="2202"/>
+				<Tab title="Software Bill of Materials - Packages" tableId="2200" type="relation" parameter="2402"/>
+				<Tab title="Software Bill of Materials - Relationships" tableId="2200" type="relation" parameter="2602"/>
 			</ExtraTabs>
 		</TreeControl>
 		<TreeControl parameterId="2996">
@@ -219,7 +226,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Discreets>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="10" save="true">
 			<Name>ApiKey</Name>
 			<Description>API Key</Description>
@@ -347,7 +354,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Discreets>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="15" trending="true">
 			<Name>RateLimit</Name>
 			<Description>Rate Limit</Description>
@@ -661,6 +668,16 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
+		<Param id="106">
+			<Name>GetRepositorySoftwareBillOfMaterialsUrl</Name>
+			<Description>Get Repository Software Bill of Materials Url</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
 		<Param id="155">
 			<Name>GetRepositoryWorkflowsQueue</Name>
 			<Description>Get Repository Workflows Queue</Description>
@@ -911,7 +928,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
-		
+
 		<Param id="135">
 			<Name>PostRepositoryVariableUrl</Name>
 			<Description>Post Repository Variable Url</Description>
@@ -932,7 +949,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
-		
+
 		<Param id="201">
 			<Name>GetRepositoryContent</Name>
 			<Description>Get Repository Content</Description>
@@ -1026,6 +1043,26 @@ To get more request you can add an api key under General/Configuration page. To 
 		<Param id="255">
 			<Name>GetRepositoryWorkflowsLinkHeader</Name>
 			<Description>Get Repository Workflows Link Header</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="206">
+			<Name>GetRepositorySoftwareBillOfMaterialsContent</Name>
+			<Description>Get Repository Software Bill of Materials Content</Description>
+			<Type>read</Type>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+		</Param>
+		<Param id="256">
+			<Name>GetRepositorySoftwareBillOfMaterialsLinkHeader</Name>
+			<Description>Get Repository Software Bill of Materials Link Header</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -1308,7 +1345,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Description>Process Post Execute Workflow</Description>
 			<Type>dummy</Type>
 		</Param>
-		
+
 		<Param id="235">
 			<Name>PostRepositoryVariableContent</Name>
 			<Description>Post Repository Variable Content</Description>
@@ -1319,7 +1356,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
-		
+
 		<Param id="300">
 			<Name>Title_End_Generic</Name>
 			<Type>fixed</Type>
@@ -1358,7 +1395,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type options="begin">title</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="500">
 			<Name>AddRepositoryButton</Name>
 			<Type>write</Type>
@@ -1502,7 +1539,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="550">
 			<Name>AddWorkflowButton</Name>
 			<Type>write</Type>
@@ -1769,7 +1806,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Discreets>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="990">
 			<Name>Repositories_ContextMenu</Name>
 			<Description>Context Menu for Repositories Table</Description>
@@ -1845,7 +1882,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 		</Param>
-		
+
 		<Param id="1000">
 			<Name>Repositories</Name>
 			<Description>Repositories</Description>
@@ -2467,8 +2504,8 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
-		
+
+
 		<Param id="1191">
 			<Name>RepositoryTags_PK_Cache</Name>
 			<Description>Repository Tags PK Cache</Description>
@@ -2485,6 +2522,26 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
+		<Param id="1199" trending="false">
+			<Name>RepositoryTagsLastPolledAtUTC</Name>
+			<Description>Last Polled At UTC (Repository Tags)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
 		<Param id="1200">
 			<Name>RepositoryTags</Name>
 			<Description>Repository Tags</Description>
@@ -2494,6 +2551,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="1" pid="1202" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="1203" type="retrieved" options=";foreignKey=1000" />
 				<ColumnOption idx="3" pid="1204" type="retrieved" options="" />
+				<ColumnOption idx="4" pid="1199" type="retrieved" options="" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>A list of all the tags the tracked repositories have.</Subtext>
@@ -2509,7 +2567,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1201|0-1202|1-1203|2-1204|3,width:400-150-200-300,sort:STRING-STRING-STRING-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1201|0-1202|1-1203|2-1204|3-1199|4,width:400-150-200-300-0,sort:STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1201" trending="false">
@@ -2593,7 +2651,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="1391">
 			<Name>RepositoryReleases_PK_Cache</Name>
 			<Description>Repository Releases PK Cache</Description>
@@ -2609,6 +2667,26 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+		</Param>
+		<Param id="1399" trending="false">
+			<Name>RepositoryReleasesLastPolledAtUTC</Name>
+			<Description>Last Polled At UTC (Repository Releases)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
 		</Param>
 		<Param id="1400">
 			<Name>RepositoryReleases</Name>
@@ -2628,6 +2706,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="10" pid="1411" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="11" pid="1412" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="12" pid="1413" type="retrieved" options=";foreignKey=1000" />
+				<ColumnOption idx="13" pid="1399" type="retrieved" options="" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>A list of all the repository releases.</Subtext>
@@ -2643,7 +2722,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1401|0-1402|1-1403|2-1404|3-1405|4-1406|5-1407|6-1408|7-1409|8-1410|9-1411|10-1412|11-1413|12,width:100-100-100-0-118-100-100-100-100-100-156-156-111,sort:STRING|ASC|1-INT-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1401|0-1402|1-1403|2-1404|3-1405|4-1406|5-1407|6-1408|7-1409|8-1410|9-1411|10-1412|11-1413|12-1399|13,width:100-100-100-0-118-100-100-100-100-100-156-156-111-0,sort:STRING|ASC|1-INT-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1401" trending="false">
@@ -2960,7 +3039,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="1590">
 			<Name>RepositoryWorkflows_ContextMenu</Name>
 			<Description>Context Menu for Repository Workflows Table</Description>
@@ -3012,6 +3091,27 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RTDisplay onAppLevel="true">true</RTDisplay>
 			</Display>
 		</Param>
+
+		<Param id="1599" trending="false">
+			<Name>RepositoryWorkflowsLastPolledAtUTC</Name>
+			<Description>Last Polled At UTC (Repository Workflows)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
 		<Param id="1600">
 			<Name>RepositoryWorkflows</Name>
 			<Description>Repository Workflows</Description>
@@ -3025,6 +3125,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="5" pid="1606" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="6" pid="1607" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="7" pid="1608" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="8" pid="1599" type="retrieved" options="" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>A list of all the workflows per tracked repository.</Subtext>
@@ -3041,7 +3142,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Display>
 			<Measurement>
 				<!-- SuppressValidator 2.31.9 More important to be grouped by repository then by datetime column -->
-				<Type options="tab=columns:1601|0-1602|1-1603|2-1604|3-1605|4-1606|5-1607|6-1608|7,width:0-200-100-108-100-156-156-156,sort:STRING|ASC|0-STRING-STRING-STRING-STRING-INT|ASC|1-INT-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1601|0-1602|1-1603|2-1604|3-1605|4-1606|5-1607|6-1608|7-1599|8,width:0-200-100-108-100-156-156-156-0,sort:STRING|ASC|0-STRING-STRING-STRING-STRING-INT|ASC|1-INT-INT-INT,lines:25,filter:true">table</Type>
 				<!-- /SuppressValidator 2.31.9 -->
 			</Measurement>
 		</Param>
@@ -3267,7 +3368,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type options="datetime">number</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="1791">
 			<Name>RepositoryReleaseAssets_PK_Cache</Name>
 			<Description>Repository Release Assets PK Cache</Description>
@@ -3283,6 +3384,26 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+		</Param>
+		<Param id="1799" trending="false">
+			<Name>RepositoryReleaseAssetsLastPolledAtUTC</Name>
+			<Description>Last Polled At UTC (Release Assets)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
 		</Param>
 		<Param id="1800">
 			<Name>RepositoryReleaseAssets</Name>
@@ -3304,6 +3425,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="12" pid="1813" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="13" pid="1814" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="14" pid="1815" type="retrieved" options="" />
+				<ColumnOption idx="15" pid="1799" type="retrieved" options="" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>A list of the assets for the releases.</Subtext>
@@ -3319,7 +3441,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1801|0-1802|1-1803|2-1804|3-1805|4-1806|5-1807|6-1808|7-1809|8-1810|9-1811|10-1812|11-1813|12-1814|13-1815|14,width:100-100-100-100-100-100-100-100-100-113-144-144-156-156-145,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT-INT-INT-STRING-STRING|DESC-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1801|0-1802|1-1803|2-1804|3-1805|4-1806|5-1807|6-1808|7-1809|8-1810|9-1811|10-1812|11-1813|12-1814|13-1815|14-1799|15,width:100-100-100-100-100-100-100-100-100-113-144-144-156-156-145-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT-INT-INT-STRING-STRING|DESC-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1801" trending="false">
@@ -3696,7 +3818,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="1991">
 			<Name>RepositoryIssues_PK_Cache</Name>
 			<Description>Repository Issues PK Cache</Description>
@@ -3712,6 +3834,26 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
 			</Interprete>
+		</Param>
+		<Param id="1999" trending="false">
+			<Name>RepositoryIssuesLastPolledAtUTC</Name>
+			<Description>Last Polled At UTC (Repository Issues)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
 		</Param>
 		<Param id="2000">
 			<Name>RepositoryIssues</Name>
@@ -3729,6 +3871,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="8" pid="2009" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="9" pid="2010" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="10" pid="2011" type="retrieved" options=";foreignKey=1000" />
+				<ColumnOption idx="11" pid="1999" type="retrieved" options="" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>A list containing all the issues linked to the repository.</Subtext>
@@ -3744,7 +3887,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:2001|0-2002|1-2003|2-2004|3-2005|4-2006|5-2007|6-2008|7-2009|8-2010|9-2011|10,width:100-100-200-200-100-100-144-156-156-156-111,sort:STRING|DESC|1-INT-STRING-STRING-STRING-STRING-STRING-INT|DESC|0-INT-INT-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:2001|0-2002|1-2003|2-2004|3-2005|4-2006|5-2007|6-2008|7-2009|8-2010|9-2011|10-1999|11,width:100-100-200-200-100-100-144-156-156-156-111-0,sort:STRING|DESC|1-INT-STRING-STRING-STRING-STRING-STRING-INT|DESC|0-INT-INT-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="2001" trending="false">
@@ -4023,8 +4166,693 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
-		
+
+		<Param id="2199" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsLastPolledAtUTC</Name>
+			<Description>Last Polled At UTC (Repository Software Bill Of Materials)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="2200">
+			<Name>RepositorySoftwareBillOfMaterials</Name>
+			<Description>Repository Software Bill Of Materials</Description>
+			<Type>array</Type>
+			<ArrayOptions index="0">
+				<ColumnOption idx="0" pid="2201" type="retrieved" options="" />
+				<ColumnOption idx="1" pid="2202" type="retrieved" options=";foreignKey=1000" />
+				<ColumnOption idx="2" pid="2203" type="retrieved" options="" />
+				<ColumnOption idx="3" pid="2204" type="retrieved" options="" />
+				<ColumnOption idx="4" pid="2205" type="retrieved" options="" />
+				<ColumnOption idx="5" pid="2206" type="retrieved" options="" />
+				<ColumnOption idx="6" pid="2207" type="retrieved" options="" />
+				<ColumnOption idx="7" pid="2199" type="retrieved" options="" />
+			</ArrayOptions>
+			<Information>
+				<Subtext>General info about the Software Bill of Materials for each repository.</Subtext>
+			</Information>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Software Bill of Materials</Page>
+						<Column>0</Column>
+						<Row>0</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:2201|0-2202|1-2203|2-2204|3-2205|4-2206|5-2207|6-2199|7,width:100-111-100-100-100-156-145-0,sort:STRING-STRING-STRING-STRING-STRING-INT-STRING-INT,lines:25,filter:true">table</Type>
+			</Measurement>
+		</Param>
+		<Param id="2201" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsName</Name>
+			<Description>Name (Repository Software Bill Of Materials)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>This is the key used internally by DataMiner to identify the table entries.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2202" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsRepositoryId</Name>
+			<Description>Repository ID (Repository Software Bill Of Materials)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The ID of the repository this sbom is linked.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2203" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsSpdxId</Name>
+			<Description>SPDX ID (Repository Software Bill Of Materials)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The SPDX identifier for the SPDX document.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2204" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsSpdxVersion</Name>
+			<Description>SPDX Version (Repository Software Bill Of Materials)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The version of the SPDX specification that this document conforms to.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2205" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsDataLicense</Name>
+			<Description>Data License (Repository Software Bill Of Materials)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The license under which the SPDX document is licensed.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2206" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsCreatedAtUTC</Name>
+			<Description>Created At UTC (Repository Software Bill Of Materials)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The date and time the SPDX document was created.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="2207" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsDocumentNamespace</Name>
+			<Description>Document Namespace (Repository Software Bill Of Materials)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The namespace for the SPDX document.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+
+		<Param id="2399" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsPackagesLastPolledAtUTC</Name>
+			<Description>Last Polled At UTC (Software Bill of Materials Packages)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="2400">
+			<Name>RepositorySoftwareBillOfMaterialsPackages</Name>
+			<Description>Software Bill of Materials Packages</Description>
+			<Type>array</Type>
+			<ArrayOptions index="0">
+				<ColumnOption idx="0" pid="2401" type="retrieved" options="" />
+				<ColumnOption idx="1" pid="2402" type="retrieved" options=";foreignKey=2200" />
+				<ColumnOption idx="2" pid="2403" type="retrieved" options=";foreignKey=1000" />
+				<ColumnOption idx="3" pid="2404" type="retrieved" options="" />
+				<ColumnOption idx="4" pid="2405" type="retrieved" options="" />
+				<ColumnOption idx="5" pid="2406" type="retrieved" options="" />
+				<ColumnOption idx="6" pid="2407" type="retrieved" options="" />
+				<ColumnOption idx="7" pid="2408" type="retrieved" options="" />
+				<ColumnOption idx="8" pid="2409" type="retrieved" options="" />
+				<ColumnOption idx="9" pid="2410" type="retrieved" options="" />
+				<ColumnOption idx="10" pid="2411" type="retrieved" options="" />
+				<ColumnOption idx="11" pid="2412" type="retrieved" options="" />
+				<ColumnOption idx="12" pid="2399" type="retrieved" options="" />
+			</ArrayOptions>
+			<Information>
+				<Subtext>Contains the list of packages for all the repositories</Subtext>
+			</Information>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Software Bill of Materials</Page>
+						<Column>0</Column>
+						<Row>1</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:2401|0-2402|1-2403|2-2404|3-2405|4-2406|5-2407|6-2408|7-2409|8-2410|9-2411|10-2412|11-2399|12,width:100-100-100-100-100-100-128-100-123-112-100-102-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
+			</Measurement>
+		</Param>
+		<Param id="2401" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsPackagesInstance</Name>
+			<Description>Instance (Software Bill of Materials Packages)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>This is the key used internally by DataMiner to identify the table entries.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2402" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsPackagesSBOMId</Name>
+			<Description>SBOM ID (Software Bill of Materials Packages)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The ID of the SBOM this package is linked to.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2403" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsPackagesRepositoryId</Name>
+			<Description>Repository ID (Software Bill of Materials Packages)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The ID of the repository this SBOM package is linked to.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2404" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsPackagesSpdxId</Name>
+			<Description>SPDX ID (Software Bill of Materials Packages)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>A unique SPDX identifier for the package.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2405" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsPackagesName</Name>
+			<Description>Name (Software Bill of Materials Packages)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The name of the package.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2406" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsPackagesVersion</Name>
+			<Description>Version (Software Bill of Materials Packages)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The version of the package. If the package does not have an exact version specified, a version range is given.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2407" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsPackagesDownloadLocation</Name>
+			<Description>Download Location (Software Bill of Materials Packages)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The location where the package can be downloaded, or NOASSERTION if this has not been determined.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="1" value="NOASSERTION">
+						<Display state="disabled">Not Determined</Display>
+						<Value>NOASSERTION</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2408" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsPackagesFilesAnalyzed</Name>
+			<Description>Files Analyzed (Software Bill of Materials Packages)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Whether the package's file content has been subjected to analysis during the creation of the SPDX document.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id ="1" value="0">
+						<Display state="disabled">Not Analyzed</Display>
+						<Value>0</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Analyzed</Display>
+						<Value>1</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="2409" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsPackagesLicenseConcluded</Name>
+			<Description>License Concluded (Software Bill of Materials Packages)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The license of the package as determined while creating the SPDX document.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="2" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2410" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsPackagesLicenseDeclared</Name>
+			<Description>License Declared (Software Bill of Materials Packages)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The license of the package as declared by its author, or NOASSERTION if this information was not available when the SPDX document was created.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="1" value="NOASSERTION">
+						<Display state="disabled">N/A</Display>
+						<Value>NOASSERTION</Value>
+					</Exception>
+					<Exception id="2" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2411" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsPackagesSupplier</Name>
+			<Description>Supplier (Software Bill of Materials Packages)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The distribution source of this package, or NOASSERTION if this was not determined.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="1" value="NOASSERTION">
+						<Display state="disabled">N/A</Display>
+						<Value>NOASSERTION</Value>
+					</Exception>
+					<Exception id="2" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2412" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsPackagesCopyrightText</Name>
+			<Description>Copyright Text (Software Bill of Materials Packages)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The copyright holders of the package, and any dates present with those notices, if available.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="2" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+
+		<Param id="2599" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsRelationshipsLastPolledAtUTC</Name>
+			<Description>Last Polled At UTC (Software Bill of Materials Relationships)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="2600">
+			<Name>RepositorySoftwareBillOfMaterialsRelationships</Name>
+			<Description>Software Bill of Materials Relationships</Description>
+			<Type>array</Type>
+			<ArrayOptions index="0">
+				<ColumnOption idx="0" pid="2601" type="retrieved" options="" />
+				<ColumnOption idx="1" pid="2602" type="retrieved" options="" />
+				<ColumnOption idx="2" pid="2603" type="retrieved" options="" />
+				<ColumnOption idx="3" pid="2604" type="retrieved" options="" />
+				<ColumnOption idx="4" pid="2605" type="retrieved" options="" />
+				<ColumnOption idx="5" pid="2606" type="retrieved" options="" />
+				<ColumnOption idx="6" pid="2599" type="retrieved" options="" />
+			</ArrayOptions>
+			<Information>
+				<Subtext>Contains the list of relationships between SPDX elements for all the repositories</Subtext>
+			</Information>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Positions>
+					<Position>
+						<Page>Software Bill of Materials</Page>
+						<Column>0</Column>
+						<Row>2</Row>
+					</Position>
+				</Positions>
+			</Display>
+			<Measurement>
+				<Type options="tab=columns:2601|0-2602|1-2603|2-2604|3-2605|4-2606|5-2599|6,width:100-100-100-114-160-119-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
+			</Measurement>
+		</Param>
+		<Param id="2601" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsRelationshipsInstance</Name>
+			<Description>Instance (Software Bill of Materials Relationships)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>This is the key used internally by DataMiner to identify the table entries.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2602" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsRelationshipsSBOMId</Name>
+			<Description>SBOM ID (Software Bill of Materials Relationships)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The ID of the SBOM this package is linked to.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2603" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsRelationshipsRepositoryId</Name>
+			<Description>Repository ID (Software Bill of Materials Relationships)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The ID of the repository this SBOM package is linked to.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2604" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsRelationshipsSpdxElementId</Name>
+			<Description>SPDX Element ID (Software Bill of Materials Relationships)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The SPDX identifier of the package that is the source of the relationship.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2605" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsRelationshipsRelatedSpdxElementId</Name>
+			<Description>Related SPDX Element ID (Software Bill of Materials Relationships)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The SPDX identifier of the package that is the target of the relationship.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="2606" trending="false">
+			<Name>RepositorySoftwareBillOfMaterialsRelationshipsRelationshipType</Name>
+			<Description>Relationship Type (Software Bill of Materials Relationships)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The type of relationship between the two SPDX elements.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>other</RawType>
+				<Type>string</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type>string</Type>
+			</Measurement>
+		</Param>
+
 		<Param id="2996">
 			<Name>OrganizationsOverview</Name>
 			<Description>Organizations Overview</Description>
@@ -4232,7 +5060,7 @@ Are you sure you want to continue.]]>
 				</Discreets>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="3200">
 			<Name>OrganizationStatistics</Name>
 			<Description>Organization Statistics</Description>
@@ -4289,7 +5117,28 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
+
+		<Param id="3399" trending="false">
+			<Name>OrganizationTeamsLastPolledAtUTC</Name>
+			<Description>Last Polled At UTC (Teams)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
 		<Param id="3400">
 			<Name>OrganizationTeams</Name>
 			<Description>Teams</Description>
@@ -4304,6 +5153,7 @@ Are you sure you want to continue.]]>
 				<ColumnOption idx="6" pid="3407" type="retrieved" options="" />
 				<ColumnOption idx="7" pid="3408" type="retrieved" options="" />
 				<ColumnOption idx="8" pid="3409" type="retrieved" options="" />
+				<ColumnOption idx="9" pid="3399" type="retrieved" options="" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>Table containing a list of teams per organization.</Subtext>
@@ -4319,7 +5169,7 @@ Are you sure you want to continue.]]>
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:3401|0-3402|1-3403|2-3405|4-3404|3-3406|5-3407|6-3408|7-3409|8,width:0-0-125-200-200-300-100-140-100,sort:STRING|ASC|0-INT-STRING-STRING-STRING-STRING-STRING-STRING-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:3401|0-3402|1-3403|2-3405|4-3404|3-3406|5-3407|6-3408|7-3409|8-3399|9,width:0-0-125-200-200-300-100-140-100-0,sort:STRING|ASC|0-INT-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="3401" trending="false">
@@ -4553,7 +5403,27 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
+		<Param id="3599" trending="false">
+			<Name>OrganizationMembersLastPolledAtUTC</Name>
+			<Description>Last Polled At UTC (Members)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
 		<Param id="3600">
 			<Name>OrganizationMembers</Name>
 			<Description>Members</Description>
@@ -4567,6 +5437,7 @@ Are you sure you want to continue.]]>
 				<ColumnOption idx="5" pid="3606" type="retrieved" options="" />
 				<ColumnOption idx="6" pid="3607" type="retrieved" options="" />
 				<ColumnOption idx="7" pid="3608" type="retrieved" options="" />
+				<ColumnOption idx="8" pid="3599" type="retrieved" options="" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>Table containing a list of members per organization.</Subtext>
@@ -4582,7 +5453,7 @@ Are you sure you want to continue.]]>
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:3601|0-3602|1-3603|2-3604|3-3605|4-3606|5-3607|6-3608|7,width:0-100-100-100-100-0-0-0,sort:STRING-INT-STRING-STRING-STRING-STRING-STRING-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:3601|0-3602|1-3603|2-3604|3-3605|4-3606|5-3607|6-3608|7-3599|8,width:0-100-100-100-100-0-0-0-0,sort:STRING-INT-STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="3601" trending="false">
@@ -4767,15 +5638,36 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
+		<Param id="21999" trending="false">
+			<Name>MemberOrganizationLinksLastPolledAtUTC</Name>
+			<Description>Last Polled At UTC (Member Organization Links)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
 		<Param id="22000">
 			<Name>MemberOrganizationLinks</Name>
 			<Description>Member Organization Links</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" options=";volatile">
 				<ColumnOption idx="0" pid="22001" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="22002" type="retrieved" options=";foreignKey=3000" />
 				<ColumnOption idx="2" pid="22003" type="retrieved" options=";foreignKey=3600" />
+				<ColumnOption idx="3" pid="21999" type="retrieved" options="" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>Contains links between a member and 0 or more organizations.</Subtext>
@@ -4851,12 +5743,12 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="22100">
 			<Name>MemberTeamLinks</Name>
 			<Description>Member Team Links</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0"  options=";volatile">
 				<ColumnOption idx="0" pid="22101" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="22102" type="retrieved" options=";foreignKey=3400" />
 				<ColumnOption idx="2" pid="22103" type="retrieved" options=";foreignKey=3600" />
@@ -4935,7 +5827,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="21000">
 			<Name>PollManager</Name>
 			<Description>Poll Manager</Description>
@@ -4964,7 +5856,7 @@ Are you sure you want to continue.]]>
 			</Display>
 			<Measurement>
 				<!-- SuppressValidator 2.31.9 Poll Manager Table -->
-				<Type options="tab=columns:21001|0-21002|1-21003|2-21004|3-21005|4-21006|5-21007|6,width:0-200-80-138-156-100-0,sort:STRING|ASC-STRING-STRING-INT-INT-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:21001|0-21002|1-21003|2-21004|3-21005|4-21006|5-21007|6,width:0-200-80-138-156-106-0,sort:STRING|ASC-STRING-STRING-INT-INT-STRING-INT,lines:25,filter:true">table</Type>
 				<!-- /SuppressValidator 2.31.9 -->
 			</Measurement>
 		</Param>
@@ -5194,7 +6086,7 @@ Are you sure you want to continue.]]>
 				<Type options="datetime">number</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="9000000" trending="false">
 			<Name>IAC_Receiver</Name>
 			<Description>Inter App Receiver</Description>
@@ -5249,7 +6141,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-		
+
 		<Param id="9000092">
 			<Name>IAC_MessagesPageButtons</Name>
 			<Type>write</Type>
@@ -5703,7 +6595,7 @@ Are you sure you want to continue.]]>
 		<QAction id="3000" name="Organizations Table - Changes" encoding="csharp" triggers="3105" row="true" />
 
 		<QAction id="20000" name="HTTP Request Handling" encoding="csharp" triggers="30" />
-		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;210;211;212;213;220;221;222;223;224;226;228;229;230;235;281"></QAction>
+		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;206;210;211;212;213;220;221;222;223;224;226;228;229;230;235;281"></QAction>
 		<QAction id="20002" name="HTTP Poll Manager Updates" encoding="csharp" row="true" triggers="21006;21053" />
 
 		<QAction id="9000000" name="Process Incoming InterApp Messages" encoding="csharp" triggers="9000000"/>
@@ -5821,6 +6713,29 @@ Are you sure you want to continue.]]>
 						<Header key="x-ratelimit-used" pid="17"></Header>
 						<Header key="x-ratelimit-reset" pid="19"></Header>
 						<Header key="Link" pid="255"/>
+					</Headers>
+				</Response>
+			</Connection>
+		</Session>
+		<Session id="6" name="Get Repository Software Bill of Materials">
+			<Connection id="6" name="Get Repository Software Bill of Materials">
+				<Request verb="GET" pid="106">
+					<Headers>
+						<Header key="Accept">application/vnd.github+json</Header>
+						<Header key="Authorization" pid="12"></Header>
+						<!-- SuppressValidator 8.3.1 Required github header -->
+						<Header key="X-GitHub-Api-Version" pid="13"></Header>
+						<!-- /SuppressValidator 8.3.1 -->
+					</Headers>
+				</Request>
+				<Response statusCode="100">
+					<Content pid="206"></Content>
+					<Headers>
+						<Header key="x-ratelimit-limit" pid="15"></Header>
+						<Header key="x-ratelimit-remaining" pid="16"></Header>
+						<Header key="x-ratelimit-used" pid="17"></Header>
+						<Header key="x-ratelimit-reset" pid="19"></Header>
+						<Header key="Link" pid="256"/>
 					</Headers>
 				</Response>
 			</Connection>
@@ -6167,7 +7082,7 @@ Are you sure you want to continue.]]>
 				</Response>
 			</Connection>
 		</Session>
-		
+
 		<!--ID 35 for Create Repository Variable-->
 		<!--ID 36 for Get Repository Variable-->
 		<!--ID 37 for Put Repository Variable-->
@@ -6254,6 +7169,14 @@ Are you sure you want to continue.]]>
 			<Type>poll</Type>
 			<Content>
 				<Session>5</Session>
+			</Content>
+		</Group>
+		<Group id="206">
+			<Name>PollRepositorySoftwareBillOfMaterials</Name>
+			<Description>Poll Repository Software Bill of Materials</Description>
+			<Type>poll</Type>
+			<Content>
+				<Session>6</Session>
 			</Content>
 		</Group>
 
@@ -6426,6 +7349,13 @@ Are you sure you want to continue.]]>
 				<Id>205</Id>
 			</Content>
 		</Trigger>
+		<Trigger id="206">
+			<Name>Start GetRepository Software Bill of Materials</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>206</Id>
+			</Content>
+		</Trigger>
 		<Trigger id="210">
 			<Name>Start GetUser Organizations</Name>
 			<Type>action</Type>
@@ -6580,6 +7510,16 @@ Are you sure you want to continue.]]>
 			<Content>
 				<Id>255</Id>
 				<Id>305</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="256">
+			<Name>After GetRepository Software Bill of Materials</Name>
+			<On id="206">group</On>
+			<Time>after</Time>
+			<Type>action</Type>
+			<Content>
+				<Id>256</Id>
+				<Id>306</Id>
 			</Content>
 		</Trigger>
 		<Trigger id="260">
@@ -6749,7 +7689,7 @@ Are you sure you want to continue.]]>
 			<On id="30">parameter</On>
 			<Type>run actions</Type>
 		</Action>
-		
+
 		<Action id="201">
 			<Name>Get Repository</Name>
 			<On id="201">group</On>
@@ -6773,6 +7713,11 @@ Are you sure you want to continue.]]>
 		<Action id="205">
 			<Name>Get Repository Workflows</Name>
 			<On id="205">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="206">
+			<Name>Get Repository Software Bill of Materials</Name>
+			<On id="206">group</On>
 			<Type>execute next</Type>
 		</Action>
 		<Action id="210">
@@ -6876,6 +7821,11 @@ Are you sure you want to continue.]]>
 			<On id="255">parameter</On>
 			<Type>clear</Type>
 		</Action>
+		<Action id="256">
+			<Name>Clear Get Repository Software Bill of Materials Link Header</Name>
+			<On id="256">parameter</On>
+			<Type>clear</Type>
+		</Action>
 		<Action id="260">
 			<Name>Clear Get User Organizations Link Header</Name>
 			<On id="260">parameter</On>
@@ -6970,6 +7920,11 @@ Are you sure you want to continue.]]>
 		<Action id="305">
 			<Name>Clear Repository Workflows Content</Name>
 			<On id="205">parameter</On>
+			<Type>clear</Type>
+		</Action>
+		<Action id="306">
+			<Name>Clear Repository Software Bill of Materials Content</Name>
+			<On id="206">parameter</On>
 			<Type>clear</Type>
 		</Action>
 		<Action id="310">
@@ -7232,6 +8187,20 @@ Are you sure you want to continue.]]>
 										</Changes>
 										<References>
 											<TaskId>276554</TaskId>
+										</References>
+									</MinorVersion>
+									<MinorVersion id="15" basedOn="1.0.0.14">
+										<Date>2026-03-12</Date>
+										<Provider>
+											<Author>AMA</Author>
+											<Company>Skyline Communications</Company>
+										</Provider>
+										<Changes>
+											<Fix>Table cleanups happens more frequently and you should have less stale data.</Fix>
+											<NewFeature>The Software Bill of Materials (SBOM) is now available in a seperate page per repository.</NewFeature>
+										</Changes>
+										<References>
+											<TaskId>293386</TaskId>
 										</References>
 									</MinorVersion>
 								</MinorVersions>

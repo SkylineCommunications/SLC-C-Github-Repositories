@@ -93,6 +93,11 @@ public static class Parameter
 	public const int getrepositoryworkflowsurl_105 = 105;
 	/// <summary>PID: 105 | Type: read</summary>
 	public const int getrepositoryworkflowsurl = 105;
+	/// <summary>PID: 106 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int getrepositorysoftwarebillofmaterialsurl_106 = 106;
+	/// <summary>PID: 106 | Type: read</summary>
+	public const int getrepositorysoftwarebillofmaterialsurl = 106;
 	/// <summary>PID: 110 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int getuserorganizationsurl_110 = 110;
@@ -253,6 +258,11 @@ public static class Parameter
 	public const int getrepositoryworkflowscontent_205 = 205;
 	/// <summary>PID: 205 | Type: read</summary>
 	public const int getrepositoryworkflowscontent = 205;
+	/// <summary>PID: 206 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int getrepositorysoftwarebillofmaterialscontent_206 = 206;
+	/// <summary>PID: 206 | Type: read</summary>
+	public const int getrepositorysoftwarebillofmaterialscontent = 206;
 	/// <summary>PID: 210 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int getuserorganizationscontent_210 = 210;
@@ -353,6 +363,11 @@ public static class Parameter
 	public const int getrepositoryworkflowslinkheader_255 = 255;
 	/// <summary>PID: 255 | Type: read</summary>
 	public const int getrepositoryworkflowslinkheader = 255;
+	/// <summary>PID: 256 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int getrepositorysoftwarebillofmaterialslinkheader_256 = 256;
+	/// <summary>PID: 256 | Type: read</summary>
+	public const int getrepositorysoftwarebillofmaterialslinkheader = 256;
 	/// <summary>PID: 260 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int getuserorganizationslinkheader_260 = 260;
@@ -879,6 +894,11 @@ public static class Parameter
 			public const int repositorytagscommitsha_1204 = 1204;
 			/// <summary>PID: 1204 | Type: read</summary>
 			public const int repositorytagscommitsha = 1204;
+			/// <summary>PID: 1199 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorytagslastpolledatutc_1199 = 1199;
+			/// <summary>PID: 1199 | Type: read</summary>
+			public const int repositorytagslastpolledatutc = 1199;
 			public class Write
 			{
 			}
@@ -905,6 +925,11 @@ public static class Parameter
 			public const int repositorytagscommitsha_1204 = 3;
 			/// <summary>IDX: 3 | Type: read</summary>
 			public const int repositorytagscommitsha = 3;
+			/// <summary>IDX: 4 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorytagslastpolledatutc_1199 = 4;
+			/// <summary>IDX: 4 | Type: read</summary>
+			public const int repositorytagslastpolledatutc = 4;
 		}
 	}
 	public class Repositoryreleases
@@ -982,6 +1007,11 @@ public static class Parameter
 			public const int repositoryreleasesrepositoryid_1413 = 1413;
 			/// <summary>PID: 1413 | Type: read</summary>
 			public const int repositoryreleasesrepositoryid = 1413;
+			/// <summary>PID: 1399 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseslastpolledatutc_1399 = 1399;
+			/// <summary>PID: 1399 | Type: read</summary>
+			public const int repositoryreleaseslastpolledatutc = 1399;
 			public class Write
 			{
 			}
@@ -1053,6 +1083,11 @@ public static class Parameter
 			public const int repositoryreleasesrepositoryid_1413 = 12;
 			/// <summary>IDX: 12 | Type: read</summary>
 			public const int repositoryreleasesrepositoryid = 12;
+			/// <summary>IDX: 13 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseslastpolledatutc_1399 = 13;
+			/// <summary>IDX: 13 | Type: read</summary>
+			public const int repositoryreleaseslastpolledatutc = 13;
 		}
 	}
 	public class Repositoryworkflows
@@ -1105,6 +1140,11 @@ public static class Parameter
 			public const int repositoryworkflowsdeletedat_1608 = 1608;
 			/// <summary>PID: 1608 | Type: read</summary>
 			public const int repositoryworkflowsdeletedat = 1608;
+			/// <summary>PID: 1599 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryworkflowslastpolledatutc_1599 = 1599;
+			/// <summary>PID: 1599 | Type: read</summary>
+			public const int repositoryworkflowslastpolledatutc = 1599;
 			public class Write
 			{
 			}
@@ -1151,6 +1191,11 @@ public static class Parameter
 			public const int repositoryworkflowsdeletedat_1608 = 7;
 			/// <summary>IDX: 7 | Type: read</summary>
 			public const int repositoryworkflowsdeletedat = 7;
+			/// <summary>IDX: 8 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryworkflowslastpolledatutc_1599 = 8;
+			/// <summary>IDX: 8 | Type: read</summary>
+			public const int repositoryworkflowslastpolledatutc = 8;
 		}
 	}
 	public class Repositoryreleaseassets
@@ -1238,6 +1283,11 @@ public static class Parameter
 			public const int repositoryreleaseassetsbrowserdownloadurl_1815 = 1815;
 			/// <summary>PID: 1815 | Type: read</summary>
 			public const int repositoryreleaseassetsbrowserdownloadurl = 1815;
+			/// <summary>PID: 1799 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetslastpolledatutc_1799 = 1799;
+			/// <summary>PID: 1799 | Type: read</summary>
+			public const int repositoryreleaseassetslastpolledatutc = 1799;
 			public class Write
 			{
 			}
@@ -1319,6 +1369,11 @@ public static class Parameter
 			public const int repositoryreleaseassetsbrowserdownloadurl_1815 = 14;
 			/// <summary>IDX: 14 | Type: read</summary>
 			public const int repositoryreleaseassetsbrowserdownloadurl = 14;
+			/// <summary>IDX: 15 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryreleaseassetslastpolledatutc_1799 = 15;
+			/// <summary>IDX: 15 | Type: read</summary>
+			public const int repositoryreleaseassetslastpolledatutc = 15;
 		}
 	}
 	public class Repositoryissues
@@ -1386,6 +1441,11 @@ public static class Parameter
 			public const int repositoryissuesrepositoryid_2011 = 2011;
 			/// <summary>PID: 2011 | Type: read</summary>
 			public const int repositoryissuesrepositoryid = 2011;
+			/// <summary>PID: 1999 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryissueslastpolledatutc_1999 = 1999;
+			/// <summary>PID: 1999 | Type: read</summary>
+			public const int repositoryissueslastpolledatutc = 1999;
 			public class Write
 			{
 			}
@@ -1447,6 +1507,345 @@ public static class Parameter
 			public const int repositoryissuesrepositoryid_2011 = 10;
 			/// <summary>IDX: 10 | Type: read</summary>
 			public const int repositoryissuesrepositoryid = 10;
+			/// <summary>IDX: 11 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoryissueslastpolledatutc_1999 = 11;
+			/// <summary>IDX: 11 | Type: read</summary>
+			public const int repositoryissueslastpolledatutc = 11;
+		}
+	}
+	public class Repositorysoftwarebillofmaterials
+	{
+		/// <summary>PID: 2200</summary>
+		public const int tablePid = 2200;
+		/// <summary>IDX: 0</summary>
+		public const int indexColumn = 0;
+		/// <summary>PID: 2201</summary>
+		public const int indexColumnPid = 2201;
+		public class Pid
+		{
+			/// <summary>PID: 2201 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsname_2201 = 2201;
+			/// <summary>PID: 2201 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsname = 2201;
+			/// <summary>PID: 2202 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsrepositoryid_2202 = 2202;
+			/// <summary>PID: 2202 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsrepositoryid = 2202;
+			/// <summary>PID: 2203 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsspdxid_2203 = 2203;
+			/// <summary>PID: 2203 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsspdxid = 2203;
+			/// <summary>PID: 2204 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsspdxversion_2204 = 2204;
+			/// <summary>PID: 2204 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsspdxversion = 2204;
+			/// <summary>PID: 2205 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsdatalicense_2205 = 2205;
+			/// <summary>PID: 2205 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsdatalicense = 2205;
+			/// <summary>PID: 2206 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialscreatedatutc_2206 = 2206;
+			/// <summary>PID: 2206 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialscreatedatutc = 2206;
+			/// <summary>PID: 2207 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsdocumentnamespace_2207 = 2207;
+			/// <summary>PID: 2207 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsdocumentnamespace = 2207;
+			/// <summary>PID: 2199 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialslastpolledatutc_2199 = 2199;
+			/// <summary>PID: 2199 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialslastpolledatutc = 2199;
+			public class Write
+			{
+			}
+		}
+		public class Idx
+		{
+			/// <summary>IDX: 0 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsname_2201 = 0;
+			/// <summary>IDX: 0 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsname = 0;
+			/// <summary>IDX: 1 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsrepositoryid_2202 = 1;
+			/// <summary>IDX: 1 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsrepositoryid = 1;
+			/// <summary>IDX: 2 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsspdxid_2203 = 2;
+			/// <summary>IDX: 2 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsspdxid = 2;
+			/// <summary>IDX: 3 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsspdxversion_2204 = 3;
+			/// <summary>IDX: 3 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsspdxversion = 3;
+			/// <summary>IDX: 4 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsdatalicense_2205 = 4;
+			/// <summary>IDX: 4 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsdatalicense = 4;
+			/// <summary>IDX: 5 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialscreatedatutc_2206 = 5;
+			/// <summary>IDX: 5 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialscreatedatutc = 5;
+			/// <summary>IDX: 6 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsdocumentnamespace_2207 = 6;
+			/// <summary>IDX: 6 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsdocumentnamespace = 6;
+			/// <summary>IDX: 7 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialslastpolledatutc_2199 = 7;
+			/// <summary>IDX: 7 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialslastpolledatutc = 7;
+		}
+	}
+	public class Repositorysoftwarebillofmaterialspackages
+	{
+		/// <summary>PID: 2400</summary>
+		public const int tablePid = 2400;
+		/// <summary>IDX: 0</summary>
+		public const int indexColumn = 0;
+		/// <summary>PID: 2401</summary>
+		public const int indexColumnPid = 2401;
+		public class Pid
+		{
+			/// <summary>PID: 2401 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagesinstance_2401 = 2401;
+			/// <summary>PID: 2401 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagesinstance = 2401;
+			/// <summary>PID: 2402 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagessbomid_2402 = 2402;
+			/// <summary>PID: 2402 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagessbomid = 2402;
+			/// <summary>PID: 2403 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagesrepositoryid_2403 = 2403;
+			/// <summary>PID: 2403 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagesrepositoryid = 2403;
+			/// <summary>PID: 2404 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagesspdxid_2404 = 2404;
+			/// <summary>PID: 2404 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagesspdxid = 2404;
+			/// <summary>PID: 2405 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagesname_2405 = 2405;
+			/// <summary>PID: 2405 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagesname = 2405;
+			/// <summary>PID: 2406 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagesversion_2406 = 2406;
+			/// <summary>PID: 2406 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagesversion = 2406;
+			/// <summary>PID: 2407 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagesdownloadlocation_2407 = 2407;
+			/// <summary>PID: 2407 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagesdownloadlocation = 2407;
+			/// <summary>PID: 2408 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagesfilesanalyzed_2408 = 2408;
+			/// <summary>PID: 2408 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagesfilesanalyzed = 2408;
+			/// <summary>PID: 2409 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackageslicenseconcluded_2409 = 2409;
+			/// <summary>PID: 2409 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackageslicenseconcluded = 2409;
+			/// <summary>PID: 2410 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackageslicensedeclared_2410 = 2410;
+			/// <summary>PID: 2410 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackageslicensedeclared = 2410;
+			/// <summary>PID: 2411 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagessupplier_2411 = 2411;
+			/// <summary>PID: 2411 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagessupplier = 2411;
+			/// <summary>PID: 2412 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagescopyrighttext_2412 = 2412;
+			/// <summary>PID: 2412 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagescopyrighttext = 2412;
+			/// <summary>PID: 2399 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackageslastpolledatutc_2399 = 2399;
+			/// <summary>PID: 2399 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackageslastpolledatutc = 2399;
+			public class Write
+			{
+			}
+		}
+		public class Idx
+		{
+			/// <summary>IDX: 0 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagesinstance_2401 = 0;
+			/// <summary>IDX: 0 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagesinstance = 0;
+			/// <summary>IDX: 1 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagessbomid_2402 = 1;
+			/// <summary>IDX: 1 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagessbomid = 1;
+			/// <summary>IDX: 2 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagesrepositoryid_2403 = 2;
+			/// <summary>IDX: 2 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagesrepositoryid = 2;
+			/// <summary>IDX: 3 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagesspdxid_2404 = 3;
+			/// <summary>IDX: 3 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagesspdxid = 3;
+			/// <summary>IDX: 4 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagesname_2405 = 4;
+			/// <summary>IDX: 4 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagesname = 4;
+			/// <summary>IDX: 5 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagesversion_2406 = 5;
+			/// <summary>IDX: 5 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagesversion = 5;
+			/// <summary>IDX: 6 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagesdownloadlocation_2407 = 6;
+			/// <summary>IDX: 6 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagesdownloadlocation = 6;
+			/// <summary>IDX: 7 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagesfilesanalyzed_2408 = 7;
+			/// <summary>IDX: 7 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagesfilesanalyzed = 7;
+			/// <summary>IDX: 8 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackageslicenseconcluded_2409 = 8;
+			/// <summary>IDX: 8 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackageslicenseconcluded = 8;
+			/// <summary>IDX: 9 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackageslicensedeclared_2410 = 9;
+			/// <summary>IDX: 9 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackageslicensedeclared = 9;
+			/// <summary>IDX: 10 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagessupplier_2411 = 10;
+			/// <summary>IDX: 10 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagessupplier = 10;
+			/// <summary>IDX: 11 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackagescopyrighttext_2412 = 11;
+			/// <summary>IDX: 11 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackagescopyrighttext = 11;
+			/// <summary>IDX: 12 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialspackageslastpolledatutc_2399 = 12;
+			/// <summary>IDX: 12 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialspackageslastpolledatutc = 12;
+		}
+	}
+	public class Repositorysoftwarebillofmaterialsrelationships
+	{
+		/// <summary>PID: 2600</summary>
+		public const int tablePid = 2600;
+		/// <summary>IDX: 0</summary>
+		public const int indexColumn = 0;
+		/// <summary>PID: 2601</summary>
+		public const int indexColumnPid = 2601;
+		public class Pid
+		{
+			/// <summary>PID: 2601 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsrelationshipsinstance_2601 = 2601;
+			/// <summary>PID: 2601 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsrelationshipsinstance = 2601;
+			/// <summary>PID: 2602 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsrelationshipssbomid_2602 = 2602;
+			/// <summary>PID: 2602 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsrelationshipssbomid = 2602;
+			/// <summary>PID: 2603 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsrelationshipsrepositoryid_2603 = 2603;
+			/// <summary>PID: 2603 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsrelationshipsrepositoryid = 2603;
+			/// <summary>PID: 2604 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsrelationshipsspdxelementid_2604 = 2604;
+			/// <summary>PID: 2604 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsrelationshipsspdxelementid = 2604;
+			/// <summary>PID: 2605 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsrelationshipsrelatedspdxelementid_2605 = 2605;
+			/// <summary>PID: 2605 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsrelationshipsrelatedspdxelementid = 2605;
+			/// <summary>PID: 2606 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsrelationshipsrelationshiptype_2606 = 2606;
+			/// <summary>PID: 2606 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsrelationshipsrelationshiptype = 2606;
+			/// <summary>PID: 2599 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsrelationshipslastpolledatutc_2599 = 2599;
+			/// <summary>PID: 2599 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsrelationshipslastpolledatutc = 2599;
+			public class Write
+			{
+			}
+		}
+		public class Idx
+		{
+			/// <summary>IDX: 0 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsrelationshipsinstance_2601 = 0;
+			/// <summary>IDX: 0 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsrelationshipsinstance = 0;
+			/// <summary>IDX: 1 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsrelationshipssbomid_2602 = 1;
+			/// <summary>IDX: 1 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsrelationshipssbomid = 1;
+			/// <summary>IDX: 2 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsrelationshipsrepositoryid_2603 = 2;
+			/// <summary>IDX: 2 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsrelationshipsrepositoryid = 2;
+			/// <summary>IDX: 3 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsrelationshipsspdxelementid_2604 = 3;
+			/// <summary>IDX: 3 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsrelationshipsspdxelementid = 3;
+			/// <summary>IDX: 4 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsrelationshipsrelatedspdxelementid_2605 = 4;
+			/// <summary>IDX: 4 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsrelationshipsrelatedspdxelementid = 4;
+			/// <summary>IDX: 5 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsrelationshipsrelationshiptype_2606 = 5;
+			/// <summary>IDX: 5 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsrelationshipsrelationshiptype = 5;
+			/// <summary>IDX: 6 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositorysoftwarebillofmaterialsrelationshipslastpolledatutc_2599 = 6;
+			/// <summary>IDX: 6 | Type: read</summary>
+			public const int repositorysoftwarebillofmaterialsrelationshipslastpolledatutc = 6;
 		}
 	}
 	public class Organizations
@@ -1610,6 +2009,11 @@ public static class Parameter
 			public const int organizationteamspermission_3409 = 3409;
 			/// <summary>PID: 3409 | Type: read</summary>
 			public const int organizationteamspermission = 3409;
+			/// <summary>PID: 3399 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int organizationteamslastpolledatutc_3399 = 3399;
+			/// <summary>PID: 3399 | Type: read</summary>
+			public const int organizationteamslastpolledatutc = 3399;
 			public class Write
 			{
 			}
@@ -1661,6 +2065,11 @@ public static class Parameter
 			public const int organizationteamspermission_3409 = 8;
 			/// <summary>IDX: 8 | Type: read</summary>
 			public const int organizationteamspermission = 8;
+			/// <summary>IDX: 9 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int organizationteamslastpolledatutc_3399 = 9;
+			/// <summary>IDX: 9 | Type: read</summary>
+			public const int organizationteamslastpolledatutc = 9;
 		}
 	}
 	public class Organizationmembers
@@ -1713,6 +2122,11 @@ public static class Parameter
 			public const int organizationmembersavatarurl_3608 = 3608;
 			/// <summary>PID: 3608 | Type: read</summary>
 			public const int organizationmembersavatarurl = 3608;
+			/// <summary>PID: 3599 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int organizationmemberslastpolledatutc_3599 = 3599;
+			/// <summary>PID: 3599 | Type: read</summary>
+			public const int organizationmemberslastpolledatutc = 3599;
 			public class Write
 			{
 			}
@@ -1759,6 +2173,11 @@ public static class Parameter
 			public const int organizationmembersavatarurl_3608 = 7;
 			/// <summary>IDX: 7 | Type: read</summary>
 			public const int organizationmembersavatarurl = 7;
+			/// <summary>IDX: 8 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int organizationmemberslastpolledatutc_3599 = 8;
+			/// <summary>IDX: 8 | Type: read</summary>
+			public const int organizationmemberslastpolledatutc = 8;
 		}
 	}
 	public class Memberorganizationlinks
@@ -1786,6 +2205,11 @@ public static class Parameter
 			public const int memberorganizationlinksmember_22003 = 22003;
 			/// <summary>PID: 22003 | Type: read</summary>
 			public const int memberorganizationlinksmember = 22003;
+			/// <summary>PID: 21999 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int memberorganizationlinkslastpolledatutc_21999 = 21999;
+			/// <summary>PID: 21999 | Type: read</summary>
+			public const int memberorganizationlinkslastpolledatutc = 21999;
 			public class Write
 			{
 			}
@@ -1807,6 +2231,11 @@ public static class Parameter
 			public const int memberorganizationlinksmember_22003 = 2;
 			/// <summary>IDX: 2 | Type: read</summary>
 			public const int memberorganizationlinksmember = 2;
+			/// <summary>IDX: 3 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int memberorganizationlinkslastpolledatutc_21999 = 3;
+			/// <summary>IDX: 3 | Type: read</summary>
+			public const int memberorganizationlinkslastpolledatutc = 3;
 		}
 	}
 	public class Memberteamlinks
@@ -2107,6 +2536,12 @@ public interface SLProtocolExt : SLProtocol
 	RepositoryreleaseassetsQActionTable repositoryreleaseassets { get; set; }
 	/// <summary>PID: 2000</summary>
 	RepositoryissuesQActionTable repositoryissues { get; set; }
+	/// <summary>PID: 2200</summary>
+	RepositorysoftwarebillofmaterialsQActionTable repositorysoftwarebillofmaterials { get; set; }
+	/// <summary>PID: 2400</summary>
+	RepositorysoftwarebillofmaterialspackagesQActionTable repositorysoftwarebillofmaterialspackages { get; set; }
+	/// <summary>PID: 2600</summary>
+	RepositorysoftwarebillofmaterialsrelationshipsQActionTable repositorysoftwarebillofmaterialsrelationships { get; set; }
 	/// <summary>PID: 3000</summary>
 	OrganizationsQActionTable organizations { get; set; }
 	/// <summary>PID: 3200</summary>
@@ -2167,6 +2602,8 @@ public interface SLProtocolExt : SLProtocol
 	object Getrepositoryreleasesurl { get; set; }
 	object Getrepositoryworkflowsurl_105 { get; set; }
 	object Getrepositoryworkflowsurl { get; set; }
+	object Getrepositorysoftwarebillofmaterialsurl_106 { get; set; }
+	object Getrepositorysoftwarebillofmaterialsurl { get; set; }
 	object Getuserorganizationsurl_110 { get; set; }
 	object Getuserorganizationsurl { get; set; }
 	object Getorganizationrepositoriesurl_111 { get; set; }
@@ -2231,6 +2668,8 @@ public interface SLProtocolExt : SLProtocol
 	object Getrepositoryreleasescontent { get; set; }
 	object Getrepositoryworkflowscontent_205 { get; set; }
 	object Getrepositoryworkflowscontent { get; set; }
+	object Getrepositorysoftwarebillofmaterialscontent_206 { get; set; }
+	object Getrepositorysoftwarebillofmaterialscontent { get; set; }
 	object Getuserorganizationscontent_210 { get; set; }
 	object Getuserorganizationscontent { get; set; }
 	object Getorganizationrepositoriescontent_211 { get; set; }
@@ -2271,6 +2710,8 @@ public interface SLProtocolExt : SLProtocol
 	object Getrepositoryreleaseslinkheader { get; set; }
 	object Getrepositoryworkflowslinkheader_255 { get; set; }
 	object Getrepositoryworkflowslinkheader { get; set; }
+	object Getrepositorysoftwarebillofmaterialslinkheader_256 { get; set; }
+	object Getrepositorysoftwarebillofmaterialslinkheader { get; set; }
 	object Getuserorganizationslinkheader_260 { get; set; }
 	object Getuserorganizationslinkheader { get; set; }
 	object Getorganizationrepositorieslinkheader_261 { get; set; }
@@ -2371,6 +2812,8 @@ public interface SLProtocolExt : SLProtocol
 	object Repositoriestopics { get; set; }
 	object Repositorytags_pk_cache_1191 { get; set; }
 	object Repositorytags_pk_cache { get; set; }
+	object Repositorytagslastpolledatutc_1199 { get; set; }
+	object Repositorytagslastpolledatutc { get; set; }
 	object Repositorytagsid_1201 { get; set; }
 	object Repositorytagsid { get; set; }
 	object Repositorytagsname_1202 { get; set; }
@@ -2381,6 +2824,8 @@ public interface SLProtocolExt : SLProtocol
 	object Repositorytagscommitsha { get; set; }
 	object Repositoryreleases_pk_cache_1391 { get; set; }
 	object Repositoryreleases_pk_cache { get; set; }
+	object Repositoryreleaseslastpolledatutc_1399 { get; set; }
+	object Repositoryreleaseslastpolledatutc { get; set; }
 	object Repositoryreleasesinstance_1401 { get; set; }
 	object Repositoryreleasesinstance { get; set; }
 	object Repositoryreleasesid_1402 { get; set; }
@@ -2413,6 +2858,8 @@ public interface SLProtocolExt : SLProtocol
 	object Repositoryworkflow_pk_cache { get; set; }
 	object Repositoryworkflow_changerequest_1592 { get; set; }
 	object Repositoryworkflow_changerequest { get; set; }
+	object Repositoryworkflowslastpolledatutc_1599 { get; set; }
+	object Repositoryworkflowslastpolledatutc { get; set; }
 	object Repositoryworkflowsid_1601 { get; set; }
 	object Repositoryworkflowsid { get; set; }
 	object Repositoryworkflowsrepositoryid_1602 { get; set; }
@@ -2431,6 +2878,8 @@ public interface SLProtocolExt : SLProtocol
 	object Repositoryworkflowsdeletedat { get; set; }
 	object Repositoryreleaseassets_pk_cache_1791 { get; set; }
 	object Repositoryreleaseassets_pk_cache { get; set; }
+	object Repositoryreleaseassetslastpolledatutc_1799 { get; set; }
+	object Repositoryreleaseassetslastpolledatutc { get; set; }
 	object Repositoryreleaseassetsinstance_1801 { get; set; }
 	object Repositoryreleaseassetsinstance { get; set; }
 	object Repositoryreleaseassetsid_1802 { get; set; }
@@ -2463,6 +2912,8 @@ public interface SLProtocolExt : SLProtocol
 	object Repositoryreleaseassetsbrowserdownloadurl { get; set; }
 	object Repositoryissues_pk_cache_1991 { get; set; }
 	object Repositoryissues_pk_cache { get; set; }
+	object Repositoryissueslastpolledatutc_1999 { get; set; }
+	object Repositoryissueslastpolledatutc { get; set; }
 	object Repositoryissuesinstance_2001 { get; set; }
 	object Repositoryissuesinstance { get; set; }
 	object Repositoryissuesnumber_2002 { get; set; }
@@ -2485,6 +2936,62 @@ public interface SLProtocolExt : SLProtocol
 	object Repositoryissuesclosedat { get; set; }
 	object Repositoryissuesrepositoryid_2011 { get; set; }
 	object Repositoryissuesrepositoryid { get; set; }
+	object Repositorysoftwarebillofmaterialslastpolledatutc_2199 { get; set; }
+	object Repositorysoftwarebillofmaterialslastpolledatutc { get; set; }
+	object Repositorysoftwarebillofmaterialsname_2201 { get; set; }
+	object Repositorysoftwarebillofmaterialsname { get; set; }
+	object Repositorysoftwarebillofmaterialsrepositoryid_2202 { get; set; }
+	object Repositorysoftwarebillofmaterialsrepositoryid { get; set; }
+	object Repositorysoftwarebillofmaterialsspdxid_2203 { get; set; }
+	object Repositorysoftwarebillofmaterialsspdxid { get; set; }
+	object Repositorysoftwarebillofmaterialsspdxversion_2204 { get; set; }
+	object Repositorysoftwarebillofmaterialsspdxversion { get; set; }
+	object Repositorysoftwarebillofmaterialsdatalicense_2205 { get; set; }
+	object Repositorysoftwarebillofmaterialsdatalicense { get; set; }
+	object Repositorysoftwarebillofmaterialscreatedatutc_2206 { get; set; }
+	object Repositorysoftwarebillofmaterialscreatedatutc { get; set; }
+	object Repositorysoftwarebillofmaterialsdocumentnamespace_2207 { get; set; }
+	object Repositorysoftwarebillofmaterialsdocumentnamespace { get; set; }
+	object Repositorysoftwarebillofmaterialspackageslastpolledatutc_2399 { get; set; }
+	object Repositorysoftwarebillofmaterialspackageslastpolledatutc { get; set; }
+	object Repositorysoftwarebillofmaterialspackagesinstance_2401 { get; set; }
+	object Repositorysoftwarebillofmaterialspackagesinstance { get; set; }
+	object Repositorysoftwarebillofmaterialspackagessbomid_2402 { get; set; }
+	object Repositorysoftwarebillofmaterialspackagessbomid { get; set; }
+	object Repositorysoftwarebillofmaterialspackagesrepositoryid_2403 { get; set; }
+	object Repositorysoftwarebillofmaterialspackagesrepositoryid { get; set; }
+	object Repositorysoftwarebillofmaterialspackagesspdxid_2404 { get; set; }
+	object Repositorysoftwarebillofmaterialspackagesspdxid { get; set; }
+	object Repositorysoftwarebillofmaterialspackagesname_2405 { get; set; }
+	object Repositorysoftwarebillofmaterialspackagesname { get; set; }
+	object Repositorysoftwarebillofmaterialspackagesversion_2406 { get; set; }
+	object Repositorysoftwarebillofmaterialspackagesversion { get; set; }
+	object Repositorysoftwarebillofmaterialspackagesdownloadlocation_2407 { get; set; }
+	object Repositorysoftwarebillofmaterialspackagesdownloadlocation { get; set; }
+	object Repositorysoftwarebillofmaterialspackagesfilesanalyzed_2408 { get; set; }
+	object Repositorysoftwarebillofmaterialspackagesfilesanalyzed { get; set; }
+	object Repositorysoftwarebillofmaterialspackageslicenseconcluded_2409 { get; set; }
+	object Repositorysoftwarebillofmaterialspackageslicenseconcluded { get; set; }
+	object Repositorysoftwarebillofmaterialspackageslicensedeclared_2410 { get; set; }
+	object Repositorysoftwarebillofmaterialspackageslicensedeclared { get; set; }
+	object Repositorysoftwarebillofmaterialspackagessupplier_2411 { get; set; }
+	object Repositorysoftwarebillofmaterialspackagessupplier { get; set; }
+	object Repositorysoftwarebillofmaterialspackagescopyrighttext_2412 { get; set; }
+	object Repositorysoftwarebillofmaterialspackagescopyrighttext { get; set; }
+	object Repositorysoftwarebillofmaterialsrelationshipslastpolledatutc_2599 { get; set; }
+	object Repositorysoftwarebillofmaterialsrelationshipslastpolledatutc { get; set; }
+	object Repositorysoftwarebillofmaterialsrelationshipsinstance_2601 { get; set; }
+	object Repositorysoftwarebillofmaterialsrelationshipsinstance { get; set; }
+	object Repositorysoftwarebillofmaterialsrelationshipssbomid_2602 { get; set; }
+	object Repositorysoftwarebillofmaterialsrelationshipssbomid { get; set; }
+	object Repositorysoftwarebillofmaterialsrelationshipsrepositoryid_2603 { get; set; }
+	object Repositorysoftwarebillofmaterialsrelationshipsrepositoryid { get; set; }
+	object Repositorysoftwarebillofmaterialsrelationshipsspdxelementid_2604 { get; set; }
+	object Repositorysoftwarebillofmaterialsrelationshipsspdxelementid { get; set; }
+	object Repositorysoftwarebillofmaterialsrelationshipsrelatedspdxelementid_2605 { get; set; }
+	object Repositorysoftwarebillofmaterialsrelationshipsrelatedspdxelementid { get; set; }
+	object Repositorysoftwarebillofmaterialsrelationshipsrelationshiptype_2606 { get; set; }
+	object Repositorysoftwarebillofmaterialsrelationshipsrelationshiptype { get; set; }
 	object Organizationsoverview_2996 { get; set; }
 	object Organizationsoverview { get; set; }
 	object Organizationsinstance_3001 { get; set; }
@@ -2502,6 +3009,8 @@ public interface SLProtocolExt : SLProtocol
 	object Organizationstatisticsinstance { get; set; }
 	object Organizationstatisticsorganization_3202 { get; set; }
 	object Organizationstatisticsorganization { get; set; }
+	object Organizationteamslastpolledatutc_3399 { get; set; }
+	object Organizationteamslastpolledatutc { get; set; }
 	object Organizationteamsinstance_3401 { get; set; }
 	object Organizationteamsinstance { get; set; }
 	object Organizationteamsid_3402 { get; set; }
@@ -2520,6 +3029,8 @@ public interface SLProtocolExt : SLProtocol
 	object Organizationteamsnotificationsenabled { get; set; }
 	object Organizationteamspermission_3409 { get; set; }
 	object Organizationteamspermission { get; set; }
+	object Organizationmemberslastpolledatutc_3599 { get; set; }
+	object Organizationmemberslastpolledatutc { get; set; }
 	object Organizationmembersinstance_3601 { get; set; }
 	object Organizationmembersinstance { get; set; }
 	object Organizationmembersid_3602 { get; set; }
@@ -2552,6 +3063,8 @@ public interface SLProtocolExt : SLProtocol
 	object Pollmanagerpreviouslypolled { get; set; }
 	object Pollmanagerpollstate_21053 { get; set; }
 	object Pollmanagerpollfrequency_21054 { get; set; }
+	object Memberorganizationlinkslastpolledatutc_21999 { get; set; }
+	object Memberorganizationlinkslastpolledatutc { get; set; }
 	object Memberorganizationlinksinstance_22001 { get; set; }
 	object Memberorganizationlinksinstance { get; set; }
 	object Memberorganizationlinksorganization_22002 { get; set; }
@@ -2611,6 +3124,12 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public RepositoryreleaseassetsQActionTable repositoryreleaseassets { get; set; }
 	/// <summary>PID: 2000</summary>
 	public RepositoryissuesQActionTable repositoryissues { get; set; }
+	/// <summary>PID: 2200</summary>
+	public RepositorysoftwarebillofmaterialsQActionTable repositorysoftwarebillofmaterials { get; set; }
+	/// <summary>PID: 2400</summary>
+	public RepositorysoftwarebillofmaterialspackagesQActionTable repositorysoftwarebillofmaterialspackages { get; set; }
+	/// <summary>PID: 2600</summary>
+	public RepositorysoftwarebillofmaterialsrelationshipsQActionTable repositorysoftwarebillofmaterialsrelationships { get; set; }
 	/// <summary>PID: 3000</summary>
 	public OrganizationsQActionTable organizations { get; set; }
 	/// <summary>PID: 3200</summary>
@@ -2735,6 +3254,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Getrepositoryworkflowsurl_105 {get { return GetParameter(105); }set { SetParameter(105, value); }}
 	/// <summary>PID: 105  | Type: read</summary>
 	public System.Object Getrepositoryworkflowsurl {get { return GetParameter(105); }set { SetParameter(105, value); }}
+	/// <summary>PID: 106  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Getrepositorysoftwarebillofmaterialsurl_106 {get { return GetParameter(106); }set { SetParameter(106, value); }}
+	/// <summary>PID: 106  | Type: read</summary>
+	public System.Object Getrepositorysoftwarebillofmaterialsurl {get { return GetParameter(106); }set { SetParameter(106, value); }}
 	/// <summary>PID: 110  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Getuserorganizationsurl_110 {get { return GetParameter(110); }set { SetParameter(110, value); }}
@@ -2895,6 +3419,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Getrepositoryworkflowscontent_205 {get { return GetParameter(205); }set { SetParameter(205, value); }}
 	/// <summary>PID: 205  | Type: read</summary>
 	public System.Object Getrepositoryworkflowscontent {get { return GetParameter(205); }set { SetParameter(205, value); }}
+	/// <summary>PID: 206  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Getrepositorysoftwarebillofmaterialscontent_206 {get { return GetParameter(206); }set { SetParameter(206, value); }}
+	/// <summary>PID: 206  | Type: read</summary>
+	public System.Object Getrepositorysoftwarebillofmaterialscontent {get { return GetParameter(206); }set { SetParameter(206, value); }}
 	/// <summary>PID: 210  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Getuserorganizationscontent_210 {get { return GetParameter(210); }set { SetParameter(210, value); }}
@@ -2995,6 +3524,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Getrepositoryworkflowslinkheader_255 {get { return GetParameter(255); }set { SetParameter(255, value); }}
 	/// <summary>PID: 255  | Type: read</summary>
 	public System.Object Getrepositoryworkflowslinkheader {get { return GetParameter(255); }set { SetParameter(255, value); }}
+	/// <summary>PID: 256  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Getrepositorysoftwarebillofmaterialslinkheader_256 {get { return GetParameter(256); }set { SetParameter(256, value); }}
+	/// <summary>PID: 256  | Type: read</summary>
+	public System.Object Getrepositorysoftwarebillofmaterialslinkheader {get { return GetParameter(256); }set { SetParameter(256, value); }}
 	/// <summary>PID: 260  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Getuserorganizationslinkheader_260 {get { return GetParameter(260); }set { SetParameter(260, value); }}
@@ -3243,6 +3777,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositorytags_pk_cache_1191 {get { return GetParameter(1191); }set { SetParameter(1191, value); }}
 	/// <summary>PID: 1191  | Type: read</summary>
 	public System.Object Repositorytags_pk_cache {get { return GetParameter(1191); }set { SetParameter(1191, value); }}
+	/// <summary>PID: 1199  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorytagslastpolledatutc_1199 {get { return GetParameter(1199); }set { SetParameter(1199, value); }}
+	/// <summary>PID: 1199  | Type: read</summary>
+	public System.Object Repositorytagslastpolledatutc {get { return GetParameter(1199); }set { SetParameter(1199, value); }}
 	/// <summary>PID: 1201  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositorytagsid_1201 {get { return GetParameter(1201); }set { SetParameter(1201, value); }}
@@ -3268,6 +3807,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoryreleases_pk_cache_1391 {get { return GetParameter(1391); }set { SetParameter(1391, value); }}
 	/// <summary>PID: 1391  | Type: read</summary>
 	public System.Object Repositoryreleases_pk_cache {get { return GetParameter(1391); }set { SetParameter(1391, value); }}
+	/// <summary>PID: 1399  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseslastpolledatutc_1399 {get { return GetParameter(1399); }set { SetParameter(1399, value); }}
+	/// <summary>PID: 1399  | Type: read</summary>
+	public System.Object Repositoryreleaseslastpolledatutc {get { return GetParameter(1399); }set { SetParameter(1399, value); }}
 	/// <summary>PID: 1401  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoryreleasesinstance_1401 {get { return GetParameter(1401); }set { SetParameter(1401, value); }}
@@ -3347,6 +3891,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoryworkflow_changerequest_1592 {get { return GetParameter(1592); }set { SetParameter(1592, value); }}
 	/// <summary>PID: 1592  | Type: read</summary>
 	public System.Object Repositoryworkflow_changerequest {get { return GetParameter(1592); }set { SetParameter(1592, value); }}
+	/// <summary>PID: 1599  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryworkflowslastpolledatutc_1599 {get { return GetParameter(1599); }set { SetParameter(1599, value); }}
+	/// <summary>PID: 1599  | Type: read</summary>
+	public System.Object Repositoryworkflowslastpolledatutc {get { return GetParameter(1599); }set { SetParameter(1599, value); }}
 	/// <summary>PID: 1601  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoryworkflowsid_1601 {get { return GetParameter(1601); }set { SetParameter(1601, value); }}
@@ -3392,6 +3941,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoryreleaseassets_pk_cache_1791 {get { return GetParameter(1791); }set { SetParameter(1791, value); }}
 	/// <summary>PID: 1791  | Type: read</summary>
 	public System.Object Repositoryreleaseassets_pk_cache {get { return GetParameter(1791); }set { SetParameter(1791, value); }}
+	/// <summary>PID: 1799  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetslastpolledatutc_1799 {get { return GetParameter(1799); }set { SetParameter(1799, value); }}
+	/// <summary>PID: 1799  | Type: read</summary>
+	public System.Object Repositoryreleaseassetslastpolledatutc {get { return GetParameter(1799); }set { SetParameter(1799, value); }}
 	/// <summary>PID: 1801  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoryreleaseassetsinstance_1801 {get { return GetParameter(1801); }set { SetParameter(1801, value); }}
@@ -3472,6 +4026,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoryissues_pk_cache_1991 {get { return GetParameter(1991); }set { SetParameter(1991, value); }}
 	/// <summary>PID: 1991  | Type: read</summary>
 	public System.Object Repositoryissues_pk_cache {get { return GetParameter(1991); }set { SetParameter(1991, value); }}
+	/// <summary>PID: 1999  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryissueslastpolledatutc_1999 {get { return GetParameter(1999); }set { SetParameter(1999, value); }}
+	/// <summary>PID: 1999  | Type: read</summary>
+	public System.Object Repositoryissueslastpolledatutc {get { return GetParameter(1999); }set { SetParameter(1999, value); }}
 	/// <summary>PID: 2001  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoryissuesinstance_2001 {get { return GetParameter(2001); }set { SetParameter(2001, value); }}
@@ -3527,6 +4086,146 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoryissuesrepositoryid_2011 {get { return GetParameter(2011); }set { SetParameter(2011, value); }}
 	/// <summary>PID: 2011  | Type: read</summary>
 	public System.Object Repositoryissuesrepositoryid {get { return GetParameter(2011); }set { SetParameter(2011, value); }}
+	/// <summary>PID: 2199  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialslastpolledatutc_2199 {get { return GetParameter(2199); }set { SetParameter(2199, value); }}
+	/// <summary>PID: 2199  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialslastpolledatutc {get { return GetParameter(2199); }set { SetParameter(2199, value); }}
+	/// <summary>PID: 2201  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsname_2201 {get { return GetParameter(2201); }set { SetParameter(2201, value); }}
+	/// <summary>PID: 2201  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsname {get { return GetParameter(2201); }set { SetParameter(2201, value); }}
+	/// <summary>PID: 2202  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsrepositoryid_2202 {get { return GetParameter(2202); }set { SetParameter(2202, value); }}
+	/// <summary>PID: 2202  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsrepositoryid {get { return GetParameter(2202); }set { SetParameter(2202, value); }}
+	/// <summary>PID: 2203  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsspdxid_2203 {get { return GetParameter(2203); }set { SetParameter(2203, value); }}
+	/// <summary>PID: 2203  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsspdxid {get { return GetParameter(2203); }set { SetParameter(2203, value); }}
+	/// <summary>PID: 2204  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsspdxversion_2204 {get { return GetParameter(2204); }set { SetParameter(2204, value); }}
+	/// <summary>PID: 2204  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsspdxversion {get { return GetParameter(2204); }set { SetParameter(2204, value); }}
+	/// <summary>PID: 2205  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsdatalicense_2205 {get { return GetParameter(2205); }set { SetParameter(2205, value); }}
+	/// <summary>PID: 2205  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsdatalicense {get { return GetParameter(2205); }set { SetParameter(2205, value); }}
+	/// <summary>PID: 2206  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialscreatedatutc_2206 {get { return GetParameter(2206); }set { SetParameter(2206, value); }}
+	/// <summary>PID: 2206  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialscreatedatutc {get { return GetParameter(2206); }set { SetParameter(2206, value); }}
+	/// <summary>PID: 2207  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsdocumentnamespace_2207 {get { return GetParameter(2207); }set { SetParameter(2207, value); }}
+	/// <summary>PID: 2207  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsdocumentnamespace {get { return GetParameter(2207); }set { SetParameter(2207, value); }}
+	/// <summary>PID: 2399  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackageslastpolledatutc_2399 {get { return GetParameter(2399); }set { SetParameter(2399, value); }}
+	/// <summary>PID: 2399  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackageslastpolledatutc {get { return GetParameter(2399); }set { SetParameter(2399, value); }}
+	/// <summary>PID: 2401  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagesinstance_2401 {get { return GetParameter(2401); }set { SetParameter(2401, value); }}
+	/// <summary>PID: 2401  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagesinstance {get { return GetParameter(2401); }set { SetParameter(2401, value); }}
+	/// <summary>PID: 2402  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagessbomid_2402 {get { return GetParameter(2402); }set { SetParameter(2402, value); }}
+	/// <summary>PID: 2402  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagessbomid {get { return GetParameter(2402); }set { SetParameter(2402, value); }}
+	/// <summary>PID: 2403  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagesrepositoryid_2403 {get { return GetParameter(2403); }set { SetParameter(2403, value); }}
+	/// <summary>PID: 2403  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagesrepositoryid {get { return GetParameter(2403); }set { SetParameter(2403, value); }}
+	/// <summary>PID: 2404  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagesspdxid_2404 {get { return GetParameter(2404); }set { SetParameter(2404, value); }}
+	/// <summary>PID: 2404  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagesspdxid {get { return GetParameter(2404); }set { SetParameter(2404, value); }}
+	/// <summary>PID: 2405  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagesname_2405 {get { return GetParameter(2405); }set { SetParameter(2405, value); }}
+	/// <summary>PID: 2405  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagesname {get { return GetParameter(2405); }set { SetParameter(2405, value); }}
+	/// <summary>PID: 2406  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagesversion_2406 {get { return GetParameter(2406); }set { SetParameter(2406, value); }}
+	/// <summary>PID: 2406  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagesversion {get { return GetParameter(2406); }set { SetParameter(2406, value); }}
+	/// <summary>PID: 2407  | Type: read | EXCEPTIONS: Not Determined = NOASSERTION</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagesdownloadlocation_2407 {get { return GetParameter(2407); }set { SetParameter(2407, value); }}
+	/// <summary>PID: 2407  | Type: read | EXCEPTIONS: Not Determined = NOASSERTION</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagesdownloadlocation {get { return GetParameter(2407); }set { SetParameter(2407, value); }}
+	/// <summary>PID: 2408  | Type: read | DISCREETS: Analyzed = 1 | EXCEPTIONS: Not Analyzed = 0</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagesfilesanalyzed_2408 {get { return GetParameter(2408); }set { SetParameter(2408, value); }}
+	/// <summary>PID: 2408  | Type: read | DISCREETS: Analyzed = 1 | EXCEPTIONS: Not Analyzed = 0</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagesfilesanalyzed {get { return GetParameter(2408); }set { SetParameter(2408, value); }}
+	/// <summary>PID: 2409  | Type: read | EXCEPTIONS: N/A = -2</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackageslicenseconcluded_2409 {get { return GetParameter(2409); }set { SetParameter(2409, value); }}
+	/// <summary>PID: 2409  | Type: read | EXCEPTIONS: N/A = -2</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackageslicenseconcluded {get { return GetParameter(2409); }set { SetParameter(2409, value); }}
+	/// <summary>PID: 2410  | Type: read | EXCEPTIONS: N/A = NOASSERTION, N/A = -2</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackageslicensedeclared_2410 {get { return GetParameter(2410); }set { SetParameter(2410, value); }}
+	/// <summary>PID: 2410  | Type: read | EXCEPTIONS: N/A = NOASSERTION, N/A = -2</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackageslicensedeclared {get { return GetParameter(2410); }set { SetParameter(2410, value); }}
+	/// <summary>PID: 2411  | Type: read | EXCEPTIONS: N/A = NOASSERTION, N/A = -2</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagessupplier_2411 {get { return GetParameter(2411); }set { SetParameter(2411, value); }}
+	/// <summary>PID: 2411  | Type: read | EXCEPTIONS: N/A = NOASSERTION, N/A = -2</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagessupplier {get { return GetParameter(2411); }set { SetParameter(2411, value); }}
+	/// <summary>PID: 2412  | Type: read | EXCEPTIONS: N/A = -2</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagescopyrighttext_2412 {get { return GetParameter(2412); }set { SetParameter(2412, value); }}
+	/// <summary>PID: 2412  | Type: read | EXCEPTIONS: N/A = -2</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagescopyrighttext {get { return GetParameter(2412); }set { SetParameter(2412, value); }}
+	/// <summary>PID: 2599  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipslastpolledatutc_2599 {get { return GetParameter(2599); }set { SetParameter(2599, value); }}
+	/// <summary>PID: 2599  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipslastpolledatutc {get { return GetParameter(2599); }set { SetParameter(2599, value); }}
+	/// <summary>PID: 2601  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsinstance_2601 {get { return GetParameter(2601); }set { SetParameter(2601, value); }}
+	/// <summary>PID: 2601  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsinstance {get { return GetParameter(2601); }set { SetParameter(2601, value); }}
+	/// <summary>PID: 2602  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipssbomid_2602 {get { return GetParameter(2602); }set { SetParameter(2602, value); }}
+	/// <summary>PID: 2602  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipssbomid {get { return GetParameter(2602); }set { SetParameter(2602, value); }}
+	/// <summary>PID: 2603  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsrepositoryid_2603 {get { return GetParameter(2603); }set { SetParameter(2603, value); }}
+	/// <summary>PID: 2603  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsrepositoryid {get { return GetParameter(2603); }set { SetParameter(2603, value); }}
+	/// <summary>PID: 2604  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsspdxelementid_2604 {get { return GetParameter(2604); }set { SetParameter(2604, value); }}
+	/// <summary>PID: 2604  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsspdxelementid {get { return GetParameter(2604); }set { SetParameter(2604, value); }}
+	/// <summary>PID: 2605  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsrelatedspdxelementid_2605 {get { return GetParameter(2605); }set { SetParameter(2605, value); }}
+	/// <summary>PID: 2605  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsrelatedspdxelementid {get { return GetParameter(2605); }set { SetParameter(2605, value); }}
+	/// <summary>PID: 2606  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsrelationshiptype_2606 {get { return GetParameter(2606); }set { SetParameter(2606, value); }}
+	/// <summary>PID: 2606  | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsrelationshiptype {get { return GetParameter(2606); }set { SetParameter(2606, value); }}
 	/// <summary>PID: 2996  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Organizationsoverview_2996 {get { return GetParameter(2996); }set { SetParameter(2996, value); }}
@@ -3570,6 +4269,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Organizationstatisticsorganization_3202 {get { return GetParameter(3202); }set { SetParameter(3202, value); }}
 	/// <summary>PID: 3202  | Type: read</summary>
 	public System.Object Organizationstatisticsorganization {get { return GetParameter(3202); }set { SetParameter(3202, value); }}
+	/// <summary>PID: 3399  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Organizationteamslastpolledatutc_3399 {get { return GetParameter(3399); }set { SetParameter(3399, value); }}
+	/// <summary>PID: 3399  | Type: read</summary>
+	public System.Object Organizationteamslastpolledatutc {get { return GetParameter(3399); }set { SetParameter(3399, value); }}
 	/// <summary>PID: 3401  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Organizationteamsinstance_3401 {get { return GetParameter(3401); }set { SetParameter(3401, value); }}
@@ -3615,6 +4319,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Organizationteamspermission_3409 {get { return GetParameter(3409); }set { SetParameter(3409, value); }}
 	/// <summary>PID: 3409  | Type: read</summary>
 	public System.Object Organizationteamspermission {get { return GetParameter(3409); }set { SetParameter(3409, value); }}
+	/// <summary>PID: 3599  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Organizationmemberslastpolledatutc_3599 {get { return GetParameter(3599); }set { SetParameter(3599, value); }}
+	/// <summary>PID: 3599  | Type: read</summary>
+	public System.Object Organizationmemberslastpolledatutc {get { return GetParameter(3599); }set { SetParameter(3599, value); }}
 	/// <summary>PID: 3601  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Organizationmembersinstance_3601 {get { return GetParameter(3601); }set { SetParameter(3601, value); }}
@@ -3695,6 +4404,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	/// <summary>PID: 21054  | Type: write</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Pollmanagerpollfrequency_21054 {get { return GetParameter(21054); }set { SetParameter(21054, value); }}
+	/// <summary>PID: 21999  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Memberorganizationlinkslastpolledatutc_21999 {get { return GetParameter(21999); }set { SetParameter(21999, value); }}
+	/// <summary>PID: 21999  | Type: read</summary>
+	public System.Object Memberorganizationlinkslastpolledatutc {get { return GetParameter(21999); }set { SetParameter(21999, value); }}
 	/// <summary>PID: 22001  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Memberorganizationlinksinstance_22001 {get { return GetParameter(22001); }set { SetParameter(22001, value); }}
@@ -3812,6 +4526,9 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 		repositoryworkflows = new RepositoryworkflowsQActionTable(this, 1600, "repositoryworkflows");
 		repositoryreleaseassets = new RepositoryreleaseassetsQActionTable(this, 1800, "repositoryreleaseassets");
 		repositoryissues = new RepositoryissuesQActionTable(this, 2000, "repositoryissues");
+		repositorysoftwarebillofmaterials = new RepositorysoftwarebillofmaterialsQActionTable(this, 2200, "repositorysoftwarebillofmaterials");
+		repositorysoftwarebillofmaterialspackages = new RepositorysoftwarebillofmaterialspackagesQActionTable(this, 2400, "repositorysoftwarebillofmaterialspackages");
+		repositorysoftwarebillofmaterialsrelationships = new RepositorysoftwarebillofmaterialsrelationshipsQActionTable(this, 2600, "repositorysoftwarebillofmaterialsrelationships");
 		organizations = new OrganizationsQActionTable(this, 3000, "organizations");
 		organizationstatistics = new OrganizationstatisticsQActionTable(this, 3200, "organizationstatistics");
 		organizationteams = new OrganizationteamsQActionTable(this, 3400, "organizationteams");
@@ -3864,6 +4581,27 @@ public class RepositoryissuesQActionTable : QActionTable, IEnumerable<Repository
 	public RepositoryissuesQActionTable(SLProtocol protocol, int tableId, string tableName) : base(protocol, tableId, tableName) { }
 	IEnumerator IEnumerable.GetEnumerator() { return (IEnumerator) GetEnumerator(); }
 	public IEnumerator<RepositoryissuesQActionRow> GetEnumerator() { return new QActionTableEnumerator<RepositoryissuesQActionRow>(this); }
+}
+/// <summary>IDX: 0</summary>
+public class RepositorysoftwarebillofmaterialsQActionTable : QActionTable, IEnumerable<RepositorysoftwarebillofmaterialsQActionRow>
+{
+	public RepositorysoftwarebillofmaterialsQActionTable(SLProtocol protocol, int tableId, string tableName) : base(protocol, tableId, tableName) { }
+	IEnumerator IEnumerable.GetEnumerator() { return (IEnumerator) GetEnumerator(); }
+	public IEnumerator<RepositorysoftwarebillofmaterialsQActionRow> GetEnumerator() { return new QActionTableEnumerator<RepositorysoftwarebillofmaterialsQActionRow>(this); }
+}
+/// <summary>IDX: 0</summary>
+public class RepositorysoftwarebillofmaterialspackagesQActionTable : QActionTable, IEnumerable<RepositorysoftwarebillofmaterialspackagesQActionRow>
+{
+	public RepositorysoftwarebillofmaterialspackagesQActionTable(SLProtocol protocol, int tableId, string tableName) : base(protocol, tableId, tableName) { }
+	IEnumerator IEnumerable.GetEnumerator() { return (IEnumerator) GetEnumerator(); }
+	public IEnumerator<RepositorysoftwarebillofmaterialspackagesQActionRow> GetEnumerator() { return new QActionTableEnumerator<RepositorysoftwarebillofmaterialspackagesQActionRow>(this); }
+}
+/// <summary>IDX: 0</summary>
+public class RepositorysoftwarebillofmaterialsrelationshipsQActionTable : QActionTable, IEnumerable<RepositorysoftwarebillofmaterialsrelationshipsQActionRow>
+{
+	public RepositorysoftwarebillofmaterialsrelationshipsQActionTable(SLProtocol protocol, int tableId, string tableName) : base(protocol, tableId, tableName) { }
+	IEnumerator IEnumerable.GetEnumerator() { return (IEnumerator) GetEnumerator(); }
+	public IEnumerator<RepositorysoftwarebillofmaterialsrelationshipsQActionRow> GetEnumerator() { return new QActionTableEnumerator<RepositorysoftwarebillofmaterialsrelationshipsQActionRow>(this); }
 }
 /// <summary>IDX: 0</summary>
 public class OrganizationsQActionTable : QActionTable, IEnumerable<OrganizationsQActionRow>
@@ -4028,6 +4766,8 @@ public class RepositoriesQActionRow : QActionTableRow
 	public System.String[] GetChildKeysRepositoryworkflowsRepositoryworkflowsrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 1602, Key); }
 	public System.String[] GetChildKeysRepositoryreleaseassetsRepositoryreleaseassetsrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 1803, Key); }
 	public System.String[] GetChildKeysRepositoryissuesRepositoryissuesrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 2011, Key); }
+	public System.String[] GetChildKeysRepositorysoftwarebillofmaterialsRepositorysoftwarebillofmaterialsrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 2202, Key); }
+	public System.String[] GetChildKeysRepositorysoftwarebillofmaterialspackagesRepositorysoftwarebillofmaterialspackagesrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 2403, Key); }
 }
 /// <summary>IDX: 0</summary>
 public class RepositorytagsQActionRow : QActionTableRow
@@ -4052,8 +4792,13 @@ public class RepositorytagsQActionRow : QActionTableRow
 	public System.Object Repositorytagscommitsha_1204 { get { if (base.Columns.ContainsKey(3)) { return base.Columns[3]; } else { return null; } } set { if (base.Columns.ContainsKey(3)) { base.Columns[3] = value; } else { base.Columns.Add(3, value); } } }
 	/// <summary>PID: 1204 | Type: read</summary>
 	public System.Object Repositorytagscommitsha { get { if (base.Columns.ContainsKey(3)) { return base.Columns[3]; } else { return null; } } set { if (base.Columns.ContainsKey(3)) { base.Columns[3] = value; } else { base.Columns.Add(3, value); } } }
-	public RepositorytagsQActionRow() : base(0, 4) { }
-	public RepositorytagsQActionRow(System.Object[] oRow) : base(0, 4, oRow) { }
+	/// <summary>PID: 1199 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorytagslastpolledatutc_1199 { get { if (base.Columns.ContainsKey(4)) { return base.Columns[4]; } else { return null; } } set { if (base.Columns.ContainsKey(4)) { base.Columns[4] = value; } else { base.Columns.Add(4, value); } } }
+	/// <summary>PID: 1199 | Type: read</summary>
+	public System.Object Repositorytagslastpolledatutc { get { if (base.Columns.ContainsKey(4)) { return base.Columns[4]; } else { return null; } } set { if (base.Columns.ContainsKey(4)) { base.Columns[4] = value; } else { base.Columns.Add(4, value); } } }
+	public RepositorytagsQActionRow() : base(0, 5) { }
+	public RepositorytagsQActionRow(System.Object[] oRow) : base(0, 5, oRow) { }
 	public static implicit operator RepositorytagsQActionRow(System.Object[] source) { return new RepositorytagsQActionRow(source); }
 	public static implicit operator System.Object[](RepositorytagsQActionRow source) { return source.ToObjectArray(); }
 	public System.Object[] GetParentRowRepositoriesRepositorytagsrepositoryid(SLProtocol protocol) { return (System.Object[])protocol.GetRow(1000, (System.String)Repositorytagsrepositoryid); }
@@ -4127,8 +4872,13 @@ public class RepositoryreleasesQActionRow : QActionTableRow
 	public System.Object Repositoryreleasesrepositoryid_1413 { get { if (base.Columns.ContainsKey(12)) { return base.Columns[12]; } else { return null; } } set { if (base.Columns.ContainsKey(12)) { base.Columns[12] = value; } else { base.Columns.Add(12, value); } } }
 	/// <summary>PID: 1413 | Type: read</summary>
 	public System.Object Repositoryreleasesrepositoryid { get { if (base.Columns.ContainsKey(12)) { return base.Columns[12]; } else { return null; } } set { if (base.Columns.ContainsKey(12)) { base.Columns[12] = value; } else { base.Columns.Add(12, value); } } }
-	public RepositoryreleasesQActionRow() : base(0, 13) { }
-	public RepositoryreleasesQActionRow(System.Object[] oRow) : base(0, 13, oRow) { }
+	/// <summary>PID: 1399 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseslastpolledatutc_1399 { get { if (base.Columns.ContainsKey(13)) { return base.Columns[13]; } else { return null; } } set { if (base.Columns.ContainsKey(13)) { base.Columns[13] = value; } else { base.Columns.Add(13, value); } } }
+	/// <summary>PID: 1399 | Type: read</summary>
+	public System.Object Repositoryreleaseslastpolledatutc { get { if (base.Columns.ContainsKey(13)) { return base.Columns[13]; } else { return null; } } set { if (base.Columns.ContainsKey(13)) { base.Columns[13] = value; } else { base.Columns.Add(13, value); } } }
+	public RepositoryreleasesQActionRow() : base(0, 14) { }
+	public RepositoryreleasesQActionRow(System.Object[] oRow) : base(0, 14, oRow) { }
 	public static implicit operator RepositoryreleasesQActionRow(System.Object[] source) { return new RepositoryreleasesQActionRow(source); }
 	public static implicit operator System.Object[](RepositoryreleasesQActionRow source) { return source.ToObjectArray(); }
 	public System.Object[] GetParentRowRepositorytagsRepositoryreleasestagid(SLProtocol protocol) { return (System.Object[])protocol.GetRow(1200, (System.String)Repositoryreleasestagid); }
@@ -4178,8 +4928,13 @@ public class RepositoryworkflowsQActionRow : QActionTableRow
 	public System.Object Repositoryworkflowsdeletedat_1608 { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
 	/// <summary>PID: 1608 | Type: read</summary>
 	public System.Object Repositoryworkflowsdeletedat { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
-	public RepositoryworkflowsQActionRow() : base(0, 8) { }
-	public RepositoryworkflowsQActionRow(System.Object[] oRow) : base(0, 8, oRow) { }
+	/// <summary>PID: 1599 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryworkflowslastpolledatutc_1599 { get { if (base.Columns.ContainsKey(8)) { return base.Columns[8]; } else { return null; } } set { if (base.Columns.ContainsKey(8)) { base.Columns[8] = value; } else { base.Columns.Add(8, value); } } }
+	/// <summary>PID: 1599 | Type: read</summary>
+	public System.Object Repositoryworkflowslastpolledatutc { get { if (base.Columns.ContainsKey(8)) { return base.Columns[8]; } else { return null; } } set { if (base.Columns.ContainsKey(8)) { base.Columns[8] = value; } else { base.Columns.Add(8, value); } } }
+	public RepositoryworkflowsQActionRow() : base(0, 9) { }
+	public RepositoryworkflowsQActionRow(System.Object[] oRow) : base(0, 9, oRow) { }
 	public static implicit operator RepositoryworkflowsQActionRow(System.Object[] source) { return new RepositoryworkflowsQActionRow(source); }
 	public static implicit operator System.Object[](RepositoryworkflowsQActionRow source) { return source.ToObjectArray(); }
 	public System.Object[] GetParentRowRepositoriesRepositoryworkflowsrepositoryid(SLProtocol protocol) { return (System.Object[])protocol.GetRow(1000, (System.String)Repositoryworkflowsrepositoryid); }
@@ -4262,8 +5017,13 @@ public class RepositoryreleaseassetsQActionRow : QActionTableRow
 	public System.Object Repositoryreleaseassetsbrowserdownloadurl_1815 { get { if (base.Columns.ContainsKey(14)) { return base.Columns[14]; } else { return null; } } set { if (base.Columns.ContainsKey(14)) { base.Columns[14] = value; } else { base.Columns.Add(14, value); } } }
 	/// <summary>PID: 1815 | Type: read</summary>
 	public System.Object Repositoryreleaseassetsbrowserdownloadurl { get { if (base.Columns.ContainsKey(14)) { return base.Columns[14]; } else { return null; } } set { if (base.Columns.ContainsKey(14)) { base.Columns[14] = value; } else { base.Columns.Add(14, value); } } }
-	public RepositoryreleaseassetsQActionRow() : base(0, 15) { }
-	public RepositoryreleaseassetsQActionRow(System.Object[] oRow) : base(0, 15, oRow) { }
+	/// <summary>PID: 1799 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryreleaseassetslastpolledatutc_1799 { get { if (base.Columns.ContainsKey(15)) { return base.Columns[15]; } else { return null; } } set { if (base.Columns.ContainsKey(15)) { base.Columns[15] = value; } else { base.Columns.Add(15, value); } } }
+	/// <summary>PID: 1799 | Type: read</summary>
+	public System.Object Repositoryreleaseassetslastpolledatutc { get { if (base.Columns.ContainsKey(15)) { return base.Columns[15]; } else { return null; } } set { if (base.Columns.ContainsKey(15)) { base.Columns[15] = value; } else { base.Columns.Add(15, value); } } }
+	public RepositoryreleaseassetsQActionRow() : base(0, 16) { }
+	public RepositoryreleaseassetsQActionRow(System.Object[] oRow) : base(0, 16, oRow) { }
 	public static implicit operator RepositoryreleaseassetsQActionRow(System.Object[] source) { return new RepositoryreleaseassetsQActionRow(source); }
 	public static implicit operator System.Object[](RepositoryreleaseassetsQActionRow source) { return source.ToObjectArray(); }
 	public System.Object[] GetParentRowRepositoriesRepositoryreleaseassetsrepositoryid(SLProtocol protocol) { return (System.Object[])protocol.GetRow(1000, (System.String)Repositoryreleaseassetsrepositoryid); }
@@ -4327,11 +5087,184 @@ public class RepositoryissuesQActionRow : QActionTableRow
 	public System.Object Repositoryissuesrepositoryid_2011 { get { if (base.Columns.ContainsKey(10)) { return base.Columns[10]; } else { return null; } } set { if (base.Columns.ContainsKey(10)) { base.Columns[10] = value; } else { base.Columns.Add(10, value); } } }
 	/// <summary>PID: 2011 | Type: read</summary>
 	public System.Object Repositoryissuesrepositoryid { get { if (base.Columns.ContainsKey(10)) { return base.Columns[10]; } else { return null; } } set { if (base.Columns.ContainsKey(10)) { base.Columns[10] = value; } else { base.Columns.Add(10, value); } } }
-	public RepositoryissuesQActionRow() : base(0, 11) { }
-	public RepositoryissuesQActionRow(System.Object[] oRow) : base(0, 11, oRow) { }
+	/// <summary>PID: 1999 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoryissueslastpolledatutc_1999 { get { if (base.Columns.ContainsKey(11)) { return base.Columns[11]; } else { return null; } } set { if (base.Columns.ContainsKey(11)) { base.Columns[11] = value; } else { base.Columns.Add(11, value); } } }
+	/// <summary>PID: 1999 | Type: read</summary>
+	public System.Object Repositoryissueslastpolledatutc { get { if (base.Columns.ContainsKey(11)) { return base.Columns[11]; } else { return null; } } set { if (base.Columns.ContainsKey(11)) { base.Columns[11] = value; } else { base.Columns.Add(11, value); } } }
+	public RepositoryissuesQActionRow() : base(0, 12) { }
+	public RepositoryissuesQActionRow(System.Object[] oRow) : base(0, 12, oRow) { }
 	public static implicit operator RepositoryissuesQActionRow(System.Object[] source) { return new RepositoryissuesQActionRow(source); }
 	public static implicit operator System.Object[](RepositoryissuesQActionRow source) { return source.ToObjectArray(); }
 	public System.Object[] GetParentRowRepositoriesRepositoryissuesrepositoryid(SLProtocol protocol) { return (System.Object[])protocol.GetRow(1000, (System.String)Repositoryissuesrepositoryid); }
+}
+/// <summary>IDX: 0</summary>
+public class RepositorysoftwarebillofmaterialsQActionRow : QActionTableRow
+{
+	/// <summary>PID: 2201 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsname_2201 { get { if (base.Columns.ContainsKey(0)) { return base.Columns[0]; } else { return null; } } set { if (base.Columns.ContainsKey(0)) { base.Columns[0] = value; } else { base.Columns.Add(0, value); } } }
+	/// <summary>PID: 2201 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsname { get { if (base.Columns.ContainsKey(0)) { return base.Columns[0]; } else { return null; } } set { if (base.Columns.ContainsKey(0)) { base.Columns[0] = value; } else { base.Columns.Add(0, value); } } }
+	/// <summary>PID: 2202 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsrepositoryid_2202 { get { if (base.Columns.ContainsKey(1)) { return base.Columns[1]; } else { return null; } } set { if (base.Columns.ContainsKey(1)) { base.Columns[1] = value; } else { base.Columns.Add(1, value); } } }
+	/// <summary>PID: 2202 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsrepositoryid { get { if (base.Columns.ContainsKey(1)) { return base.Columns[1]; } else { return null; } } set { if (base.Columns.ContainsKey(1)) { base.Columns[1] = value; } else { base.Columns.Add(1, value); } } }
+	/// <summary>PID: 2203 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsspdxid_2203 { get { if (base.Columns.ContainsKey(2)) { return base.Columns[2]; } else { return null; } } set { if (base.Columns.ContainsKey(2)) { base.Columns[2] = value; } else { base.Columns.Add(2, value); } } }
+	/// <summary>PID: 2203 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsspdxid { get { if (base.Columns.ContainsKey(2)) { return base.Columns[2]; } else { return null; } } set { if (base.Columns.ContainsKey(2)) { base.Columns[2] = value; } else { base.Columns.Add(2, value); } } }
+	/// <summary>PID: 2204 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsspdxversion_2204 { get { if (base.Columns.ContainsKey(3)) { return base.Columns[3]; } else { return null; } } set { if (base.Columns.ContainsKey(3)) { base.Columns[3] = value; } else { base.Columns.Add(3, value); } } }
+	/// <summary>PID: 2204 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsspdxversion { get { if (base.Columns.ContainsKey(3)) { return base.Columns[3]; } else { return null; } } set { if (base.Columns.ContainsKey(3)) { base.Columns[3] = value; } else { base.Columns.Add(3, value); } } }
+	/// <summary>PID: 2205 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsdatalicense_2205 { get { if (base.Columns.ContainsKey(4)) { return base.Columns[4]; } else { return null; } } set { if (base.Columns.ContainsKey(4)) { base.Columns[4] = value; } else { base.Columns.Add(4, value); } } }
+	/// <summary>PID: 2205 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsdatalicense { get { if (base.Columns.ContainsKey(4)) { return base.Columns[4]; } else { return null; } } set { if (base.Columns.ContainsKey(4)) { base.Columns[4] = value; } else { base.Columns.Add(4, value); } } }
+	/// <summary>PID: 2206 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialscreatedatutc_2206 { get { if (base.Columns.ContainsKey(5)) { return base.Columns[5]; } else { return null; } } set { if (base.Columns.ContainsKey(5)) { base.Columns[5] = value; } else { base.Columns.Add(5, value); } } }
+	/// <summary>PID: 2206 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialscreatedatutc { get { if (base.Columns.ContainsKey(5)) { return base.Columns[5]; } else { return null; } } set { if (base.Columns.ContainsKey(5)) { base.Columns[5] = value; } else { base.Columns.Add(5, value); } } }
+	/// <summary>PID: 2207 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsdocumentnamespace_2207 { get { if (base.Columns.ContainsKey(6)) { return base.Columns[6]; } else { return null; } } set { if (base.Columns.ContainsKey(6)) { base.Columns[6] = value; } else { base.Columns.Add(6, value); } } }
+	/// <summary>PID: 2207 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsdocumentnamespace { get { if (base.Columns.ContainsKey(6)) { return base.Columns[6]; } else { return null; } } set { if (base.Columns.ContainsKey(6)) { base.Columns[6] = value; } else { base.Columns.Add(6, value); } } }
+	/// <summary>PID: 2199 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialslastpolledatutc_2199 { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
+	/// <summary>PID: 2199 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialslastpolledatutc { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
+	public RepositorysoftwarebillofmaterialsQActionRow() : base(0, 8) { }
+	public RepositorysoftwarebillofmaterialsQActionRow(System.Object[] oRow) : base(0, 8, oRow) { }
+	public static implicit operator RepositorysoftwarebillofmaterialsQActionRow(System.Object[] source) { return new RepositorysoftwarebillofmaterialsQActionRow(source); }
+	public static implicit operator System.Object[](RepositorysoftwarebillofmaterialsQActionRow source) { return source.ToObjectArray(); }
+	public System.Object[] GetParentRowRepositoriesRepositorysoftwarebillofmaterialsrepositoryid(SLProtocol protocol) { return (System.Object[])protocol.GetRow(1000, (System.String)Repositorysoftwarebillofmaterialsrepositoryid); }
+	public System.String[] GetChildKeysRepositorysoftwarebillofmaterialspackagesRepositorysoftwarebillofmaterialspackagessbomid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 2402, Key); }
+}
+/// <summary>IDX: 0</summary>
+public class RepositorysoftwarebillofmaterialspackagesQActionRow : QActionTableRow
+{
+	/// <summary>PID: 2401 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagesinstance_2401 { get { if (base.Columns.ContainsKey(0)) { return base.Columns[0]; } else { return null; } } set { if (base.Columns.ContainsKey(0)) { base.Columns[0] = value; } else { base.Columns.Add(0, value); } } }
+	/// <summary>PID: 2401 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagesinstance { get { if (base.Columns.ContainsKey(0)) { return base.Columns[0]; } else { return null; } } set { if (base.Columns.ContainsKey(0)) { base.Columns[0] = value; } else { base.Columns.Add(0, value); } } }
+	/// <summary>PID: 2402 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagessbomid_2402 { get { if (base.Columns.ContainsKey(1)) { return base.Columns[1]; } else { return null; } } set { if (base.Columns.ContainsKey(1)) { base.Columns[1] = value; } else { base.Columns.Add(1, value); } } }
+	/// <summary>PID: 2402 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagessbomid { get { if (base.Columns.ContainsKey(1)) { return base.Columns[1]; } else { return null; } } set { if (base.Columns.ContainsKey(1)) { base.Columns[1] = value; } else { base.Columns.Add(1, value); } } }
+	/// <summary>PID: 2403 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagesrepositoryid_2403 { get { if (base.Columns.ContainsKey(2)) { return base.Columns[2]; } else { return null; } } set { if (base.Columns.ContainsKey(2)) { base.Columns[2] = value; } else { base.Columns.Add(2, value); } } }
+	/// <summary>PID: 2403 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagesrepositoryid { get { if (base.Columns.ContainsKey(2)) { return base.Columns[2]; } else { return null; } } set { if (base.Columns.ContainsKey(2)) { base.Columns[2] = value; } else { base.Columns.Add(2, value); } } }
+	/// <summary>PID: 2404 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagesspdxid_2404 { get { if (base.Columns.ContainsKey(3)) { return base.Columns[3]; } else { return null; } } set { if (base.Columns.ContainsKey(3)) { base.Columns[3] = value; } else { base.Columns.Add(3, value); } } }
+	/// <summary>PID: 2404 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagesspdxid { get { if (base.Columns.ContainsKey(3)) { return base.Columns[3]; } else { return null; } } set { if (base.Columns.ContainsKey(3)) { base.Columns[3] = value; } else { base.Columns.Add(3, value); } } }
+	/// <summary>PID: 2405 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagesname_2405 { get { if (base.Columns.ContainsKey(4)) { return base.Columns[4]; } else { return null; } } set { if (base.Columns.ContainsKey(4)) { base.Columns[4] = value; } else { base.Columns.Add(4, value); } } }
+	/// <summary>PID: 2405 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagesname { get { if (base.Columns.ContainsKey(4)) { return base.Columns[4]; } else { return null; } } set { if (base.Columns.ContainsKey(4)) { base.Columns[4] = value; } else { base.Columns.Add(4, value); } } }
+	/// <summary>PID: 2406 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagesversion_2406 { get { if (base.Columns.ContainsKey(5)) { return base.Columns[5]; } else { return null; } } set { if (base.Columns.ContainsKey(5)) { base.Columns[5] = value; } else { base.Columns.Add(5, value); } } }
+	/// <summary>PID: 2406 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagesversion { get { if (base.Columns.ContainsKey(5)) { return base.Columns[5]; } else { return null; } } set { if (base.Columns.ContainsKey(5)) { base.Columns[5] = value; } else { base.Columns.Add(5, value); } } }
+	/// <summary>PID: 2407 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagesdownloadlocation_2407 { get { if (base.Columns.ContainsKey(6)) { return base.Columns[6]; } else { return null; } } set { if (base.Columns.ContainsKey(6)) { base.Columns[6] = value; } else { base.Columns.Add(6, value); } } }
+	/// <summary>PID: 2407 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagesdownloadlocation { get { if (base.Columns.ContainsKey(6)) { return base.Columns[6]; } else { return null; } } set { if (base.Columns.ContainsKey(6)) { base.Columns[6] = value; } else { base.Columns.Add(6, value); } } }
+	/// <summary>PID: 2408 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagesfilesanalyzed_2408 { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
+	/// <summary>PID: 2408 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagesfilesanalyzed { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
+	/// <summary>PID: 2409 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackageslicenseconcluded_2409 { get { if (base.Columns.ContainsKey(8)) { return base.Columns[8]; } else { return null; } } set { if (base.Columns.ContainsKey(8)) { base.Columns[8] = value; } else { base.Columns.Add(8, value); } } }
+	/// <summary>PID: 2409 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackageslicenseconcluded { get { if (base.Columns.ContainsKey(8)) { return base.Columns[8]; } else { return null; } } set { if (base.Columns.ContainsKey(8)) { base.Columns[8] = value; } else { base.Columns.Add(8, value); } } }
+	/// <summary>PID: 2410 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackageslicensedeclared_2410 { get { if (base.Columns.ContainsKey(9)) { return base.Columns[9]; } else { return null; } } set { if (base.Columns.ContainsKey(9)) { base.Columns[9] = value; } else { base.Columns.Add(9, value); } } }
+	/// <summary>PID: 2410 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackageslicensedeclared { get { if (base.Columns.ContainsKey(9)) { return base.Columns[9]; } else { return null; } } set { if (base.Columns.ContainsKey(9)) { base.Columns[9] = value; } else { base.Columns.Add(9, value); } } }
+	/// <summary>PID: 2411 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagessupplier_2411 { get { if (base.Columns.ContainsKey(10)) { return base.Columns[10]; } else { return null; } } set { if (base.Columns.ContainsKey(10)) { base.Columns[10] = value; } else { base.Columns.Add(10, value); } } }
+	/// <summary>PID: 2411 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagessupplier { get { if (base.Columns.ContainsKey(10)) { return base.Columns[10]; } else { return null; } } set { if (base.Columns.ContainsKey(10)) { base.Columns[10] = value; } else { base.Columns.Add(10, value); } } }
+	/// <summary>PID: 2412 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackagescopyrighttext_2412 { get { if (base.Columns.ContainsKey(11)) { return base.Columns[11]; } else { return null; } } set { if (base.Columns.ContainsKey(11)) { base.Columns[11] = value; } else { base.Columns.Add(11, value); } } }
+	/// <summary>PID: 2412 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackagescopyrighttext { get { if (base.Columns.ContainsKey(11)) { return base.Columns[11]; } else { return null; } } set { if (base.Columns.ContainsKey(11)) { base.Columns[11] = value; } else { base.Columns.Add(11, value); } } }
+	/// <summary>PID: 2399 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialspackageslastpolledatutc_2399 { get { if (base.Columns.ContainsKey(12)) { return base.Columns[12]; } else { return null; } } set { if (base.Columns.ContainsKey(12)) { base.Columns[12] = value; } else { base.Columns.Add(12, value); } } }
+	/// <summary>PID: 2399 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialspackageslastpolledatutc { get { if (base.Columns.ContainsKey(12)) { return base.Columns[12]; } else { return null; } } set { if (base.Columns.ContainsKey(12)) { base.Columns[12] = value; } else { base.Columns.Add(12, value); } } }
+	public RepositorysoftwarebillofmaterialspackagesQActionRow() : base(0, 13) { }
+	public RepositorysoftwarebillofmaterialspackagesQActionRow(System.Object[] oRow) : base(0, 13, oRow) { }
+	public static implicit operator RepositorysoftwarebillofmaterialspackagesQActionRow(System.Object[] source) { return new RepositorysoftwarebillofmaterialspackagesQActionRow(source); }
+	public static implicit operator System.Object[](RepositorysoftwarebillofmaterialspackagesQActionRow source) { return source.ToObjectArray(); }
+	public System.Object[] GetParentRowRepositorysoftwarebillofmaterialsRepositorysoftwarebillofmaterialspackagessbomid(SLProtocol protocol) { return (System.Object[])protocol.GetRow(2200, (System.String)Repositorysoftwarebillofmaterialspackagessbomid); }
+	public System.Object[] GetParentRowRepositoriesRepositorysoftwarebillofmaterialspackagesrepositoryid(SLProtocol protocol) { return (System.Object[])protocol.GetRow(1000, (System.String)Repositorysoftwarebillofmaterialspackagesrepositoryid); }
+}
+/// <summary>IDX: 0</summary>
+public class RepositorysoftwarebillofmaterialsrelationshipsQActionRow : QActionTableRow
+{
+	/// <summary>PID: 2601 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsinstance_2601 { get { if (base.Columns.ContainsKey(0)) { return base.Columns[0]; } else { return null; } } set { if (base.Columns.ContainsKey(0)) { base.Columns[0] = value; } else { base.Columns.Add(0, value); } } }
+	/// <summary>PID: 2601 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsinstance { get { if (base.Columns.ContainsKey(0)) { return base.Columns[0]; } else { return null; } } set { if (base.Columns.ContainsKey(0)) { base.Columns[0] = value; } else { base.Columns.Add(0, value); } } }
+	/// <summary>PID: 2602 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipssbomid_2602 { get { if (base.Columns.ContainsKey(1)) { return base.Columns[1]; } else { return null; } } set { if (base.Columns.ContainsKey(1)) { base.Columns[1] = value; } else { base.Columns.Add(1, value); } } }
+	/// <summary>PID: 2602 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipssbomid { get { if (base.Columns.ContainsKey(1)) { return base.Columns[1]; } else { return null; } } set { if (base.Columns.ContainsKey(1)) { base.Columns[1] = value; } else { base.Columns.Add(1, value); } } }
+	/// <summary>PID: 2603 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsrepositoryid_2603 { get { if (base.Columns.ContainsKey(2)) { return base.Columns[2]; } else { return null; } } set { if (base.Columns.ContainsKey(2)) { base.Columns[2] = value; } else { base.Columns.Add(2, value); } } }
+	/// <summary>PID: 2603 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsrepositoryid { get { if (base.Columns.ContainsKey(2)) { return base.Columns[2]; } else { return null; } } set { if (base.Columns.ContainsKey(2)) { base.Columns[2] = value; } else { base.Columns.Add(2, value); } } }
+	/// <summary>PID: 2604 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsspdxelementid_2604 { get { if (base.Columns.ContainsKey(3)) { return base.Columns[3]; } else { return null; } } set { if (base.Columns.ContainsKey(3)) { base.Columns[3] = value; } else { base.Columns.Add(3, value); } } }
+	/// <summary>PID: 2604 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsspdxelementid { get { if (base.Columns.ContainsKey(3)) { return base.Columns[3]; } else { return null; } } set { if (base.Columns.ContainsKey(3)) { base.Columns[3] = value; } else { base.Columns.Add(3, value); } } }
+	/// <summary>PID: 2605 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsrelatedspdxelementid_2605 { get { if (base.Columns.ContainsKey(4)) { return base.Columns[4]; } else { return null; } } set { if (base.Columns.ContainsKey(4)) { base.Columns[4] = value; } else { base.Columns.Add(4, value); } } }
+	/// <summary>PID: 2605 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsrelatedspdxelementid { get { if (base.Columns.ContainsKey(4)) { return base.Columns[4]; } else { return null; } } set { if (base.Columns.ContainsKey(4)) { base.Columns[4] = value; } else { base.Columns.Add(4, value); } } }
+	/// <summary>PID: 2606 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsrelationshiptype_2606 { get { if (base.Columns.ContainsKey(5)) { return base.Columns[5]; } else { return null; } } set { if (base.Columns.ContainsKey(5)) { base.Columns[5] = value; } else { base.Columns.Add(5, value); } } }
+	/// <summary>PID: 2606 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipsrelationshiptype { get { if (base.Columns.ContainsKey(5)) { return base.Columns[5]; } else { return null; } } set { if (base.Columns.ContainsKey(5)) { base.Columns[5] = value; } else { base.Columns.Add(5, value); } } }
+	/// <summary>PID: 2599 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipslastpolledatutc_2599 { get { if (base.Columns.ContainsKey(6)) { return base.Columns[6]; } else { return null; } } set { if (base.Columns.ContainsKey(6)) { base.Columns[6] = value; } else { base.Columns.Add(6, value); } } }
+	/// <summary>PID: 2599 | Type: read</summary>
+	public System.Object Repositorysoftwarebillofmaterialsrelationshipslastpolledatutc { get { if (base.Columns.ContainsKey(6)) { return base.Columns[6]; } else { return null; } } set { if (base.Columns.ContainsKey(6)) { base.Columns[6] = value; } else { base.Columns.Add(6, value); } } }
+	public RepositorysoftwarebillofmaterialsrelationshipsQActionRow() : base(0, 7) { }
+	public RepositorysoftwarebillofmaterialsrelationshipsQActionRow(System.Object[] oRow) : base(0, 7, oRow) { }
+	public static implicit operator RepositorysoftwarebillofmaterialsrelationshipsQActionRow(System.Object[] source) { return new RepositorysoftwarebillofmaterialsrelationshipsQActionRow(source); }
+	public static implicit operator System.Object[](RepositorysoftwarebillofmaterialsrelationshipsQActionRow source) { return source.ToObjectArray(); }
 }
 /// <summary>IDX: 0</summary>
 public class OrganizationsQActionRow : QActionTableRow
@@ -4436,8 +5369,13 @@ public class OrganizationteamsQActionRow : QActionTableRow
 	public System.Object Organizationteamspermission_3409 { get { if (base.Columns.ContainsKey(8)) { return base.Columns[8]; } else { return null; } } set { if (base.Columns.ContainsKey(8)) { base.Columns[8] = value; } else { base.Columns.Add(8, value); } } }
 	/// <summary>PID: 3409 | Type: read</summary>
 	public System.Object Organizationteamspermission { get { if (base.Columns.ContainsKey(8)) { return base.Columns[8]; } else { return null; } } set { if (base.Columns.ContainsKey(8)) { base.Columns[8] = value; } else { base.Columns.Add(8, value); } } }
-	public OrganizationteamsQActionRow() : base(0, 9) { }
-	public OrganizationteamsQActionRow(System.Object[] oRow) : base(0, 9, oRow) { }
+	/// <summary>PID: 3399 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Organizationteamslastpolledatutc_3399 { get { if (base.Columns.ContainsKey(9)) { return base.Columns[9]; } else { return null; } } set { if (base.Columns.ContainsKey(9)) { base.Columns[9] = value; } else { base.Columns.Add(9, value); } } }
+	/// <summary>PID: 3399 | Type: read</summary>
+	public System.Object Organizationteamslastpolledatutc { get { if (base.Columns.ContainsKey(9)) { return base.Columns[9]; } else { return null; } } set { if (base.Columns.ContainsKey(9)) { base.Columns[9] = value; } else { base.Columns.Add(9, value); } } }
+	public OrganizationteamsQActionRow() : base(0, 10) { }
+	public OrganizationteamsQActionRow(System.Object[] oRow) : base(0, 10, oRow) { }
 	public static implicit operator OrganizationteamsQActionRow(System.Object[] source) { return new OrganizationteamsQActionRow(source); }
 	public static implicit operator System.Object[](OrganizationteamsQActionRow source) { return source.ToObjectArray(); }
 	public System.Object[] GetParentRowOrganizationsOrganizationteamsorganization(SLProtocol protocol) { return (System.Object[])protocol.GetRow(3000, (System.String)Organizationteamsorganization); }
@@ -4486,8 +5424,13 @@ public class OrganizationmembersQActionRow : QActionTableRow
 	public System.Object Organizationmembersavatarurl_3608 { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
 	/// <summary>PID: 3608 | Type: read</summary>
 	public System.Object Organizationmembersavatarurl { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
-	public OrganizationmembersQActionRow() : base(0, 8) { }
-	public OrganizationmembersQActionRow(System.Object[] oRow) : base(0, 8, oRow) { }
+	/// <summary>PID: 3599 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Organizationmemberslastpolledatutc_3599 { get { if (base.Columns.ContainsKey(8)) { return base.Columns[8]; } else { return null; } } set { if (base.Columns.ContainsKey(8)) { base.Columns[8] = value; } else { base.Columns.Add(8, value); } } }
+	/// <summary>PID: 3599 | Type: read</summary>
+	public System.Object Organizationmemberslastpolledatutc { get { if (base.Columns.ContainsKey(8)) { return base.Columns[8]; } else { return null; } } set { if (base.Columns.ContainsKey(8)) { base.Columns[8] = value; } else { base.Columns.Add(8, value); } } }
+	public OrganizationmembersQActionRow() : base(0, 9) { }
+	public OrganizationmembersQActionRow(System.Object[] oRow) : base(0, 9, oRow) { }
 	public static implicit operator OrganizationmembersQActionRow(System.Object[] source) { return new OrganizationmembersQActionRow(source); }
 	public static implicit operator System.Object[](OrganizationmembersQActionRow source) { return source.ToObjectArray(); }
 	public System.String[] GetChildKeysMemberorganizationlinksMemberorganizationlinksmember(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 22003, Key); }
@@ -4511,8 +5454,13 @@ public class MemberorganizationlinksQActionRow : QActionTableRow
 	public System.Object Memberorganizationlinksmember_22003 { get { if (base.Columns.ContainsKey(2)) { return base.Columns[2]; } else { return null; } } set { if (base.Columns.ContainsKey(2)) { base.Columns[2] = value; } else { base.Columns.Add(2, value); } } }
 	/// <summary>PID: 22003 | Type: read</summary>
 	public System.Object Memberorganizationlinksmember { get { if (base.Columns.ContainsKey(2)) { return base.Columns[2]; } else { return null; } } set { if (base.Columns.ContainsKey(2)) { base.Columns[2] = value; } else { base.Columns.Add(2, value); } } }
-	public MemberorganizationlinksQActionRow() : base(0, 3) { }
-	public MemberorganizationlinksQActionRow(System.Object[] oRow) : base(0, 3, oRow) { }
+	/// <summary>PID: 21999 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Memberorganizationlinkslastpolledatutc_21999 { get { if (base.Columns.ContainsKey(3)) { return base.Columns[3]; } else { return null; } } set { if (base.Columns.ContainsKey(3)) { base.Columns[3] = value; } else { base.Columns.Add(3, value); } } }
+	/// <summary>PID: 21999 | Type: read</summary>
+	public System.Object Memberorganizationlinkslastpolledatutc { get { if (base.Columns.ContainsKey(3)) { return base.Columns[3]; } else { return null; } } set { if (base.Columns.ContainsKey(3)) { base.Columns[3] = value; } else { base.Columns.Add(3, value); } } }
+	public MemberorganizationlinksQActionRow() : base(0, 4) { }
+	public MemberorganizationlinksQActionRow(System.Object[] oRow) : base(0, 4, oRow) { }
 	public static implicit operator MemberorganizationlinksQActionRow(System.Object[] source) { return new MemberorganizationlinksQActionRow(source); }
 	public static implicit operator System.Object[](MemberorganizationlinksQActionRow source) { return source.ToObjectArray(); }
 	public System.Object[] GetParentRowOrganizationsMemberorganizationlinksorganization(SLProtocol protocol) { return (System.Object[])protocol.GetRow(3000, (System.String)Memberorganizationlinksorganization); }

@@ -5,7 +5,7 @@
 		<Company>Skyline Communications</Company>
 		<Copyright>© Skyline Communications</Copyright>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<AssemblyVersion>2025.0701.1339.32280</AssemblyVersion>
+		<AssemblyVersion>2026.0311.1603.08460</AssemblyVersion>
 		<RootNamespace>Skyline.Protocol</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>

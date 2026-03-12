@@ -47,6 +47,7 @@
 			var pattern = "https:\\/\\/api.github.com\\/repos\\/(.*)\\/(.*)\\/commits\\/(.*)";
 			var options = RegexOptions.Multiline;
 
+			var utcNow = DateTime.UtcNow;
 			var match = Regex.Match(response[0]?.Commit.Url, pattern, options);
 			var owner = match.Groups[1].Value;
 			var name = match.Groups[2].Value;
@@ -54,7 +55,6 @@
 
 			// Update the tags table
 			var table = RepositoryTagsTable.GetTable();
-			var pkCache = PkCache.GetCache(protocol, Parameter.Repositorytags.tablePid);
 			foreach (var tag in response)
 			{
 				if (tag == null)
@@ -69,6 +69,7 @@
 				row.Name = tag.Name;
 				row.RepositoryID = repositoryId;
 				row.CommitSHA = tag.Commit?.Sha ?? Exceptions.NotAvailable;
+				row.LastPolledAt = utcNow;
 
 				// If its a new row fill in ID and add it to the table.
 				if (String.IsNullOrEmpty(row.ID))
@@ -76,24 +77,6 @@
 					row.ID = id;
 					table.Rows.Add(row);
 				}
-
-				pkCache[repositoryId].Add(row.ID);
-			}
-
-			// If not all tags are polled for this repo, store the fetched ids and poll the next page.
-			if (link.HasNext)
-			{
-				pkCache.Store(protocol);
-			}
-
-			// If the last page is polled check to see if some tags are removed.
-			if (link.IsLast)
-			{
-				var toBeRemoved = table.Rows.Where(r => r.RepositoryID == repositoryId).Select(r => r.ID).ToHashSet();
-				toBeRemoved.ExceptWith(pkCache[repositoryId]);
-				table.DeleteRow(protocol, toBeRemoved.ToArray());
-				pkCache[repositoryId].Clear();
-				pkCache.Store(protocol);
 			}
 
 			if (table.Rows.Count > 0)
@@ -108,6 +91,10 @@
 			if (link.HasNext)
 			{
 				RepositoriesRequestHandler.HandleRepositoriesTagsRequest(protocol, owner, name, PollingConstants.PerPage, link.NextPage);
+			}
+			else
+			{
+				RepositoryTagsTable.GetTable(protocol).Cleanup(protocol, repositoryId);
 			}
 		}
 	}

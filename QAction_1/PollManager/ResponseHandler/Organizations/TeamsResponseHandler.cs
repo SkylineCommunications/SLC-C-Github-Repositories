@@ -47,6 +47,7 @@
 			var pattern = "https:\\/\\/github.com\\/orgs\\/(?<owner>.*)\\/teams\\/(?<slug>.*)";
 			var options = RegexOptions.Multiline;
 
+			var utcNow = DateTime.UtcNow;
 			var match = Regex.Match(response[0].HtmlUrl.OriginalString, pattern, options);
 			var owner = match.Groups["owner"].Value;
 
@@ -64,6 +65,7 @@
 				row.Privacy = Extensions.ParseEnumDescription<PrivacySetting>(team.Privacy);
 				row.NotificationsEnabled = Extensions.ParseEnumDescription<NotificationSetting>(team.NotificationSetting);
 				row.Permission = team.Permission;
+				row.LastPolledAt = utcNow;
 
 				// If its a new row fill in ID and add it to the table.
 				if (row.Instance == Exceptions.NotAvailable)
@@ -80,13 +82,21 @@
 
 			// Check if there are more repositories to fetch
 			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getorganizationteamslinkheader));
-			if (string.IsNullOrEmpty(linkHeader)) return;
+			if (string.IsNullOrEmpty(linkHeader))
+			{
+				TeamsTable.GetTable(protocol).Cleanup(protocol, owner);
+				return;
+			}
 
 			var link = new LinkHeader(linkHeader);
 
 			if (link.HasNext)
 			{
 				OrganizationsRequestHandler.HandleOrganizationTeamsRequest(protocol, owner, PollingConstants.PerPage, link.NextPage);
+			}
+			else
+			{
+				TeamsTable.GetTable(protocol).Cleanup(protocol, owner);
 			}
 		}
 	}

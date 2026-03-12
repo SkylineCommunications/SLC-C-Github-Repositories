@@ -7,6 +7,8 @@ namespace Skyline.Protocol.Tables
 
 	using Skyline.DataMiner.Net.Helper;
 	using Skyline.DataMiner.Scripting;
+	using Skyline.Protocol.PollManager;
+	using Skyline.Protocol.Tables.Events;
 
 	using SLNetMessages = Skyline.DataMiner.Net.Messages;
 
@@ -14,6 +16,7 @@ namespace Skyline.Protocol.Tables
 	{
 		private static readonly double DateTimeNotAvailable = -2;
 
+		private DateTime lastPolledAt;
 
 		public MemberOrganizationLinksTableRow() { }
 
@@ -22,6 +25,7 @@ namespace Skyline.Protocol.Tables
 			Instance = Convert.ToString(row[0]);
 			Organization = Convert.ToString(row[1]);
 			Member = Convert.ToString(row[2]);
+			LastPolledAt = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[3])), DateTimeKind.Utc);
 		}
 
 		public string Instance { get; set; } = Exceptions.NotAvailable;
@@ -29,6 +33,24 @@ namespace Skyline.Protocol.Tables
 		public string Organization { get; set; }
 
 		public string Member { get; set; }
+
+		public DateTime LastPolledAt
+		{
+			get
+			{
+				return lastPolledAt;
+			}
+
+			set
+			{
+				if (value.Kind != DateTimeKind.Utc)
+				{
+					throw new ArgumentException("LastPolledAt must be in UTC.");
+				}
+
+				lastPolledAt = value;
+			}
+		}
 
 		public static MemberOrganizationLinksTableRow FromPK(SLProtocol protocol, string pk)
 		{
@@ -48,6 +70,7 @@ namespace Skyline.Protocol.Tables
 				Memberorganizationlinksinstance_22001 = Instance,
 				Memberorganizationlinksorganization_22002 = Organization,
 				Memberorganizationlinksmember_22003 = Member,
+				Memberorganizationlinkslastpolledatutc_21999 = LastPolledAt.ToOADate(),
 			};
 		}
 
@@ -77,18 +100,21 @@ namespace Skyline.Protocol.Tables
 				Parameter.Memberorganizationlinks.Idx.memberorganizationlinksinstance_22001,
 				Parameter.Memberorganizationlinks.Idx.memberorganizationlinksorganization_22002,
 				Parameter.Memberorganizationlinks.Idx.memberorganizationlinksmember_22003,
+				Parameter.Memberorganizationlinks.Idx.memberorganizationlinkslastpolledatutc_21999,
 			};
 			object[] memberorganizationlinks = (object[])protocol.NotifyProtocol((int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Memberorganizationlinks.tablePid, memberOrganizationLinksIdx);
 			object[] instance = (object[])memberorganizationlinks[0];
 			object[] organization = (object[])memberorganizationlinks[1];
 			object[] member = (object[])memberorganizationlinks[2];
+			object[] lastPolledDateUtc = (object[])memberorganizationlinks[3];
 
 			for (int i = 0; i < instance.Length; i++)
 			{
 				Rows.Add(new MemberOrganizationLinksTableRow(
 				instance[i],
 				organization[i],
-				member[i]));
+				member[i],
+				lastPolledDateUtc[i]));
 			}
 		}
 
@@ -96,11 +122,12 @@ namespace Skyline.Protocol.Tables
 
 		public static MemberOrganizationLinksTable GetTable(SLProtocol protocol = null)
 		{
-			if (protocol != null)
+			if (protocol is null)
 			{
-				instance = new MemberOrganizationLinksTable(protocol);
+				return instance;
 			}
 
+			instance = new MemberOrganizationLinksTable(protocol);
 			return instance;
 		}
 
@@ -128,6 +155,27 @@ namespace Skyline.Protocol.Tables
 					protocol.FillArray(Parameter.Memberorganizationlinks.tablePid, batch.ToList(), NotifyProtocol.SaveOption.Partial);
 				}
 			}
+		}
+
+		public void DeleteRow(SLProtocol protocol, params string[] rowsToDelete)
+		{
+			if (rowsToDelete.Length <= 0)
+				return;
+
+			// Remove from DataMiner and local instance
+			protocol.DeleteRow(Parameter.Memberorganizationlinks.tablePid, rowsToDelete);
+			instance.Rows.RemoveAll(x => rowsToDelete.ToHashSet().Contains(x.Instance));
+		}
+
+		public void Cleanup(SLProtocol protocol, string organization)
+		{
+			var pollRow = PollManagerTable.GetTable(protocol).Rows.FirstOrDefault(r => r.RequestType == RequestType.Organizations_Teams);
+			var toBeRemoved = Rows.Where(r => r.Organization == organization)
+				.Where(r => r.LastPolledAt < pollRow.LastPolledUTCTime)
+				.Select(r => r.Instance)
+				.ToArray();
+
+			DeleteRow(protocol, toBeRemoved);
 		}
 	}
 }

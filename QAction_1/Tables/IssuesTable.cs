@@ -5,8 +5,11 @@
 	using System.Linq;
 
 	using Skyline.DataMiner.Net;
+	using Skyline.DataMiner.Net.Helper;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.Protocol.Extensions;
+	using Skyline.Protocol.PollManager;
+	using Skyline.Protocol.Tables.Events;
 
 	using SLNetMessages = Skyline.DataMiner.Net.Messages;
 
@@ -25,6 +28,7 @@
 		private double updatedAtOA = Exceptions.IntNotAvailable;
 		private DateTime closedAt;
 		private double closedAtOA = Exceptions.IntNotAvailable;
+		private DateTime lastPolledAt;
 
 		public RepositoryIssuesRow() { }
 
@@ -41,6 +45,7 @@
 			UpdatedAt = DateTime.FromOADate(Convert.ToDouble(row[8]));
 			ClosedAt = DateTime.FromOADate(Convert.ToDouble(row[9]));
 			RepositoryID = Convert.ToString(row[10]);
+			LastPolledAt = DateTime.SpecifyKind(DateTime.FromOADate(Convert.ToDouble(row[11])), DateTimeKind.Utc);
 		}
 
 		public string Instance { get; set; }
@@ -140,6 +145,25 @@
 
 		public string RepositoryID { get; set; }
 
+		public DateTime LastPolledAt
+		{
+			get
+			{
+				return lastPolledAt;
+			}
+
+			set
+			{
+				if (value.Kind != DateTimeKind.Utc)
+				{
+					throw new ArgumentException("LastPolledAt must be in UTC.");
+				}
+
+				lastPolledAt = value;
+			}
+		}
+
+
 		public static RepositoryIssuesRow FromPK(SLProtocol protocol, string pk)
 		{
 			var row = (object[])protocol.GetRow(Parameter.Repositoryissues.tablePid, pk);
@@ -166,6 +190,7 @@
 				Repositoryissuesupdatedat = updatedAtOA,
 				Repositoryissuesclosedat = closedAtOA,
 				Repositoryissuesrepositoryid = RepositoryID,
+				Repositoryissueslastpolledatutc = LastPolledAt.ToOADate(),
 			};
 		}
 
@@ -209,9 +234,10 @@
 				Parameter.Repositoryissues.Idx.repositoryissuesupdatedat,
 				Parameter.Repositoryissues.Idx.repositoryissuesclosedat,
 				Parameter.Repositoryissues.Idx.repositoryissuesrepositoryid,
+				Parameter.Repositoryissues.Idx.repositoryissueslastpolledatutc,
 			};
 			object[] repositoryissues = (object[])protocol.NotifyProtocol((int)SLNetMessages.NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Repositoryissues.tablePid, repositoryIssuesIdx);
-			object[] instance = (object[])repositoryissues[0];
+			object[] pk = (object[])repositoryissues[0];
 			object[] number = (object[])repositoryissues[1];
 			object[] title = (object[])repositoryissues[2];
 			object[] body = (object[])repositoryissues[3];
@@ -222,11 +248,12 @@
 			object[] updatedAt = (object[])repositoryissues[8];
 			object[] closedAt = (object[])repositoryissues[9];
 			object[] repositoryID = (object[])repositoryissues[10];
+			object[] lastPolledAt = (object[])repositoryissues[11];
 
-			for (int i = 0; i < instance.Length; i++)
+			for (int i = 0; i < pk.Length; i++)
 			{
 				Rows.Add(new RepositoryIssuesRow(
-				instance[i],
+				pk[i],
 				number[i],
 				title[i],
 				body[i],
@@ -236,21 +263,25 @@
 				createdAt[i],
 				updatedAt[i],
 				closedAt[i],
-				repositoryID[i]));
+				repositoryID[i],
+				lastPolledAt[i]));
 			}
 		}
 		#endregion
+
+		public static event EventHandler<TableEventArgs> IssuesChanged;
 
 		public List<RepositoryIssuesRow> Rows { get; private set; } = new List<RepositoryIssuesRow>();
 
 		public static RepositoryIssuesTable GetTable(SLProtocol protocol = null)
 		{
-			if (protocol != null)
+			if (protocol is null)
 			{
-				instance.Dispose();
-				instance = new RepositoryIssuesTable(protocol);
+				return instance;
 			}
 
+			instance?.Dispose();
+			instance = new RepositoryIssuesTable(protocol);
 			return instance;
 		}
 
@@ -262,13 +293,44 @@
 			// Remove from DateMiner and local instance
 			protocol.DeleteRow(Parameter.Repositoryissues.tablePid, rowsToDelete);
 			instance.Rows.RemoveAll(x => rowsToDelete.ToList().Contains(x.Instance));
+			IssuesChanged?.Invoke(null, new TableEventArgs(protocol, TableChange.Remove, rowsToDelete));
 		}
 
 		public void SaveToProtocol(SLProtocol protocol, bool partial = false)
 		{
-			List<object[]> rows = Rows.Select(x => x.ToProtocolRow()).ToList();
-			NotifyProtocol.SaveOption option = partial ? NotifyProtocol.SaveOption.Partial : NotifyProtocol.SaveOption.Full;
-			protocol.FillArray(Parameter.Repositoryissues.tablePid, rows, option);
+			// Calculate the batch size, recommended 25000 cells max per fill array, divided by the number of columns.
+			var batchSize = 25000 / 13;
+
+			// If full then the first batch needs to be a SaveOption.Full.
+			var first = !partial;
+			if (!Rows.Any() && !partial)
+			{
+				protocol.ClearAllKeys(Parameter.Repositoryissues.tablePid);
+				return;
+			}
+
+			foreach (var batch in Rows.Select(x => x.ToProtocolRow()).Batch(batchSize))
+			{
+				if (first)
+				{
+					protocol.FillArray(Parameter.Repositoryissues.tablePid, batch.ToList(), NotifyProtocol.SaveOption.Full);
+				}
+				else
+				{
+					protocol.FillArray(Parameter.Repositoryissues.tablePid, batch.ToList(), NotifyProtocol.SaveOption.Partial);
+				}
+			}
+		}
+
+		public void Cleanup(SLProtocol protocol, string repositoryId)
+		{
+			var pollRow = PollManagerTable.GetTable(protocol).Rows.FirstOrDefault(r => r.RequestType == RequestType.Repository_Issues);
+			var toBeRemoved = Rows.Where(r => r.RepositoryID == repositoryId)
+				.Where(r => r.LastPolledAt < pollRow.LastPolledUTCTime)
+				.Select(r => r.Instance)
+				.ToArray();
+
+			DeleteRow(protocol, toBeRemoved);
 		}
 
 		#region IDisposable
@@ -304,7 +366,7 @@
 				.Where(row => e.Repositories.Contains(row[1]))
 				.Select(row => row[0]);
 
-			RepositoryIssuesTable.GetTable().DeleteRow(e.Protocol, issuesRows.ToArray());
+			DeleteRow(e.Protocol, issuesRows.ToArray());
 		}
 	}
 }
