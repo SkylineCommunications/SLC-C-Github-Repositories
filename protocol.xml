@@ -47,7 +47,7 @@ Any inquiries can be addressed to:
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>Github Repositories</Name>
 	<Description>Github Repositories DataMiner connector</Description>
-	<Version>1.0.0.15</Version>
+	<Version>1.0.1.1</Version>
 	<IntegrationID>DMS-DRV-0</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>Github</Vendor>
@@ -226,7 +226,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Discreets>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="10" save="true">
 			<Name>ApiKey</Name>
 			<Description>API Key</Description>
@@ -354,7 +354,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Discreets>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="15" trending="true">
 			<Name>RateLimit</Name>
 			<Description>Rate Limit</Description>
@@ -928,7 +928,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
-
+		
 		<Param id="135">
 			<Name>PostRepositoryVariableUrl</Name>
 			<Description>Post Repository Variable Url</Description>
@@ -949,7 +949,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
-
+		
 		<Param id="201">
 			<Name>GetRepositoryContent</Name>
 			<Description>Get Repository Content</Description>
@@ -1345,7 +1345,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Description>Process Post Execute Workflow</Description>
 			<Type>dummy</Type>
 		</Param>
-
+		
 		<Param id="235">
 			<Name>PostRepositoryVariableContent</Name>
 			<Description>Post Repository Variable Content</Description>
@@ -1356,7 +1356,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
-
+		
 		<Param id="300">
 			<Name>Title_End_Generic</Name>
 			<Type>fixed</Type>
@@ -1395,7 +1395,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type options="begin">title</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="500">
 			<Name>AddRepositoryButton</Name>
 			<Type>write</Type>
@@ -1539,7 +1539,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="550">
 			<Name>AddWorkflowButton</Name>
 			<Type>write</Type>
@@ -1806,7 +1806,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				</Discreets>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="990">
 			<Name>Repositories_ContextMenu</Name>
 			<Description>Context Menu for Repositories Table</Description>
@@ -1882,12 +1882,12 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 		</Param>
-
+		
 		<Param id="1000">
 			<Name>Repositories</Name>
 			<Description>Repositories</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" partial="true:200">
 				<ColumnOption idx="0" pid="1001" type="retrieved" options="" />
 				<ColumnOption idx="1" pid="1002" type="retrieved" options=";save" />
 				<ColumnOption idx="2" pid="1003" type="retrieved" options="" />
@@ -2504,8 +2504,8 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
-
+		
+		
 		<Param id="1191">
 			<Name>RepositoryTags_PK_Cache</Name>
 			<Description>Repository Tags PK Cache</Description>
@@ -2546,7 +2546,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Name>RepositoryTags</Name>
 			<Description>Repository Tags</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" partial="true:500">
 				<ColumnOption idx="0" pid="1201" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="1202" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="1203" type="retrieved" options=";foreignKey=1000" />
@@ -2651,7 +2651,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="1391">
 			<Name>RepositoryReleases_PK_Cache</Name>
 			<Description>Repository Releases PK Cache</Description>
@@ -2692,7 +2692,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Name>RepositoryReleases</Name>
 			<Description>Repository Releases</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" partial="true:500">
 				<ColumnOption idx="0" pid="1401" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="1402" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="1403" type="retrieved" options="" />
@@ -3039,7 +3039,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="1590">
 			<Name>RepositoryWorkflows_ContextMenu</Name>
 			<Description>Context Menu for Repository Workflows Table</Description>
@@ -3091,7 +3091,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RTDisplay onAppLevel="true">true</RTDisplay>
 			</Display>
 		</Param>
-
+		
 		<Param id="1599" trending="false">
 			<Name>RepositoryWorkflowsLastPolledAtUTC</Name>
 			<Description>Last Polled At UTC (Repository Workflows)</Description>
@@ -3116,7 +3116,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Name>RepositoryWorkflows</Name>
 			<Description>Repository Workflows</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" partial="true:200">
 				<ColumnOption idx="0" pid="1601" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="1602" type="retrieved" options=";foreignKey=1000" />
 				<ColumnOption idx="2" pid="1603" type="retrieved" options="" />
@@ -3368,7 +3368,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type options="datetime">number</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="1791">
 			<Name>RepositoryReleaseAssets_PK_Cache</Name>
 			<Description>Repository Release Assets PK Cache</Description>
@@ -3409,7 +3409,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Name>RepositoryReleaseAssets</Name>
 			<Description>Release Assets</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" partial="true:200">
 				<ColumnOption idx="0" pid="1801" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="1802" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="1803" type="retrieved" options=";foreignKey=1000" />
@@ -3818,7 +3818,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="1991">
 			<Name>RepositoryIssues_PK_Cache</Name>
 			<Description>Repository Issues PK Cache</Description>
@@ -3859,7 +3859,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Name>RepositoryIssues</Name>
 			<Description>Repository Issues</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" partial="true:200">
 				<ColumnOption idx="0" pid="2001" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="2002" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="2003" type="retrieved" options="" />
@@ -4166,7 +4166,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="2199" trending="false">
 			<Name>RepositorySoftwareBillOfMaterialsLastPolledAtUTC</Name>
 			<Description>Last Polled At UTC (Repository Software Bill Of Materials)</Description>
@@ -4191,7 +4191,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Name>RepositorySoftwareBillOfMaterials</Name>
 			<Description>Repository Software Bill Of Materials</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" partial="true:200">
 				<ColumnOption idx="0" pid="2201" type="retrieved" options="" />
 				<ColumnOption idx="1" pid="2202" type="retrieved" options=";foreignKey=1000" />
 				<ColumnOption idx="2" pid="2203" type="retrieved" options="" />
@@ -4352,7 +4352,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="2399" trending="false">
 			<Name>RepositorySoftwareBillOfMaterialsPackagesLastPolledAtUTC</Name>
 			<Description>Last Polled At UTC (Software Bill of Materials Packages)</Description>
@@ -4377,7 +4377,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Name>RepositorySoftwareBillOfMaterialsPackages</Name>
 			<Description>Software Bill of Materials Packages</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" partial="true:500">
 				<ColumnOption idx="0" pid="2401" type="retrieved" options="" />
 				<ColumnOption idx="1" pid="2402" type="retrieved" options=";foreignKey=2200" />
 				<ColumnOption idx="2" pid="2403" type="retrieved" options=";foreignKey=1000" />
@@ -4406,7 +4406,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:2401|0-2402|1-2403|2-2404|3-2405|4-2406|5-2407|6-2408|7-2409|8-2410|9-2411|10-2412|11-2399|12,width:100-100-100-100-100-100-128-100-123-112-100-102-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:2401|0-2402|1-2403|2-2404|3-2405|4-2406|5-2407|6-2408|7-2409|8-2410|9-2411|10-2412|11-2399|12,width:100-100-111-100-100-100-128-100-123-112-100-102-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="2401" trending="false">
@@ -4687,7 +4687,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="2599" trending="false">
 			<Name>RepositorySoftwareBillOfMaterialsRelationshipsLastPolledAtUTC</Name>
 			<Description>Last Polled At UTC (Software Bill of Materials Relationships)</Description>
@@ -4712,7 +4712,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Name>RepositorySoftwareBillOfMaterialsRelationships</Name>
 			<Description>Software Bill of Materials Relationships</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" partial="true:500">
 				<ColumnOption idx="0" pid="2601" type="retrieved" options="" />
 				<ColumnOption idx="1" pid="2602" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="2603" type="retrieved" options="" />
@@ -4852,7 +4852,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="2996">
 			<Name>OrganizationsOverview</Name>
 			<Description>Organizations Overview</Description>
@@ -5060,12 +5060,12 @@ Are you sure you want to continue.]]>
 				</Discreets>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="3200">
 			<Name>OrganizationStatistics</Name>
 			<Description>Organization Statistics</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" partial="true:200">
 				<ColumnOption idx="0" pid="3201" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="3202" type="retrieved" options=";foreignKey=3000" />
 			</ArrayOptions>
@@ -5117,8 +5117,8 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
-
+		
+		
 		<Param id="3399" trending="false">
 			<Name>OrganizationTeamsLastPolledAtUTC</Name>
 			<Description>Last Polled At UTC (Teams)</Description>
@@ -5143,7 +5143,7 @@ Are you sure you want to continue.]]>
 			<Name>OrganizationTeams</Name>
 			<Description>Teams</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" partial="true:200">
 				<ColumnOption idx="0" pid="3401" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="3402" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="3403" type="retrieved" options=";foreignKey=3000" />
@@ -5403,7 +5403,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="3599" trending="false">
 			<Name>OrganizationMembersLastPolledAtUTC</Name>
 			<Description>Last Polled At UTC (Members)</Description>
@@ -5428,7 +5428,7 @@ Are you sure you want to continue.]]>
 			<Name>OrganizationMembers</Name>
 			<Description>Members</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" partial="true:200">
 				<ColumnOption idx="0" pid="3601" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="3602" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="3603" type="retrieved" options="" />
@@ -5638,7 +5638,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="21999" trending="false">
 			<Name>MemberOrganizationLinksLastPolledAtUTC</Name>
 			<Description>Last Polled At UTC (Member Organization Links)</Description>
@@ -5663,7 +5663,7 @@ Are you sure you want to continue.]]>
 			<Name>MemberOrganizationLinks</Name>
 			<Description>Member Organization Links</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0" options=";volatile">
+			<ArrayOptions index="0" options=";volatile" partial="true:200">
 				<ColumnOption idx="0" pid="22001" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="22002" type="retrieved" options=";foreignKey=3000" />
 				<ColumnOption idx="2" pid="22003" type="retrieved" options=";foreignKey=3600" />
@@ -5743,12 +5743,12 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="22100">
 			<Name>MemberTeamLinks</Name>
 			<Description>Member Team Links</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0"  options=";volatile">
+			<ArrayOptions index="0"  options=";volatile" partial="true:200">
 				<ColumnOption idx="0" pid="22101" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="22102" type="retrieved" options=";foreignKey=3400" />
 				<ColumnOption idx="2" pid="22103" type="retrieved" options=";foreignKey=3600" />
@@ -5827,7 +5827,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="21000">
 			<Name>PollManager</Name>
 			<Description>Poll Manager</Description>
@@ -6086,7 +6086,7 @@ Are you sure you want to continue.]]>
 				<Type options="datetime">number</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="9000000" trending="false">
 			<Name>IAC_Receiver</Name>
 			<Description>Inter App Receiver</Description>
@@ -6141,7 +6141,7 @@ Are you sure you want to continue.]]>
 				<Type>string</Type>
 			</Measurement>
 		</Param>
-
+		
 		<Param id="9000092">
 			<Name>IAC_MessagesPageButtons</Name>
 			<Type>write</Type>
@@ -8189,15 +8189,28 @@ Are you sure you want to continue.]]>
 											<TaskId>276554</TaskId>
 										</References>
 									</MinorVersion>
-									<MinorVersion id="15" basedOn="1.0.0.14">
-										<Date>2026-03-12</Date>
+								</MinorVersions>
+							</MajorVersion>
+							<MajorVersion id="1">
+								<Changes>
+									<Change>
+										<Impact>All tables are now partials &#39;GetTable&#39; via automation scripts will only be able to retrieve the displayed content.</Impact>
+										<ActionsToTake>
+											<ActionToTake>Make sure the automation scripts that rely on the connector page through the table correctly.</ActionToTake>
+										</ActionsToTake>
+									</Change>
+								</Changes>
+								<MinorVersions>
+									<MinorVersion id="1" basedOn="1.0.0.14">
+										<Date>2026-03-17</Date>
 										<Provider>
 											<Author>AMA</Author>
 											<Company>Skyline Communications</Company>
 										</Provider>
 										<Changes>
 											<Fix>Table cleanups happens more frequently and you should have less stale data.</Fix>
-											<NewFeature>The Software Bill of Materials (SBOM) is now available in a seperate page per repository.</NewFeature>
+											<Change>The Software Bill of Materials (SBOM) is now available in a seperate page per repository.</Change>
+											<Change>All tables are now partial, because polling on organization in it&#39;s entirety is too much data.</Change>
 										</Changes>
 										<References>
 											<TaskId>293386</TaskId>
