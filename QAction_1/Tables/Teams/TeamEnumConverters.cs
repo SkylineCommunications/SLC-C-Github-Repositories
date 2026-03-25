@@ -6,7 +6,7 @@ namespace Skyline.Protocol.Tables
 	using Skyline.DataMiner.Scripting.Helper;
 	using Skyline.Protocol.Extensions;
 
-	using Extensions = Extensions.Extensions;
+	using Extensions = Skyline.Protocol.Extensions.Extensions;
 
 	public enum PrivacySetting
 	{

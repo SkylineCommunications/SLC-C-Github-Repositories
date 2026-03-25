@@ -38,10 +38,9 @@
 			}
 
 			var row = default(RepositoriesModel);
-			var existing = SLTables.Repositories.GetRow(protocol, response.FullName);
-			if (!(existing is null))
+			if (SLTables.Repositories.TryGetRow(protocol, response.FullName, out var rawRow))
 			{
-				row = RepositoriesRowConverter.Instance.FromRawValue(existing);
+				row = RepositoriesRowConverter.Instance.FromRawValue(rawRow);
 			}
 
 			row.FullName = response.FullName;

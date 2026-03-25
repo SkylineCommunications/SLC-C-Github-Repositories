@@ -51,8 +51,12 @@
 			var name = match.Groups[2].Value;
 
 			// Update the repositories table
-			var repo = RepositoriesRowConverter.Instance.FromRawValue(
-				SLTables.Repositories.GetRow(protocol, $"{owner}/{name}"));
+			if (!SLTables.Repositories.TryGetRow(protocol, $"{owner}/{name}", out var rawRow))
+			{
+				return;
+			}
+
+			var repo = RepositoriesRowConverter.Instance.FromRawValue(rawRow);
 			if (repo == null)
 			{
 				return;

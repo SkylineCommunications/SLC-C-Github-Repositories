@@ -67,18 +67,20 @@ Any inquiries can be addressed to:
 
 	<Compliancies>
 		<CassandraReady>true</CassandraReady>
-		<MinimumRequiredVersion>10.3.9.0 - 13293</MinimumRequiredVersion>
+		<MinimumRequiredVersion>10.4.0.0 - 14003</MinimumRequiredVersion>
 	</Compliancies>
 
 	<Relations>
-		<Relation name="Repository Issues" path="1000;2000"/>
-		<Relation name="Repository Tags" path="1000;1200"/>
-		<Relation name="Repository Releases" path="1000;1400"/>
-		<Relation name="Repository Releases Assets" path="1000;1800"/>
-		<Relation name="Repository Workflows" path="1000;1600"/>
-		<Relation name="Repository Software Bill of Materials" path="1000;2200"/>
-		<Relation name="Repository Software Bill of Materials - Packages" path="1000;2200;2400"/>
-		<Relation name="Repository Software Bill of Materials - Relationships" path="1000;2200;2600"/>
+		<Relation name="Repository - Issues" path="1000;2000"/>
+		<Relation name="Repository - Tags" path="1000;1200"/>
+		<Relation name="Repository - Releases" path="1000;1400"/>
+		<Relation name="Repository - Releases Assets" path="1000;1800"/>
+		<Relation name="Repository - Workflows" path="1000;1600"/>
+		<Relation name="Repository - Software Bill of Materials" path="1000;2200"/>
+		<Relation name="Repository - Software Bill of Materials Packages" path="1000;2400"/>
+		<Relation name="Repository - Software Bill of Materials - Packages" path="1000;2200;2400"/>
+		<Relation name="Repository - Software Bill of Materials Relationships" path="1000;2600"/>
+		<Relation name="Repository - Software Bill of Materials - Relationships" path="1000;2200;2600"/>
 
 		<Relation name="Releases - Assets" path="1400;1800"/>
 		<Relation name="Tags Releases" path="1200;1400"/>
@@ -2538,10 +2540,6 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Decimals>0</Decimals>
-				<Range>
-					<Low>0</Low>
-					<High>1</High>
-				</Range>
 			</Display>
 			<Measurement>
 				<Type>discreet</Type>
@@ -2569,10 +2567,6 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Display>
 				<RTDisplay>true</RTDisplay>
 				<Decimals>0</Decimals>
-				<Range>
-					<Low>0</Low>
-					<High>1</High>
-				</Range>
 			</Display>
 			<Measurement>
 				<Type>togglebutton</Type>
@@ -2608,7 +2602,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="1199" trending="false">
 			<Name>RepositoryTagsLastPolledAtUTC</Name>
-			<Description>Last Polled At UTC (Repository Tags)</Description>
+			<Description>Last Polled at UTC (Repository Tags)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
@@ -2754,7 +2748,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="1399" trending="false">
 			<Name>RepositoryReleasesLastPolledAtUTC</Name>
-			<Description>Last Polled At UTC (Repository Releases)</Description>
+			<Description>Last Polled at UTC (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
@@ -3178,7 +3172,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 		
 		<Param id="1599" trending="false">
 			<Name>RepositoryWorkflowsLastPolledAtUTC</Name>
-			<Description>Last Polled At UTC (Repository Workflows)</Description>
+			<Description>Last Polled at UTC (Repository Workflows)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
@@ -3471,7 +3465,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="1799" trending="false">
 			<Name>RepositoryReleaseAssetsLastPolledAtUTC</Name>
-			<Description>Last Polled At UTC (Release Assets)</Description>
+			<Description>Last Polled at UTC (Release Assets)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
@@ -3921,7 +3915,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="1999" trending="false">
 			<Name>RepositoryIssuesLastPolledAtUTC</Name>
-			<Description>Last Polled At UTC (Repository Issues)</Description>
+			<Description>Last Polled at UTC (Repository Issues)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
@@ -4253,7 +4247,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 		
 		<Param id="2199" trending="false">
 			<Name>RepositorySoftwareBillOfMaterialsLastPolledAtUTC</Name>
-			<Description>Last Polled At UTC (Repository Software Bill Of Materials)</Description>
+			<Description>Last Polled at UTC (Repository Software Bill of Materials)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
@@ -4273,7 +4267,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="2200">
 			<Name>RepositorySoftwareBillOfMaterials</Name>
-			<Description>Repository Software Bill Of Materials</Description>
+			<Description>Repository Software Bill of Materials</Description>
 			<Type>array</Type>
 			<ArrayOptions index="0" partial="true:200">
 				<ColumnOption idx="0" pid="2201" type="retrieved" options="" />
@@ -4299,12 +4293,12 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:2201|0-2202|1-2203|2-2204|3-2205|4-2206|5-2207|6-2199|7,width:100-111-100-100-100-156-145-0,sort:STRING-STRING-STRING-STRING-STRING-INT-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:2201|0-2202|1-2203|2-2204|3-2205|4-2206|5-2207|6-2199|7,width:100-111-100-100-100-156-145-0,sort:STRING-STRING-STRING-STRING-STRING-INT|DESC-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="2201" trending="false">
 			<Name>RepositorySoftwareBillOfMaterialsName</Name>
-			<Description>Name (Repository Software Bill Of Materials)</Description>
+			<Description>Name (Repository Software Bill of Materials)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>This is the key used internally by DataMiner to identify the table entries.</Subtext>
@@ -4323,7 +4317,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="2202" trending="false">
 			<Name>RepositorySoftwareBillOfMaterialsRepositoryId</Name>
-			<Description>Repository ID (Repository Software Bill Of Materials)</Description>
+			<Description>Repository ID (Repository Software Bill of Materials)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The ID of the repository this sbom is linked.</Subtext>
@@ -4342,7 +4336,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="2203" trending="false">
 			<Name>RepositorySoftwareBillOfMaterialsSpdxId</Name>
-			<Description>SPDX ID (Repository Software Bill Of Materials)</Description>
+			<Description>SPDX ID (Repository Software Bill of Materials)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The SPDX identifier for the SPDX document.</Subtext>
@@ -4361,7 +4355,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="2204" trending="false">
 			<Name>RepositorySoftwareBillOfMaterialsSpdxVersion</Name>
-			<Description>SPDX Version (Repository Software Bill Of Materials)</Description>
+			<Description>SPDX Version (Repository Software Bill of Materials)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The version of the SPDX specification that this document conforms to.</Subtext>
@@ -4380,7 +4374,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="2205" trending="false">
 			<Name>RepositorySoftwareBillOfMaterialsDataLicense</Name>
-			<Description>Data License (Repository Software Bill Of Materials)</Description>
+			<Description>Data License (Repository Software Bill of Materials)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The license under which the SPDX document is licensed.</Subtext>
@@ -4399,7 +4393,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="2206" trending="false">
 			<Name>RepositorySoftwareBillOfMaterialsCreatedAtUTC</Name>
-			<Description>Created At UTC (Repository Software Bill Of Materials)</Description>
+			<Description>Created at UTC (Repository Software Bill of Materials)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The date and time the SPDX document was created.</Subtext>
@@ -4419,7 +4413,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="2207" trending="false">
 			<Name>RepositorySoftwareBillOfMaterialsDocumentNamespace</Name>
-			<Description>Document Namespace (Repository Software Bill Of Materials)</Description>
+			<Description>Document Namespace (Repository Software Bill of Materials)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The namespace for the SPDX document.</Subtext>
@@ -4439,7 +4433,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 		
 		<Param id="2399" trending="false">
 			<Name>RepositorySoftwareBillOfMaterialsPackagesLastPolledAtUTC</Name>
-			<Description>Last Polled At UTC (Software Bill of Materials Packages)</Description>
+			<Description>Last Polled at UTC (Software Bill of Materials Packages)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
@@ -4701,7 +4695,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<LengthType>next param</LengthType>
 				<Exceptions>
 					<Exception id="1" value="NOASSERTION">
-						<Display state="disabled">N/A</Display>
+						<Display state="disabled">No Assertion</Display>
 						<Value>NOASSERTION</Value>
 					</Exception>
 					<Exception id="2" value="-2">
@@ -4730,7 +4724,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<LengthType>next param</LengthType>
 				<Exceptions>
 					<Exception id="1" value="NOASSERTION">
-						<Display state="disabled">N/A</Display>
+						<Display state="disabled">No Assertion</Display>
 						<Value>NOASSERTION</Value>
 					</Exception>
 					<Exception id="2" value="-2">
@@ -4774,7 +4768,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 		
 		<Param id="2599" trending="false">
 			<Name>RepositorySoftwareBillOfMaterialsRelationshipsLastPolledAtUTC</Name>
-			<Description>Last Polled At UTC (Software Bill of Materials Relationships)</Description>
+			<Description>Last Polled at UTC (Software Bill of Materials Relationships)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
@@ -4819,7 +4813,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:2601|0-2602|1-2603|2-2604|3-2605|4-2606|5-2599|6,width:100-100-100-114-160-119-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:2601|0-2602|1-2603|2-2604|3-2605|4-2606|5-2599|6,width:100-100-111-114-160-119-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="2601" trending="false">
@@ -4959,7 +4953,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="2999" trending="false">
 			<Name>OrganizationsLastPolledAtUTC</Name>
-			<Description>Last Polled At UTC (Organizations)</Description>
+			<Description>Last Polled at UTC (Organizations)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
@@ -5226,7 +5220,7 @@ Are you sure you want to continue.]]>
 		
 		<Param id="3399" trending="false">
 			<Name>OrganizationTeamsLastPolledAtUTC</Name>
-			<Description>Last Polled At UTC (Teams)</Description>
+			<Description>Last Polled at UTC (Teams)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
@@ -5511,7 +5505,7 @@ Are you sure you want to continue.]]>
 		
 		<Param id="3599" trending="false">
 			<Name>OrganizationMembersLastPolledAtUTC</Name>
-			<Description>Last Polled At UTC (Members)</Description>
+			<Description>Last Polled at UTC (Members)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
@@ -5746,7 +5740,7 @@ Are you sure you want to continue.]]>
 		
 		<Param id="21999" trending="false">
 			<Name>MemberOrganizationLinksLastPolledAtUTC</Name>
-			<Description>Last Polled At UTC (Member Organization Links)</Description>
+			<Description>Last Polled at UTC (Member Organization Links)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
@@ -5768,7 +5762,7 @@ Are you sure you want to continue.]]>
 			<Name>MemberOrganizationLinks</Name>
 			<Description>Member Organization Links</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0" options=";volatile" partial="true:200">
+			<ArrayOptions index="0" partial="true:200">
 				<ColumnOption idx="0" pid="22001" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="22002" type="retrieved" options=";foreignKey=3000" />
 				<ColumnOption idx="2" pid="22003" type="retrieved" options=";foreignKey=3600" />
@@ -5853,7 +5847,7 @@ Are you sure you want to continue.]]>
 			<Name>MemberTeamLinks</Name>
 			<Description>Member Team Links</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0"  options=";volatile" partial="true:200">
+			<ArrayOptions index="0" partial="true:200">
 				<ColumnOption idx="0" pid="22101" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="22102" type="retrieved" options=";foreignKey=3400" />
 				<ColumnOption idx="2" pid="22103" type="retrieved" options=";foreignKey=3600" />

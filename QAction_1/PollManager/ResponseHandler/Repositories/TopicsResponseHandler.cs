@@ -86,9 +86,13 @@
 			var owner = match.Groups[1].Value;
 			var name = match.Groups[2].Value;
 
+			if (!SLTables.Repositories.TryGetRow(protocol, $"{owner}/{name}", out var rawRow))
+			{
+				return;
+			}
+
 			// Update the repositories table
-			var repo = RepositoriesRowConverter.Instance.FromRawValue(
-				SLTables.Repositories.GetRow(protocol, $"{owner}/{name}"));
+			var repo = RepositoriesRowConverter.Instance.FromRawValue(rawRow);
 			if (repo == null)
 			{
 				return;

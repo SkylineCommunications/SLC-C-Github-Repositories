@@ -12,3 +12,5 @@ dotnet_sort_system_directives_first = true
 
 # stylecop analyzers
 dotnet_diagnostic.SA1118.severity = none
+dotnet_diagnostic.SA1509.severity = none
+dotnet_diagnostic.SA1202.severity = none

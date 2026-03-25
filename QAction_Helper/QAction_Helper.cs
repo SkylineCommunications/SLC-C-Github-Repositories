@@ -4216,15 +4216,15 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositorysoftwarebillofmaterialspackageslicenseconcluded_2409 {get { return GetParameter(2409); }set { SetParameter(2409, value); }}
 	/// <summary>PID: 2409  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	public System.Object Repositorysoftwarebillofmaterialspackageslicenseconcluded {get { return GetParameter(2409); }set { SetParameter(2409, value); }}
-	/// <summary>PID: 2410  | Type: read | EXCEPTIONS: N/A = NOASSERTION, N/A = -2</summary>
+	/// <summary>PID: 2410  | Type: read | EXCEPTIONS: No Assertion = NOASSERTION, N/A = -2</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositorysoftwarebillofmaterialspackageslicensedeclared_2410 {get { return GetParameter(2410); }set { SetParameter(2410, value); }}
-	/// <summary>PID: 2410  | Type: read | EXCEPTIONS: N/A = NOASSERTION, N/A = -2</summary>
+	/// <summary>PID: 2410  | Type: read | EXCEPTIONS: No Assertion = NOASSERTION, N/A = -2</summary>
 	public System.Object Repositorysoftwarebillofmaterialspackageslicensedeclared {get { return GetParameter(2410); }set { SetParameter(2410, value); }}
-	/// <summary>PID: 2411  | Type: read | EXCEPTIONS: N/A = NOASSERTION, N/A = -2</summary>
+	/// <summary>PID: 2411  | Type: read | EXCEPTIONS: No Assertion = NOASSERTION, N/A = -2</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositorysoftwarebillofmaterialspackagessupplier_2411 {get { return GetParameter(2411); }set { SetParameter(2411, value); }}
-	/// <summary>PID: 2411  | Type: read | EXCEPTIONS: N/A = NOASSERTION, N/A = -2</summary>
+	/// <summary>PID: 2411  | Type: read | EXCEPTIONS: No Assertion = NOASSERTION, N/A = -2</summary>
 	public System.Object Repositorysoftwarebillofmaterialspackagessupplier {get { return GetParameter(2411); }set { SetParameter(2411, value); }}
 	/// <summary>PID: 2412  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
