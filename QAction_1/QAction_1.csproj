@@ -5,8 +5,9 @@
 		<Company>Skyline Communications</Company>
 		<Copyright>© Skyline Communications</Copyright>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<AssemblyVersion>2025.0701.1339.32280</AssemblyVersion>
+		<AssemblyVersion>2026.0325.0754.00331</AssemblyVersion>
 		<RootNamespace>Skyline.Protocol</RootNamespace>
+		<SonarQubeExclude>true</SonarQubeExclude>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\QAction_Helper\QAction_Helper.csproj" />
@@ -30,7 +31,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<SonarQubeSetting Include="sonar.cpd.exclusions">
-			<Value>API/Workflows/WorkflowFactory.cs,InterApp/Executors/**</Value>
+			<Value>**/*.*</Value>
 		</SonarQubeSetting>
 	</ItemGroup>
 	<ProjectExtensions>

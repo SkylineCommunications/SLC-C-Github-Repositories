@@ -26,20 +26,19 @@ namespace Skyline.Protocol.PollManager.RequestHandler.Repositories
 
 		public static void HandleRepositoriesWorkflowsRequest(SLProtocol protocol, int perPage, int page)
 		{
-			var table = RepositoriesTable.GetTable(protocol);
-			var first = table.Rows.FirstOrDefault();
-			if (first == null)
+			var rows = SLTables.Repositories.GetPrimaryKeys(protocol);
+			if (!rows.Any())
 			{
 				return;
 			}
 
-			protocol.SetParameter(Parameter.getrepositoryworkflowsqueue, JsonConvert.SerializeObject(table.Rows.Select(x => x.FullName).Skip(1)));
-			HandleRepositoriesWorkflowsRequest(protocol, first.Owner, first.Name, perPage, page);
+			protocol.SetParameter(Parameter.getrepositoryworkflowsqueue, JsonConvert.SerializeObject(rows.Skip(1)));
+			HandleRepositoriesWorkflowsRequest(protocol, rows[0], perPage, page);
 		}
 
-		public static void HandleRepositoriesWorkflowsRequest(SLProtocol protocol, string owner, string name, int perPage, int page)
+		public static void HandleRepositoriesWorkflowsRequest(SLProtocol protocol, string repositoryId, int perPage, int page)
 		{
-			protocol.SetParameter(Parameter.getrepositoryworkflowsurl, $"repos/{owner}/{name}/actions/workflows?per_page={perPage}&page={page}");
+			protocol.SetParameter(Parameter.getrepositoryworkflowsurl, $"repos/{repositoryId}/actions/workflows?per_page={perPage}&page={page}");
 			protocol.CheckTrigger(205);
 		}
 

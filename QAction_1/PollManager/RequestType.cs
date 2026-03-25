@@ -30,6 +30,10 @@ namespace Skyline.Protocol.PollManager
 		[Description("Repositories/Workflows")]
 		Repositories_Workflows = 205,
 
+		[Table(Parameter.Repositorysoftwarebillofmaterials.tablePid)]
+		[Description("Repositories/Software Bill of Materials")]
+		Repositories_SoftwareBillOfMaterials = 206,
+
 		[Table(Parameter.Organizations.tablePid)]
 		[Description("Organizations/User")]
 		Organizations_User = 210,

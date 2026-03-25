@@ -27,9 +27,6 @@
 			// Parse response
 			var response = SecureNewtonsoftDeserialization.DeserializeObject<List<RepositoryTagsResponse>>(
 				Convert.ToString(protocol.GetParameter(Parameter.getrepositorytagscontent)));
-			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositorytagslinkheader_253));
-			var link = new LinkHeader(linkHeader);
-
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|response was null.", LogType.Error, LogLevel.Level1);
@@ -47,14 +44,14 @@
 			var pattern = "https:\\/\\/api.github.com\\/repos\\/(.*)\\/(.*)\\/commits\\/(.*)";
 			var options = RegexOptions.Multiline;
 
+			var utcNow = DateTime.UtcNow;
 			var match = Regex.Match(response[0]?.Commit.Url, pattern, options);
 			var owner = match.Groups[1].Value;
 			var name = match.Groups[2].Value;
 			var repositoryId = $"{owner}/{name}";
 
 			// Update the tags table
-			var table = RepositoryTagsTable.GetTable();
-			var pkCache = PkCache.GetCache(protocol, Parameter.Repositorytags.tablePid);
+			var rows = new List<RepositorytagsQActionRow>();
 			foreach (var tag in response)
 			{
 				if (tag == null)
@@ -65,49 +62,37 @@
 
 				// Update existing workflow if found, otherwise create new one
 				var id = $"{owner}/{name}/commits/{tag.Name}";
-				var row = table.Rows.Find(wf => wf.ID == id) ?? new RepositoryTagsTableRow();
-				row.Name = tag.Name;
-				row.RepositoryID = repositoryId;
-				row.CommitSHA = tag.Commit?.Sha ?? Exceptions.NotAvailable;
-
-				// If its a new row fill in ID and add it to the table.
-				if (String.IsNullOrEmpty(row.ID))
+				var row = new TagsModel
 				{
-					row.ID = id;
-					table.Rows.Add(row);
-				}
+					ID = id,
+					Name = tag.Name,
+					RepositoryID = repositoryId,
+					CommitSHA = tag.Commit?.Sha ?? Exceptions.NotAvailable,
+					LastPolledAt = utcNow,
+				};
 
-				pkCache[repositoryId].Add(row.ID);
+				rows.Add(TagsRowConverter.Instance.ToRawValue(row));
 			}
 
-			// If not all tags are polled for this repo, store the fetched ids and poll the next page.
-			if (link.HasNext)
+			if (rows.Count > 0)
 			{
-				pkCache.Store(protocol);
-			}
-
-			// If the last page is polled check to see if some tags are removed.
-			if (link.IsLast)
-			{
-				var toBeRemoved = table.Rows.Where(r => r.RepositoryID == repositoryId).Select(r => r.ID).ToHashSet();
-				toBeRemoved.ExceptWith(pkCache[repositoryId]);
-				table.DeleteRow(protocol, toBeRemoved.ToArray());
-				pkCache[repositoryId].Clear();
-				pkCache.Store(protocol);
-			}
-
-			if (table.Rows.Count > 0)
-			{
-				table.SaveToProtocol(protocol, true);
+				SLTables.Tags.FillTableNoDelete(protocol, rows);
 			}
 
 			// Check if there are more tags to fetch
+			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositorytagslinkheader_253));
+			var link = new LinkHeader(linkHeader);
+
 			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|Current page: {link.CurrentPage}", LogType.Information, LogLevel.Level2);
 			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|Has next page: {link.HasNext}", LogType.Information, LogLevel.Level2);
 
 			if (link.HasNext)
 			{
-				RepositoriesRequestHandler.HandleRepositoriesTagsRequest(protocol, owner, name, PollingConstants.PerPage, link.NextPage);
+				RepositoriesRequestHandler.HandleRepositoriesTagsRequest(protocol, repositoryId, PollingConstants.PerPage, link.NextPage);
+			}
+			else
+			{
+				SLTables.Tags.Cleanup(protocol, repositoryId);
 			}
 		}
 	}

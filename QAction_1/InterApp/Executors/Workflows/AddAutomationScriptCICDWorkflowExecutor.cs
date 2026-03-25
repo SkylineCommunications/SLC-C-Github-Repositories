@@ -20,7 +20,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 	{
 		private AddWorkflowResponse result;
 
-		private RepositoriesTableRow repo;
+		private RepositoriesModel repo;
 
 		public AddAutomationScriptCICDWorkflowExecutor(GenericInterAppMessage<AddAutomationScriptCICDWorkflowRequest> message) : base(message)
 		{
@@ -38,7 +38,10 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 			var protocol = (SLProtocol)dataSource;
 
 			// Fetch the requested repository information
-			repo = RepositoriesTableRow.FromPK(protocol, Message.Data.RepositoryId.FullName);
+			if (SLTables.Repositories.TryGetRow(protocol, Message.Data.RepositoryId.FullName, out var rawRepo))
+			{
+				repo = RepositoriesRowConverter.Instance.FromRawValue(rawRepo);
+			}
 		}
 
 		public override void Parse() { }
@@ -46,7 +49,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 		public override bool Validate()
 		{
 			// Validate the request
-			if(!WorkflowValidation.Validate(Message.Data, repo, out var error))
+			if (!WorkflowValidation.Validate(Message.Data, repo, out var error))
 			{
 				result.Success = false;
 				result.Description = error;
@@ -95,7 +98,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 
 		public override Message CreateReturnMessage()
 		{
-			if(result != null)
+			if (result != null)
 			{
 				return new GenericInterAppMessage<AddWorkflowResponse>(result);
 			}

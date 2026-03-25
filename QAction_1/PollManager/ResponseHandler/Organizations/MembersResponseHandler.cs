@@ -23,13 +23,6 @@
 		public static void HandleOrganizationMembersResponse(SLProtocol protocol)
 		{
 			// Check status code
-			var code = protocol.GetStatusCode();
-			if (code >= 400 && code <= 499)
-			{
-				HandleNextOrganizationMembers(protocol);
-				return;
-			}
-
 			if (!protocol.IsSuccessStatusCode())
 			{
 				return;
@@ -38,8 +31,6 @@
 			// Parse response
 			var response = SecureNewtonsoftDeserialization.DeserializeObject<List<Member>>(
 				Convert.ToString(protocol.GetParameter(Parameter.getorganizationmemberscontent)));
-			var url = Convert.ToString(protocol.GetParameter(Parameter.getorganizationmembersurl));
-
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|HandleOrganizationMembersResponse|response was null.", LogType.Error, LogLevel.Level1);
@@ -54,19 +45,21 @@
 			}
 
 			// Parse url to check which organization this member is linked to
+			var url = Convert.ToString(protocol.GetParameter(Parameter.getorganizationmembersurl));
 			var pattern = "orgs\\/(?<Organization>.*)\\/members";
 			var options = RegexOptions.Multiline;
 
+			var utcNow = DateTime.UtcNow;
 			var match = Regex.Match(url, pattern, options);
 			var org = match.Groups["Organization"].Value;
 
-			var table = MembersTable.GetTable();
-			var linkerTable = MemberOrganizationLinksTable.GetTable();
+			var memberRows = new List<OrganizationmembersQActionRow>();
+			var memberLinks = new List<MemberorganizationlinksQActionRow>();
 			foreach (var member in response)
 			{
 				// Update existing member if found, otherwise create new one
-				var id = $"{org}/{member.Login}";
-				var row = table.Rows.Find(t => t.Instance == member.Login) ?? new MembersTableRow();
+				var row = new MembersModel();
+				row.Instance = member.Login;
 				row.Id = member.Id;
 				row.Login = member.Login;
 				row.Type = member.Type;
@@ -74,70 +67,48 @@
 				row.Url = member.Url;
 				row.HtmlUrl = member.HtmlUrl;
 				row.AvatarUrl = member.AvatarUrl;
+				row.LastPolledAt = utcNow;
 
-				// If its a new row fill in ID and add it to the table.
-				if (row.Instance == Exceptions.NotAvailable)
-				{
-					row.Instance = member.Login;
-					table.Rows.Add(row);
-				}
+				memberRows.Add(MembersRowConverter.Instance.ToRawValue(row));
 
 				// Update the members to organization linker table
-				var linkerRow = linkerTable.Rows.Find(l => l.Instance == id) ?? new MemberOrganizationLinksTableRow();
+				var linkerId = $"{org}/{member.Login}";
+				var linkerRow = new MemberOrganizationLinksModel();
+				if (SLTables.MemberOrganizationLinks.TryGetRow(protocol, linkerId, out var existingOrgLink))
+				{
+					linkerRow = MemberOrganizationLinksRowConverter.Instance.FromRawValue(existingOrgLink);
+				}
+
+				linkerRow.Instance = linkerId;
 				linkerRow.Organization = org;
 				linkerRow.Member = member.Login;
+				linkerRow.LastPolledAt = utcNow;
 
-				// If its a new row fill in ID and add it to the table.
-				if (linkerRow.Instance == Exceptions.NotAvailable)
-				{
-					linkerRow.Instance = id;
-					linkerTable.Rows.Add(linkerRow);
-				}
+				memberLinks.Add(MemberOrganizationLinksRowConverter.Instance.ToRawValue(linkerRow));
 			}
 
-			if (table.Rows.Count > 0)
+			if (memberRows.Count > 0)
 			{
-				table.SaveToProtocol(protocol, true);
+				SLTables.Members.FillTableNoDelete(protocol, memberRows);
 			}
 
-			if (linkerTable.Rows.Count > 0)
+			if (memberLinks.Count > 0)
 			{
-				linkerTable.SaveToProtocol(protocol, true);
+				SLTables.MemberOrganizationLinks.FillTableNoDelete(protocol, memberLinks);
 			}
 
 			// Check if there are more repositories to fetch
 			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getorganizationmemberslinkheader));
-			if (string.IsNullOrEmpty(linkHeader))
-			{
-				HandleNextOrganizationMembers(protocol);
-			}
-
 			var link = new LinkHeader(linkHeader);
-
 			if (link.HasNext)
 			{
 				OrganizationsRequestHandler.HandleOrganizationMembersRequest(protocol, org, PollingConstants.PerPage, link.NextPage);
 			}
 			else
 			{
-				HandleNextOrganizationMembers(protocol);
+				SLTables.Members.Cleanup(protocol);
+				SLTables.MemberOrganizationLinks.Cleanup(protocol, org);
 			}
-		}
-
-		private static void HandleNextOrganizationMembers(SLProtocol protocol)
-		{
-			// Get the next repo in the queue to fetch
-			var queue = SecureNewtonsoftDeserialization.DeserializeObject<List<string>>(
-				Convert.ToString(protocol.GetParameter(Parameter.getorganizationmembersqueue)));
-			var next = queue?.FirstOrDefault();
-
-			if (next == null)
-			{
-				return;
-			}
-
-			protocol.SetParameter(Parameter.getorganizationmembersqueue, JsonConvert.SerializeObject(queue.Skip(1)));
-			OrganizationsRequestHandler.HandleOrganizationMembersRequest(protocol, next, PollingConstants.PerPage, 1);
 		}
 	}
 }

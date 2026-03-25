@@ -6,7 +6,7 @@
     <Copyright>© Skyline Communications</Copyright>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <LangVersion>7.3</LangVersion>
-    <AssemblyVersion>2025.0701.1339.34179</AssemblyVersion>
+    <AssemblyVersion>2026.0324.1327.19185</AssemblyVersion>
     <RootNamespace>QAction_20001</RootNamespace>
     <AssemblyName>QAction_20001</AssemblyName>
   </PropertyGroup>

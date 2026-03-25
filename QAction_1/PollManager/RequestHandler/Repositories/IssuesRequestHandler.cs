@@ -13,16 +13,16 @@
 
 		public static void HandleRepositoriesIssuesRequest(SLProtocol protocol, int perPage, int page)
 		{
-			var table = RepositoriesTable.GetTable(protocol);
-			foreach (var row in table.Rows)
+			var repositories = SLTables.Repositories.GetPrimaryKeys(protocol);
+			foreach (var row in repositories)
 			{
-				HandleRepositoriesIssuesRequest(protocol, row.Owner, row.Name, perPage, page);
+				HandleRepositoriesIssuesRequest(protocol, row, perPage, page);
 			}
 		}
 
-		public static void HandleRepositoriesIssuesRequest(SLProtocol protocol, string owner, string name, int perPage, int page)
+		public static void HandleRepositoriesIssuesRequest(SLProtocol protocol, string repositoryId, int perPage, int page)
 		{
-			protocol.SetParameter(Parameter.getrepositoryissuesurl, $"repos/{owner}/{name}/issues?per_page={perPage}&page={page}&state=all");
+			protocol.SetParameter(Parameter.getrepositoryissuesurl, $"repos/{repositoryId}/issues?per_page={perPage}&page={page}&state=all");
 			protocol.CheckTrigger(202);
 		}
 	}

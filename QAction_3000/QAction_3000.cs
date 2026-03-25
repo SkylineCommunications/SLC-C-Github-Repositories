@@ -31,9 +31,17 @@ public static class QAction
 			// Disable tracking
 			else
 			{
-				var reposTable = RepositoriesTable.GetTable(protocol);
-				var toRemove = reposTable.Rows.Where(row => row.Owner == organization);
-				reposTable.DeleteRow(protocol, toRemove.Select(row => row.FullName).ToArray());
+				var toBeRemoved = SLTables.Repositories.GetData(
+					protocol,
+					SLTables.Repositories.FullName.Read.Map<RepositoriesModel>(m => m.FullName),
+					SLTables.Repositories.Owner.Read.Map<RepositoriesModel>(m => m.Owner),
+					SLTables.Repositories.AutoRemove.Read.Map<RepositoriesModel>(m => m.AutoRemove))
+						.Where(m => m.AutoRemove.HasValue && m.AutoRemove.Value)
+						.Where(m => m.Owner == organization)
+						.Select(m => m.FullName)
+						.ToHashSet();
+
+				SLTables.Repositories.DeleteRows(protocol, toBeRemoved);
 			}
 		}
 		catch (Exception ex)

@@ -13,8 +13,11 @@
 	{
 		public static void HandleOrganizationRepositoriesRequest(SLProtocol protocol)
 		{
-			var table = OrganizationsTable.GetTable(protocol);
-			foreach (var row in table.Rows.Where(org => org.Tracked))
+			var rows = SLTables.Organizations.GetData(
+				protocol,
+				SLTables.Organizations.Instance.Read.Map<OrganizationsModel>(m => m.Instance),
+				SLTables.Organizations.Tracked.Read.Map<OrganizationsModel>(m => m.Tracked));
+			foreach (var row in rows.Where(org => org.Tracked.HasValue && org.Tracked.Value))
 			{
 				HandleOrganizationRepositoriesRequest(protocol, row.Instance);
 			}

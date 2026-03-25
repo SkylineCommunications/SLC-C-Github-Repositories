@@ -14,20 +14,19 @@
 	{
 		public static void HandleRepositoriesPublicKeysRequest(SLProtocol protocol)
 		{
-			var table = RepositoriesTable.GetTable(protocol);
-			var first = table.Rows.FirstOrDefault();
-			if (first == null)
+			var repositories = SLTables.Repositories.GetPrimaryKeys(protocol);
+			if (!repositories.Any())
 			{
 				return;
 			}
 
-			protocol.SetParameter(Parameter.getrepositorypublickeyqueue, JsonConvert.SerializeObject(table.Rows.Select(x => x.FullName).Skip(1)));
-			HandleRepositoriesPublicKeysRequest(protocol, first.Owner, first.Name);
+			protocol.SetParameter(Parameter.getrepositorypublickeyqueue, JsonConvert.SerializeObject(repositories.Skip(1)));
+			HandleRepositoriesPublicKeysRequest(protocol, repositories[0]);
 		}
 
-		public static void HandleRepositoriesPublicKeysRequest(SLProtocol protocol, string owner, string name)
+		public static void HandleRepositoriesPublicKeysRequest(SLProtocol protocol, string repositoryId)
 		{
-			protocol.SetParameter(Parameter.getrepositorypublickeyurl, $"repos/{owner}/{name}/actions/secrets/public-key");
+			protocol.SetParameter(Parameter.getrepositorypublickeyurl, $"repos/{repositoryId}/actions/secrets/public-key");
 			protocol.CheckTrigger(228);
 		}
 	}

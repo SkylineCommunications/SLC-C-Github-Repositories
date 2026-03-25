@@ -31,9 +31,19 @@
 			// Parse response
 			var response = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryResponse>(
 				Convert.ToString(protocol.GetParameter(Parameter.getrepositorycontent)));
+			if (response is null)
+			{
+				protocol.Log($"QA{protocol.QActionID}|{nameof(HandleRepositoriesResponse)}|response was null.", LogType.Error, LogLevel.Level1);
+				return;
+			}
 
-			var table = RepositoriesTable.GetTable();
-			var row = table.Rows.Find(repository => repository.FullName == response.FullName) ?? new RepositoriesTableRow();
+			var row = default(RepositoriesModel);
+			if (SLTables.Repositories.TryGetRow(protocol, response.FullName, out var rawRow))
+			{
+				row = RepositoriesRowConverter.Instance.FromRawValue(rawRow);
+			}
+
+			row.FullName = response.FullName;
 			row.Name = response.Name;
 			row.Private = response.Private;
 			row.Owner = response.Owner.Login;
@@ -47,19 +57,12 @@
 			row.Watcher = response.WatchersCount;
 			row.Language = response.Language;
 			row.DefaultBranch = response.DefaultBranch;
-			row.Type = RepositoriesTableRow.GetTypeFromTopics(response.Topics);
+			row.Type = RepositoriesModel.GetTypeFromTopics(response.Topics);
 			row.Id = response.Id;
+
 			row.Topics.Clear();
 			row.Topics.AddRange(response.Topics);
-
-			// If its a new row fill in ID and add it to the table.
-			if (row.FullName == Exceptions.NotAvailable)
-			{
-				row.FullName = response.FullName;
-				table.Rows.Add(row);
-			}
-
-			table.SaveToProtocol(protocol);
+			SLTables.Repositories.SetRow(protocol, RepositoriesRowConverter.Instance.ToRawValue(row));
 
 			RepositoriesResponseHandler.HandleTopicsInterApp(protocol, response.Name, response.Owner.Login, response.Topics);
 		}
@@ -104,7 +107,7 @@
 					iacRow.Status = IAC_MessageStatus.Confirmed;
 					iacRow.SaveToProtocol(protocol);
 
-					RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, request.RepositoryId.Owner, request.RepositoryId.Name, PollingConstants.PerPage, 1);
+					RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, $"{request.RepositoryId.Owner}/{request.RepositoryId.Name}", PollingConstants.PerPage, 1);
 				}
 			}
 

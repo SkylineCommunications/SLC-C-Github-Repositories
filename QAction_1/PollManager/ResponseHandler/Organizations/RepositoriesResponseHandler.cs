@@ -8,6 +8,7 @@
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Repositories;
 	using Skyline.DataMiner.Scripting;
+	using Skyline.DataMiner.Scripting.Helper;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
 	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 	using Skyline.Protocol.API.Headers;
@@ -43,11 +44,24 @@
 				return;
 			}
 
-			var table = RepositoriesTable.GetTable();
+			var rows = new List<RepositoriesQActionRow>();
+			var existingRows = SLTables.Repositories.GetData(protocol,
+				SLTables.Repositories.FullName.Read.Map<RepositoriesModel>(m => m.FullName),
+				SLTables.Repositories.PublicKey.Read.Map<RepositoriesModel>(m => m.PublicKey),
+				SLTables.Repositories.PublicKeyID.Read.Map<RepositoriesModel>(m => m.PublicKeyID))
+					.ToDictionary(m => m.FullName);
 			foreach (var repo in response)
 			{
 				// Update existing organization if found, otherwise create new one
-				var row = table.Rows.Find(repository => repository.FullName == repo.FullName) ?? new RepositoriesTableRow();
+				if (!existingRows.TryGetValue(repo.FullName, out var row))
+				{
+					row = new RepositoriesModel
+					{
+						AutoRemove = true,
+					};
+				}
+
+				row.FullName = repo.FullName;
 				row.Name = repo.Name;
 				row.Private = repo.Private;
 				row.Owner = repo.Owner.Login;
@@ -61,26 +75,19 @@
 				row.Watcher = repo.WatchersCount;
 				row.Language = repo.Language;
 				row.DefaultBranch = repo.DefaultBranch;
-				row.Type = RepositoriesTableRow.GetTypeFromTopics(repo.Topics);
+				row.Type = RepositoriesModel.GetTypeFromTopics(repo.Topics);
 				row.Id = repo.Id;
 
-				// If its a new row fill in ID and add it to the table.
-				if (row.FullName == Exceptions.NotAvailable)
-				{
-					row.FullName = repo.FullName;
-					table.Rows.Add(row);
-				}
+				rows.Add(RepositoriesRowConverter.Instance.ToRawValue(row));
 			}
 
-			if (table.Rows.Count > 0)
+			if (rows.Count > 0)
 			{
-				table.SaveToProtocol(protocol, true);
+				SLTables.Repositories.FillTableNoDelete(protocol, rows);
 			}
 
 			// Check if there are more repositories to fetch
 			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getorganizationrepositorieslinkheader));
-			if (string.IsNullOrEmpty(linkHeader)) return;
-
 			var link = new LinkHeader(linkHeader);
 
 			if (link.HasNext)
@@ -106,10 +113,14 @@
 				return;
 			}
 
-			var table = RepositoriesTable.GetTable();
-
 			// Update existing organization if found, otherwise create new one
-			var row = table.Rows.Find(repository => repository.FullName == response.FullName) ?? new RepositoriesTableRow();
+			var row = new RepositoriesModel();
+			if (SLTables.Repositories.TryGetRow(protocol, response.FullName, out var rawRow))
+			{
+				row = RepositoriesRowConverter.Instance.FromRawValue(rawRow);
+			}
+
+			row.FullName = response.FullName;
 			row.Name = response.Name;
 			row.Private = response.Private;
 			row.Owner = response.Owner.Login;
@@ -123,24 +134,15 @@
 			row.Watcher = response.WatchersCount;
 			row.Language = response.Language;
 			row.DefaultBranch = response.DefaultBranch;
-			row.Type = RepositoriesTableRow.GetTypeFromTopics(response.Topics);
+			row.Type = RepositoriesModel.GetTypeFromTopics(response.Topics);
 			row.Id = response.Id;
+			row.AutoRemove = false;
 			row.Topics.Clear();
 			row.Topics.AddRange(response.Topics);
 
-			// If its a new row fill in ID and add it to the table.
-			if (row.FullName == Exceptions.NotAvailable)
-			{
-				row.FullName = response.FullName;
-				table.Rows.Add(row);
-			}
+			SLTables.Repositories.SetRow(protocol, RepositoriesRowConverter.Instance.ToRawValue(row));
 
-			if (table.Rows.Count > 0)
-			{
-				table.SaveToProtocol(protocol, true);
-			}
-
-			RepositoriesRequestHandler.HandleRepositoriesPublicKeysRequest(protocol, response.Owner.Login, response.Name);
+			RepositoriesRequestHandler.HandleRepositoriesPublicKeysRequest(protocol, response.FullName);
 
 			HandleInterAppResponses(protocol, response);
 			RepositoriesResponseHandler.HandleTopicsInterApp(protocol, response.Name, response.Owner.Login, response.Topics);

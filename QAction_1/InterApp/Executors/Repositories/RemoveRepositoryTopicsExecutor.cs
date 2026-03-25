@@ -21,7 +21,7 @@
 	{
 		private RemoveRepositoryTopicsResponse result;
 
-		private RepositoriesTableRow repository;
+		private RepositoriesModel repository;
 
 		public RemoveRepositoryTopicsExecutor(GenericInterAppMessage<RemoveRepositoryTopicsRequest> message) : base(message)
 		{
@@ -39,7 +39,10 @@
 			var protocol = (SLProtocol)dataSource;
 
 			// Fetch the requested organization information
-			repository = RepositoriesTableRow.FromPK(protocol, Message.Data.RepositoryId.FullName);
+			if (SLTables.Repositories.TryGetRow(protocol, Message.Data.RepositoryId.FullName, out var rawRepo))
+			{
+				repository = RepositoriesRowConverter.Instance.FromRawValue(rawRepo);
+			}
 		}
 
 		public override void Parse() { }
@@ -81,7 +84,7 @@
 			}
 
 			// Check if the to be removed topics are already removed
-			if(!Message.Data.Topics.Any(topic => repository.Topics.Contains(topic)))
+			if (!Message.Data.Topics.Any(topic => repository.Topics.Contains(topic)))
 			{
 				result.Success = true;
 				result.Description = $"All the topics are already removed from the repository.";
@@ -115,7 +118,7 @@
 			}.SaveToProtocol(protocol);
 
 			// Do the actual create of the repository
-			RepositoriesRequestHandler.CreateOrUpdateRepositoriesTopicsRequest(protocol, Message.Data.RepositoryId.Owner, Message.Data.RepositoryId.Name, totalTopics);
+			RepositoriesRequestHandler.CreateOrUpdateRepositoriesTopicsRequest(protocol, $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}", totalTopics);
 
 			// Return message
 			result = null;

@@ -17,10 +17,10 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 	{
 		private AddRepositoryCollaboratorResponse result;
 
-		private OrganizationsTableRow organization;
-		private RepositoriesTableRow repo;
-		private TeamsTableRow team;
-		private MembersTableRow member;
+		private OrganizationsModel organization;
+		private RepositoriesModel repo;
+		private TeamsModel team;
+		private MembersModel member;
 
 		public AddRepositoryCollaboratorExecutor(GenericInterAppMessage<AddRepositoryCollaboratorRequest> message) : base(message)
 		{
@@ -38,10 +38,25 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 			var protocol = (SLProtocol)dataSource;
 
 			// Fetch the requested organization information
-			organization = OrganizationsTableRow.FromPK(protocol, Message.Data.Data.RepositoryOrganization);
-			repo = RepositoriesTableRow.FromPK(protocol, Message.Data.RepositoryId.FullName);
-			team = TeamsTableRow.FromPK(protocol, $"{Message.Data.Data.RepositoryOrganization}/{Message.Data.Data.CollaboratorSlug}");
-			member = MembersTableRow.FromPK(protocol, Message.Data.Data.CollaboratorSlug);
+			if (SLTables.Organizations.TryGetRow(protocol, Message.Data.Data.RepositoryOrganization, out var rawOrg))
+			{
+				organization = OrganizationsRowConverter.Instance.FromRawValue(rawOrg);
+			}
+
+			if (SLTables.Repositories.TryGetRow(protocol, Message.Data.RepositoryId.FullName, out var rawRepo))
+			{
+				repo = RepositoriesRowConverter.Instance.FromRawValue(rawRepo);
+			}
+
+			if (SLTables.Teams.TryGetRow(protocol, $"{Message.Data.Data.RepositoryOrganization}/{Message.Data.Data.CollaboratorSlug}", out var rawTeam))
+			{
+				team = TeamsRowConverter.Instance.FromRawValue(rawTeam);
+			}
+
+			if (SLTables.Members.TryGetRow(protocol, Message.Data.Data.CollaboratorSlug, out var rawMember))
+			{
+				member = MembersRowConverter.Instance.FromRawValue(rawMember);
+			}
 		}
 
 		public override void Parse() { }
@@ -142,7 +157,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 			}.SaveToProtocol(protocol);
 
 			// Add the user/team to the repository
-			if(Message.Data.Data.CollaboratorType == CollaboratorType.User)
+			if (Message.Data.Data.CollaboratorType == CollaboratorType.User)
 			{
 				RepositoriesRequestHandler.HandleOrganizationAddRepositoryCollaborator(protocol,
 					Message.Data.RepositoryId.Owner,
@@ -150,7 +165,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 					Message.Data.Data.CollaboratorSlug,
 					Message.Data.Data.Permission);
 			}
-			else if(Message.Data.Data.CollaboratorType == CollaboratorType.Team)
+			else if (Message.Data.Data.CollaboratorType == CollaboratorType.Team)
 			{
 				OrganizationsRequestHandler.HandleOrganizationAddRepositoryCollaborator(protocol,
 					Message.Data.Data.RepositoryOrganization,
@@ -170,7 +185,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 
 		public override Message CreateReturnMessage()
 		{
-			if(result != null)
+			if (result != null)
 			{
 				return new GenericInterAppMessage<AddRepositoryCollaboratorResponse>(result);
 			}

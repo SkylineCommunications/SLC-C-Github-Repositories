@@ -7,12 +7,10 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Repositories;
-	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows;
 	using Skyline.DataMiner.Core.InterAppCalls.Common.CallSingle;
 	using Skyline.DataMiner.Core.InterAppCalls.Common.MessageExecution;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.SecureCoding.SecureIO;
-	using Skyline.Protocol.API.Workflows;
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;
 
@@ -20,7 +18,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 	{
 		private CreateRepositoryContentResponse result;
 
-		private RepositoriesTableRow repo;
+		private RepositoriesModel repo;
 
 		public CreateRepositoryContentExecutor(GenericInterAppMessage<CreateRepositoryContentRequest> message) : base(message)
 		{
@@ -38,7 +36,10 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 			var protocol = (SLProtocol)dataSource;
 
 			// Fetch the requested organization information
-			repo = RepositoriesTableRow.FromPK(protocol, Message.Data.RepositoryId.FullName);
+			if (SLTables.Repositories.TryGetRow(protocol, Message.Data.RepositoryId.FullName, out var rawRepo))
+			{
+				repo = RepositoriesRowConverter.Instance.FromRawValue(rawRepo);
+			}
 		}
 
 		public override void Parse() { }
@@ -63,7 +64,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 			}
 
 			// Check file path
-			if (Message.Data.Data.Method	== UpdateMethod.File && String.IsNullOrWhiteSpace(Message.Data.Data.Path))
+			if (Message.Data.Data.Method == UpdateMethod.File && String.IsNullOrWhiteSpace(Message.Data.Data.Path))
 			{
 				result.Success = false;
 				result.Description = "If the Update Method is File, then the path cannot be left empty.";
@@ -98,7 +99,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 
 			// Get the content
 			string content;
-			if(Message.Data.Data.Method == UpdateMethod.Raw)
+			if (Message.Data.Data.Method == UpdateMethod.Raw)
 			{
 				content = Message.Data.Data.Content;
 			}
@@ -108,7 +109,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 			}
 
 			var commitMessage = $"Updating '{Message.Data.RepositoryPath}'";
-			if(!String.IsNullOrEmpty(Message.Data.CommitMessage))
+			if (!String.IsNullOrEmpty(Message.Data.CommitMessage))
 			{
 				commitMessage = Message.Data.CommitMessage;
 			}
@@ -135,7 +136,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 
 		public override Message CreateReturnMessage()
 		{
-			if(result != null)
+			if (result != null)
 			{
 				return new GenericInterAppMessage<CreateRepositoryContentResponse>(result);
 			}

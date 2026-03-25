@@ -27,9 +27,6 @@
 			// Parse response
 			var response = SecureNewtonsoftDeserialization.DeserializeObject<List<RepositoryIssuesResponse>>(
 				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryissuescontent_202)));
-			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryissueslinkheader_252));
-			var link = new LinkHeader(linkHeader);
-
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|response was null.", LogType.Error, LogLevel.Level1);
@@ -47,68 +44,56 @@
 			var pattern = "https:\\/\\/api.github.com\\/repos\\/(.*)\\/(.*)\\/issues\\/(\\d+)";
 			var options = RegexOptions.Multiline;
 
+			var utcNow = DateTime.UtcNow;
 			var match = Regex.Match(response[0].Url, pattern, options);
 			var owner = match.Groups[1].Value;
 			var name = match.Groups[2].Value;
 			var repositoryId = $"{owner}/{name}";
 
 			// Update the issues table
-			var table = RepositoryIssuesTable.GetTable();
-			var pkCache = PkCache.GetCache(protocol, Parameter.Repositoryissues.tablePid);
+			var rows = new List<RepositoryissuesQActionRow>();
 			foreach (var issue in response)
 			{
 				// Update existing issue if found, otherwise create new one
 				var id = $"{owner}/{name}/issues/{issue.Number}";
-				var row = table.Rows.Find(iss => iss.Instance == id) ?? new RepositoryIssuesRow();
-				row.RepositoryID = $"{owner}/{name}";
-				row.Number = issue.Number;
-				row.Title = issue.Title;
-				row.Body = issue.Body;
-				row.Creator = issue.User.Login;
-				row.State = (IssueState)Enum.Parse(typeof(IssueState), issue.State, true);
-				row.Assignee = issue.Assignee?.Login;
-				row.CreatedAt = issue.CreatedAt;
-				row.UpdatedAt = issue.UpdatedAt;
-				row.ClosedAt = issue.ClosedAt ?? default(DateTime);
-
-				// If its a new row fill in ID and add it to the table.
-				if (String.IsNullOrEmpty(row.Instance))
+				var row = new IssuesModel
 				{
-					row.Instance = id;
-					table.Rows.Add(row);
-				}
+					Instance = id,
+					RepositoryID = $"{owner}/{name}",
+					Number = issue.Number,
+					Title = issue.Title,
+					Body = issue.Body,
+					Creator = issue.User.Login,
+					State = (IssueState)Enum.Parse(typeof(IssueState), issue.State, true),
+					Assignee = issue.Assignee?.Login,
+					CreatedAt = issue.CreatedAt,
+					UpdatedAt = issue.UpdatedAt,
+					ClosedAt = issue.ClosedAt ?? default(DateTime),
+					LastPolledAt = utcNow,
+				};
 
-				pkCache[repositoryId].Add(row.Instance);
+				rows.Add(IssuesRowConverter.Instance.ToRawValue(row));
 			}
 
-			// If not all tags are polled for this repo, store the fetched ids and poll the next page.
-			if (link.HasNext)
+			if (rows.Count > 0)
 			{
-				pkCache.Store(protocol);
-			}
-
-			// If the last page is polled check to see if some tags are removed.
-			if (link.IsLast)
-			{
-				var toBeRemoved = table.Rows.Where(r => r.RepositoryID == repositoryId).Select(r => r.Instance).ToHashSet();
-				toBeRemoved.ExceptWith(pkCache[repositoryId]);
-				table.DeleteRow(protocol, toBeRemoved.ToArray());
-				pkCache[repositoryId].Clear();
-				pkCache.Store(protocol);
-			}
-
-			if (table.Rows.Count > 0)
-			{
-				table.SaveToProtocol(protocol, true);
+				SLTables.Issues.FillTableNoDelete(protocol, rows);
 			}
 
 			// Check if there are more tags to fetch
+			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryissueslinkheader_252));
+			var link = new LinkHeader(linkHeader);
+
 			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|Current page: {link.CurrentPage}", LogType.Information, LogLevel.Level2);
 			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|Has next page: {link.HasNext}", LogType.Information, LogLevel.Level2);
 
 			if (link.HasNext)
 			{
-				RepositoriesRequestHandler.HandleRepositoriesIssuesRequest(protocol, owner, name, PollingConstants.PerPage, link.NextPage);
+				RepositoriesRequestHandler.HandleRepositoriesIssuesRequest(protocol, repositoryId, PollingConstants.PerPage, link.NextPage);
+			}
+			else
+			{
+				SLTables.Issues.Cleanup(protocol, repositoryId);
 			}
 		}
 	}

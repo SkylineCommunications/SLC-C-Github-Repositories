@@ -3,7 +3,7 @@
     <TargetFramework>net48</TargetFramework>
     <Company>Skyline Communications</Company>
     <Copyright>© Skyline Communications</Copyright>
-    <AssemblyVersion>2025.0701.1339.30825</AssemblyVersion>
+    <AssemblyVersion>2026.0325.0753.58753</AssemblyVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Skyline.DataMiner.Dev.Protocol" Version="10.3.9" />

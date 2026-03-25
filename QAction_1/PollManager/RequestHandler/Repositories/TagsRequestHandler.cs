@@ -13,16 +13,16 @@
 
 		public static void HandleRepositoriesTagsRequest(SLProtocol protocol, int perPage, int page)
 		{
-			var table = RepositoriesTable.GetTable(protocol);
-			foreach (var row in table.Rows)
+			var rows = SLTables.Repositories.GetPrimaryKeys(protocol);
+			foreach (var row in rows)
 			{
-				HandleRepositoriesTagsRequest(protocol, row.Owner, row.Name, perPage, page);
+				HandleRepositoriesTagsRequest(protocol, row, perPage, page);
 			}
 		}
 
-		public static void HandleRepositoriesTagsRequest(SLProtocol protocol, string owner, string name, int perPage, int page)
+		public static void HandleRepositoriesTagsRequest(SLProtocol protocol, string repositoryId, int perPage, int page)
 		{
-			protocol.SetParameter(Parameter.getrepositorytagsurl, $"repos/{owner}/{name}/tags?per_page={perPage}&page={page}");
+			protocol.SetParameter(Parameter.getrepositorytagsurl, $"repos/{repositoryId}/tags?per_page={perPage}&page={page}");
 			protocol.CheckTrigger(203);
 		}
 	}

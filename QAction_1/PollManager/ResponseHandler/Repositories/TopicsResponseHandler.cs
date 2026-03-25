@@ -86,8 +86,13 @@
 			var owner = match.Groups[1].Value;
 			var name = match.Groups[2].Value;
 
+			if (!SLTables.Repositories.TryGetRow(protocol, $"{owner}/{name}", out var rawRow))
+			{
+				return;
+			}
+
 			// Update the repositories table
-			var repo = RepositoriesTable.GetTable().Rows.Find(x => x.FullName == $"{owner}/{name}");
+			var repo = RepositoriesRowConverter.Instance.FromRawValue(rawRow);
 			if (repo == null)
 			{
 				return;
@@ -95,7 +100,7 @@
 
 			repo.Topics.Clear();
 			repo.Topics.AddRange(response.Names);
-			repo.SaveToProtocol(protocol);
+			SLTables.Repositories.SetRow(protocol, RepositoriesRowConverter.Instance.ToRawValue(repo));
 
 			HandleTopicsInterApp(protocol, owner, name, repo.Topics);
 		}
@@ -114,9 +119,9 @@
 
 			protocol.SetParameter(Parameter.getrepositorytopicsqueue, JsonConvert.SerializeObject(queue.Skip(1)));
 
-			var nextOwner = next.Split('/')[0];
-			var nextName = next.Split('/')[1];
-			RepositoriesRequestHandler.HandleRepositoriesTopicsRequest(protocol, nextOwner, nextName, PollingConstants.PerPage, 1);
+			////var nextOwner = next.Split('/')[0];
+			////var nextName = next.Split('/')[1];
+			RepositoriesRequestHandler.HandleRepositoriesTopicsRequest(protocol, next, PollingConstants.PerPage, 1);
 		}
 
 		public static void HandleTopicsInterApp(SLProtocol protocol, string owner, string name, IEnumerable<string> topics)

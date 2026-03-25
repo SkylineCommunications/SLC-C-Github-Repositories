@@ -21,6 +21,7 @@
 			{ RequestType.Repositories_Releases, new PollSettings { PollFrequency = TimeSpan.FromMinutes(360), Enabled = true } },
 			{ RequestType.Repository_Issues, new PollSettings { PollFrequency = TimeSpan.FromMinutes(5), Enabled = true } },
 			{ RequestType.Repositories_Workflows, new PollSettings { PollFrequency = TimeSpan.FromMinutes(360), Enabled = true } },
+			{ RequestType.Repositories_SoftwareBillOfMaterials, new PollSettings { PollFrequency = TimeSpan.FromMinutes(360), Enabled = true } },
 
 			{ RequestType.Organizations_User, new PollSettings { PollFrequency = TimeSpan.FromHours(24), Enabled = true } },
 			{ RequestType.Organizations_Repositories, new PollSettings { PollFrequency = TimeSpan.FromHours(10), Enabled = true } },
@@ -120,7 +121,7 @@
 
 		public static void PollDeviceObjects(SLProtocol protocol, Dictionary<RequestType, PollSettings> pollItems, DateTime utcNow)
 		{
-			foreach (KeyValuePair<RequestType, PollSettings> pollItem in pollItems.OrderBy(x => (int)x.Key))
+			foreach (KeyValuePair<RequestType, PollSettings> pollItem in pollItems.OrderByDescending(x => (int)x.Key))
 			{
 				if (!pollItem.Value.Enabled
 					|| pollItem.Value.LastPollTime + pollItem.Value.PollFrequency > utcNow)

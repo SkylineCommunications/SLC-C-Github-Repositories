@@ -33,7 +33,6 @@
 			var owner = match.Groups["owner"].Value;
 			var name = match.Groups["name"].Value;
 
-
 			// Check if there are generic InterApp messages waiting on content creation
 			var table = IAC_MessagesTable.GetTable(protocol);
 			foreach (var iacRow in table.Rows.Where(iac => iac.ResponseType.AssemblyQualifiedName == typeof(AddRepositoryCollaboratorResponse).AssemblyQualifiedName))

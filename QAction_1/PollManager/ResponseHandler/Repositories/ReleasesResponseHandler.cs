@@ -15,6 +15,8 @@
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;
 
+	using static System.Net.Mime.MediaTypeNames;
+
 	public static partial class RepositoriesResponseHandler
 	{
 		public static void HandleRepositoriesReleasesResponse(SLProtocol protocol)
@@ -28,8 +30,6 @@
 			// Parse response
 			var response = SecureNewtonsoftDeserialization.DeserializeObject<List<RepositoryReleasesResponse>>(
 				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryreleasescontent)));
-			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryreleaseslinkheader_254));
-			var link = new LinkHeader(linkHeader);
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|response was null.", LogType.Error, LogLevel.Level1);
@@ -47,14 +47,14 @@
 			var pattern = "https:\\/\\/api.github.com\\/repos\\/(.*)\\/(.*)\\/releases\\/(\\d+)";
 			var options = RegexOptions.Multiline;
 
+			var utcNow = DateTime.UtcNow;
 			var match = Regex.Match(response[0]?.Url, pattern, options);
 			var owner = match.Groups[1].Value;
 			var name = match.Groups[2].Value;
 			var repositoryId = $"{owner}/{name}";
 
 			// Update the releases table
-			var table = RepositoryReleasesTable.GetTable();
-			var pkCache = PkCache.GetCache(protocol, Parameter.Repositoryreleases.tablePid);
+			var rows = new List<RepositoryreleasesQActionRow>();
 			foreach (var release in response)
 			{
 				if (release == null)
@@ -71,59 +71,53 @@
 
 				// Update existing release if found, otherwise create new one
 				var id = $"{owner}/{name}/releases/{release.Id}";
-				var row = table.Rows.Find(rel => rel.Instance == id) ?? new RepositoryReleasesTableRow();
-				row.RepositoryID = $"{owner}/{name}";
-				row.ID = release.Id;
-				row.TagName = release.TagName ?? Exceptions.NotAvailable;
-				row.TagId = release.TagName != null ? $"{owner}/{name}/commits/{release.TagName}" : Exceptions.NotAvailable;
-				row.TargetCommitish = release.TargetCommitish;
-				row.Name = release.Name;
-				row.Draft = release.Draft;
-				row.PreRelease = release.Prerelease;
-				row.Body = release.Body;
-				row.Author = release.Author?.Login ?? Exceptions.NotAvailable;
-				row.CreatedAt = release.CreatedAt;
-				row.PublishedAt = release.PublishedAt;
-
-				// If its a new row fill in ID and add it to the table.
-				if (String.IsNullOrEmpty(row.Instance))
+				var row = new ReleasesModel
 				{
-					row.Instance = id;
-					table.Rows.Add(row);
-				}
+					Instance = id,
+					RepositoryID = $"{owner}/{name}",
+					ID = release.Id,
+					TagName = release.TagName ?? Exceptions.NotAvailable,
+					TagId = release.TagName != null ? $"{owner}/{name}/commits/{release.TagName}" : Exceptions.NotAvailable,
+					TargetCommitish = release.TargetCommitish,
+					Name = release.Name,
+					Draft = release.Draft,
+					PreRelease = release.Prerelease,
+					Body = release.Body,
+					Author = release.Author?.Login ?? Exceptions.NotAvailable,
+					CreatedAt = release.CreatedAt,
+					PublishedAt = release.PublishedAt,
+					LastPolledAt = utcNow,
+				};
 
-				pkCache[repositoryId].Add(row.Instance);
+				rows.Add(ReleasesRowConverter.Instance.ToRawValue(row));
 			}
 
-			// If the last page is polled check to see if some releases are removed.
-			if (link.IsLast)
+			if (rows.Count > 0)
 			{
-				var toBeRemoved = table.Rows.Where(r => r.RepositoryID == repositoryId).Select(r => r.Instance).ToHashSet();
-				toBeRemoved.ExceptWith(pkCache[repositoryId]);
-				table.DeleteRow(protocol, toBeRemoved.ToArray());
-				pkCache[repositoryId].Clear();
-				pkCache.Store(protocol);
+				SLTables.Releases.FillTableNoDelete(protocol, rows);
 			}
 
-			if (table.Rows.Count > 0)
-			{
-				table.SaveToProtocol(protocol, true);
-			}
-
-			HandleRepositoryReleaseAssetsResponse(protocol);
+			HandleRepositoryReleaseAssetsResponse(protocol, response);
 
 			// Check if there are more releases to fetch
+			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryreleaseslinkheader_254));
+			var link = new LinkHeader(linkHeader);
+
 			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|Current page: {link.CurrentPage}", LogType.Information, LogLevel.Level2);
 			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|Has next page: {link.HasNext}", LogType.Information, LogLevel.Level2);
 
 			if (link.HasNext)
 			{
-				pkCache.Store(protocol);
-				RepositoriesRequestHandler.HandleRepositoriesReleasesRequest(protocol, owner, name, PollingConstants.PerPage, link.NextPage);
+				RepositoriesRequestHandler.HandleRepositoriesReleasesRequest(protocol, repositoryId, PollingConstants.PerPage, link.NextPage);
+			}
+			else
+			{
+				SLTables.Releases.Cleanup(protocol, repositoryId);
+				SLTables.ReleaseAssets.Cleanup(protocol, repositoryId);
 			}
 		}
 
-		public static void HandleRepositoryReleaseAssetsResponse(SLProtocol protocol)
+		public static void HandleRepositoryReleaseAssetsResponse(SLProtocol protocol, List<RepositoryReleasesResponse> response)
 		{
 			// Check status code
 			if (!protocol.IsSuccessStatusCode())
@@ -131,36 +125,18 @@
 				return;
 			}
 
-			// Parse response
-			var response = SecureNewtonsoftDeserialization.DeserializeObject<List<RepositoryReleasesResponse>>(
-				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryreleasescontent)));
-			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.repositoryreleaseassets_pk_cache_1791));
-			var link = new LinkHeader(linkHeader);
-			if (response == null)
-			{
-				protocol.Log($"QA{protocol.QActionID}|HandleRepositoryReleaseAssetsResponse|response was null.", LogType.Error, LogLevel.Level1);
-				return;
-			}
-
-			if (!response.Any())
-			{
-				// No releases for the repository
-				protocol.Log($"QA{protocol.QActionID}|HandleRepositoryReleaseAssetsResponse|No releases for the repo.", LogType.Information, LogLevel.Level2);
-				return;
-			}
-
 			// Parse url to check which respository this issue is linked to
 			var pattern = "https:\\/\\/api.github.com\\/repos\\/(.*)\\/(.*)\\/releases\\/(\\d+)";
 			var options = RegexOptions.Multiline;
 
+			var utcNow = DateTime.UtcNow;
 			var match = Regex.Match(response[0]?.Url, pattern, options);
 			var owner = match.Groups[1].Value;
 			var name = match.Groups[2].Value;
 			var repositoryId = $"{owner}/{name}";
 
 			// Update the releases table
-			var table = ReleaseAssetsTable.GetTable();
-			var pkCache = PkCache.GetCache(protocol, Parameter.Repositoryreleaseassets.tablePid);
+			var rows = new List<RepositoryreleaseassetsQActionRow>();
 			foreach (var release in response)
 			{
 				if (release?.Url == null)
@@ -169,56 +145,37 @@
 					continue;
 				}
 
-				foreach(var asset in release.Assets)
+				foreach (var asset in release.Assets)
 				{
 					// Update existing release if found, otherwise create new one
 					var id = $"{owner}/{name}/releases/{release.Id}/{asset.Id}";
-					var row = table.Rows.Find(rel => rel.Instance == id) ?? new ReleaseAssetsTableRow();
-					row.AssetId = asset.Id;
-					row.RepositoryID = $"{owner}/{name}";
-					row.Release = $"{owner}/{name}/releases/{release.Id}";
-					row.Uploader = asset.Uploader.Login;
-					row.NodeID = asset.NodeId;
-					row.Name = asset.Name;
-					row.Label = asset.Label;
-					row.ContentType = asset.ContentType;
-					row.State = asset.State;
-					row.Size = asset.Size;
-					row.DownloadCount = asset.DownloadCount;
-					row.CreatedAt = asset.CreatedAt;
-					row.UpdatedAt = asset.UpdatedAt;
-					row.BrowserDownloadUrl = asset.BrowserDownloadUrl;
-
-					// If its a new row fill in ID and add it to the table.
-					if (String.IsNullOrEmpty(row.Instance))
+					var row = new ReleaseAssetsModel
 					{
-						row.Instance = id;
-						table.Rows.Add(row);
-					}
+						Instance = id,
+						AssetId = asset.Id,
+						RepositoryID = repositoryId,
+						Release = $"{owner}/{name}/releases/{release.Id}",
+						Uploader = asset.Uploader.Login,
+						NodeID = asset.NodeId,
+						Name = asset.Name,
+						Label = asset.Label ?? Exceptions.NotAvailable,
+						ContentType = asset.ContentType,
+						State = asset.State,
+						Size = asset.Size,
+						DownloadCount = asset.DownloadCount,
+						CreatedAt = asset.CreatedAt,
+						UpdatedAt = asset.UpdatedAt,
+						BrowserDownloadUrl = asset.BrowserDownloadUrl,
+						LastPolledAt = utcNow,
+					};
 
-					pkCache[repositoryId].Add(row.Instance);
+					rows.Add(ReleaseAssetsRowConverter.Instance.ToRawValue(row));
 				}
 			}
 
-			// If not all release assets are polled for this repo, store the fetched ids and poll the next page.
-			if (link.HasNext)
+			if (rows.Count > 0)
 			{
-				pkCache.Store(protocol);
-			}
-
-			// If the last page is polled check to see if some release assets are removed.
-			if (link.IsLast)
-			{
-				var toBeRemoved = table.Rows.Where(r => r.RepositoryID == repositoryId).Select(r => r.Instance).ToHashSet();
-				toBeRemoved.ExceptWith(pkCache[repositoryId]);
-				table.DeleteRow(protocol, toBeRemoved.ToArray());
-				pkCache[repositoryId].Clear();
-				pkCache.Store(protocol);
-			}
-
-			if (table.Rows.Count > 0)
-			{
-				table.SaveToProtocol(protocol, true);
+				SLTables.ReleaseAssets.FillTableNoDelete(protocol, rows);
 			}
 		}
 	}

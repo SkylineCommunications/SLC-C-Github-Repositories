@@ -38,33 +38,37 @@
 				return;
 			}
 
-			var table = OrganizationsTable.GetTable(protocol);
+			var rows = new List<OrganizationsQActionRow>();
 			foreach (var org in response)
 			{
 				// Update existing organization if found, otherwise create new one
-				var row = table.Rows.Find(organization => organization.Instance == org.Login) ?? new OrganizationsTableRow();
+				var row = new OrganizationsModel();
+				if (SLTables.Organizations.TryGetRow(protocol, org.Login, out var rawRow))
+				{
+					row = OrganizationsRowConverter.Instance.FromRawValue(rawRow);
+				}
+
 				row.Id = org.Id;
 				row.Description = org.Description;
-				row.AvatarURL = org.AvatarUrl;
+				row.AvatarUrl = org.AvatarUrl.OriginalString;
 
 				// If its a new row fill in ID and default values and add it to the table.
 				if (String.IsNullOrEmpty(row.Instance))
 				{
 					row.Instance = org.Login;
 					row.Tracked = false;
-					table.Rows.Add(row);
 				}
+
+				rows.Add(OrganizationsRowConverter.Instance.ToRawValue(row));
 			}
 
-			if(table.Rows.Count > 0)
+			if (rows.Count > 0)
 			{
-				table.SaveToProtocol(protocol);
+				SLTables.Organizations.FillTableNoDelete(protocol, rows);
 			}
 
 			// Check if there are more repositories to fetch
 			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getuserorganizationslinkheader));
-			if (string.IsNullOrEmpty(linkHeader)) return;
-
 			var link = new LinkHeader(linkHeader);
 
 			protocol.Log($"QA{protocol.QActionID}|HandleUserOrganizationsResponse|Current page: {link.CurrentPage}", LogType.Information, LogLevel.Level2);
