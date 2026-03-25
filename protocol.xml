@@ -1907,6 +1907,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="16" pid="1017" type="retrieved" options="" />
 				<ColumnOption idx="17" pid="1018" type="retrieved" options=";save" />
 				<ColumnOption idx="18" pid="1019" type="retrieved" options="" />
+				<ColumnOption idx="19" pid="1020" type="retrieved" options=";save" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>A list of all the tracked repositories.</Subtext>
@@ -1922,7 +1923,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3-1005|4-1006|5-1007|6-1008|7-1009|8-1010|9-1011|10-1012|11-1013|12-1014|13-1015|14-1016|15-1017|16-1018|17-1019|18,width:100-134-157-140-165-137-156-160-165-157-123-128-147-103-100-0-0-0-0,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT-INT-INT-STRING-STRING-STRING-STRING-INT-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3-1005|4-1006|5-1007|6-1008|7-1009|8-1010|9-1011|10-1012|11-1013|12-1014|13-1015|14-1016|15-1017|16-1018|17-1019|18-1020|19,width:100-134-157-140-165-137-156-160-165-157-123-128-147-103-100-0-0-0-0-100,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT-INT-INT-STRING-STRING-STRING-STRING-INT-STRING-STRING,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1001" trending="false">
@@ -1955,6 +1956,12 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>other</RawType>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="2" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
@@ -2044,6 +2051,12 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>other</RawType>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="2" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
 			</Interprete>
 			<!-- SuppressValidator 2.5.1 Depends on the use case -->
 			<Alarm>
@@ -2491,6 +2504,12 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>other</RawType>
 				<Type>string</Type>
 				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="2" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
 			</Interprete>
 			<!-- SuppressValidator 2.5.1 Depends on the use case -->
 			<Alarm>
@@ -2502,6 +2521,71 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Display>
 			<Measurement>
 				<Type>string</Type>
+			</Measurement>
+		</Param>
+		<Param id="1020" trending="false">
+			<Name>RepositoriesAutoRemove</Name>
+			<Description>Auto-Remove (Repositories)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Indicates whether this repository should be auto removed when it's no removed. This is used when you enable the track repositories option for an organization.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Decimals>0</Decimals>
+				<Range>
+					<Low>0</Low>
+					<High>1</High>
+				</Range>
+			</Display>
+			<Measurement>
+				<Type>discreet</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Enabled</Display>
+						<Value>1</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Disabled</Display>
+						<Value>0</Value>
+					</Discreet>
+				</Discreets>
+			</Measurement>
+		</Param>
+		<Param id="1120" setter="true">
+			<Name>RepositoriesAutoRemove</Name>
+			<Description>Auto-Remove (Repositories)</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Decimals>0</Decimals>
+				<Range>
+					<Low>0</Low>
+					<High>1</High>
+				</Range>
+			</Display>
+			<Measurement>
+				<Type>togglebutton</Type>
+				<Discreets>
+					<Discreet>
+						<Display>Enabled</Display>
+						<Value>1</Value>
+					</Discreet>
+					<Discreet>
+						<Display>Disabled</Display>
+						<Value>0</Value>
+					</Discreet>
+				</Discreets>
 			</Measurement>
 		</Param>
 		
@@ -4714,8 +4798,8 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Type>array</Type>
 			<ArrayOptions index="0" partial="true:500">
 				<ColumnOption idx="0" pid="2601" type="retrieved" options="" />
-				<ColumnOption idx="1" pid="2602" type="retrieved" options="" />
-				<ColumnOption idx="2" pid="2603" type="retrieved" options="" />
+				<ColumnOption idx="1" pid="2602" type="retrieved" options=";foreignKey=2200" />
+				<ColumnOption idx="2" pid="2603" type="retrieved" options=";foreignKey=1000" />
 				<ColumnOption idx="3" pid="2604" type="retrieved" options="" />
 				<ColumnOption idx="4" pid="2605" type="retrieved" options="" />
 				<ColumnOption idx="5" pid="2606" type="retrieved" options="" />
@@ -4873,6 +4957,26 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 		</Param>
+		<Param id="2999" trending="false">
+			<Name>OrganizationsLastPolledAtUTC</Name>
+			<Description>Last Polled At UTC (Organizations)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+			</Display>
+			<Measurement>
+				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
 		<Param id="3000">
 			<Name>Organizations</Name>
 			<Description>Organizations</Description>
@@ -4883,6 +4987,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="2" pid="3003" type="retrieved" options="" />
 				<ColumnOption idx="3" pid="3004" type="retrieved" options="" />
 				<ColumnOption idx="4" pid="3005" type="retrieved" options=";save" />
+				<ColumnOption idx="5" pid="2999" type="retrieved" options="" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>Table containing a list of all the organizations.</Subtext>
@@ -4898,7 +5003,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:3001|0-3002|1-3003|2-3004|3-3005|4,width:250-0-100-400-121,sort:STRING-INT-STRING-STRING-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:3001|0-3002|1-3003|2-3004|3-3005|4-2999|5,width:250-0-100-400-121-0,sort:STRING-INT-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="3001" trending="false">
@@ -5683,7 +5788,7 @@ Are you sure you want to continue.]]>
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:22001|0-22002|1-22003|2,width:100-107-100,sort:STRING-STRING-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:22001|0-22002|1-22003|2-21999|3,width:100-107-100-0,sort:STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="22001" trending="false">
@@ -5932,7 +6037,7 @@ Are you sure you want to continue.]]>
 				</Discreets>
 			</Measurement>
 		</Param>
-		<Param id="21053" setter="true">
+		<Param id="21053">
 			<Name>PollManagerPollState</Name>
 			<Description>Poll State (Poll Manager)</Description>
 			<Type>write</Type>

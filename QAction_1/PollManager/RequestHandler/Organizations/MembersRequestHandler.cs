@@ -16,15 +16,14 @@
 
 		public static void HandleOrganizationMembersRequest(SLProtocol protocol, int perPage, int page)
 		{
-			var table = OrganizationsTable.GetTable(protocol);
-			var first = table.Rows.FirstOrDefault();
-			if (first == null)
+			var organizations = SLTables.Organizations.GetPrimaryKeys(protocol);
+			if (!organizations.Any())
 			{
 				return;
 			}
 
-			protocol.SetParameter(Parameter.getorganizationmembersqueue, JsonConvert.SerializeObject(table.Rows.Select(x => x.Instance).Skip(1)));
-			HandleOrganizationMembersRequest(protocol, first.Instance, perPage, page);
+			protocol.SetParameter(Parameter.getorganizationmembersqueue, JsonConvert.SerializeObject(organizations.Skip(1)));
+			HandleOrganizationMembersRequest(protocol, organizations[0], perPage, page);
 		}
 
 		public static void HandleOrganizationMembersRequest(SLProtocol protocol, string organization, int perPage, int page)

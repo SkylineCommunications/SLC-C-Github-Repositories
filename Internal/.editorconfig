@@ -9,3 +9,6 @@ trim_trailing_whitespace = true
 
 [*.cs]
 dotnet_sort_system_directives_first = true
+
+# stylecop analyzers
+dotnet_diagnostic.SA1118.severity = none

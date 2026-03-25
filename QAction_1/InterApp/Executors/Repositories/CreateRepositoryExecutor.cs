@@ -18,7 +18,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 	{
 		private CreateRepositoryResponse result;
 
-		private OrganizationsTableRow organization;
+		private OrganizationsModel organization;
 
 		public CreateRepositoryExecutor(GenericInterAppMessage<CreateRepositoryRequest> message) : base(message)
 		{
@@ -36,7 +36,10 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 			var protocol = (SLProtocol)dataSource;
 
 			// Fetch the requested organization information
-			organization = OrganizationsTableRow.FromPK(protocol, Message.Data.Data.OrganizationId);
+			if (SLTables.Organizations.TryGetRow(protocol, Message.Data.Data.OrganizationId, out var rawOrg))
+			{
+				organization = OrganizationsRowConverter.Instance.FromRawValue(rawOrg);
+			}
 		}
 
 		public override void Parse() { }
@@ -125,7 +128,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 
 		public override Message CreateReturnMessage()
 		{
-			if(result != null)
+			if (result != null)
 			{
 				return new GenericInterAppMessage<CreateRepositoryResponse>(result);
 			}

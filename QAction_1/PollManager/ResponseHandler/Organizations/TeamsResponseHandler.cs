@@ -5,8 +5,6 @@
 	using System.Linq;
 	using System.Text.RegularExpressions;
 
-	using Newtonsoft.Json;
-
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Organizations;
 	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
@@ -51,43 +49,35 @@
 			var match = Regex.Match(response[0].HtmlUrl.OriginalString, pattern, options);
 			var owner = match.Groups["owner"].Value;
 
-			var table = TeamsTable.GetTable();
+			var rows = new List<OrganizationteamsQActionRow>();
 			foreach (var team in response)
 			{
 				// Update existing organization if found, otherwise create new one
 				var id = $"{owner}/{team.Slug}";
-				var row = table.Rows.Find(t => t.Instance == id) ?? new TeamsTableRow();
-				row.Id = team.Id;
-				row.Organization = owner;
-				row.Name = team.Name;
-				row.Slug = team.Slug;
-				row.Description = team.Description;
-				row.Privacy = Extensions.ParseEnumDescription<PrivacySetting>(team.Privacy);
-				row.NotificationsEnabled = Extensions.ParseEnumDescription<NotificationSetting>(team.NotificationSetting);
-				row.Permission = team.Permission;
-				row.LastPolledAt = utcNow;
-
-				// If its a new row fill in ID and add it to the table.
-				if (row.Instance == Exceptions.NotAvailable)
+				var row = new TeamsModel
 				{
-					row.Instance = id;
-					table.Rows.Add(row);
-				}
+					Instance = id,
+					Id = team.Id,
+					Organization = owner,
+					Name = team.Name,
+					Slug = team.Slug,
+					Description = team.Description,
+					Privacy = Extensions.ParseEnumDescription<PrivacySetting>(team.Privacy),
+					NotificationsEnabled = Extensions.ParseEnumDescription<NotificationSetting>(team.NotificationSetting),
+					Permission = team.Permission,
+					LastPolledAt = utcNow,
+				};
+
+				rows.Add(TeamsRowConverter.Instance.ToRawValue(row));
 			}
 
-			if (table.Rows.Count > 0)
+			if (rows.Count > 0)
 			{
-				table.SaveToProtocol(protocol, true);
+				SLTables.Teams.FillTableNoDelete(protocol, rows);
 			}
 
 			// Check if there are more repositories to fetch
 			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getorganizationteamslinkheader));
-			if (string.IsNullOrEmpty(linkHeader))
-			{
-				TeamsTable.GetTable(protocol).Cleanup(protocol, owner);
-				return;
-			}
-
 			var link = new LinkHeader(linkHeader);
 
 			if (link.HasNext)
@@ -96,7 +86,7 @@
 			}
 			else
 			{
-				TeamsTable.GetTable(protocol).Cleanup(protocol, owner);
+				SLTables.Teams.Cleanup(protocol, owner);
 			}
 		}
 	}

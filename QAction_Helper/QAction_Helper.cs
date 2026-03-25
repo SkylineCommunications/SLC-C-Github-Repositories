@@ -615,6 +615,11 @@ public static class Parameter
 		public const int repositories_contextmenu_990 = 990;
 		/// <summary>PID: 990 | Type: write</summary>
 		public const int repositories_contextmenu = 990;
+		/// <summary>PID: 1120 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int repositoriesautoremove_1120 = 1120;
+		/// <summary>PID: 1120 | Type: write</summary>
+		public const int repositoriesautoremove = 1120;
 		/// <summary>PID: 1590 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public const int repositoryworkflows_contextmenu_1590 = 1590;
@@ -761,6 +766,11 @@ public static class Parameter
 			public const int repositoriestopics_1019 = 1019;
 			/// <summary>PID: 1019 | Type: read</summary>
 			public const int repositoriestopics = 1019;
+			/// <summary>PID: 1020 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoriesautoremove_1020 = 1020;
+			/// <summary>PID: 1020 | Type: read</summary>
+			public const int repositoriesautoremove = 1020;
 			public class Write
 			{
 			}
@@ -862,6 +872,11 @@ public static class Parameter
 			public const int repositoriestopics_1019 = 18;
 			/// <summary>IDX: 18 | Type: read</summary>
 			public const int repositoriestopics = 18;
+			/// <summary>IDX: 19 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int repositoriesautoremove_1020 = 19;
+			/// <summary>IDX: 19 | Type: read</summary>
+			public const int repositoriesautoremove = 19;
 		}
 	}
 	public class Repositorytags
@@ -1883,6 +1898,11 @@ public static class Parameter
 			public const int organizationstrackrepositories_3005 = 3005;
 			/// <summary>PID: 3005 | Type: read</summary>
 			public const int organizationstrackrepositories = 3005;
+			/// <summary>PID: 2999 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int organizationslastpolledatutc_2999 = 2999;
+			/// <summary>PID: 2999 | Type: read</summary>
+			public const int organizationslastpolledatutc = 2999;
 			public class Write
 			{
 			}
@@ -1914,6 +1934,11 @@ public static class Parameter
 			public const int organizationstrackrepositories_3005 = 4;
 			/// <summary>IDX: 4 | Type: read</summary>
 			public const int organizationstrackrepositories = 4;
+			/// <summary>IDX: 5 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int organizationslastpolledatutc_2999 = 5;
+			/// <summary>IDX: 5 | Type: read</summary>
+			public const int organizationslastpolledatutc = 5;
 		}
 	}
 	public class Organizationstatistics
@@ -2498,6 +2523,8 @@ public class WriteParameters
 	public System.Object Addworkflowworkflow {get { return Protocol.GetParameter(655); }set { Protocol.SetParameter(655, value); }}
 	/// <summary>PID: 990  | Type: write | DISCREETS: Add... = 1, Delete selected row(s) = 2</summary>
 	public System.Object Repositories_contextmenu {get { return Protocol.GetParameter(990); }set { Protocol.SetParameter(990, value); }}
+	/// <summary>PID: 1120  | Type: write | DISCREETS: Enabled = 1, Disabled = 0</summary>
+	public System.Object Repositoriesautoremove {get { return Protocol.GetParameter(1120); }set { Protocol.SetParameter(1120, value); }}
 	/// <summary>PID: 1590  | Type: write | DISCREETS: Add... = 1</summary>
 	public System.Object Repositoryworkflows_contextmenu {get { return Protocol.GetParameter(1590); }set { Protocol.SetParameter(1590, value); }}
 	/// <summary>PID: 3105  | Type: write | DISCREETS: Disabled = 0, Enabled = 1</summary>
@@ -2810,6 +2837,9 @@ public interface SLProtocolExt : SLProtocol
 	object Repositoriesid { get; set; }
 	object Repositoriestopics_1019 { get; set; }
 	object Repositoriestopics { get; set; }
+	object Repositoriesautoremove_1020 { get; set; }
+	object Repositoriesautoremove { get; set; }
+	object Repositoriesautoremove_1120 { get; set; }
 	object Repositorytags_pk_cache_1191 { get; set; }
 	object Repositorytags_pk_cache { get; set; }
 	object Repositorytagslastpolledatutc_1199 { get; set; }
@@ -2994,6 +3024,8 @@ public interface SLProtocolExt : SLProtocol
 	object Repositorysoftwarebillofmaterialsrelationshipsrelationshiptype { get; set; }
 	object Organizationsoverview_2996 { get; set; }
 	object Organizationsoverview { get; set; }
+	object Organizationslastpolledatutc_2999 { get; set; }
+	object Organizationslastpolledatutc { get; set; }
 	object Organizationsinstance_3001 { get; set; }
 	object Organizationsinstance { get; set; }
 	object Organizationsid_3002 { get; set; }
@@ -3682,10 +3714,10 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoriesfullname_1001 {get { return GetParameter(1001); }set { SetParameter(1001, value); }}
 	/// <summary>PID: 1001  | Type: read</summary>
 	public System.Object Repositoriesfullname {get { return GetParameter(1001); }set { SetParameter(1001, value); }}
-	/// <summary>PID: 1002  | Type: read</summary>
+	/// <summary>PID: 1002  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoriesname_1002 {get { return GetParameter(1002); }set { SetParameter(1002, value); }}
-	/// <summary>PID: 1002  | Type: read</summary>
+	/// <summary>PID: 1002  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	public System.Object Repositoriesname {get { return GetParameter(1002); }set { SetParameter(1002, value); }}
 	/// <summary>PID: 1003  | Type: read | DISCREETS: Private = 1, Public = 0 | EXCEPTIONS: N/A = -2</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
@@ -3697,10 +3729,10 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoriesdescription_1004 {get { return GetParameter(1004); }set { SetParameter(1004, value); }}
 	/// <summary>PID: 1004  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	public System.Object Repositoriesdescription {get { return GetParameter(1004); }set { SetParameter(1004, value); }}
-	/// <summary>PID: 1005  | Type: read</summary>
+	/// <summary>PID: 1005  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoriesowner_1005 {get { return GetParameter(1005); }set { SetParameter(1005, value); }}
-	/// <summary>PID: 1005  | Type: read</summary>
+	/// <summary>PID: 1005  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	public System.Object Repositoriesowner {get { return GetParameter(1005); }set { SetParameter(1005, value); }}
 	/// <summary>PID: 1006  | Type: read | DISCREETS: Fork = 1, Normal = 0 | EXCEPTIONS: N/A = -2</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
@@ -3767,11 +3799,19 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoriesid_1018 {get { return GetParameter(1018); }set { SetParameter(1018, value); }}
 	/// <summary>PID: 1018  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	public System.Object Repositoriesid {get { return GetParameter(1018); }set { SetParameter(1018, value); }}
-	/// <summary>PID: 1019  | Type: read</summary>
+	/// <summary>PID: 1019  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoriestopics_1019 {get { return GetParameter(1019); }set { SetParameter(1019, value); }}
-	/// <summary>PID: 1019  | Type: read</summary>
+	/// <summary>PID: 1019  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	public System.Object Repositoriestopics {get { return GetParameter(1019); }set { SetParameter(1019, value); }}
+	/// <summary>PID: 1020  | Type: read | DISCREETS: Enabled = 1, Disabled = 0</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoriesautoremove_1020 {get { return GetParameter(1020); }set { SetParameter(1020, value); }}
+	/// <summary>PID: 1020  | Type: read | DISCREETS: Enabled = 1, Disabled = 0</summary>
+	public System.Object Repositoriesautoremove {get { return GetParameter(1020); }set { SetParameter(1020, value); }}
+	/// <summary>PID: 1120  | Type: write | DISCREETS: Enabled = 1, Disabled = 0</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoriesautoremove_1120 {get { return GetParameter(1120); }set { SetParameter(1120, value); }}
 	/// <summary>PID: 1191  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositorytags_pk_cache_1191 {get { return GetParameter(1191); }set { SetParameter(1191, value); }}
@@ -4231,6 +4271,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Organizationsoverview_2996 {get { return GetParameter(2996); }set { SetParameter(2996, value); }}
 	/// <summary>PID: 2996  | Type: read</summary>
 	public System.Object Organizationsoverview {get { return GetParameter(2996); }set { SetParameter(2996, value); }}
+	/// <summary>PID: 2999  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Organizationslastpolledatutc_2999 {get { return GetParameter(2999); }set { SetParameter(2999, value); }}
+	/// <summary>PID: 2999  | Type: read</summary>
+	public System.Object Organizationslastpolledatutc {get { return GetParameter(2999); }set { SetParameter(2999, value); }}
 	/// <summary>PID: 3001  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Organizationsinstance_3001 {get { return GetParameter(3001); }set { SetParameter(3001, value); }}
@@ -4757,8 +4802,13 @@ public class RepositoriesQActionRow : QActionTableRow
 	public System.Object Repositoriestopics_1019 { get { if (base.Columns.ContainsKey(18)) { return base.Columns[18]; } else { return null; } } set { if (base.Columns.ContainsKey(18)) { base.Columns[18] = value; } else { base.Columns.Add(18, value); } } }
 	/// <summary>PID: 1019 | Type: read</summary>
 	public System.Object Repositoriestopics { get { if (base.Columns.ContainsKey(18)) { return base.Columns[18]; } else { return null; } } set { if (base.Columns.ContainsKey(18)) { base.Columns[18] = value; } else { base.Columns.Add(18, value); } } }
-	public RepositoriesQActionRow() : base(0, 19) { }
-	public RepositoriesQActionRow(System.Object[] oRow) : base(0, 19, oRow) { }
+	/// <summary>PID: 1020 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoriesautoremove_1020 { get { if (base.Columns.ContainsKey(19)) { return base.Columns[19]; } else { return null; } } set { if (base.Columns.ContainsKey(19)) { base.Columns[19] = value; } else { base.Columns.Add(19, value); } } }
+	/// <summary>PID: 1020 | Type: read</summary>
+	public System.Object Repositoriesautoremove { get { if (base.Columns.ContainsKey(19)) { return base.Columns[19]; } else { return null; } } set { if (base.Columns.ContainsKey(19)) { base.Columns[19] = value; } else { base.Columns.Add(19, value); } } }
+	public RepositoriesQActionRow() : base(0, 20) { }
+	public RepositoriesQActionRow(System.Object[] oRow) : base(0, 20, oRow) { }
 	public static implicit operator RepositoriesQActionRow(System.Object[] source) { return new RepositoriesQActionRow(source); }
 	public static implicit operator System.Object[](RepositoriesQActionRow source) { return source.ToObjectArray(); }
 	public System.String[] GetChildKeysRepositorytagsRepositorytagsrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 1203, Key); }
@@ -4768,6 +4818,7 @@ public class RepositoriesQActionRow : QActionTableRow
 	public System.String[] GetChildKeysRepositoryissuesRepositoryissuesrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 2011, Key); }
 	public System.String[] GetChildKeysRepositorysoftwarebillofmaterialsRepositorysoftwarebillofmaterialsrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 2202, Key); }
 	public System.String[] GetChildKeysRepositorysoftwarebillofmaterialspackagesRepositorysoftwarebillofmaterialspackagesrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 2403, Key); }
+	public System.String[] GetChildKeysRepositorysoftwarebillofmaterialsrelationshipsRepositorysoftwarebillofmaterialsrelationshipsrepositoryid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 2603, Key); }
 }
 /// <summary>IDX: 0</summary>
 public class RepositorytagsQActionRow : QActionTableRow
@@ -5147,6 +5198,7 @@ public class RepositorysoftwarebillofmaterialsQActionRow : QActionTableRow
 	public static implicit operator System.Object[](RepositorysoftwarebillofmaterialsQActionRow source) { return source.ToObjectArray(); }
 	public System.Object[] GetParentRowRepositoriesRepositorysoftwarebillofmaterialsrepositoryid(SLProtocol protocol) { return (System.Object[])protocol.GetRow(1000, (System.String)Repositorysoftwarebillofmaterialsrepositoryid); }
 	public System.String[] GetChildKeysRepositorysoftwarebillofmaterialspackagesRepositorysoftwarebillofmaterialspackagessbomid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 2402, Key); }
+	public System.String[] GetChildKeysRepositorysoftwarebillofmaterialsrelationshipsRepositorysoftwarebillofmaterialsrelationshipssbomid(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 2602, Key); }
 }
 /// <summary>IDX: 0</summary>
 public class RepositorysoftwarebillofmaterialspackagesQActionRow : QActionTableRow
@@ -5265,6 +5317,8 @@ public class RepositorysoftwarebillofmaterialsrelationshipsQActionRow : QActionT
 	public RepositorysoftwarebillofmaterialsrelationshipsQActionRow(System.Object[] oRow) : base(0, 7, oRow) { }
 	public static implicit operator RepositorysoftwarebillofmaterialsrelationshipsQActionRow(System.Object[] source) { return new RepositorysoftwarebillofmaterialsrelationshipsQActionRow(source); }
 	public static implicit operator System.Object[](RepositorysoftwarebillofmaterialsrelationshipsQActionRow source) { return source.ToObjectArray(); }
+	public System.Object[] GetParentRowRepositorysoftwarebillofmaterialsRepositorysoftwarebillofmaterialsrelationshipssbomid(SLProtocol protocol) { return (System.Object[])protocol.GetRow(2200, (System.String)Repositorysoftwarebillofmaterialsrelationshipssbomid); }
+	public System.Object[] GetParentRowRepositoriesRepositorysoftwarebillofmaterialsrelationshipsrepositoryid(SLProtocol protocol) { return (System.Object[])protocol.GetRow(1000, (System.String)Repositorysoftwarebillofmaterialsrelationshipsrepositoryid); }
 }
 /// <summary>IDX: 0</summary>
 public class OrganizationsQActionRow : QActionTableRow
@@ -5294,8 +5348,13 @@ public class OrganizationsQActionRow : QActionTableRow
 	public System.Object Organizationstrackrepositories_3005 { get { if (base.Columns.ContainsKey(4)) { return base.Columns[4]; } else { return null; } } set { if (base.Columns.ContainsKey(4)) { base.Columns[4] = value; } else { base.Columns.Add(4, value); } } }
 	/// <summary>PID: 3005 | Type: read</summary>
 	public System.Object Organizationstrackrepositories { get { if (base.Columns.ContainsKey(4)) { return base.Columns[4]; } else { return null; } } set { if (base.Columns.ContainsKey(4)) { base.Columns[4] = value; } else { base.Columns.Add(4, value); } } }
-	public OrganizationsQActionRow() : base(0, 5) { }
-	public OrganizationsQActionRow(System.Object[] oRow) : base(0, 5, oRow) { }
+	/// <summary>PID: 2999 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Organizationslastpolledatutc_2999 { get { if (base.Columns.ContainsKey(5)) { return base.Columns[5]; } else { return null; } } set { if (base.Columns.ContainsKey(5)) { base.Columns[5] = value; } else { base.Columns.Add(5, value); } } }
+	/// <summary>PID: 2999 | Type: read</summary>
+	public System.Object Organizationslastpolledatutc { get { if (base.Columns.ContainsKey(5)) { return base.Columns[5]; } else { return null; } } set { if (base.Columns.ContainsKey(5)) { base.Columns[5] = value; } else { base.Columns.Add(5, value); } } }
+	public OrganizationsQActionRow() : base(0, 6) { }
+	public OrganizationsQActionRow(System.Object[] oRow) : base(0, 6, oRow) { }
 	public static implicit operator OrganizationsQActionRow(System.Object[] source) { return new OrganizationsQActionRow(source); }
 	public static implicit operator System.Object[](OrganizationsQActionRow source) { return source.ToObjectArray(); }
 	public System.String[] GetChildKeysOrganizationstatisticsOrganizationstatisticsorganization(SLProtocol protocol) { return (System.String[])protocol.NotifyProtocol(196, 3202, Key); }

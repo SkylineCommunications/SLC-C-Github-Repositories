@@ -37,12 +37,15 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			// Parse response
 			var response = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryWorkflowsResponse>(
 				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowscontent_205)));
-			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowslinkheader_255));
-			var link = new LinkHeader(linkHeader);
-			var url = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowsurl_105));
-			var table = RepositoryWorkflowsTable.GetTable();
+			if (response == null)
+			{
+				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|response was null.", LogType.Error, LogLevel.Level1);
+				HandleNextRepositoryWorkflow(protocol);
+				return;
+			}
 
 			// Parse url to check which respository this workflow is linked to
+			var url = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowsurl_105));
 			var pattern = "repos\\/(.*)\\/(.*)\\/actions\\/workflows(.*)";
 			var options = RegexOptions.Multiline;
 
@@ -51,24 +54,18 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			var owner = match.Groups[1].Value;
 			var name = match.Groups[2].Value;
 			var repositoryId = $"{owner}/{name}";
-
-			// Sanity checks
-			if (response == null)
-			{
-				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|response was null.", LogType.Error, LogLevel.Level1);
-				HandleNextRepositoryWorkflow(protocol);
-				return;
-			}
+			var primaryKeys = SLTables.Workflows.RepositoryID.Read.GetPrimaryKeysForValue(protocol, repositoryId);
 
 			if (response.TotalCount <= 0)
 			{
 				// No workflows for the repository
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryWorkflowsResponse|No workflows for the repo.", LogType.Information, LogLevel.Level2);
-				table.DeleteRow(protocol, table.Rows.Where(x => x.RepositoryID == $"{owner}/{name}").Select(x => x.ID).ToArray());
+				SLTables.Workflows.DeleteRows(protocol, primaryKeys);
 				HandleNextRepositoryWorkflow(protocol);
 				return;
 			}
 
+			var rows = new List<RepositoryworkflowsQActionRow>();
 			foreach (var workflow in response.Workflows)
 			{
 				if (workflow == null)
@@ -79,27 +76,25 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 
 				// Update existing workflow if found, otherwise create new one
 				var id = $"{owner}/{name}/actions/workflows/{workflow.Id}";
-				var row = table.Rows.Find(wf => wf.ID == id) ?? new RepositoryWorkflowsTableRow();
-				row.RepositoryID = repositoryId;
-				row.Name = workflow.Name;
-				row.State = workflow.State;
-				row.Path = workflow.Path;
-				row.CreatedAt = workflow.CreatedAt;
-				row.UpdatedAt = workflow.UpdatedAt;
-				row.DeletedAt = workflow.DeletedAt;
-				row.LastPolledAt = utcNow;
-
-				// If its a new row fill in ID and add it to the table.
-				if (String.IsNullOrEmpty(row.ID))
+				var row = new WorkflowsModel
 				{
-					row.ID = id;
-					table.Rows.Add(row);
-				}
+					ID = id,
+					RepositoryID = repositoryId,
+					Name = workflow.Name,
+					State = workflow.State,
+					Path = workflow.Path,
+					CreatedAt = workflow.CreatedAt,
+					UpdatedAt = workflow.UpdatedAt,
+					DeletedAt = workflow.DeletedAt,
+					LastPolledAt = utcNow,
+				};
+
+				rows.Add(WorkflowsRowConverter.Instance.ToRawValue(row));
 			}
 
-			if (table.Rows.Count > 0)
+			if (rows.Count > 0)
 			{
-				table.SaveToProtocol(protocol, true);
+				SLTables.Workflows.FillTableNoDelete(protocol, rows);
 			}
 
 			HandleNextRepositoryWorkflowPage(protocol, owner, name);
@@ -140,21 +135,14 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			// Check if there are more workflows to fetch for the current repository
 			if (!string.IsNullOrEmpty(linkHeader))
 			{
-				// Update the tags table
-				if (link.IsFirst)
-				{
-					var table = RepositoryWorkflowsTable.GetTable();
-					table.DeleteRow(protocol, table.Rows.Where(x => x.RepositoryID == $"{owner}/{name}").Select(x => x.ID).ToArray());
-				}
-
 				if (link.HasNext)
 				{
-					RepositoriesRequestHandler.HandleRepositoriesTagsRequest(protocol, owner, name, PollingConstants.PerPage, link.NextPage);
+					RepositoriesRequestHandler.HandleRepositoriesTagsRequest(protocol, $"{owner}/{name}", PollingConstants.PerPage, link.NextPage);
 					return;
 				}
 				else
 				{
-					RepositoryWorkflowsTable.GetTable(protocol).Cleanup(protocol, $"{owner}/{name}");
+					SLTables.Workflows.Cleanup(protocol, $"{owner}/{name}");
 				}
 			}
 
@@ -175,9 +163,9 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 
 			protocol.SetParameter(Parameter.getrepositoryworkflowsqueue, JsonConvert.SerializeObject(queue.Skip(1)));
 
-			var nextOwner = next.Split('/')[0];
-			var nextName = next.Split('/')[1];
-			RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, nextOwner, nextName, PollingConstants.PerPage, 1);
+			////var nextOwner = next.Split('/')[0];
+			////var nextName = next.Split('/')[1];
+			RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, next, PollingConstants.PerPage, 1);
 		}
 
 		public static void HandleWorkflowExecutionInterApp(SLProtocol protocol, string owner, string name, string workflowId, string message)

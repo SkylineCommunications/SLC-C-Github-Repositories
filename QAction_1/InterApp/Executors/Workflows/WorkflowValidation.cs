@@ -12,7 +12,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 
 	internal static class WorkflowValidation
 	{
-		public static bool Validate(AddWorkflowRequest workflowRequest, RepositoriesTableRow repo, out string result)
+		public static bool Validate(AddWorkflowRequest workflowRequest, RepositoriesModel repo, out string result)
 		{
 			result = String.Empty;
 
@@ -78,7 +78,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 			return true;
 		}
 
-		public static bool Validate(ExecuteWorkflowRequest workflowRequest, RepositoriesTableRow repo, out string result)
+		public static bool Validate(ExecuteWorkflowRequest workflowRequest, RepositoriesModel repo, out string result)
 		{
 			result = String.Empty;
 

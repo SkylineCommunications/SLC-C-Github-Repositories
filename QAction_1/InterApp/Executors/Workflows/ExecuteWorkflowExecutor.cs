@@ -16,7 +16,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 	{
 		private ExecuteWorkflowResponse result;
 
-		private RepositoriesTableRow repo;
+		private RepositoriesModel repo;
 
 		public ExecuteWorkflowExecutor(GenericInterAppMessage<ExecuteWorkflowRequest> message) : base(message)
 		{
@@ -34,7 +34,10 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 			var protocol = (SLProtocol)dataSource;
 
 			// Fetch the requested repository information
-			repo = RepositoriesTableRow.FromPK(protocol, Message.Data.RepositoryId.FullName);
+			if (SLTables.Repositories.TryGetRow(protocol, Message.Data.RepositoryId.FullName, out var rawRepo))
+			{
+				repo = RepositoriesRowConverter.Instance.FromRawValue(rawRepo);
+			}
 		}
 
 		public override void Parse() { }

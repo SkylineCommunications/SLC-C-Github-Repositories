@@ -53,7 +53,7 @@ namespace Skyline.Protocol.InterApp.Executors.Repositories
 			}
 
 			// Check if it was already removed.
-			if (RepositoriesTableRow.FromPK(protocol, $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}") == default)
+			if (!SLTables.Repositories.TryGetRow(protocol, $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}", out var rawRow))
 			{
 				returnMessage.Success = true;
 				returnMessage.Description = "The repository is already removed.";
@@ -75,8 +75,35 @@ namespace Skyline.Protocol.InterApp.Executors.Repositories
 				return true;
 			}
 
+			var row = RepositoriesRowConverter.Instance.FromRawValue(rawRow);
+			var isOrganizationTracked = SLTables.Organizations.Tracked.Read.GetCell(protocol, row.Owner).Value;
+			if (isOrganizationTracked.HasValue && isOrganizationTracked.Value)
+			{
+				// If the organization is tracked we cannot remove it.
+				SLTables.Repositories.AutoRemove.Read.SetCell(protocol, row.FullName, true);
+
+				returnMessage.Success = false;
+				returnMessage.Description = "Cannot remove the repository as it's owner organization is tracked. Enabled Auto-Remove instead.";
+				optionalReturnMessage = new GenericInterAppMessage<RemoveRepositoryResponse>(returnMessage);
+
+				// Add to the InterApp Queue
+				new IAC_MessagesTableRow
+				{
+					Guid = Guid.Parse(Message.Guid),
+					Status = IAC_MessageStatus.Confirmed,
+					Request = Message,
+					RequestType = typeof(RemoveRepositoryRequest),
+					Response = optionalReturnMessage,
+					ResponseType = typeof(RemoveRepositoryResponse),
+					Info = $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}",
+					ReceivedAt = DateTime.Now,
+				}.SaveToProtocol(protocol);
+
+				return true;
+			}
+
 			// Remove Repository
-			RepositoriesTable.GetTable().DeleteRow(protocol, $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}");
+			SLTables.Repositories.DeleteRow(protocol, $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}");
 
 			// Return message
 			returnMessage.Success = true;

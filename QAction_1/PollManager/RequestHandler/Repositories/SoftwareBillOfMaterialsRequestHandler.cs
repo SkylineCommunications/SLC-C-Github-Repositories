@@ -7,16 +7,16 @@
 	{
 		public static void HandleSoftwareBillOfMaterialsRequest(SLProtocol protocol)
 		{
-			var table = RepositoriesTable.GetTable(protocol);
-			foreach (var row in table.Rows)
+			var rows = SLTables.Repositories.GetPrimaryKeys(protocol);
+			foreach (var row in rows)
 			{
-				HandleSoftwareBillOfMaterialsRequest(protocol, row.Owner, row.Name);
+				HandleSoftwareBillOfMaterialsRequest(protocol, row);
 			}
 		}
 
-		public static void HandleSoftwareBillOfMaterialsRequest(SLProtocol protocol, string owner, string name)
+		public static void HandleSoftwareBillOfMaterialsRequest(SLProtocol protocol, string repositoryId)
 		{
-			protocol.SetParameter(Parameter.getrepositorysoftwarebillofmaterialsurl, $"repos/{owner}/{name}/dependency-graph/sbom");
+			protocol.SetParameter(Parameter.getrepositorysoftwarebillofmaterialsurl, $"repos/{repositoryId}/dependency-graph/sbom");
 			protocol.CheckTrigger(206);
 		}
 	}

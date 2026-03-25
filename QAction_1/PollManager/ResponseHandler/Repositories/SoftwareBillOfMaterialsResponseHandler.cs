@@ -1,7 +1,7 @@
 ﻿namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 {
 	using System;
-	using System.Linq;
+	using System.Collections.Generic;
 	using System.Text.RegularExpressions;
 
 	using Skyline.DataMiner.Scripting;
@@ -38,24 +38,26 @@
 			var owner = match.Groups["owner"].Value;
 			var repo = match.Groups["repo"].Value;
 
-			var table = SoftwareBillOfMaterialsTable.GetTable();
-			var row = table.Rows.Find(r => r.Name == response.Sbom.Name) ?? new SoftwareBillOfMaterialsTableRow();
-			row.RepositoryID = $"{owner}/{repo}";
-			row.SpdxId = response.Sbom.SpdxId;
-			row.SpdxVersion = response.Sbom.SpdxVersion;
-			row.DataLicense = response.Sbom.DataLicense;
-			row.DocumentNamespace = response.Sbom.DocumentNamespace;
-			row.CreateAt = DateTime.SpecifyKind(response.Sbom.CreationInfo.Created, DateTimeKind.Utc);
-			row.LastPolledAt = utcNow;
-
-			// If its a new row fill in Name and add it to the table.
-			if (row.Name == Exceptions.NotAvailable)
+			var row = new SoftwareBillOfMaterialsModel
 			{
-				row.Name = response.Sbom.Name;
-				table.Rows.Add(row);
-			}
+				Name = response.Sbom.Name,
+				RepositoryID = $"{owner}/{repo}",
+				SpdxId = response.Sbom.SpdxId,
+				SpdxVersion = response.Sbom.SpdxVersion,
+				DataLicense = response.Sbom.DataLicense,
+				DocumentNamespace = response.Sbom.DocumentNamespace,
+				CreatedAt = DateTime.SpecifyKind(response.Sbom.CreationInfo.Created, DateTimeKind.Utc),
+				LastPolledAt = utcNow,
+			};
 
-			table.SaveToProtocol(protocol);
+			if (SLTables.SoftwareBillOfMaterials.Exists(protocol, row.Name))
+			{
+				SLTables.SoftwareBillOfMaterials.SetRow(protocol, SoftwareBillOfMaterialsRowConverter.Instance.ToRawValue(row));
+			}
+			else
+			{
+				SLTables.SoftwareBillOfMaterials.AddRow(protocol, SoftwareBillOfMaterialsRowConverter.Instance.ToRawValue(row));
+			}
 
 			HandleSoftwareBillOfMaterialsPackagesResponse(protocol, row.RepositoryID, response);
 			HandleSoftwareBillOfMaterialsRelationshipsResponse(protocol, row.RepositoryID, response);
@@ -64,57 +66,57 @@
 		private static void HandleSoftwareBillOfMaterialsPackagesResponse(SLProtocol protocol, string repositoryId, SoftwareBillOfMaterialsResponse response)
 		{
 			var utcNow = DateTime.UtcNow;
-			var table = SoftwareBillOfMaterialsPackagesTable.GetTable();
+			var rows = new List<RepositorysoftwarebillofmaterialspackagesQActionRow>();
 			foreach (var package in response.Sbom.Packages)
 			{
 				var id = $"{response.Sbom.Name}/{package.SpdxId}";
-				var row = table.Rows.Find(r => r.Instance == id) ?? new SoftwareBillOfMaterialsPackagesTableRow();
-				row.SoftwareBillOfMaterialsName = response.Sbom.Name;
-				row.RepositoryID = repositoryId;
-				row.SpdxId = package.SpdxId;
-				row.Name = package.Name;
-				row.Version = package.VersionInfo;
-				row.DownloadLocation = package.DownloadLocation;
-				row.FilesAnalyzed = package.FilesAnalyzed;
-				row.LicenseConcluded = package.LicenseConcluded ?? Exceptions.NotAvailable;
-				row.LicenseDeclared = package.LicenseDeclared ?? Exceptions.NotAvailable;
-				row.Supplier = package.Supplier ?? Exceptions.NotAvailable;
-				row.CopyrightText = package.CopyrightText ?? Exceptions.NotAvailable;
-				row.LastPolledAt = utcNow;
-
-				if (row.Instance == Exceptions.NotAvailable)
+				var row = new SoftwareBillOfMaterialsPackagesModel
 				{
-					row.Instance = id;
-					table.Rows.Add(row);
-				}
+					Instance = id,
+					SoftwareBillOfMaterialsName = response.Sbom.Name,
+					RepositoryID = repositoryId,
+					SpdxId = package.SpdxId,
+					Name = package.Name,
+					Version = package.VersionInfo,
+					DownloadLocation = package.DownloadLocation,
+					FilesAnalyzed = package.FilesAnalyzed,
+					LicenseConcluded = package.LicenseConcluded ?? Exceptions.NotAvailable,
+					LicenseDeclared = package.LicenseDeclared ?? Exceptions.NotAvailable,
+					Supplier = package.Supplier ?? Exceptions.NotAvailable,
+					CopyrightText = package.CopyrightText ?? Exceptions.NotAvailable,
+					LastPolledAt = utcNow,
+				};
+
+				rows.Add(SoftwareBillOfMaterialsPackagesRowConverter.Instance.ToRawValue(row));
 			}
 
-			table.SaveToProtocol(protocol, true);
+			SLTables.SoftwareBillOfMaterialsPackages.FillTableNoDelete(protocol, rows);
+			SLTables.SoftwareBillOfMaterialsPackages.Cleanup(protocol, repositoryId);
 		}
 
 		private static void HandleSoftwareBillOfMaterialsRelationshipsResponse(SLProtocol protocol, string repositoryId, SoftwareBillOfMaterialsResponse response)
 		{
 			var utcNow = DateTime.UtcNow;
-			var table = SoftwareBillOfMaterialsRelationshipsTable.GetTable();
+			var rows = new List<RepositorysoftwarebillofmaterialsrelationshipsQActionRow>();
 			foreach (var relationship in response.Sbom.Relationships)
 			{
 				var id = $"{response.Sbom.Name}/{relationship.SpdxElementId}/{relationship.RelatedSpdxElement}";
-				var row = table.Rows.Find(r => r.Instance == id) ?? new SoftwareBillOfMaterialsRelationshipsTableRow();
-				row.SoftwareBillOfMaterialsName = response.Sbom.Name;
-				row.RepositoryID = repositoryId;
-				row.SpdxElementID = relationship.SpdxElementId;
-				row.RelatedSpdxElementID = relationship.RelatedSpdxElement;
-				row.RelationshipType = relationship.RelationshipType;
-				row.LastPolledAt = utcNow;
-
-				if (row.Instance == Exceptions.NotAvailable)
+				var row = new SoftwareBillOfMaterialsRelationshipsModel
 				{
-					row.Instance = id;
-					table.Rows.Add(row);
-				}
+					Instance = id,
+					SoftwareBillOfMaterialsName = response.Sbom.Name,
+					RepositoryID = repositoryId,
+					SpdxElementID = relationship.SpdxElementId,
+					RelatedSpdxElementID = relationship.RelatedSpdxElement,
+					RelationshipType = relationship.RelationshipType,
+					LastPolledAt = utcNow,
+				};
+
+				rows.Add(SoftwareBillOfMaterialsRelationshipsRowConverter.Instance.ToRawValue(row));
 			}
 
-			table.SaveToProtocol(protocol, true);
+			SLTables.SoftwareBillOfMaterialsRelationships.FillTableNoDelete(protocol, rows);
+			SLTables.SoftwareBillOfMaterialsRelationships.Cleanup(protocol, repositoryId);
 		}
 	}
 }

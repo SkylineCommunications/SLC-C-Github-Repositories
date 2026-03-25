@@ -51,7 +51,8 @@
 			var name = match.Groups[2].Value;
 
 			// Update the repositories table
-			var repo = RepositoriesTable.GetTable().Rows.FirstOrDefault(x => x.FullName == $"{owner}/{name}");
+			var repo = RepositoriesRowConverter.Instance.FromRawValue(
+				SLTables.Repositories.GetRow(protocol, $"{owner}/{name}"));
 			if (repo == null)
 			{
 				return;
@@ -59,7 +60,7 @@
 
 			repo.PublicKeyID = response.KeyID;
 			repo.PublicKey = response.Key;
-			repo.SaveToProtocol(protocol);
+			SLTables.Repositories.SetRow(protocol, RepositoriesRowConverter.Instance.ToRawValue(repo));
 
 			HandleNextRepositoryPublicKey(protocol);
 		}
@@ -78,9 +79,9 @@
 
 			protocol.SetParameter(Parameter.getrepositorypublickeyqueue, JsonConvert.SerializeObject(queue.Skip(1)));
 
-			var nextOwner = next.Split('/')[0];
-			var nextName = next.Split('/')[1];
-			RepositoriesRequestHandler.HandleRepositoriesPublicKeysRequest(protocol, nextOwner, nextName);
+			////var nextOwner = next.Split('/')[0];
+			////var nextName = next.Split('/')[1];
+			RepositoriesRequestHandler.HandleRepositoriesPublicKeysRequest(protocol, next);
 		}
 	}
 }

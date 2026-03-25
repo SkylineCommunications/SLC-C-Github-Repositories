@@ -27,9 +27,6 @@
 			// Parse response
 			var response = SecureNewtonsoftDeserialization.DeserializeObject<List<RepositoryTagsResponse>>(
 				Convert.ToString(protocol.GetParameter(Parameter.getrepositorytagscontent)));
-			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositorytagslinkheader_253));
-			var link = new LinkHeader(linkHeader);
-
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|response was null.", LogType.Error, LogLevel.Level1);
@@ -54,7 +51,7 @@
 			var repositoryId = $"{owner}/{name}";
 
 			// Update the tags table
-			var table = RepositoryTagsTable.GetTable();
+			var rows = new List<RepositorytagsQActionRow>();
 			foreach (var tag in response)
 			{
 				if (tag == null)
@@ -65,36 +62,37 @@
 
 				// Update existing workflow if found, otherwise create new one
 				var id = $"{owner}/{name}/commits/{tag.Name}";
-				var row = table.Rows.Find(wf => wf.ID == id) ?? new RepositoryTagsTableRow();
-				row.Name = tag.Name;
-				row.RepositoryID = repositoryId;
-				row.CommitSHA = tag.Commit?.Sha ?? Exceptions.NotAvailable;
-				row.LastPolledAt = utcNow;
-
-				// If its a new row fill in ID and add it to the table.
-				if (String.IsNullOrEmpty(row.ID))
+				var row = new TagsModel
 				{
-					row.ID = id;
-					table.Rows.Add(row);
-				}
+					ID = id,
+					Name = tag.Name,
+					RepositoryID = repositoryId,
+					CommitSHA = tag.Commit?.Sha ?? Exceptions.NotAvailable,
+					LastPolledAt = utcNow,
+				};
+
+				rows.Add(TagsRowConverter.Instance.ToRawValue(row));
 			}
 
-			if (table.Rows.Count > 0)
+			if (rows.Count > 0)
 			{
-				table.SaveToProtocol(protocol, true);
+				SLTables.Tags.FillTableNoDelete(protocol, rows);
 			}
 
 			// Check if there are more tags to fetch
+			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositorytagslinkheader_253));
+			var link = new LinkHeader(linkHeader);
+
 			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|Current page: {link.CurrentPage}", LogType.Information, LogLevel.Level2);
 			protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|Has next page: {link.HasNext}", LogType.Information, LogLevel.Level2);
 
 			if (link.HasNext)
 			{
-				RepositoriesRequestHandler.HandleRepositoriesTagsRequest(protocol, owner, name, PollingConstants.PerPage, link.NextPage);
+				RepositoriesRequestHandler.HandleRepositoriesTagsRequest(protocol, repositoryId, PollingConstants.PerPage, link.NextPage);
 			}
 			else
 			{
-				RepositoryTagsTable.GetTable(protocol).Cleanup(protocol, repositoryId);
+				SLTables.Tags.Cleanup(protocol, repositoryId);
 			}
 		}
 	}

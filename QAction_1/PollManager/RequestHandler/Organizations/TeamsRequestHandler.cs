@@ -12,10 +12,10 @@
 
 		public static void HandleOrganizationTeamsRequest(SLProtocol protocol, int perPage, int page)
 		{
-			var table = OrganizationsTable.GetTable(protocol);
-			foreach (var org in table.Rows)
+			var organizations = SLTables.Organizations.GetPrimaryKeys(protocol);
+			foreach (var org in organizations)
 			{
-				HandleOrganizationTeamsRequest(protocol, org.Instance, perPage, page);
+				HandleOrganizationTeamsRequest(protocol, org, perPage, page);
 			}
 		}
 

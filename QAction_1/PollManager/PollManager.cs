@@ -121,7 +121,7 @@
 
 		public static void PollDeviceObjects(SLProtocol protocol, Dictionary<RequestType, PollSettings> pollItems, DateTime utcNow)
 		{
-			foreach (KeyValuePair<RequestType, PollSettings> pollItem in pollItems.OrderBy(x => (int)x.Key))
+			foreach (KeyValuePair<RequestType, PollSettings> pollItem in pollItems.OrderByDescending(x => (int)x.Key))
 			{
 				if (!pollItem.Value.Enabled
 					|| pollItem.Value.LastPollTime + pollItem.Value.PollFrequency > utcNow)

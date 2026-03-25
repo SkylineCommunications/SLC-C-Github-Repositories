@@ -136,10 +136,6 @@ namespace Skyline.Protocol.Tables
 		}
 		#endregion
 
-		#region Events
-		public static event EventHandler<IAC_MessagesEventArgs> OnChange;
-		#endregion
-
 		public List<IAC_MessagesTableRow> Rows { get; set; } = new List<IAC_MessagesTableRow>();
 
 		public static IAC_MessagesTable GetTable(SLProtocol protocol = null)

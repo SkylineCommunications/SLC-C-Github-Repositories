@@ -13,13 +13,11 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;
 
-#pragma warning disable S101 // Types should be named in PascalCase
 	public class AddInternalNugetCICDWorkflowExecutor : MessageExecutor<GenericInterAppMessage<AddInternalNugetCICDWorkflowRequest>>
-#pragma warning restore S101 // Types should be named in PascalCase
 	{
 		private AddWorkflowResponse result;
 
-		private RepositoriesTableRow repo;
+		private RepositoriesModel repo;
 
 		public AddInternalNugetCICDWorkflowExecutor(GenericInterAppMessage<AddInternalNugetCICDWorkflowRequest> message) : base(message)
 		{
@@ -37,7 +35,10 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 			var protocol = (SLProtocol)dataSource;
 
 			// Fetch the requested repository information
-			repo = RepositoriesTableRow.FromPK(protocol, Message.Data.RepositoryId.FullName);
+			if (SLTables.Repositories.TryGetRow(protocol, Message.Data.RepositoryId.FullName, out var rawRepo))
+			{
+				repo = RepositoriesRowConverter.Instance.FromRawValue(rawRepo);
+			}
 		}
 
 		public override void Parse() { }
@@ -93,7 +94,7 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 
 		public override Message CreateReturnMessage()
 		{
-			if(result != null)
+			if (result != null)
 			{
 				return new GenericInterAppMessage<AddWorkflowResponse>(result);
 			}
