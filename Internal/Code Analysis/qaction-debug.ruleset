@@ -309,32 +309,6 @@
 		<Rule Id="S927" Action="Warning" />
 	</Rules>
 	<Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
-		<Rule Id="SA1600" Action="None" />
-		<Rule Id="SA1601" Action="None" />
-		<Rule Id="SA1602" Action="None" />
-		<Rule Id="SA1609" Action="None" />
-		<Rule Id="SA1610" Action="None" />
-		<Rule Id="SA1633" Action="None" />
-		<Rule Id="SA1634" Action="None" />
-		<Rule Id="SA1635" Action="None" />
-		<Rule Id="SA1637" Action="None" />
-		<Rule Id="SA1636" Action="None" />
-		<Rule Id="SA1639" Action="None" />
-		<Rule Id="SA1640" Action="None" />
-		<Rule Id="SA1641" Action="None" />
-		<Rule Id="SA1638" Action="None" />
-		<Rule Id="SA1649" Action="None" />
-		<Rule Id="SA1503" Action="None" />
-		<Rule Id="SA1402" Action="None" />
-		<Rule Id="SA1403" Action="None" />
-		<Rule Id="SA1309" Action="None" />
-		<Rule Id="SA1310" Action="None" />
-		<Rule Id="SA1101" Action="None" />
-		<Rule Id="SA1123" Action="None" />
-		<Rule Id="SA1124" Action="None" />
-		<Rule Id="SA1127" Action="None" />
-		<Rule Id="SA1128" Action="None" />
-		<Rule Id="SA1121" Action="None" />
 		<Rule Id="SA1000" Action="None" />
 		<Rule Id="SA1001" Action="None" />
 		<Rule Id="SA1003" Action="None" />
@@ -350,6 +324,33 @@
 		<Rule Id="SA1017" Action="None" />
 		<Rule Id="SA1018" Action="None" />
 		<Rule Id="SA1027" Action="None" />
+		<Rule Id="SA1101" Action="None" />
+		<Rule Id="SA1118" Action="None" />
+		<Rule Id="SA1121" Action="None" />
+		<Rule Id="SA1123" Action="None" />
+		<Rule Id="SA1124" Action="None" />
+		<Rule Id="SA1127" Action="None" />
+		<Rule Id="SA1128" Action="None" />
 		<Rule Id="SA1305" Action="Warning" />
+		<Rule Id="SA1309" Action="None" />
+		<Rule Id="SA1310" Action="None" />
+		<Rule Id="SA1402" Action="None" />
+		<Rule Id="SA1403" Action="None" />
+		<Rule Id="SA1503" Action="None" />
+		<Rule Id="SA1600" Action="None" />
+		<Rule Id="SA1601" Action="None" />
+		<Rule Id="SA1602" Action="None" />
+		<Rule Id="SA1609" Action="None" />
+		<Rule Id="SA1610" Action="None" />
+		<Rule Id="SA1633" Action="None" />
+		<Rule Id="SA1634" Action="None" />
+		<Rule Id="SA1635" Action="None" />
+		<Rule Id="SA1636" Action="None" />
+		<Rule Id="SA1637" Action="None" />
+		<Rule Id="SA1638" Action="None" />
+		<Rule Id="SA1639" Action="None" />
+		<Rule Id="SA1640" Action="None" />
+		<Rule Id="SA1641" Action="None" />
+		<Rule Id="SA1649" Action="None" />
 	</Rules>
 </RuleSet>

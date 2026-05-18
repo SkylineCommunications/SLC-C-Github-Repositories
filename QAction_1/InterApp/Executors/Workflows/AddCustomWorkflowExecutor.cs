@@ -40,7 +40,9 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 			}
 		}
 
-		public override void Parse() { }
+		public override void Parse()
+		{
+		}
 
 		public override bool Validate()
 		{
@@ -54,7 +56,9 @@ namespace Skyline.Protocol.InterApp.Executors.Workflows
 			return true;
 		}
 
-		public override void Modify() { }
+		public override void Modify()
+		{
+		}
 
 		public override void DataSets(object dataDestination)
 		{

@@ -126,6 +126,30 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			HandleWorkflowExecutionInterApp(protocol, owner, name, workflowId, message);
 		}
 
+		public static void HandleWorkflowExecutionInterApp(SLProtocol protocol, string owner, string name, string workflowId, string message)
+		{
+			// Check if there are Topics InterApp messages waiting for confirmation
+			var table = IAC_MessagesTable.GetTable(protocol);
+
+			foreach (var iacRow in table.Rows.Where(iac => iac.ResponseType.AssemblyQualifiedName == typeof(ExecuteWorkflowResponse).AssemblyQualifiedName))
+			{
+				var request = (GenericInterAppMessage<ExecuteWorkflowRequest>)iacRow.Request;
+
+				if (request.Data.RepositoryId.Owner == owner &&
+					request.Data.RepositoryId.Name == name &&
+					request.Data.WorkflowId == workflowId &&
+					iacRow.Status == IAC_MessageStatus.InProgress)
+				{
+					var returnMessage = (GenericInterAppMessage<ExecuteWorkflowResponse>)iacRow.Response;
+					returnMessage.Data.Success = true;
+					returnMessage.Data.Description = message;
+					iacRow.Request.Reply(protocol.SLNet.RawConnection, returnMessage, Types.KnownTypes);
+					iacRow.Status = IAC_MessageStatus.Confirmed;
+					iacRow.SaveToProtocol(protocol);
+				}
+			}
+		}
+
 		private static void HandleNextRepositoryWorkflowPage(SLProtocol protocol, string owner, string name)
 		{
 			// Check if there are more workflows to fetch
@@ -166,30 +190,6 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			////var nextOwner = next.Split('/')[0];
 			////var nextName = next.Split('/')[1];
 			RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, next, PollingConstants.PerPage, 1);
-		}
-
-		public static void HandleWorkflowExecutionInterApp(SLProtocol protocol, string owner, string name, string workflowId, string message)
-		{
-			// Check if there are Topics InterApp messages waiting for confirmation
-			var table = IAC_MessagesTable.GetTable(protocol);
-
-			foreach (var iacRow in table.Rows.Where(iac => iac.ResponseType.AssemblyQualifiedName == typeof(ExecuteWorkflowResponse).AssemblyQualifiedName))
-			{
-				var request = (GenericInterAppMessage<ExecuteWorkflowRequest>)iacRow.Request;
-
-				if (request.Data.RepositoryId.Owner == owner &&
-					request.Data.RepositoryId.Name == name &&
-					request.Data.WorkflowId == workflowId &&
-					iacRow.Status == IAC_MessageStatus.InProgress)
-				{
-					var returnMessage = (GenericInterAppMessage<ExecuteWorkflowResponse>)iacRow.Response;
-					returnMessage.Data.Success = true;
-					returnMessage.Data.Description = message;
-					iacRow.Request.Reply(protocol.SLNet.RawConnection, returnMessage, Types.KnownTypes);
-					iacRow.Status = IAC_MessageStatus.Confirmed;
-					iacRow.SaveToProtocol(protocol);
-				}
-			}
 		}
 	}
 }

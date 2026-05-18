@@ -45,7 +45,9 @@
 			}
 		}
 
-		public override void Parse() { }
+		public override void Parse()
+		{
+		}
 
 		public override bool Validate()
 		{
@@ -94,7 +96,9 @@
 			return true;
 		}
 
-		public override void Modify() { }
+		public override void Modify()
+		{
+		}
 
 		public override void DataSets(object dataDestination)
 		{

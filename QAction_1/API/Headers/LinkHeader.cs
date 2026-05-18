@@ -15,8 +15,8 @@
 
 	public class LinkHeader
 	{
-		private static readonly Regex relRegex = new Regex("(?<=rel=\").+?(?=\")", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-		private static readonly Regex linkRegex = new Regex("(?<=<).+?(?=>)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+		private static readonly Regex RelRegex = new Regex("(?<=rel=\").+?(?=\")", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+		private static readonly Regex LinkRegex = new Regex("(?<=<).+?(?=>)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
 		private readonly string headerRaw;
 
@@ -42,7 +42,7 @@
 
 		public int LastPage { get; private set; }
 
-		public int CurrentPage { get; private set; }
+		public int CurrentPage { get; }
 
 		private static int GetPageFromUrl(string url)
 		{
@@ -57,8 +57,8 @@
 			var links = new Dictionary<string, string>();
 			foreach (var entry in entries)
 			{
-				var relMatch = relRegex.Match(entry);
-				var linkMatch = linkRegex.Match(entry);
+				var relMatch = RelRegex.Match(entry);
+				var linkMatch = LinkRegex.Match(entry);
 
 				if (relMatch.Success && linkMatch.Success)
 				{

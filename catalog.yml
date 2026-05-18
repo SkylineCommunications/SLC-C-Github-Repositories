@@ -38,13 +38,13 @@ id: eece1db3-7a77-4182-bc0a-40e9158efc90
 #   Max length: 100 characters.
 #   Cannot contain newlines.
 #   Cannot contain leading or trailing whitespace characters.
-title: Github Repositories
+title: GitHub Repositories
 
 # [Optional]
 # General information about the Catalog item.
 #   Max length: 100,000 characters
 # Currently not shown in the Catalog UI but will be supported in the near future.
-short_description: 'A DataMiner connector that can track github repositories.'
+short_description: 'A DataMiner connector that can track GitHub repositories and run GitHub actions from DataMiner.'
 
 # [Optional]
 # A valid URL that points to the source code.
@@ -57,7 +57,7 @@ source_code_url: https://github.com/SkylineCommunications/SLC-C-Github-Repositor
 #   A valid URL
 #   Max length: 2048 characters
 # Currently not shown in the Catalog UI but will be supported in the near future.
-documentation_url: https://github.com/SkylineCommunications/SLC-C-Github-Repositories/blob/1.0.0.X/Documentation/README.md
+documentation_url: https://github.com/SkylineCommunications/SLC-C-Github-Repositories/blob/1.0.1.X/Documentation/README.md
 
 # [Optional]
 # People who are responsible for this Catalog item. Might be developers, but this is not required.
@@ -76,4 +76,6 @@ owners:
 #   Cannot contain newlines.
 #   Cannot contain leading or trailing whitespace characters.
 tags:
-  - Github
+  - GitHub
+
+vendor_id: 66a0e91f-9833-48dd-a1da-df95747f2045
