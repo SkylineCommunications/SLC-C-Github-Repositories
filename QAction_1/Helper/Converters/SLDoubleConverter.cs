@@ -7,7 +7,9 @@
 		public double? FromRawValue(object rawValue)
 		{
 			if (rawValue != null)
+			{
 				return Convert.ToDouble(rawValue);
+			}
 
 			return null;
 		}

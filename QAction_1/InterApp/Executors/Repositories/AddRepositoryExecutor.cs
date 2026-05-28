@@ -115,8 +115,8 @@ namespace Skyline.Protocol.InterApp.Executors.Repositories
 			}
 
 			// Poll the repository
-			RepositoriesRequestHandler.HandleRepositoriesPublicKeysRequest(protocol, $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}");
-			RepositoriesRequestHandler.HandleRepositoriesRequest(protocol, $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}");
+			RepositoriesRequestHandler.HandleRepositoriesPublicKeysRequest(protocol, $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}", true);
+			RepositoriesRequestHandler.HandleRepositoriesRequest(protocol, $"{Message.Data.RepositoryId.Owner}/{Message.Data.RepositoryId.Name}", true);
 
 			// Return message
 			returnMessage.Success = true;

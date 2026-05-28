@@ -26,7 +26,7 @@
 			};
 
 			protocol.SetParameters(sets.Keys.ToArray(), sets.Values.ToArray());
-			protocol.CheckTrigger(224);
+			protocol.CheckTrigger((int)Triggers.PutRepositoryTeamCollaboratorNow);
 		}
 	}
 }

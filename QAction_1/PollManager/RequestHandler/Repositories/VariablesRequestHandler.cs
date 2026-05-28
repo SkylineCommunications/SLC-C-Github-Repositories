@@ -24,7 +24,7 @@ namespace Skyline.Protocol.PollManager.RequestHandler.Repositories
 
 			protocol.SetParameter(Parameter.postrepositoryvariableurl_135, $"repos/{repositoryId}/actions/variables");
 			protocol.SetParameter(Parameter.postrepositoryvariablebody_185, JsonConvert.SerializeObject(body));
-			protocol.CheckTrigger(235);
+			protocol.CheckTrigger((int)Triggers.PostRepositoryVariableNow);
 		}
 	}
 }

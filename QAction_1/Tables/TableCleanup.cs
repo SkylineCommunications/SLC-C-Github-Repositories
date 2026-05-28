@@ -6,7 +6,7 @@
 
 	public class TableCleanup
 	{
-		public static void Cleanup(SLProtocol protocol)
+		public static void Cleanup(SLProtocol protocol, bool executeNow)
 		{
 			CleanupInterApp(protocol);
 			SLTables.Tags.Cleanup(protocol);

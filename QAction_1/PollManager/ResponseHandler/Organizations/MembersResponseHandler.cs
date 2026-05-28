@@ -102,7 +102,7 @@
 			var link = new LinkHeader(linkHeader);
 			if (link.HasNext)
 			{
-				OrganizationsRequestHandler.HandleOrganizationMembersRequest(protocol, org, PollingConstants.PerPage, link.NextPage);
+				OrganizationsRequestHandler.HandleOrganizationMembersRequest(protocol, org, link.NextPage, true);
 			}
 			else
 			{

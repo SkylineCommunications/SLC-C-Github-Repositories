@@ -31,10 +31,15 @@
 				return;
 			}
 
-			// Parse response
-			var response = SecureNewtonsoftDeserialization.DeserializeObject<PublicKey>(
-				Convert.ToString(protocol.GetParameter(Parameter.getrepositorypublickeycontent)));
-			var url = Convert.ToString(protocol.GetParameter(Parameter.getrepositorypublickeyurl));
+			var parameterIds = new uint[]
+			{
+				Parameter.getrepositorypublickeycontent,
+				Parameter.getrepositorypublickeyurl,
+			};
+
+			var parameterValues = Array.ConvertAll((object[])protocol.GetParameters(parameterIds), Convert.ToString);
+			var response = SecureNewtonsoftDeserialization.DeserializeObject<PublicKey>(parameterValues[0]);
+			var url = parameterValues[1];
 
 			if (response == null)
 			{
@@ -85,7 +90,7 @@
 
 			////var nextOwner = next.Split('/')[0];
 			////var nextName = next.Split('/')[1];
-			RepositoriesRequestHandler.HandleRepositoriesPublicKeysRequest(protocol, next);
+			RepositoriesRequestHandler.HandleRepositoriesPublicKeysRequest(protocol, next, true);
 		}
 	}
 }

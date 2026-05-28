@@ -8,7 +8,8 @@ namespace Skyline.DataMiner.Utils.Github.API.V20221128.Repositories
     using Newtonsoft.Json;
 
 	// Root myDeserializedClass = SecureNewtonsoftDeserialization.DeserializeObject<List<Root>>(myJsonResponse);
-	public class Asset
+
+    public class Asset
     {
         [JsonProperty("url")]
         public string Url { get; set; }

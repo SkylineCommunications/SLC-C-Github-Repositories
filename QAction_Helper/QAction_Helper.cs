@@ -640,6 +640,11 @@ public static class Parameter
 		public const int pollmanagerpollfrequency_21054 = 21054;
 		/// <summary>PID: 21054 | Type: write</summary>
 		public const int pollmanagerpollfrequency = 21054;
+		/// <summary>PID: 21058 | Type: write</summary>
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public const int pollmanagerpagelimit_21058 = 21058;
+		/// <summary>PID: 21058 | Type: write</summary>
+		public const int pollmanagerpagelimit = 21058;
 		/// <summary>PID: 9000092 | Type: write</summary>
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public const int iac_messagespagebuttons_9000092 = 9000092;
@@ -2351,6 +2356,11 @@ public static class Parameter
 			public const int pollmanagerpreviouslypolled_21007 = 21007;
 			/// <summary>PID: 21007 | Type: read</summary>
 			public const int pollmanagerpreviouslypolled = 21007;
+			/// <summary>PID: 21008 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int pollmanagerpagelimit_21008 = 21008;
+			/// <summary>PID: 21008 | Type: read</summary>
+			public const int pollmanagerpagelimit = 21008;
 			public class Write
 			{
 				/// <summary>PID: 21006 | Type: write</summary>
@@ -2392,6 +2402,11 @@ public static class Parameter
 			public const int pollmanagerpreviouslypolled_21007 = 6;
 			/// <summary>IDX: 6 | Type: read</summary>
 			public const int pollmanagerpreviouslypolled = 6;
+			/// <summary>IDX: 7 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int pollmanagerpagelimit_21008 = 7;
+			/// <summary>IDX: 7 | Type: read</summary>
+			public const int pollmanagerpagelimit = 7;
 		}
 	}
 	public class Iac_messages
@@ -2535,6 +2550,8 @@ public class WriteParameters
 	public System.Object Pollmanagerpollstate {get { return Protocol.GetParameter(21053); }set { Protocol.SetParameter(21053, value); }}
 	/// <summary>PID: 21054  | Type: write</summary>
 	public System.Object Pollmanagerpollfrequency {get { return Protocol.GetParameter(21054); }set { Protocol.SetParameter(21054, value); }}
+	/// <summary>PID: 21058  | Type: write</summary>
+	public System.Object Pollmanagerpagelimit {get { return Protocol.GetParameter(21058); }set { Protocol.SetParameter(21058, value); }}
 	/// <summary>PID: 9000092  | Type: write | DISCREETS: Table Cleanup... = Inter-App Cleanup</summary>
 	public System.Object Iac_messagespagebuttons {get { return Protocol.GetParameter(9000092); }set { Protocol.SetParameter(9000092, value); }}
 	/// <summary>PID: 9000143  | Type: write</summary>
@@ -3093,8 +3110,11 @@ public interface SLProtocolExt : SLProtocol
 	object Pollmanagerrefresh { get; set; }
 	object Pollmanagerpreviouslypolled_21007 { get; set; }
 	object Pollmanagerpreviouslypolled { get; set; }
+	object Pollmanagerpagelimit_21008 { get; set; }
+	object Pollmanagerpagelimit { get; set; }
 	object Pollmanagerpollstate_21053 { get; set; }
 	object Pollmanagerpollfrequency_21054 { get; set; }
+	object Pollmanagerpagelimit_21058 { get; set; }
 	object Memberorganizationlinkslastpolledatutc_21999 { get; set; }
 	object Memberorganizationlinkslastpolledatutc { get; set; }
 	object Memberorganizationlinksinstance_22001 { get; set; }
@@ -4443,12 +4463,20 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Pollmanagerpreviouslypolled_21007 {get { return GetParameter(21007); }set { SetParameter(21007, value); }}
 	/// <summary>PID: 21007  | Type: read | EXCEPTIONS: Not Polled = 0</summary>
 	public System.Object Pollmanagerpreviouslypolled {get { return GetParameter(21007); }set { SetParameter(21007, value); }}
+	/// <summary>PID: 21008  | Type: read | EXCEPTIONS: N/A = -2</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Pollmanagerpagelimit_21008 {get { return GetParameter(21008); }set { SetParameter(21008, value); }}
+	/// <summary>PID: 21008  | Type: read | EXCEPTIONS: N/A = -2</summary>
+	public System.Object Pollmanagerpagelimit {get { return GetParameter(21008); }set { SetParameter(21008, value); }}
 	/// <summary>PID: 21053  | Type: write | DISCREETS: Disabled = 0, Enabled = 1</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Pollmanagerpollstate_21053 {get { return GetParameter(21053); }set { SetParameter(21053, value); }}
 	/// <summary>PID: 21054  | Type: write</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Pollmanagerpollfrequency_21054 {get { return GetParameter(21054); }set { SetParameter(21054, value); }}
+	/// <summary>PID: 21058  | Type: write</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Pollmanagerpagelimit_21058 {get { return GetParameter(21058); }set { SetParameter(21058, value); }}
 	/// <summary>PID: 21999  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Memberorganizationlinkslastpolledatutc_21999 {get { return GetParameter(21999); }set { SetParameter(21999, value); }}
@@ -5587,8 +5615,13 @@ public class PollmanagerQActionRow : QActionTableRow
 	public System.Object Pollmanagerpreviouslypolled_21007 { get { if (base.Columns.ContainsKey(6)) { return base.Columns[6]; } else { return null; } } set { if (base.Columns.ContainsKey(6)) { base.Columns[6] = value; } else { base.Columns.Add(6, value); } } }
 	/// <summary>PID: 21007 | Type: read</summary>
 	public System.Object Pollmanagerpreviouslypolled { get { if (base.Columns.ContainsKey(6)) { return base.Columns[6]; } else { return null; } } set { if (base.Columns.ContainsKey(6)) { base.Columns[6] = value; } else { base.Columns.Add(6, value); } } }
-	public PollmanagerQActionRow() : base(0, 7) { }
-	public PollmanagerQActionRow(System.Object[] oRow) : base(0, 7, oRow) { }
+	/// <summary>PID: 21008 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Pollmanagerpagelimit_21008 { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
+	/// <summary>PID: 21008 | Type: read</summary>
+	public System.Object Pollmanagerpagelimit { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
+	public PollmanagerQActionRow() : base(0, 8) { }
+	public PollmanagerQActionRow(System.Object[] oRow) : base(0, 8, oRow) { }
 	public static implicit operator PollmanagerQActionRow(System.Object[] source) { return new PollmanagerQActionRow(source); }
 	public static implicit operator System.Object[](PollmanagerQActionRow source) { return source.ToObjectArray(); }
 }

@@ -24,6 +24,7 @@
 				SLTables.PollManager.PollFrequency.Read.Map<PollManagerModel>(m => m.PollFrequency),
 				SLTables.PollManager.LastPolled.Read.Map<PollManagerModel>(m => m.LastPolledUTCTime),
 				SLTables.PollManager.PreviouslyPolled.Read.Map<PollManagerModel>(m => m.PreviouslyPolledUTCTime),
+				SLTables.PollManager.PageLimit.Read.Map<PollManagerModel>(m => m.PageLimit),
 			};
 			_columnWriteMaps = new ColumnWriteMapBase<PollManagerModel>[]
 			{
@@ -33,6 +34,7 @@
 				SLTables.PollManager.PollFrequency.Read.MapWrite<PollManagerModel>(m => m.PollFrequency),
 				SLTables.PollManager.LastPolled.Read.MapWrite<PollManagerModel>(m => m.LastPolledUTCTime),
 				SLTables.PollManager.PreviouslyPolled.Read.MapWrite<PollManagerModel>(m => m.PreviouslyPolledUTCTime),
+				SLTables.PollManager.PageLimit.Read.MapWrite<PollManagerModel>(m => m.PageLimit),
 			};
 		}
 
@@ -74,6 +76,8 @@
 		public DateTime? LastPolledUTCTime { get; set; }
 
 		public DateTime? PreviouslyPolledUTCTime { get; set; }
+
+		public int PageLimit { get; set; }
 	}
 
 	public class PollManagerQActionTable : SLTable<PollmanagerQActionRow>
@@ -115,6 +119,11 @@
 				Parameter.Pollmanager.Pid.pollmanagerpreviouslypolled_21007,
 				new PreviouslyPolledConverter(),
 				this);
+
+			PageLimit = new SLReadColumn<int>(
+				Parameter.Pollmanager.Idx.pollmanagerpagelimit_21008,
+				Parameter.Pollmanager.Pid.pollmanagerpagelimit_21008,
+				this);
 		}
 
 		public event EventHandler<PollManagerStateChangedEventArgs> StateChanged;
@@ -131,9 +140,11 @@
 
 		public SLReadColumn<DateTime?> PreviouslyPolled { get; }
 
+		public SLReadColumn<int> PageLimit { get; }
+
 		public PollManagerModel GetRowByRequestType(SLProtocol protocol, RequestType requestType)
 		{
-			var row = SLTables.PollManager.GetRow(protocol, Convert.ToString((int)requestType));
+			var row = GetRow(protocol, Convert.ToString((int)requestType));
 			if (row == default)
 			{
 				return default;

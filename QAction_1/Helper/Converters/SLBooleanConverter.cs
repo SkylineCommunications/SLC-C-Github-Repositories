@@ -20,8 +20,10 @@
 	{
 		public bool? FromRawValue(object rawValue)
 		{
-			if (rawValue is null)
+			if (rawValue == null)
+			{
 				return null;
+			}
 
 			var rawBool = Convert.ToInt16(rawValue);
 			return Convert.ToBoolean(rawBool);

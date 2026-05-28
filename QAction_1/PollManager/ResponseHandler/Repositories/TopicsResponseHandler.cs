@@ -33,10 +33,15 @@
 				return;
 			}
 
-			// Parse response
-			var response = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryTopics>(
-				Convert.ToString(protocol.GetParameter(Parameter.getrepositorytopicscontent)));
-			var url = Convert.ToString(protocol.GetParameter(Parameter.getrepositorytopicsurl));
+			var parameterIds = new uint[]
+			{
+				Parameter.getrepositorytopicscontent,
+				Parameter.getrepositorytopicsurl,
+			};
+
+			var parameterValues = Array.ConvertAll((object[])protocol.GetParameters(parameterIds), Convert.ToString);
+			var response = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryTopics>(parameterValues[0]);
+			var url = parameterValues[1];
 
 			if (response == null)
 			{
@@ -56,10 +61,15 @@
 				return;
 			}
 
-			// Parse response
-			var response = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryTopics>(
-				Convert.ToString(protocol.GetParameter(Parameter.putrepositorytopicscontent)));
-			var url = Convert.ToString(protocol.GetParameter(Parameter.putrepositorytopicsurl));
+			var parameterIds = new uint[]
+			{
+				Parameter.putrepositorytopicscontent,
+				Parameter.putrepositorytopicsurl,
+			};
+
+			var parameterValues = Array.ConvertAll((object[])protocol.GetParameters(parameterIds), Convert.ToString);
+			var response = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryTopics>(parameterValues[0]);
+			var url = parameterValues[1];
 
 			if (response == null)
 			{
@@ -161,7 +171,7 @@
 
 			////var nextOwner = next.Split('/')[0];
 			////var nextName = next.Split('/')[1];
-			RepositoriesRequestHandler.HandleRepositoriesTopicsRequest(protocol, next, PollingConstants.PerPage, 1);
+			RepositoriesRequestHandler.HandleRepositoriesTopicsRequest(protocol, next, 1, true);
 		}
 	}
 }

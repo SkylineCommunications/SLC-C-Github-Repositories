@@ -44,7 +44,10 @@ namespace Skyline.Protocol.API.Workflows
 				{
 					Push = new Push
 					{
-						Branches = new List<string>(),
+						Branches = new List<string>
+						{
+							"**",
+						},
 						Tags = new List<string>
 						{
 							"[0-9]+.[0-9]+.[0-9]+.[0-9]+",
@@ -93,7 +96,10 @@ namespace Skyline.Protocol.API.Workflows
 				{
 					Push = new Push
 					{
-						Branches = new List<string>(),
+						Branches = new List<string>
+						{
+							"**",
+						},
 						Tags = new List<string>
 						{
 							"[0-9]+.[0-9]+.[0-9]+.[0-9]+",
@@ -172,8 +178,7 @@ namespace Skyline.Protocol.API.Workflows
 					{
 						Branches = new List<string>
 						{
-							"main",
-							"master",
+							"**",
 						},
 						Tags = new List<string>
 						{
@@ -225,7 +230,10 @@ namespace Skyline.Protocol.API.Workflows
 				{
 					Push = new Push
 					{
-						Branches = new List<string>(),
+						Branches = new List<string>
+						{
+							"**",
+						},
 						Tags = new List<string>
 						{
 							"[0-9]+.[0-9]+.[0-9]+.[0-9]+",
@@ -276,8 +284,7 @@ namespace Skyline.Protocol.API.Workflows
 					{
 						Branches = new List<string>
 						{
-							"main",
-							"master",
+							"**",
 						},
 						Tags = new List<string>
 						{

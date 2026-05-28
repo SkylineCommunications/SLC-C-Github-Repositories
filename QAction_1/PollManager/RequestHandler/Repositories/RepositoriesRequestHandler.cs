@@ -14,7 +14,7 @@
 
 	public static partial class RepositoriesRequestHandler
 	{
-		public static void HandleRepositoriesRequest(SLProtocol protocol)
+		public static void HandleRepositoriesRequest(SLProtocol protocol, bool executeNow)
 		{
 			// Retrieve tracked organizations
 			var trackedOrganizations = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -39,14 +39,15 @@
 				.ToArray();
 			foreach (var row in repositories.Where(repo => !trackedOrganizations.Contains(repo.Owner)))
 			{
-				HandleRepositoriesRequest(protocol, row.FullName);
+				HandleRepositoriesRequest(protocol, row.FullName, executeNow);
 			}
 		}
 
-		public static void HandleRepositoriesRequest(SLProtocol protocol, string repositoryId)
+		public static void HandleRepositoriesRequest(SLProtocol protocol, string repositoryId, bool executeNow)
 		{
 			protocol.SetParameter(Parameter.getrepositoryurl, $"repos/{repositoryId}");
-			protocol.CheckTrigger(201);
+			var trigger = executeNow ? Triggers.GetRepositoryNow : Triggers.GetRepository;
+			protocol.CheckTrigger((int)trigger);
 		}
 
 		public static void CreateRepositoryContent(SLProtocol protocol, string repositoryId, string path, string content, string commitMessage)
@@ -65,7 +66,7 @@
 			};
 
 			protocol.SetParameters(sets.Keys.ToArray(), sets.Values.ToArray());
-			protocol.CheckTrigger(221);
+			protocol.CheckTrigger((int)Triggers.PutRepositoryContentNow);
 		}
 	}
 }

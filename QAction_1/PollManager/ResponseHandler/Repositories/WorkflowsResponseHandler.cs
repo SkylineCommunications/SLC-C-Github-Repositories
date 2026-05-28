@@ -161,7 +161,7 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			{
 				if (link.HasNext)
 				{
-					RepositoriesRequestHandler.HandleRepositoriesTagsRequest(protocol, $"{owner}/{name}", PollingConstants.PerPage, link.NextPage);
+					RepositoriesRequestHandler.HandleRepositoriesTagsRequest(protocol, $"{owner}/{name}", link.NextPage, true);
 					return;
 				}
 				else
@@ -189,7 +189,7 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 
 			////var nextOwner = next.Split('/')[0];
 			////var nextName = next.Split('/')[1];
-			RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, next, PollingConstants.PerPage, 1);
+			RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, next, 1, true);
 		}
 	}
 }

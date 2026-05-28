@@ -10,7 +10,7 @@
 
 	public static class ResponseHandler
 	{
-		private static IReadOnlyDictionary<RequestType, Action<SLProtocol>> handlers = new Dictionary<RequestType, Action<SLProtocol>>
+		private static readonly IReadOnlyDictionary<RequestType, Action<SLProtocol>> _handlers = new Dictionary<RequestType, Action<SLProtocol>>
 		{
 			{ RequestType.Repositories_Repositories,            RepositoriesResponseHandler.HandleRepositoriesResponse },
 			{ RequestType.Repositories_Tags,                    RepositoriesResponseHandler.HandleRepositoriesTagsResponse },
@@ -34,6 +34,6 @@
 			{ RequestType.Repositories_WorkflowExecution,       RepositoriesResponseHandler.HandleExecuteWorkflowResponse },
 		};
 
-		public static IReadOnlyDictionary<RequestType, Action<SLProtocol>> Handlers => handlers;
+		public static IReadOnlyDictionary<RequestType, Action<SLProtocol>> Handlers => _handlers;
 	}
 }

@@ -337,9 +337,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
-				<!-- SuppressValidator 2.9.4 This is correct -->
-				<Units>requests</Units>
-				<!-- /SuppressValidator 2.9.4 -->
+				<Units>Requests</Units>
 				<Range>
 					<Low>0</Low>
 				</Range>
@@ -377,9 +375,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
-				<!-- SuppressValidator 2.9.4 This is correct -->
-				<Units>requests</Units>
-				<!-- /SuppressValidator 2.9.4 -->
+				<Units>Requests</Units>
 				<Range>
 					<Low>0</Low>
 				</Range>
@@ -417,9 +413,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
-				<!-- SuppressValidator 2.9.4 This is correct -->
-				<Units>requests</Units>
-				<!-- /SuppressValidator 2.9.4 -->
+				<Units>Requests</Units>
 				<Range>
 					<Low>0</Low>
 				</Range>
@@ -581,7 +575,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
-		<Param id="101" save="true">
+		<Param id="101">
 			<Name>GetRepositoryUrl</Name>
 			<Description>Get Repository Url</Description>
 			<Type>read</Type>
@@ -591,7 +585,7 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
-		<Param id="102" save="true">
+		<Param id="102">
 			<Name>GetRepositoryIssuesUrl</Name>
 			<Description>Get Repository Issues Url</Description>
 			<Type>read</Type>
@@ -1857,9 +1851,9 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="3" pid="1004" type="retrieved" options="" />
 				<ColumnOption idx="4" pid="1005" type="retrieved" options=";save" />
 				<ColumnOption idx="5" pid="1006" type="retrieved" options="" />
-				<ColumnOption idx="6" pid="1007" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="7" pid="1008" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="8" pid="1009" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="6" pid="1007" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
+				<ColumnOption idx="7" pid="1008" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
+				<ColumnOption idx="8" pid="1009" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
 				<ColumnOption idx="9" pid="1010" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="10" pid="1011" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="11" pid="1012" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
@@ -1886,7 +1880,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3-1005|4-1006|5-1007|6-1008|7-1009|8-1010|9-1011|10-1012|11-1013|12-1014|13-1015|14-1016|15-1017|16-1018|17-1019|18-1020|19,width:100-134-157-140-165-137-156-160-165-157-123-128-147-103-100-0-0-0-0-100,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT-INT-INT-STRING-STRING-STRING-STRING-INT-STRING-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3-1005|4-1006|5-1007|6-1008|7-1009|8-1010|9-1011|10-1012|11-1013|12-1014|13-1015|14-1016|15-1017|16-1018|17-1019|18-1020|19,width:100-134-157-140-165-137-156-160-165-157-123-128-147-103-100-0-0-0-0-100,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-STRING-INT-INT-INT|DESC|0-INT-INT-INT-INT-STRING-STRING-STRING-STRING-INT-STRING-STRING,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1001" trending="false">
@@ -2084,6 +2078,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 				<Exceptions>
 					<Exception id="2" value="-2">
 						<Display state="disabled">N/A</Display>
@@ -2115,6 +2110,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 				<Exceptions>
 					<Exception id="2" value="-2">
 						<Display state="disabled">N/A</Display>
@@ -2146,6 +2142,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 				<Exceptions>
 					<Exception id="2" value="-2">
 						<Display state="disabled">N/A</Display>
@@ -2576,6 +2573,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -2722,6 +2720,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -2742,8 +2741,8 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="7" pid="1408" type="retrieved" options="" />
 				<ColumnOption idx="8" pid="1409" type="retrieved" options="" />
 				<ColumnOption idx="9" pid="1410" type="retrieved" options="" />
-				<ColumnOption idx="10" pid="1411" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="11" pid="1412" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="10" pid="1411" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
+				<ColumnOption idx="11" pid="1412" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
 				<ColumnOption idx="12" pid="1413" type="retrieved" options=";foreignKey=1000" />
 				<ColumnOption idx="13" pid="1399" type="retrieved" options="" />
 			</ArrayOptions>
@@ -3022,6 +3021,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 			</Interprete>
 			<!-- SuppressValidator 2.5.1 Depend on the use case -->
 			<Alarm>
@@ -3030,6 +3030,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -3046,6 +3047,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 			</Interprete>
 			<!-- SuppressValidator 2.5.1 Depend on the use case -->
 			<Alarm>
@@ -3054,6 +3056,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -3146,6 +3149,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -3161,9 +3165,9 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="2" pid="1603" type="retrieved" options="" />
 				<ColumnOption idx="3" pid="1604" type="retrieved" options="" />
 				<ColumnOption idx="4" pid="1605" type="retrieved" options="" />
-				<ColumnOption idx="5" pid="1606" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="6" pid="1607" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="7" pid="1608" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="5" pid="1606" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
+				<ColumnOption idx="6" pid="1607" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
+				<ColumnOption idx="7" pid="1608" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
 				<ColumnOption idx="8" pid="1599" type="retrieved" options="" />
 			</ArrayOptions>
 			<Information>
@@ -3181,7 +3185,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Display>
 			<Measurement>
 				<!-- SuppressValidator 2.31.9 More important to be grouped by repository then by datetime column -->
-				<Type options="tab=columns:1601|0-1602|1-1603|2-1604|3-1605|4-1606|5-1607|6-1608|7-1599|8,width:0-200-100-108-100-156-156-156-0,sort:STRING|ASC|0-STRING-STRING-STRING-STRING-INT|ASC|1-INT-INT-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1601|0-1602|1-1603|2-1604|3-1605|4-1606|5-1607|6-1608|7-1599|8,width:0-200-100-108-100-156-156-156-0,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT,lines:25,filter:true">table</Type>
 				<!-- /SuppressValidator 2.31.9 -->
 			</Measurement>
 		</Param>
@@ -3329,6 +3333,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 				<Exceptions>
 					<Exception id="2" value="-2">
 						<Display state="disabled">N/A</Display>
@@ -3343,6 +3348,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -3365,6 +3371,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 						<Value>-2</Value>
 					</Exception>
 				</Exceptions>
+				<Decimals>8</Decimals>
 			</Interprete>
 			<!-- SuppressValidator 2.5.1 Depends on use case -->
 			<Alarm>
@@ -3373,6 +3380,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -3389,6 +3397,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 				<Exceptions>
 					<Exception id="2" value="-2">
 						<Display state="disabled">N/A</Display>
@@ -3402,6 +3411,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -3439,6 +3449,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -3461,8 +3472,8 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="9" pid="1810" type="retrieved" options="" />
 				<ColumnOption idx="10" pid="1811" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="11" pid="1812" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="12" pid="1813" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="13" pid="1814" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="12" pid="1813" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
+				<ColumnOption idx="13" pid="1814" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
 				<ColumnOption idx="14" pid="1815" type="retrieved" options="" />
 				<ColumnOption idx="15" pid="1799" type="retrieved" options="" />
 			</ArrayOptions>
@@ -3480,7 +3491,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1801|0-1802|1-1803|2-1804|3-1805|4-1806|5-1807|6-1808|7-1809|8-1810|9-1811|10-1812|11-1813|12-1814|13-1815|14-1799|15,width:100-100-100-100-100-100-100-100-100-113-144-144-156-156-145-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT-INT-INT-STRING-STRING|DESC-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1801|0-1802|1-1803|2-1804|3-1805|4-1806|5-1807|6-1808|7-1809|8-1810|9-1811|10-1812|11-1813|12-1814|13-1815|14-1799|15,width:100-100-100-100-100-100-100-100-100-113-144-144-156-156-145-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT-INT-INT-INT-INT|DESC-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1801" trending="false">
@@ -3788,6 +3799,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 			</Interprete>
 			<!-- SuppressValidator 2.5.1 Depends on the use case -->
 			<Alarm>
@@ -3816,6 +3828,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 			</Interprete>
 			<!-- SuppressValidator 2.5.1 Depends on the use case -->
 			<Alarm>
@@ -3889,6 +3902,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -3906,9 +3920,9 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="4" pid="2005" type="retrieved" options="" />
 				<ColumnOption idx="5" pid="2006" type="retrieved" options="" />
 				<ColumnOption idx="6" pid="2007" type="retrieved" options="" />
-				<ColumnOption idx="7" pid="2008" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="8" pid="2009" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="9" pid="2010" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="7" pid="2008" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
+				<ColumnOption idx="8" pid="2009" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
+				<ColumnOption idx="9" pid="2010" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
 				<ColumnOption idx="10" pid="2011" type="retrieved" options=";foreignKey=1000" />
 				<ColumnOption idx="11" pid="1999" type="retrieved" options="" />
 			</ArrayOptions>
@@ -3926,7 +3940,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:2001|0-2002|1-2003|2-2004|3-2005|4-2006|5-2007|6-2008|7-2009|8-2010|9-2011|10-1999|11,width:100-100-200-200-100-100-144-156-156-156-111-0,sort:STRING|DESC|1-INT-STRING-STRING-STRING-STRING-STRING-INT|DESC|0-INT-INT-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:2001|0-2002|1-2003|2-2004|3-2005|4-2006|5-2007|6-2008|7-2009|8-2010|9-2011|10-1999|11,width:100-100-200-200-100-100-144-156-156-156-111-0,sort:STRING|DESC|1-INT-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="2001" trending="false">
@@ -4119,6 +4133,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 			</Interprete>
 			<!-- SuppressValidator 2.5.1 Depend on the use case -->
 			<Alarm>
@@ -4127,6 +4142,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -4143,6 +4159,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 			</Interprete>
 			<!-- SuppressValidator 2.5.1 Depend on the use case -->
 			<Alarm>
@@ -4151,6 +4168,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -4167,6 +4185,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 				<Exceptions>
 					<Exception id="2" value="-2">
 						<Display state="disabled">N/A</Display>
@@ -4181,6 +4200,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -4221,6 +4241,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -4367,6 +4388,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -4407,6 +4429,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -4742,6 +4765,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -4927,6 +4951,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -5194,6 +5219,7 @@ Are you sure you want to continue.]]>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -5479,6 +5505,7 @@ Are you sure you want to continue.]]>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -5714,6 +5741,7 @@ Are you sure you want to continue.]]>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -5900,6 +5928,7 @@ Are you sure you want to continue.]]>
 				<ColumnOption idx="4" pid="21005" type="retrieved" options="" />
 				<ColumnOption idx="5" pid="21006" type="retrieved" options="" />
 				<ColumnOption idx="6" pid="21007" type="retrieved" options="" />
+				<ColumnOption idx="7" pid="21008" type="retrieved" options=";save" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>Poll Manager</Subtext>
@@ -5916,7 +5945,7 @@ Are you sure you want to continue.]]>
 			</Display>
 			<Measurement>
 				<!-- SuppressValidator 2.31.9 Poll Manager Table -->
-				<Type options="tab=columns:21001|0-21002|1-21003|2-21004|3-21005|4-21006|5-21007|6,width:0-200-80-138-156-106-0,sort:STRING|ASC-STRING-STRING-INT-INT-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:21001|0-21002|1-21003|2-21004|3-21005|4-21006|5-21007|6-21008|7,width:0-200-80-138-156-106-0-100,sort:STRING|ASC-STRING-STRING-INT-INT-STRING-INT-INT,lines:25,filter:true">table</Type>
 				<!-- /SuppressValidator 2.31.9 -->
 			</Measurement>
 		</Param>
@@ -6029,6 +6058,7 @@ Are you sure you want to continue.]]>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 				<Range>
 					<Low>10</Low>
 				</Range>
@@ -6059,6 +6089,7 @@ Are you sure you want to continue.]]>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 				<Range>
 					<Low>10</Low>
 				</Range>
@@ -6144,6 +6175,57 @@ Are you sure you want to continue.]]>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="21008" trending="false">
+			<Name>PollManagerPageLimit</Name>
+			<Description>Page Limit (Poll Manager)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Determines the number of units that can be retrieved in a single API call. Lower Page Limits help when the units of the call are large while higher Page Limits help when the units are small and numerous.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="1" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Range>
+					<Low>0</Low>
+					<High>100</High>
+				</Range>
+				<Units>Units</Units>
+			</Display>
+			<Measurement>
+				<Type options="custom=disableWrite:21008=-1">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="21058" setter="true">
+			<Name>PollManagerPageLimit</Name>
+			<Description>Page Limit (Poll Manager)</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Range>
+					<Low>0</Low>
+					<High>100</High>
+				</Range>
+				<Units>Units</Units>
+			</Display>
+			<Measurement>
+				<Type options="custom=disableWrite:21008=-1">number</Type>
 			</Measurement>
 		</Param>
 		
@@ -6644,18 +6726,18 @@ Are you sure you want to continue.]]>
 	<QActions>
 		<QAction id="1" name="Precompiled Code" encoding="csharp" options="precompile" />
 		<QAction id="2" name="After Startup" encoding="csharp" triggers="2" />
-		<QAction id="19" name="Parse general parameters" encoding="csharp" triggers="11;19"></QAction>
+		<QAction id="19" name="Parse general parameters" encoding="csharp" triggers="11;19"/>
 
 		<QAction id="990" name="Repositories Table - ContextMenu" encoding="csharp" triggers="990" />
-		<QAction id="1000" name="Add Repositories page" encoding="csharp" triggers="500"></QAction>
+		<QAction id="1000" name="Add Repositories page" encoding="csharp" triggers="500"/>
 
 		<QAction id="1590" name="Repository Workflow Table - ContextMenu" encoding="csharp" triggers="1590" />
-		<QAction id="1600" name="Add Repository Workflow page" encoding="csharp" triggers="550;651"></QAction>
+		<QAction id="1600" name="Add Repository Workflow page" encoding="csharp" triggers="550;651"/>
 
 		<QAction id="3000" name="Organizations Table - Changes" encoding="csharp" triggers="3105" row="true" />
 
 		<QAction id="20000" name="HTTP Request Handling" encoding="csharp" triggers="30" />
-		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;206;210;211;212;213;220;221;222;223;224;226;228;229;230;235;281"></QAction>
+		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;206;210;211;212;213;220;221;222;223;224;226;228;229;230;235;281"/>
 		<QAction id="20002" name="HTTP Poll Manager Updates" encoding="csharp" row="true" triggers="21006;21053" />
 
 		<QAction id="9000000" name="Process Incoming InterApp Messages" encoding="csharp" triggers="9000000"/>
@@ -7730,6 +7812,154 @@ Are you sure you want to continue.]]>
 				<Id>335</Id>
 			</Content>
 		</Trigger>
+
+		<Trigger id="401">
+			<Name>Start GetRepository Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>401</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="402">
+			<Name>Start GetRepository Issues Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>402</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="403">
+			<Name>Start GetRepository Tags Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>403</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="404">
+			<Name>Start GetRepository Releases Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>404</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="405">
+			<Name>Start GetRepository Workflows Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>405</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="406">
+			<Name>Start GetRepository Software Bill of Materials Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>406</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="410">
+			<Name>Start GetUser Organizations Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>410</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="411">
+			<Name>Start GetOrganization Repositories Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>411</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="412">
+			<Name>Start GetOrganization Teams Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>412</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="413">
+			<Name>Start GetOrganization Members Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>413</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="420">
+			<Name>Start GetRepository Content Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>420</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="421">
+			<Name>Start PutRepository Content Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>421</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="422">
+			<Name>Start PostRepository Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>422</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="423">
+			<Name>Start PutRepository User Collaborator Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>423</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="424">
+			<Name>Start PutRepository Team Collaborator Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>424</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="426">
+			<Name>Start PutRepository Secret Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>426</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="428">
+			<Name>Start GetRepository Public Key Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>428</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="429">
+			<Name>Start GetRepository Topics Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>429</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="430">
+			<Name>Start PutRepository Topics Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>430</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="431">
+			<Name>Start PostWorkflow Execution Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>431</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="435">
+			<Name>Start PostRepository Variable Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>435</Id>
+			</Content>
+		</Trigger>
 	</Triggers>
 
 	<Actions>
@@ -7753,107 +7983,107 @@ Are you sure you want to continue.]]>
 		<Action id="201">
 			<Name>Get Repository</Name>
 			<On id="201">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="202">
 			<Name>Get Repository Issues</Name>
 			<On id="202">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="203">
 			<Name>Get Repository Tags</Name>
 			<On id="203">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="204">
 			<Name>Get Repository Releases</Name>
 			<On id="204">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="205">
 			<Name>Get Repository Workflows</Name>
 			<On id="205">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="206">
 			<Name>Get Repository Software Bill of Materials</Name>
 			<On id="206">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="210">
 			<Name>Get User Organizations</Name>
 			<On id="210">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="211">
 			<Name>Get Organization Repositories</Name>
 			<On id="211">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="212">
 			<Name>Get Organization Teams</Name>
 			<On id="212">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="213">
 			<Name>Get Organization Members</Name>
 			<On id="213">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="220">
 			<Name>Get Repository Content</Name>
 			<On id="220">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="221">
 			<Name>Put Repository Content</Name>
 			<On id="221">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="222">
 			<Name>Post Repository</Name>
 			<On id="222">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="223">
 			<Name>Put Repository User Collaborator</Name>
 			<On id="223">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="224">
 			<Name>Put Repository Team Collaborator</Name>
 			<On id="224">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="226">
 			<Name>Put Repository Secret</Name>
 			<On id="226">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="228">
 			<Name>Get Repository Public Key</Name>
 			<On id="228">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="229">
 			<Name>Get Repository Topics</Name>
 			<On id="229">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="230">
 			<Name>Put Repository Topics</Name>
 			<On id="230">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="231">
 			<Name>Post Workflow Execution</Name>
 			<On id="231">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="235">
 			<Name>Post Repository Variable</Name>
 			<On id="235">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 
 		<Action id="251">
@@ -8056,6 +8286,112 @@ Are you sure you want to continue.]]>
 			<Name>Clear Post Repository Variable Content</Name>
 			<On id="235">parameter</On>
 			<Type>clear</Type>
+		</Action>
+
+		<Action id="401">
+			<Name>Get Repository Now</Name>
+			<On id="201">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="402">
+			<Name>Get Repository Issues Now</Name>
+			<On id="202">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="403">
+			<Name>Get Repository Tags Now</Name>
+			<On id="203">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="404">
+			<Name>Get Repository Releases Now</Name>
+			<On id="204">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="405">
+			<Name>Get Repository Workflows Now</Name>
+			<On id="205">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="406">
+			<Name>Get Repository Software Bill of Materials Now</Name>
+			<On id="206">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="410">
+			<Name>Get User Organizations Now</Name>
+			<On id="210">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="411">
+			<Name>Get Organization Repositories Now</Name>
+			<On id="211">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="412">
+			<Name>Get Organization Teams Now</Name>
+			<On id="212">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="413">
+			<Name>Get Organization Members Now</Name>
+			<On id="213">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="420">
+			<Name>Get Repository Content Now</Name>
+			<On id="220">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="421">
+			<Name>Put Repository Content Now</Name>
+			<On id="221">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="422">
+			<Name>Post Repository Now</Name>
+			<On id="222">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="423">
+			<Name>Put Repository User Collaborator Now</Name>
+			<On id="223">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="424">
+			<Name>Put Repository Team Collaborator Now</Name>
+			<On id="224">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="426">
+			<Name>Put Repository Secret Now</Name>
+			<On id="226">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="428">
+			<Name>Get Repository Public Key Now</Name>
+			<On id="228">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="429">
+			<Name>Get Repository Topics Now</Name>
+			<On id="229">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="430">
+			<Name>Put Repository Topics Now</Name>
+			<On id="230">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="431">
+			<Name>Post Workflow Execution Now</Name>
+			<On id="231">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="435">
+			<Name>Post Repository Variable Now</Name>
+			<On id="235">group</On>
+			<Type>execute next</Type>
 		</Action>
 	</Actions>
 
@@ -8284,6 +8620,7 @@ Are you sure you want to continue.]]>
 										</Provider>
 										<Changes>
 											<Change>Cleaning up Connector</Change>
+											<NewFeature>Added Page Limits to Poll Manager</NewFeature>
 										</Changes>
 										<References>
 											<TaskId>298519</TaskId>

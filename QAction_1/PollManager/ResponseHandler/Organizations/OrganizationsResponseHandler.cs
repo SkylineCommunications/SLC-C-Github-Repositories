@@ -76,7 +76,7 @@
 
 			if (link.HasNext)
 			{
-				OrganizationsRequestHandler.HandleUserOrganizationsRequest(protocol, PollingConstants.PerPage, link.NextPage);
+				OrganizationsRequestHandler.HandleUserOrganizationsRequest(protocol, link.NextPage, true);
 			}
 		}
 	}

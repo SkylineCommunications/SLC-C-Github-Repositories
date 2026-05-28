@@ -7,7 +7,9 @@
 		public UInt16? FromRawValue(object rawValue)
 		{
 			if (rawValue != null)
+			{
 				return Convert.ToUInt16(rawValue);
+			}
 
 			return null;
 		}

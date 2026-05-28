@@ -30,7 +30,7 @@ namespace Skyline.Protocol.PollManager.RequestHandler.Repositories
 
 			protocol.SetParameter(Parameter.putrepositorysecreturl, $"repos/{repositoryId}/actions/secrets/{secretName}");
 			protocol.SetParameter(Parameter.putrepositorysecretbody, JsonConvert.SerializeObject(body));
-			protocol.CheckTrigger(226);
+			protocol.CheckTrigger((int)Triggers.PutRepositorySecretNow);
 		}
 	}
 }

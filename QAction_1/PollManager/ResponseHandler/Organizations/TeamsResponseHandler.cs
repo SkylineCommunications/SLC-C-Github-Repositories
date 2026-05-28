@@ -82,7 +82,7 @@
 
 			if (link.HasNext)
 			{
-				OrganizationsRequestHandler.HandleOrganizationTeamsRequest(protocol, owner, PollingConstants.PerPage, link.NextPage);
+				OrganizationsRequestHandler.HandleOrganizationTeamsRequest(protocol, owner, link.NextPage, true);
 			}
 			else
 			{

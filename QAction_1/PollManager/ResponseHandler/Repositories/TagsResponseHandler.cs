@@ -88,7 +88,7 @@
 
 			if (link.HasNext)
 			{
-				RepositoriesRequestHandler.HandleRepositoriesTagsRequest(protocol, repositoryId, PollingConstants.PerPage, link.NextPage);
+				RepositoriesRequestHandler.HandleRepositoriesTagsRequest(protocol, repositoryId, link.NextPage, true);
 			}
 			else
 			{

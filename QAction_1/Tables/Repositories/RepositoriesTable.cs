@@ -335,7 +335,6 @@ namespace Skyline.Protocol.Tables
 				e.PollState != PollState.Disabled)
 			{
 				Repositories_Disabled(e.Protocol);
-				return;
 			}
 		}
 

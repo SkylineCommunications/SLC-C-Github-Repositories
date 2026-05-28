@@ -7,7 +7,9 @@
 		public Int32? FromRawValue(object rawValue)
 		{
 			if (rawValue != null)
+			{
 				return Convert.ToInt32(rawValue);
+			}
 
 			return null;
 		}

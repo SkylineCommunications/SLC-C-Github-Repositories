@@ -107,7 +107,7 @@
 					iacRow.Status = IAC_MessageStatus.Confirmed;
 					iacRow.SaveToProtocol(protocol);
 
-					RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, $"{request.RepositoryId.Owner}/{request.RepositoryId.Name}", PollingConstants.PerPage, 1);
+					RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, $"{request.RepositoryId.Owner}/{request.RepositoryId.Name}", 1, true);
 				}
 			}
 

@@ -19,12 +19,12 @@ namespace Skyline.Protocol.PollManager.RequestHandler.Repositories
 
 	public static partial class RepositoriesRequestHandler
 	{
-		public static void HandleRepositoriesWorkflowsRequest(SLProtocol protocol)
+		public static void HandleRepositoriesWorkflowsRequest(SLProtocol protocol, bool executeNow)
 		{
-			HandleRepositoriesWorkflowsRequest(protocol, PollingConstants.PerPage, 1);
+			HandleRepositoriesWorkflowsRequest(protocol, 1, executeNow);
 		}
 
-		public static void HandleRepositoriesWorkflowsRequest(SLProtocol protocol, int perPage, int page)
+		public static void HandleRepositoriesWorkflowsRequest(SLProtocol protocol, int page, bool executeNow)
 		{
 			var rows = SLTables.Repositories.GetPrimaryKeys(protocol);
 			if (!rows.Any())
@@ -33,13 +33,15 @@ namespace Skyline.Protocol.PollManager.RequestHandler.Repositories
 			}
 
 			protocol.SetParameter(Parameter.getrepositoryworkflowsqueue, JsonConvert.SerializeObject(rows.Skip(1)));
-			HandleRepositoriesWorkflowsRequest(protocol, rows[0], perPage, page);
+			HandleRepositoriesWorkflowsRequest(protocol, rows[0], page, executeNow);
 		}
 
-		public static void HandleRepositoriesWorkflowsRequest(SLProtocol protocol, string repositoryId, int perPage, int page)
+		public static void HandleRepositoriesWorkflowsRequest(SLProtocol protocol, string repositoryId, int page, bool executeNow)
 		{
+			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Repositories_Workflows)?.PageLimit ?? PollingConstants.PerPage;
 			protocol.SetParameter(Parameter.getrepositoryworkflowsurl, $"repos/{repositoryId}/actions/workflows?per_page={perPage}&page={page}");
-			protocol.CheckTrigger(205);
+			var trigger = executeNow ? Triggers.GetRepositoryWorkflowsNow : Triggers.GetRepositoryWorkflows;
+			protocol.CheckTrigger((int)trigger);
 		}
 
 		public static void CreateRepositoryWorkflow(SLProtocol protocol, string repositoryId, WorkflowType type)
@@ -82,7 +84,7 @@ namespace Skyline.Protocol.PollManager.RequestHandler.Repositories
 			};
 
 			protocol.SetParameters(sets.Keys.ToArray(), sets.Values.ToArray());
-			protocol.CheckTrigger(231);
+			protocol.CheckTrigger((int)Triggers.PostWorkflowExecutionNow);
 		}
 	}
 }
