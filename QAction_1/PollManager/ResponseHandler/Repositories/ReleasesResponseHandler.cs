@@ -3,19 +3,17 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using System.Text.RegularExpressions;
 
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
 	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 	using Skyline.Protocol;
+	using Skyline.Protocol.API;
 	using Skyline.Protocol.API.Headers;
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;
-
-	using static System.Net.Mime.MediaTypeNames;
 
 	public static partial class RepositoriesResponseHandler
 	{
@@ -43,15 +41,11 @@
 				return;
 			}
 
-			// Parse url to check which respository this issue is linked to
-			var pattern = "https:\\/\\/api.github.com\\/repos\\/(.*)\\/(.*)\\/releases\\/(\\d+)";
-			var options = RegexOptions.Multiline;
+			// Parse url to check which repository this release is linked to
+			GithubUrlHelper.TryParseRepoOwnerAndName(response[0]?.Url, out var owner, out var name);
+			var repositoryId = $"{owner}/{name}";
 
 			var utcNow = DateTime.UtcNow;
-			var match = Regex.Match(response[0]?.Url, pattern, options);
-			var owner = match.Groups[1].Value;
-			var name = match.Groups[2].Value;
-			var repositoryId = $"{owner}/{name}";
 
 			// Update the releases table
 			var rows = new List<RepositoryreleasesQActionRow>();
@@ -97,7 +91,7 @@
 				SLTables.Releases.FillTableNoDelete(protocol, rows);
 			}
 
-			HandleRepositoryReleaseAssetsResponse(protocol, response);
+			HandleRepositoryReleaseAssetsResponse(protocol, response, owner, name, repositoryId);
 
 			// Check if there are more releases to fetch
 			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryreleaseslinkheader_254));
@@ -117,25 +111,11 @@
 			}
 		}
 
-		public static void HandleRepositoryReleaseAssetsResponse(SLProtocol protocol, List<RepositoryReleasesResponse> response)
+		public static void HandleRepositoryReleaseAssetsResponse(SLProtocol protocol, List<RepositoryReleasesResponse> response, string owner, string name, string repositoryId)
 		{
-			// Check status code
-			if (!protocol.IsSuccessStatusCode())
-			{
-				return;
-			}
-
-			// Parse url to check which respository this issue is linked to
-			var pattern = "https:\\/\\/api.github.com\\/repos\\/(.*)\\/(.*)\\/releases\\/(\\d+)";
-			var options = RegexOptions.Multiline;
-
 			var utcNow = DateTime.UtcNow;
-			var match = Regex.Match(response[0]?.Url, pattern, options);
-			var owner = match.Groups[1].Value;
-			var name = match.Groups[2].Value;
-			var repositoryId = $"{owner}/{name}";
 
-			// Update the releases table
+			// Update the release assets table
 			var rows = new List<RepositoryreleaseassetsQActionRow>();
 			foreach (var release in response)
 			{
@@ -147,7 +127,7 @@
 
 				foreach (var asset in release.Assets)
 				{
-					// Update existing release if found, otherwise create new one
+					// Update existing release asset if found, otherwise create new one
 					var id = $"{owner}/{name}/releases/{release.Id}/{asset.Id}";
 					var row = new ReleaseAssetsModel
 					{

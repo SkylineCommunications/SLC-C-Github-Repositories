@@ -3,13 +3,13 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using System.Text.RegularExpressions;
 
 	using Newtonsoft.Json;
 
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
 	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
+	using Skyline.Protocol.API;
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;
@@ -47,13 +47,8 @@
 				return;
 			}
 
-			// Parse url to check which respository this issue is linked to
-			var pattern = "repos\\/(.*)\\/(.*)\\/actions/secrets/public-key";
-			var options = RegexOptions.Multiline;
-
-			var match = Regex.Match(url, pattern, options);
-			var owner = match.Groups[1].Value;
-			var name = match.Groups[2].Value;
+			// Parse url to check which repository this public key is linked to
+			GithubUrlHelper.TryParseRepoOwnerAndName(url, out var owner, out var name);
 
 			// Update the repositories table
 			if (!SLTables.Repositories.TryGetRow(protocol, $"{owner}/{name}", out var rawRow))
@@ -87,9 +82,6 @@
 			}
 
 			protocol.SetParameter(Parameter.getrepositorypublickeyqueue, JsonConvert.SerializeObject(queue.Skip(1)));
-
-			////var nextOwner = next.Split('/')[0];
-			////var nextName = next.Split('/')[1];
 			RepositoriesRequestHandler.HandleRepositoriesPublicKeysRequest(protocol, next, true);
 		}
 	}

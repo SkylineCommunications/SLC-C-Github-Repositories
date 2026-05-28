@@ -6,30 +6,28 @@ namespace Skyline.Protocol.YAML
 
     public static class YamlConvert
     {
+        private static readonly ISerializer _serializer = new SerializerBuilder()
+            .ConfigureDefaultValuesHandling(DefaultValuesHandling.OmitNull)
+            .Build();
+
+        private static readonly IDeserializer _deserializer = new DeserializerBuilder()
+            .Build();
+
         public static string SerializeObject<T>(T obj)
         {
-            var serializer = new SerializerBuilder()
-                .ConfigureDefaultValuesHandling(DefaultValuesHandling.OmitNull)
-                .Build();
-            return serializer.Serialize(obj);
+            return _serializer.Serialize(obj);
         }
 
         public static T DeserializeObject<T>(string obj)
         {
-            var deserializer = new DeserializerBuilder()
-                .Build();
-
-            var result = deserializer.Deserialize<T>(obj);
-            return result;
+            return _deserializer.Deserialize<T>(obj);
         }
 
         public static bool IsValidYaml(string obj)
         {
 			try
 			{
-				var deserializer = new DeserializerBuilder()
-					.Build();
-				deserializer.Deserialize<object>(obj);
+				_deserializer.Deserialize<object>(obj);
 				return true;
 			}
 			catch
