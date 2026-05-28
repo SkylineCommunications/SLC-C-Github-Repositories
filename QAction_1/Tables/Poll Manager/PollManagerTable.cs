@@ -120,7 +120,7 @@
 				new PreviouslyPolledConverter(),
 				this);
 
-			PageLimit = new SLReadColumn<int>(
+			PageLimit = new SLReadColumn<int?>(
 				Parameter.Pollmanager.Idx.pollmanagerpagelimit_21008,
 				Parameter.Pollmanager.Pid.pollmanagerpagelimit_21008,
 				this);
@@ -140,7 +140,7 @@
 
 		public SLReadColumn<DateTime?> PreviouslyPolled { get; }
 
-		public SLReadColumn<int> PageLimit { get; }
+		public SLReadColumn<int?> PageLimit { get; }
 
 		public PollManagerModel GetRowByRequestType(SLProtocol protocol, RequestType requestType)
 		{
