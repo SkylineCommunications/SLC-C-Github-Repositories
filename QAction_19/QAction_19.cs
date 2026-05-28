@@ -25,9 +25,9 @@ public static class QAction
         try
         {
             var trigger = protocol.GetTriggerParameter();
-            if(handlers.ContainsKey(trigger))
+            if (handlers.TryGetValue(trigger, out var handler))
             {
-                handlers[trigger](protocol);
+                handler(protocol);
             }
             else
             {

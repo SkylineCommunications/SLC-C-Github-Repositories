@@ -16,15 +16,13 @@ namespace Skyline.Protocol.Extensions
 
 	public static class Extensions
 	{
-		private const string StatusCodePattern = "HTTP\\/\\d+\\.\\d+\\s(\\d*)\\s(.*)";
+		private static readonly Regex StatusCodeRegex = new Regex("HTTP\\/\\d+\\.\\d+\\s(\\d*)\\s(.*)", RegexOptions.Multiline | RegexOptions.Compiled);
 
 		public static bool IsSuccessStatusCode(this SLProtocol protocol)
 		{
 			var statusCode = Convert.ToString(protocol.GetParameter(Parameter.statuscode));
 
-			RegexOptions options = RegexOptions.Multiline;
-
-			var match = Regex.Match(statusCode, StatusCodePattern, options);
+			var match = StatusCodeRegex.Match(statusCode);
 			var code = Convert.ToInt32(match.Groups[1].Value);
 			var message = match.Groups[2].Value.Trim();
 
@@ -43,9 +41,7 @@ namespace Skyline.Protocol.Extensions
 		{
 			var statusCode = Convert.ToString(protocol.GetParameter(Parameter.statuscode));
 
-			RegexOptions options = RegexOptions.Multiline;
-
-			var match = Regex.Match(statusCode, StatusCodePattern, options);
+			var match = StatusCodeRegex.Match(statusCode);
 			var code = Convert.ToInt32(match.Groups[1].Value);
 
 			return code;
@@ -80,11 +76,13 @@ namespace Skyline.Protocol.Extensions
 		public static T ParseEnumDescription<T>(string description) where T : Enum
 		{
 			var enumType = typeof(T);
-			var descriptions = enumType.GetFields().ToDictionary(field => field, field => field.GetCustomAttribute<DescriptionAttribute>());
-			var @enum = descriptions.FirstOrDefault(desc => desc.Value != null && desc.Value.Description == description);
-			if (@enum.Value != null)
+			foreach (var field in enumType.GetFields())
 			{
-				return (T)Enum.Parse(enumType, @enum.Key.Name);
+				var attrib = field.GetCustomAttribute<DescriptionAttribute>();
+				if (attrib != null && attrib.Description == description)
+				{
+					return (T)Enum.Parse(enumType, field.Name);
+				}
 			}
 
 			throw new KeyNotFoundException("There is no value for the given description");
@@ -92,10 +90,9 @@ namespace Skyline.Protocol.Extensions
 
 		public static List<List<T>> ToRows<T>(this IEnumerable<IEnumerable<T>> columns)
 		{
-			return columns.SelectMany(x => x)
-				.Select((x, i) => new { V = x, Index = i })
-				.GroupBy(x => (x.Index + 1) % columns.First().Count())
-				.Select(g => g.Select(x => x.V).ToList())
+			var columnList = columns.Select(c => c.ToList()).ToList();
+			return Enumerable.Range(0, columnList[0].Count)
+				.Select(r => columnList.Select(c => c[r]).ToList())
 				.ToList();
 		}
 

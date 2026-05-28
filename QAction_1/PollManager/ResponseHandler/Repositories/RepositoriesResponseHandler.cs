@@ -3,7 +3,6 @@
 	using System;
 	using System.IO;
 	using System.Linq;
-	using System.Text.RegularExpressions;
 	using System.Web;
 
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages;
@@ -12,6 +11,7 @@
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
 	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
+	using Skyline.Protocol.API;
 	using Skyline.Protocol.API.Content;
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.InterApp;
@@ -81,13 +81,8 @@
 			var url = response.Content.Url;
 			var table = IAC_MessagesTable.GetTable(protocol);
 
-			// Parse url to check which respository this issue is linked to
-			var pattern = "repos\\/(.*)\\/(.*)\\/contents\\/(.*)";
-			var options = RegexOptions.Multiline;
-
-			var match = Regex.Match(url, pattern, options);
-			var owner = match.Groups[1].Value;
-			var name = match.Groups[2].Value;
+			// Parse url to check which repository this content is linked to
+			GithubUrlHelper.TryParseRepoOwnerAndName(url, out var owner, out var name);
 
 			// Check if there are Workflow InterApp messages waiting on content creation
 			foreach (var iacRow in table.Rows.Where(iac => iac.ResponseType.AssemblyQualifiedName == typeof(AddWorkflowResponse).AssemblyQualifiedName))

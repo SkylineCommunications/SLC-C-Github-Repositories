@@ -3,7 +3,6 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using System.Text.RegularExpressions;
 
 	using Newtonsoft.Json;
 
@@ -12,6 +11,7 @@
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
 	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
+	using Skyline.Protocol.API;
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;
@@ -122,19 +122,12 @@
 
 		private static void HandleRepositoriesTopicsResponse(SLProtocol protocol, RepositoryTopics response, string url)
 		{
-			// Parse url to check which respository this issue is linked to
-			var pattern = "repos\\/(.*)\\/(.*)\\/topics";
-			var options = RegexOptions.Multiline;
-
-			var match = Regex.Match(url, pattern, options);
-			if (!match.Success)
+			// Parse url to check which repository this topic is linked to
+			if (!GithubUrlHelper.TryParseRepoOwnerAndName(url, out var owner, out var name))
 			{
 				protocol.Log($"QA{protocol.QActionID}|HandleRepositoriesTopicsResponse|Did not find a tracked repository for this request.", LogType.Information, LogLevel.Level1);
 				return;
 			}
-
-			var owner = match.Groups[1].Value;
-			var name = match.Groups[2].Value;
 
 			if (!SLTables.Repositories.TryGetRow(protocol, $"{owner}/{name}", out var rawRow))
 			{
@@ -168,9 +161,6 @@
 			}
 
 			protocol.SetParameter(Parameter.getrepositorytopicsqueue, JsonConvert.SerializeObject(queue.Skip(1)));
-
-			////var nextOwner = next.Split('/')[0];
-			////var nextName = next.Split('/')[1];
 			RepositoriesRequestHandler.HandleRepositoriesTopicsRequest(protocol, next, 1, true);
 		}
 	}

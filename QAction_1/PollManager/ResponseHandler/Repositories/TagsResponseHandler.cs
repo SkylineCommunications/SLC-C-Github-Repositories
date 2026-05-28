@@ -3,12 +3,12 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using System.Text.RegularExpressions;
 
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
 	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 	using Skyline.Protocol;
+	using Skyline.Protocol.API;
 	using Skyline.Protocol.API.Headers;
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
@@ -40,15 +40,11 @@
 				return;
 			}
 
-			// Parse url to check which respository this issue is linked to
-			var pattern = "https:\\/\\/api.github.com\\/repos\\/(.*)\\/(.*)\\/commits\\/(.*)";
-			var options = RegexOptions.Multiline;
+			// Parse url to check which repository this tag is linked to
+			GithubUrlHelper.TryParseRepoOwnerAndName(response[0]?.Commit.Url, out var owner, out var name);
+			var repositoryId = $"{owner}/{name}";
 
 			var utcNow = DateTime.UtcNow;
-			var match = Regex.Match(response[0]?.Commit.Url, pattern, options);
-			var owner = match.Groups[1].Value;
-			var name = match.Groups[2].Value;
-			var repositoryId = $"{owner}/{name}";
 
 			// Update the tags table
 			var rows = new List<RepositorytagsQActionRow>();
@@ -60,7 +56,7 @@
 					continue;
 				}
 
-				// Update existing workflow if found, otherwise create new one
+				// Update existing tag if found, otherwise create new one
 				var id = $"{owner}/{name}/commits/{tag.Name}";
 				var row = new TagsModel
 				{
