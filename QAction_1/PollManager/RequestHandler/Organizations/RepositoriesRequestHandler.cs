@@ -17,20 +17,21 @@
 				protocol,
 				SLTables.Organizations.Instance.Read.Map<OrganizationsModel>(m => m.Instance),
 				SLTables.Organizations.Tracked.Read.Map<OrganizationsModel>(m => m.Tracked));
+
+			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_Repositories)?.PageLimit ?? PollingConstants.PerPage;
 			foreach (var row in rows.Where(org => org.Tracked.HasValue && org.Tracked.Value))
 			{
-				HandleOrganizationRepositoriesRequest(protocol, row.Instance, executeNow);
+				HandleOrganizationRepositoriesRequest(protocol, row.Instance, perPage, executeNow);
 			}
 		}
 
-		public static void HandleOrganizationRepositoriesRequest(SLProtocol protocol, string organization, bool executeNow)
+		public static void HandleOrganizationRepositoriesRequest(SLProtocol protocol, string organization, int perPage, bool executeNow)
 		{
-			HandleOrganizationRepositoriesRequest(protocol, organization, 1, executeNow);
+			HandleOrganizationRepositoriesRequest(protocol, organization, perPage, 1, executeNow);
 		}
 
-		public static void HandleOrganizationRepositoriesRequest(SLProtocol protocol, string organization, int page, bool executeNow)
+		public static void HandleOrganizationRepositoriesRequest(SLProtocol protocol, string organization, int perPage, int page, bool executeNow)
 		{
-			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_Repositories)?.PageLimit ?? PollingConstants.PerPage;
 			protocol.SetParameter(Parameter.getorganizationrepositoriesurl, $"orgs/{organization}/repos?per_page={perPage}&page={page}");
 			var trigger = executeNow ? Triggers.GetOrganizationRepositoriesNow : Triggers.GetOrganizationRepositories;
 			protocol.CheckTrigger((int)trigger);

@@ -76,7 +76,8 @@
 
 			if (link.HasNext)
 			{
-				OrganizationsRequestHandler.HandleUserOrganizationsRequest(protocol, link.NextPage, true);
+				var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_User)?.PageLimit ?? PollingConstants.PerPage;
+				OrganizationsRequestHandler.HandleUserOrganizationsRequest(protocol, perPage, link.NextPage, true);
 			}
 		}
 	}

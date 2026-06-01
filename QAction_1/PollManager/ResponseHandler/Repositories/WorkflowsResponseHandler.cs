@@ -158,7 +158,8 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			{
 				if (link.HasNext)
 				{
-					RepositoriesRequestHandler.HandleRepositoriesTagsRequest(protocol, $"{owner}/{name}", link.NextPage, true);
+					var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Repositories_Workflows)?.PageLimit ?? PollingConstants.PerPage;
+					RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, $"{owner}/{name}", perPage, link.NextPage, true);
 					return;
 				}
 				else
@@ -183,7 +184,8 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			}
 
 			protocol.SetParameter(Parameter.getrepositoryworkflowsqueue, JsonConvert.SerializeObject(queue.Skip(1)));
-			RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, next, 1, true);
+			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Repositories_Workflows)?.PageLimit ?? PollingConstants.PerPage;
+			RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, next, perPage, 1, true);
 		}
 	}
 }

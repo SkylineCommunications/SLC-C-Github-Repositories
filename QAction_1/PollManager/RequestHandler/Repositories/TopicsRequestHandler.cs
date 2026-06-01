@@ -13,10 +13,11 @@
 	{
 		public static void HandleRepositoriesTopicsRequest(SLProtocol protocol, bool executeNext)
 		{
-			HandleRepositoriesTopicsRequest(protocol, 1, executeNext);
+			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Repositories_Topics)?.PageLimit ?? PollingConstants.PerPage;
+			HandleRepositoriesTopicsRequest(protocol, perPage, 1, executeNext);
 		}
 
-		public static void HandleRepositoriesTopicsRequest(SLProtocol protocol, int page, bool executeNext)
+		public static void HandleRepositoriesTopicsRequest(SLProtocol protocol, int perPage, int page, bool executeNext)
 		{
 			var rows = SLTables.Repositories.GetPrimaryKeys(protocol);
 			if (!rows.Any())
@@ -25,12 +26,11 @@
 			}
 
 			protocol.SetParameter(Parameter.getrepositorytopicsqueue, JsonConvert.SerializeObject(rows.Skip(1)));
-			HandleRepositoriesTopicsRequest(protocol, rows[0], page, executeNext);
+			HandleRepositoriesTopicsRequest(protocol, rows[0], perPage, page, executeNext);
 		}
 
-		public static void HandleRepositoriesTopicsRequest(SLProtocol protocol, string repositoryId, int page, bool executeNext)
+		public static void HandleRepositoriesTopicsRequest(SLProtocol protocol, string repositoryId, int perPage, int page, bool executeNext)
 		{
-			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Repositories_Topics)?.PageLimit ?? PollingConstants.PerPage;
 			protocol.SetParameter(Parameter.getrepositoryissuesurl, $"repos/{repositoryId}/topics?per_page={perPage}&page={page}&state=all");
 			var trigger = executeNext ? Triggers.GetRepositoryTopicsNow : Triggers.GetRepositoryTopics;
 			protocol.CheckTrigger((int)trigger);

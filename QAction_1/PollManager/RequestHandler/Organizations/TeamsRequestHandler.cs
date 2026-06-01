@@ -7,21 +7,21 @@
 	{
 		public static void HandleOrganizationsTeamsRequest(SLProtocol protocol, bool executeNow)
 		{
-			HandleOrganizationTeamsRequest(protocol, 1, executeNow);
+			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_Teams)?.PageLimit ?? PollingConstants.PerPage;
+			HandleOrganizationTeamsRequest(protocol, perPage, 1, executeNow);
 		}
 
-		public static void HandleOrganizationTeamsRequest(SLProtocol protocol, int page, bool executeNow)
+		public static void HandleOrganizationTeamsRequest(SLProtocol protocol, int perPage, int page, bool executeNow)
 		{
 			var organizations = SLTables.Organizations.GetPrimaryKeys(protocol);
 			foreach (var org in organizations)
 			{
-				HandleOrganizationTeamsRequest(protocol, org, page, executeNow);
+				HandleOrganizationTeamsRequest(protocol, org, perPage, page, executeNow);
 			}
 		}
 
-		public static void HandleOrganizationTeamsRequest(SLProtocol protocol, string organization, int page, bool executeNow)
+		public static void HandleOrganizationTeamsRequest(SLProtocol protocol, string organization, int perPage, int page, bool executeNow)
 		{
-			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_Teams)?.PageLimit ?? PollingConstants.PerPage;
 			protocol.SetParameter(Parameter.getorganizationteamsurl, $"orgs/{organization}/teams?per_page={perPage}&page={page}");
 			var trigger = executeNow ? Triggers.GetOrganizationTeamsNow : Triggers.GetOrganizationTeams;
 			protocol.CheckTrigger((int)trigger);

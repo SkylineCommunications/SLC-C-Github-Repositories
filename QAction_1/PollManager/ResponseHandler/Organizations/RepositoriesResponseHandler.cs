@@ -92,7 +92,8 @@
 
 			if (link.HasNext)
 			{
-				OrganizationsRequestHandler.HandleOrganizationRepositoriesRequest(protocol, response[0].Owner.Login, link.NextPage, true);
+				var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_Repositories)?.PageLimit ?? PollingConstants.PerPage;
+				OrganizationsRequestHandler.HandleOrganizationRepositoriesRequest(protocol, response[0].Owner.Login, perPage, link.NextPage, true);
 			}
 		}
 

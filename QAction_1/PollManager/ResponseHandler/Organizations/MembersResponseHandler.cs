@@ -102,7 +102,8 @@
 			var link = new LinkHeader(linkHeader);
 			if (link.HasNext)
 			{
-				OrganizationsRequestHandler.HandleOrganizationMembersRequest(protocol, org, link.NextPage, true);
+				var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_Members)?.PageLimit ?? PollingConstants.PerPage;
+				OrganizationsRequestHandler.HandleOrganizationMembersRequest(protocol, org, perPage, link.NextPage, true);
 			}
 			else
 			{

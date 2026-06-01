@@ -161,7 +161,8 @@
 			}
 
 			protocol.SetParameter(Parameter.getrepositorytopicsqueue, JsonConvert.SerializeObject(queue.Skip(1)));
-			RepositoriesRequestHandler.HandleRepositoriesTopicsRequest(protocol, next, 1, true);
+			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Repositories_Topics)?.PageLimit ?? PollingConstants.PerPage;
+			RepositoriesRequestHandler.HandleRepositoriesTopicsRequest(protocol, next, perPage, 1, true);
 		}
 	}
 }

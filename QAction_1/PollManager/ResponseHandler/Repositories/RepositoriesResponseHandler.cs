@@ -84,6 +84,7 @@
 			// Parse url to check which repository this content is linked to
 			GithubUrlHelper.TryParseRepoOwnerAndName(url, out var owner, out var name);
 
+			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Repositories_Workflows)?.PageLimit ?? PollingConstants.PerPage;
 			// Check if there are Workflow InterApp messages waiting on content creation
 			foreach (var iacRow in table.Rows.Where(iac => iac.ResponseType.AssemblyQualifiedName == typeof(AddWorkflowResponse).AssemblyQualifiedName))
 			{
@@ -102,7 +103,7 @@
 					iacRow.Status = IAC_MessageStatus.Confirmed;
 					iacRow.SaveToProtocol(protocol);
 
-					RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, $"{request.RepositoryId.Owner}/{request.RepositoryId.Name}", 1, true);
+					RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, $"{request.RepositoryId.Owner}/{request.RepositoryId.Name}", perPage, 1, true);
 				}
 			}
 

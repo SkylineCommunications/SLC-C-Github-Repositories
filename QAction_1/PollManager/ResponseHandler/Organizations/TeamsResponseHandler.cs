@@ -82,7 +82,8 @@
 
 			if (link.HasNext)
 			{
-				OrganizationsRequestHandler.HandleOrganizationTeamsRequest(protocol, owner, link.NextPage, true);
+				var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_Teams)?.PageLimit ?? PollingConstants.PerPage;
+				OrganizationsRequestHandler.HandleOrganizationTeamsRequest(protocol, owner, perPage, link.NextPage, true);
 			}
 			else
 			{

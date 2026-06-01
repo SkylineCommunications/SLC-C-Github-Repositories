@@ -102,7 +102,8 @@
 
 			if (link.HasNext)
 			{
-				RepositoriesRequestHandler.HandleRepositoriesReleasesRequest(protocol, repositoryId, link.NextPage, true);
+				var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Repositories_Releases)?.PageLimit ?? PollingConstants.PerPage;
+				RepositoriesRequestHandler.HandleRepositoriesReleasesRequest(protocol, repositoryId, perPage, link.NextPage, true);
 			}
 			else
 			{

@@ -21,10 +21,11 @@ namespace Skyline.Protocol.PollManager.RequestHandler.Repositories
 	{
 		public static void HandleRepositoriesWorkflowsRequest(SLProtocol protocol, bool executeNow)
 		{
-			HandleRepositoriesWorkflowsRequest(protocol, 1, executeNow);
+			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Repositories_Workflows)?.PageLimit ?? PollingConstants.PerPage;
+			HandleRepositoriesWorkflowsRequest(protocol, perPage, 1, executeNow);
 		}
 
-		public static void HandleRepositoriesWorkflowsRequest(SLProtocol protocol, int page, bool executeNow)
+		public static void HandleRepositoriesWorkflowsRequest(SLProtocol protocol, int perPage, int page, bool executeNow)
 		{
 			var rows = SLTables.Repositories.GetPrimaryKeys(protocol);
 			if (!rows.Any())
@@ -33,12 +34,11 @@ namespace Skyline.Protocol.PollManager.RequestHandler.Repositories
 			}
 
 			protocol.SetParameter(Parameter.getrepositoryworkflowsqueue, JsonConvert.SerializeObject(rows.Skip(1)));
-			HandleRepositoriesWorkflowsRequest(protocol, rows[0], page, executeNow);
+			HandleRepositoriesWorkflowsRequest(protocol, rows[0], perPage, page, executeNow);
 		}
 
-		public static void HandleRepositoriesWorkflowsRequest(SLProtocol protocol, string repositoryId, int page, bool executeNow)
+		public static void HandleRepositoriesWorkflowsRequest(SLProtocol protocol, string repositoryId, int perPage, int page, bool executeNow)
 		{
-			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Repositories_Workflows)?.PageLimit ?? PollingConstants.PerPage;
 			protocol.SetParameter(Parameter.getrepositoryworkflowsurl, $"repos/{repositoryId}/actions/workflows?per_page={perPage}&page={page}");
 			var trigger = executeNow ? Triggers.GetRepositoryWorkflowsNow : Triggers.GetRepositoryWorkflows;
 			protocol.CheckTrigger((int)trigger);
