@@ -51,6 +51,7 @@
 				row.Id = org.Id;
 				row.Description = org.Description;
 				row.AvatarUrl = org.AvatarUrl.OriginalString;
+				row.LastPolledAt = DateTime.UtcNow;
 
 				// If its a new row fill in ID and default values and add it to the table.
 				if (String.IsNullOrEmpty(row.Instance))

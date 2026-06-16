@@ -33,9 +33,8 @@
 
 			// Fetch all the repositories that are not fetch through the organization.
 			var repositories = SLTables.Repositories.GetData(protocol,
-				SLTables.Repositories.FullName.Read.Map<RepositoriesModel>(m => m.FullName),
-				SLTables.Repositories.Owner.Read.Map<RepositoriesModel>(m => m.Owner))
-				.Select(m => new { m.FullName, m.Owner })
+				SLTables.Repositories.FullName.Read.Map<RepositoriesModel>(m => m.FullName))
+				.Select(m => new { m.FullName, Owner = m.FullName.Split('/')[0] })
 				.ToArray();
 			foreach (var row in repositories.Where(repo => !trackedOrganizations.Contains(repo.Owner)))
 			{

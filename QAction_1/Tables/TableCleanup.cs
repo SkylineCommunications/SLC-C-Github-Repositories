@@ -1,14 +1,23 @@
 ﻿namespace Skyline.Protocol.Tables
 {
+	using System;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.TableCleanup;
 	using Skyline.DataMiner.Utils.TableCleanup.Filters;
+	using Skyline.Protocol.PollManager;
 
 	public class TableCleanup
 	{
 		public static void Cleanup(SLProtocol protocol, bool executeNow)
 		{
 			CleanupInterApp(protocol);
+			var pollRow = PollManagerRowConverter.Instance.FromRawValue(
+				SLTables.PollManager.GetRow(protocol, Convert.ToString((int)RequestType.Table_Cleanup)));
+			if(!pollRow.LastPolledUTCTime.HasValue)
+			{
+				return;
+			}
+
 			SLTables.Tags.Cleanup(protocol);
 			SLTables.Releases.Cleanup(protocol);
 			SLTables.ReleaseAssets.Cleanup(protocol);

@@ -6,17 +6,17 @@
 -->
 
 <Protocol xmlns="http://www.skyline.be/protocol">
-	<Name>Github Repositories</Name>
-	<Description>Github Repositories DataMiner connector</Description>
-	<Version>1.0.1.2</Version>
+	<Name>GitHub Repositories</Name>
+	<Description>GitHub Repositories DataMiner connector</Description>
+	<Version>1.0.2.1</Version>
 	<IntegrationID>DMS-DRV-9437</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>GitHub</Vendor>
 	<VendorOID>1.3.6.1.4.1.8813.2.1268</VendorOID>
 	<DeviceOID>1</DeviceOID>
-	<ElementType>Github Repositories</ElementType>
+	<ElementType>GitHub Repositories</ElementType>
 	<Type relativeTimers="true">http</Type>
-	<Display defaultPage="General" pageOrder="General;----------;Organizations - Overview;Organizations;Teams;Members;----------;Repositories - Overview;Repositories;Releases;Issues;Workflows;Software Bill of Materials;----------;Inter-App Communication;Linker Tables" wideColumnPages="">
+	<Display defaultPage="General" pageOrder="General;----------;Organizations - Overview;Organizations;Teams;Members;----------;Repositories - Overview;Repositories;Releases;Issues;Workflows;Software Bill of Materials;----------;Inter-App Communication;Linker Tables" wideColumnPages="Repositories;Workflows;Repositories - Overview;Releases;Issues;Software Bill of Materials;Organizations - Overview;Organizations;Teams;Members;Poll Manager;Inter-App Communication">
 		<Pages>
 			<Page>
 				<Name>Linker Tables</Name>
@@ -101,8 +101,8 @@
 					<![CDATA[To start tracking repositories, add one to the repositories table. This can be done via the context menu or via the add repository page.
 Both will ask for the repository owner and name, both can be found in the url of the github repository.
 
-By default this element runs without an api key. This means that the element can only sent 60 request per hour before being blocked out by Github.
-To get more request you can add an api key under General/Configuration page. To generate such a token you can go to Github.com -> Settings -> Developer settings -> Personal access tokens -> tokens (classic), to generate one.]]>
+By default this element runs without an API key. This means that the element can only sent 60 request per hour before being blocked out by GitHub.
+To get more request you can add an API key under General/Configuration page. To generate such a token you can go to GitHub.com -> Settings -> Developer settings -> Personal access tokens -> tokens (classic), to generate one.]]>
 				</DefaultValue>
 			</Interprete>
 			<Display>
@@ -190,13 +190,13 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Measurement>
 		</Param>
 		
-		<Param id="10" save="true">
+		<Param id="10" trending="false" save="true">
 			<Name>ApiKey</Name>
 			<Description>API Key</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>
-					<![CDATA[The api key retrieved by going to your account settings -> Developer settings -> Personal access tokens -> Tokens (classic)]]>
+					<![CDATA[The API key retrieved by going to your account settings -> Developer settings -> Personal access tokens -> Tokens (classic)]]>
 				</Subtext>
 			</Information>
 			<Interprete>
@@ -243,7 +243,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="12" save="true">
 			<Name>ApiKeyBearer</Name>
-			<Description>Api Key Bearer</Description>
+			<Description>API Key Bearer</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -252,11 +252,13 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Interprete>
 		</Param>
 		<Param id="13" save="true">
-			<Name>GithubApiVersion</Name>
-			<Description>Github API Version</Description>
+			<Name>GitHubApiVersion</Name>
+			<!-- SuppressValidator 2.14.7 GitHub is the correct casing -->
+			<Description>GitHub API Version</Description>
+			<!-- /SuppressValidator 2.14.7 -->
 			<Type>read</Type>
 			<Information>
-				<Subtext>The Api version this element uses.</Subtext>
+				<Subtext>The API version this element uses.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -289,8 +291,10 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Measurement>
 		</Param>
 		<Param id="14" setter="true">
-			<Name>GithubApiVersion</Name>
-			<Description>Github API Version</Description>
+			<Name>GitHubApiVersion</Name>
+			<!-- SuppressValidator 2.14.7 GitHub is the correct casing -->
+			<Description>GitHub API Version</Description>
+			<!-- /SuppressValidator 2.14.7 -->
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -323,7 +327,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Description>Rate Limit</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The maximum number of request this api key can make in one hour.</Subtext>
+				<Subtext>The maximum number of request this API key can make in one hour.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -551,7 +555,7 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Position>
 						<Page>Workflows</Page>
 						<Column>0</Column>
-						<Row>2</Row>
+						<Row>1</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -1819,7 +1823,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RTDisplay onAppLevel="true">true</RTDisplay>
 			</Display>
 		</Param>
-		<Param id="996">
+		<Param id="996" trending="false">
 			<Name>RepositoriesOverview</Name>
 			<Description>Repositories Overview</Description>
 			<Type>read</Type>
@@ -1846,10 +1850,10 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Type>array</Type>
 			<ArrayOptions index="0" partial="true:200">
 				<ColumnOption idx="0" pid="1001" type="retrieved" options="" />
-				<ColumnOption idx="1" pid="1002" type="retrieved" options=";save" />
+				<ColumnOption idx="1" pid="1002" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="1003" type="retrieved" options="" />
 				<ColumnOption idx="3" pid="1004" type="retrieved" options="" />
-				<ColumnOption idx="4" pid="1005" type="retrieved" options=";save" />
+				<ColumnOption idx="4" pid="1005" type="retrieved" options="" />
 				<ColumnOption idx="5" pid="1006" type="retrieved" options="" />
 				<ColumnOption idx="6" pid="1007" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
 				<ColumnOption idx="7" pid="1008" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
@@ -1928,8 +1932,8 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Measurement>
 		</Param>
 		<Param id="1003" trending="false">
-			<Name>RepositoriesPrivate</Name>
-			<Description>Private (Repositories)</Description>
+			<Name>RepositoriesVisibility</Name>
+			<Description>Visibility (Repositories)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Indicates if the repository is public or private.</Subtext>
@@ -2057,11 +2061,11 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>discreet</Type>
 				<Discreets>
 					<Discreet>
-						<Display>Fork</Display>
+						<Display>Yes</Display>
 						<Value>1</Value>
 					</Discreet>
 					<Discreet>
-						<Display>Normal</Display>
+						<Display>No</Display>
 						<Value>0</Value>
 					</Discreet>
 				</Discreets>
@@ -2859,7 +2863,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Target Commitish (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The branch this relaese is targetting.</Subtext>
+				<Subtext>The branch this release is targeting.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -2897,8 +2901,8 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Measurement>
 		</Param>
 		<Param id="1407" trending="false">
-			<Name>RepositoryReleasesDraft</Name>
-			<Description>Draft (Repository Releases)</Description>
+			<Name>RepositoryReleasesPublished</Name>
+			<Description>Published (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Indication if this release is a draft or not.</Subtext>
@@ -2930,8 +2934,8 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Measurement>
 		</Param>
 		<Param id="1408" trending="false">
-			<Name>RepositoryReleasesPreRelease</Name>
-			<Description>Pre-Release (Repository Releases)</Description>
+			<Name>RepositoryReleasesType</Name>
+			<Description>Type (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Indication if this release is a pre-release or not.</Subtext>
@@ -4916,7 +4920,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Measurement>
 		</Param>
 		
-		<Param id="2996">
+		<Param id="2996" trending="false">
 			<Name>OrganizationsOverview</Name>
 			<Description>Organizations Overview</Description>
 			<Type>read</Type>
@@ -4961,7 +4965,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Name>Organizations</Name>
 			<Description>Organizations</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" partial="true:200">
 				<ColumnOption idx="0" pid="3001" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="3002" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="3003" type="retrieved" options="" />
@@ -6521,7 +6525,7 @@ Are you sure you want to continue.]]>
 			<Name>IAC_Messages</Name>
 			<Description>IAC_Messages</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0" options=";volatile">
+			<ArrayOptions index="0" options=";volatile" partial="true:200">
 				<ColumnOption idx="0" pid="9000101" type="retrieved" options="" />
 				<ColumnOption idx="1" pid="9000102" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="9000103" type="retrieved" options="" />
@@ -8444,7 +8448,7 @@ Are you sure you want to continue.]]>
 											<Fix>Issue 1 pagination</Fix>
 										</Changes>
 										<References>
-											<Reference type="Github">https://github.com/SkylineCommunications/SLC-Connector-Github-Repositories/issues/1</Reference>
+											<Reference type="GitHub">https://github.com/SkylineCommunications/SLC-Connector-GitHub-Repositories/issues/1</Reference>
 										</References>
 									</MinorVersion>
 									<MinorVersion id="3" basedOn="1.0.0.2">
@@ -8517,7 +8521,7 @@ Are you sure you want to continue.]]>
 											<Fix>Fixed IndexOutOfRange exception when no repositories are present</Fix>
 											<Change>Updated all QActions to net48</Change>
 											<Change>Updated to InterApp Library 1.0.1.1</Change>
-											<Change>Updated Github ConnectorAPI to 1.0.4</Change>
+											<Change>Updated GitHub ConnectorAPI to 1.0.4</Change>
 											<NewFeature>Added Teams page</NewFeature>
 											<NewFeature>Added Members page</NewFeature>
 											<NewFeature>Added Create Repository InterApp Request</NewFeature>
@@ -8532,7 +8536,7 @@ Are you sure you want to continue.]]>
 											<Company>Skyline Communications</Company>
 										</Provider>
 										<Changes>
-											<Change>Updated Github ConnectorAPI to 1.0.6</Change>
+											<Change>Updated GitHub ConnectorAPI to 1.0.6</Change>
 											<NewFeature>Added more option for alarming</NewFeature>
 											<NewFeature>Added Release Assets table</NewFeature>
 										</Changes>
@@ -8567,7 +8571,7 @@ Are you sure you want to continue.]]>
 											<Company>Skyline Communications</Company>
 										</Provider>
 										<Changes>
-											<Change>Update to Github ConnectorAPI v1.0.9</Change>
+											<Change>Update to GitHub ConnectorAPI v1.0.9</Change>
 											<NewFeature>Handle the adding of custom workflows</NewFeature>
 											<NewFeature>Can now also add variables to repositories</NewFeature>
 										</Changes>
@@ -8612,7 +8616,19 @@ Are you sure you want to continue.]]>
 											<TaskId>293386</TaskId>
 										</References>
 									</MinorVersion>
-									<MinorVersion id="2" basedOn="1.0.1.1">
+								</MinorVersions>
+							</MajorVersion>
+							<MajorVersion id="2">
+								<Changes>
+									<Change>
+										<Impact>Trending no longer available on API Key</Impact>
+										<ActionsToTake>
+											<ActionToTake>No action, loss of trend data</ActionToTake>
+										</ActionsToTake>
+									</Change>
+								</Changes>
+								<MinorVersions>
+									<MinorVersion id="1" basedOn="1.0.1.1">
 										<Date>2026-05-18</Date>
 										<Provider>
 											<Author>BSO</Author>

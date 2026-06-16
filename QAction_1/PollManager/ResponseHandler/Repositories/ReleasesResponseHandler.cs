@@ -139,7 +139,7 @@
 						Uploader = asset.Uploader.Login,
 						NodeID = asset.NodeId,
 						Name = asset.Name,
-						Label = asset.Label ?? Exceptions.NotAvailable,
+						Label = String.IsNullOrWhiteSpace(asset.Label) ? Exceptions.NotAvailable : asset.Label,
 						ContentType = asset.ContentType,
 						State = asset.State,
 						Size = asset.Size,
