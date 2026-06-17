@@ -14,7 +14,7 @@
 	<Vendor>GitHub</Vendor>
 	<VendorOID>1.3.6.1.4.1.8813.2.1268</VendorOID>
 	<DeviceOID>1</DeviceOID>
-	<ElementType>GitHub Repositories</ElementType>
+	<ElementType>Management System</ElementType>
 	<Type relativeTimers="true">http</Type>
 	<Display defaultPage="General" pageOrder="General;----------;Organizations - Overview;Organizations;Teams;Members;----------;Repositories - Overview;Repositories;Releases;Issues;Workflows;Software Bill of Materials;----------;Inter-App Communication;Linker Tables" wideColumnPages="Repositories;Workflows;Repositories - Overview;Releases;Issues;Software Bill of Materials;Organizations - Overview;Organizations;Teams;Members;Poll Manager;Inter-App Communication">
 		<Pages>
@@ -99,7 +99,7 @@
 				<LengthType>next param</LengthType>
 				<DefaultValue>
 					<![CDATA[To start tracking repositories, add one to the repositories table. This can be done via the context menu or via the add repository page.
-Both will ask for the repository owner and name, both can be found in the url of the github repository.
+Both will ask for the repository owner and name, both can be found in the URL of the github repository.
 
 By default this element runs without an API key. This means that the element can only sent 60 request per hour before being blocked out by GitHub.
 To get more request you can add an API key under General/Configuration page. To generate such a token you can go to GitHub.com -> Settings -> Developer settings -> Personal access tokens -> tokens (classic), to generate one.]]>
@@ -327,7 +327,7 @@ To get more request you can add an API key under General/Configuration page. To 
 			<Description>Rate Limit</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The maximum number of request this API key can make in one hour.</Subtext>
+				<Subtext>The maximum number of requests this API key can make in one hour.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -362,7 +362,7 @@ To get more request you can add an API key under General/Configuration page. To 
 			<Description>Rate Limit Remaining</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The amount of hourly request remaining.</Subtext>
+				<Subtext>The amount of hourly requests remaining.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -400,7 +400,7 @@ To get more request you can add an API key under General/Configuration page. To 
 			<Description>Rate Limit Used</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The amount of hourly request already used.</Subtext>
+				<Subtext>The amount of hourly requests already used.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -438,7 +438,7 @@ To get more request you can add an API key under General/Configuration page. To 
 			<Description>Rate Limit Reset</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The date time when the rate limit is going to reset again.</Subtext>
+				<Subtext>The DateTime when the rate limit is going to reset again.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -581,7 +581,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="101">
 			<Name>GetRepositoryUrl</Name>
-			<Description>Get Repository Url</Description>
+			<Description>Get Repository URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -591,7 +591,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="102">
 			<Name>GetRepositoryIssuesUrl</Name>
-			<Description>Get Repository Issues Url</Description>
+			<Description>Get Repository Issues URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -601,7 +601,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="103">
 			<Name>GetRepositoryTagsUrl</Name>
-			<Description>Get Repository Tags Url</Description>
+			<Description>Get Repository Tags URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -611,7 +611,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="104">
 			<Name>GetRepositoryReleasesUrl</Name>
-			<Description>Get Repository Releases Url</Description>
+			<Description>Get Repository Releases URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -621,7 +621,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="105">
 			<Name>GetRepositoryWorkflowsUrl</Name>
-			<Description>Get Repository Workflows Url</Description>
+			<Description>Get Repository Workflows URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -631,7 +631,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="106">
 			<Name>GetRepositorySoftwareBillOfMaterialsUrl</Name>
-			<Description>Get Repository Software Bill of Materials Url</Description>
+			<Description>Get Repository Software Bill of Materials URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -651,7 +651,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="110">
 			<Name>GetUserOrganizationsUrl</Name>
-			<Description>Get User Organizations Url</Description>
+			<Description>Get User Organizations URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -661,7 +661,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="111">
 			<Name>GetOrganizationRepositoriesUrl</Name>
-			<Description>Get Organization Repositories Url</Description>
+			<Description>Get Organization Repositories URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -671,7 +671,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="112">
 			<Name>GetOrganizationTeamsUrl</Name>
-			<Description>Get Organization Teams Url</Description>
+			<Description>Get Organization Teams URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -681,7 +681,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="113">
 			<Name>GetOrganizationMembersUrl</Name>
-			<Description>Get Organization Members Url</Description>
+			<Description>Get Organization Members URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -701,7 +701,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="120">
 			<Name>GetRepositoryContentUrl</Name>
-			<Description>Get Repository Content Url</Description>
+			<Description>Get Repository Content URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -711,7 +711,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="121">
 			<Name>PutRepositoryContentUrl</Name>
-			<Description>Create/Update Repository Content Url</Description>
+			<Description>Create/Update Repository Content URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -731,7 +731,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="122">
 			<Name>PostRepositoryUrl</Name>
-			<Description>Create Repository Url</Description>
+			<Description>Create Repository URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -751,7 +751,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="123">
 			<Name>PutRepositoryUserCollaboratorUrl</Name>
-			<Description>Create Repository User Collaborator Url</Description>
+			<Description>Create Repository User Collaborator URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -771,7 +771,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="124">
 			<Name>PutRepositoryTeamCollaboratorUrl</Name>
-			<Description>Create Repository Team Collaborator Url</Description>
+			<Description>Create Repository Team Collaborator URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -791,7 +791,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="126">
 			<Name>PutRepositorySecretUrl</Name>
-			<Description>Create/Update Repository Secret Url</Description>
+			<Description>Create/Update Repository Secret URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -811,7 +811,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="128">
 			<Name>GetRepositoryPublicKeyUrl</Name>
-			<Description>Get Repository Public Key Url</Description>
+			<Description>Get Repository Public Key URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -831,7 +831,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="129">
 			<Name>GetRepositoryTopicsUrl</Name>
-			<Description>Get Repository Topics Url</Description>
+			<Description>Get Repository Topics URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -851,7 +851,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="130">
 			<Name>PutRepositoryTopicsUrl</Name>
-			<Description>Put Repository Topics Url</Description>
+			<Description>Put Repository Topics URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -871,7 +871,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		</Param>
 		<Param id="131">
 			<Name>PostWorkflowExecutionUrl</Name>
-			<Description>Post Workflow Execution Url</Description>
+			<Description>Post Workflow Execution URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -892,7 +892,7 @@ To get more request you can add an API key under General/Configuration page. To 
 		
 		<Param id="135">
 			<Name>PostRepositoryVariableUrl</Name>
-			<Description>Post Repository Variable Url</Description>
+			<Description>Post Repository Variable URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -1361,7 +1361,7 @@ To get more request you can add an API key under General/Configuration page. To 
 			<Name>AddRepositoryButton</Name>
 			<Type>write</Type>
 			<Information>
-				<Subtext>The button that trigger an add to the repositories table.</Subtext>
+				<Subtext>When pressed, adds the specified Repository to the Repositories table.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -1712,11 +1712,11 @@ To get more request you can add an API key under General/Configuration page. To 
 						<Value>2</Value>
 					</Discreet>
 					<Discreet>
-						<Display>Nuget Solution CICD</Display>
+						<Display>NuGet Solution CICD</Display>
 						<Value>3</Value>
 					</Discreet>
 					<Discreet>
-						<Display>Internal Nuget Solution CICD</Display>
+						<Display>Internal NuGet Solution CICD</Display>
 						<Value>4</Value>
 					</Discreet>
 				</Discreets>
@@ -1757,11 +1757,11 @@ To get more request you can add an API key under General/Configuration page. To 
 						<Value>2</Value>
 					</Discreet>
 					<Discreet>
-						<Display>Nuget Solution CICD</Display>
+						<Display>NuGet Solution CICD</Display>
 						<Value>3</Value>
 					</Discreet>
 					<Discreet>
-						<Display>Internal Nuget Solution CICD</Display>
+						<Display>Internal NuGet Solution CICD</Display>
 						<Value>4</Value>
 					</Discreet>
 				</Discreets>
@@ -1800,7 +1800,7 @@ To get more request you can add an API key under General/Configuration page. To 
 			<Information>
 				<Subtext>
 					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
-At the end of the cycle this parameter should contains the entire list of still existing repositories. This list is used to for cleanup at the end]]>
+At the end of the cycle this parameter should contain the entire list of still existing repositories. This list is used for cleanup at the end]]>
 				</Subtext>
 			</Information>
 			<Type>read</Type>
@@ -1866,7 +1866,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="14" pid="1015" type="retrieved" options="" />
 				<ColumnOption idx="15" pid="1016" type="retrieved" options="" />
 				<ColumnOption idx="16" pid="1017" type="retrieved" options="" />
-				<ColumnOption idx="17" pid="1018" type="retrieved" options=";save" />
+				<ColumnOption idx="17" pid="1018" type="retrieved" options="" />
 				<ColumnOption idx="18" pid="1019" type="retrieved" options="" />
 				<ColumnOption idx="19" pid="1020" type="retrieved" options=";save" />
 			</ArrayOptions>
@@ -2006,7 +2006,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Owner (Repositories)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The owner of the repository</Subtext>
+				<Subtext>The owner of the repository.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -2172,7 +2172,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Size (Repositories)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The total size of the repository in kilo bytes</Subtext>
+				<Subtext>The total size of the repository in kilobytes.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -2338,7 +2338,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Type (Repositories)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The type of the repository</Subtext>
+				<Subtext>The type of the repository.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -2462,7 +2462,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Topics (Repositories)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>comma separated list of the topics assigned to the repository.</Subtext>
+				<Subtext>Comma separated list of the topics assigned to the repository.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -2492,7 +2492,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Auto-Remove (Repositories)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>Indicates whether this repository should be auto removed when it's no removed. This is used when you enable the track repositories option for an organization.</Subtext>
+				<Subtext>Indicates whether this repository should be auto removed when it's no longer tracked. This is used when you enable the track repositories option for an organization.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -2552,7 +2552,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Information>
 				<Subtext>
 					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
-At the end of the cycle this parameter should contains the entire list of still existing tags. This list is used to for cleanup at the end]]>
+At the end of the cycle this parameter should contain the entire list of still existing tags. This list is used for cleanup at the end]]>
 				</Subtext>
 			</Information>
 			<Type>read</Type>
@@ -2567,7 +2567,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Repository Tags)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -2659,7 +2659,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Repository ID (Repository Tags)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The ID of the repository this tag is linked.</Subtext>
+				<Subtext>The ID of the repository this tag is linked to.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -2699,7 +2699,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Information>
 				<Subtext>
 					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
-At the end of the cycle this parameter should contains the entire list of still existing releases. This list is used to for cleanup at the end]]>
+At the end of the cycle this parameter should contain the entire list of still existing releases. This list is used for cleanup at the end]]>
 				</Subtext>
 			</Information>
 			<Type>read</Type>
@@ -2714,7 +2714,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -2836,10 +2836,10 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="1404" trending="false">
 			<Name>RepositoryReleasesTagId</Name>
-			<Description>Tag Id (Repository Releases)</Description>
+			<Description>Tag ID (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The dataminer id of the tag this release is linked with.</Subtext>
+				<Subtext>The DataMiner ID of the tag this release is linked with.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -2886,7 +2886,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Name (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The name of the release</Subtext>
+				<Subtext>The name of the release.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -2905,7 +2905,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Published (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>Indication if this release is a draft or not.</Subtext>
+				<Subtext>Indication if this release is a draft.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -3045,7 +3045,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Published At (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The in UTC when the release was publsihed.</Subtext>
+				<Subtext>The DateTime in UTC when the release was published.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -3071,7 +3071,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Repository ID (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The id of the repository this release is linked with.</Subtext>
+				<Subtext>The ID of the repository this release is linked with.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -3114,7 +3114,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Information>
 				<Subtext>
 					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
-At the end of the cycle this parameter should contains the entire list of still existing workflows. This list is used to for cleanup at the end]]>
+At the end of the cycle this parameter should contain the entire list of still existing workflows. This list is used for cleanup at the end]]>
 				</Subtext>
 			</Information>
 			<Type>read</Type>
@@ -3143,7 +3143,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Repository Workflows)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -3217,7 +3217,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Repository ID (Repository Workflows)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The ID of the repository this workflow is linked.</Subtext>
+				<Subtext>The ID of the repository this workflow is linked to.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -3260,7 +3260,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>State (Repository Workflows)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The state of the workflow</Subtext>
+				<Subtext>The state of the workflow.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -3307,7 +3307,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Path (Repository Workflows)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The path to the workflow yaml file.</Subtext>
+				<Subtext>The path to the workflow YAML file.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -3331,7 +3331,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Created At (Repository Workflows)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The datetime when the workflow was created.</Subtext>
+				<Subtext>The DateTime when the workflow was created.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -3363,7 +3363,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Updated At (Repository Workflows)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The datetime of the last update to the workflow</Subtext>
+				<Subtext>The DateTime of the last update to the workflow.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -3395,7 +3395,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Deleted At (Repository Workflows)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The datetime when the workflow was deleted.</Subtext>
+				<Subtext>The DateTime when the workflow was deleted.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -3428,7 +3428,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Information>
 				<Subtext>
 					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
-At the end of the cycle this parameter should contains the entire list of still existing release assets. This list is used to for cleanup at the end]]>
+At the end of the cycle this parameter should contain the entire list of still existing release assets. This list is used for cleanup at the end]]>
 				</Subtext>
 			</Information>
 			<Type>read</Type>
@@ -3443,7 +3443,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Release Assets)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -3797,7 +3797,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Created At (Release Assets)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The datetime when the asset was first created.</Subtext>
+				<Subtext>The DateTime when the asset was first created.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -3826,7 +3826,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Updated At (Release Assets)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The datetime when the asset was last updated.</Subtext>
+				<Subtext>The DateTime when the asset was last updated.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -3852,10 +3852,10 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="1815" trending="false">
 			<Name>RepositoryReleaseAssetsBrowserDownloadUrl</Name>
-			<Description>Browser Download Url (Release Assets)</Description>
+			<Description>Browser Download URL (Release Assets)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The url to download the asset in a browser.</Subtext>
+				<Subtext>The URL to download the asset in a browser.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -3881,7 +3881,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Information>
 				<Subtext>
 					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
-At the end of the cycle this parameter should contains the entire list of still existing release assets. This list is used to for cleanup at the end]]>
+At the end of the cycle this parameter should contain the entire list of still existing release assets. This list is used for cleanup at the end]]>
 				</Subtext>
 			</Information>
 			<Type>read</Type>
@@ -3896,7 +3896,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Repository Issues)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -4131,7 +4131,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Created At (Repository Issues)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The datetime in UTC when the task was created.</Subtext>
+				<Subtext>The DateTime in UTC when the task was created.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -4157,7 +4157,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Updated At (Repository Issues)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The datetime when the issue was last updated.</Subtext>
+				<Subtext>The DateTime when the issue was last updated.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -4183,7 +4183,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Closed At (Repository Issues)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The datetime when the issue was closed.</Subtext>
+				<Subtext>The DateTime when the issue was closed.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -4215,7 +4215,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Repository ID (Repository Issues)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The ID of the repository this issue is linked.</Subtext>
+				<Subtext>The ID of the repository this issue is linked to.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -4235,7 +4235,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Repository Software Bill of Materials)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -4306,7 +4306,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Repository ID (Repository Software Bill of Materials)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The ID of the repository this sbom is linked.</Subtext>
+				<Subtext>The ID of the repository this SBOM is linked to.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -4400,10 +4400,10 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="2207" trending="false">
 			<Name>RepositorySoftwareBillOfMaterialsDocumentNamespace</Name>
-			<Description>Document Namespace (Repository Software Bill of Materials)</Description>
+			<Description>Document NameSpace (Repository Software Bill of Materials)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The namespace for the SPDX document.</Subtext>
+				<Subtext>The NameSpace for the SPDX document.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -4423,7 +4423,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Software Bill of Materials Packages)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -4759,7 +4759,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Software Bill of Materials Relationships)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -4945,7 +4945,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Organizations)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -5068,7 +5068,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Avatar URL (Organizations)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The url the the avatar of the organization.</Subtext>
+				<Subtext>The URL the avatar of the organization.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -5087,7 +5087,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Track Repositories (Organizations)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>Indicates if the repositories under this origanization should be polled.</Subtext>
+				<Subtext>Indicates if the repositories under this organization should be polled.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -5213,7 +5213,7 @@ Are you sure you want to continue.]]>
 			<Description>Last Polled at UTC (Teams)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -5499,7 +5499,7 @@ Are you sure you want to continue.]]>
 			<Description>Last Polled at UTC (Members)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -5674,10 +5674,10 @@ Are you sure you want to continue.]]>
 		</Param>
 		<Param id="3606" trending="false">
 			<Name>OrganizationMembersUrl</Name>
-			<Description>Url (Members)</Description>
+			<Description>URL (Members)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The API url to fetch specific user information from.</Subtext>
+				<Subtext>The API URL to fetch specific user information from.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -5693,10 +5693,10 @@ Are you sure you want to continue.]]>
 		</Param>
 		<Param id="3607" trending="false">
 			<Name>OrganizationMembersHtmlUrl</Name>
-			<Description>Html Url (Members)</Description>
+			<Description>HTML URL (Members)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The browser url that will take you to the member's GitHub page.</Subtext>
+				<Subtext>The browser URL that will take you to the member's GitHub page.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -5712,10 +5712,10 @@ Are you sure you want to continue.]]>
 		</Param>
 		<Param id="3608" trending="false">
 			<Name>OrganizationMembersAvatarUrl</Name>
-			<Description>Avatar Url (Members)</Description>
+			<Description>Avatar URL (Members)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The url to the member's avatar image.</Subtext>
+				<Subtext>The URL to the member's avatar image.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -5735,7 +5735,7 @@ Are you sure you want to continue.]]>
 			<Description>Last Polled at UTC (Member Organization Links)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -7107,7 +7107,7 @@ Are you sure you want to continue.]]>
 		<!--ID 25 for Get Repository Secret-->
 		<!--ID 26 for Put Repository Secret-->
 		<!--ID 27 for Delete Repository Secret-->
-		<!--ID 28 for Get Repository Pulic Key-->
+		<!--ID 28 for Get Repository Public Key-->
 		<Session id="26" name="Create/Update Repository Secret">
 			<Connection id="26" name="Create/Update Repository Secret">
 				<Request verb="PUT" pid="126">
