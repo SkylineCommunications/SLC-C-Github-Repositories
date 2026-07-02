@@ -3189,7 +3189,7 @@ At the end of the cycle this parameter should contain the entire list of still e
 			</Display>
 			<Measurement>
 				<!-- SuppressValidator 2.31.9 More important to be grouped by repository then by datetime column -->
-				<Type options="tab=columns:1601|0-1602|1-1603|2-1604|3-1605|4-1606|5-1607|6-1608|7-1599|8,width:0-250-150-108-100-156-156-156-0,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1601|0-1602|1-1603|2-1604|3-1605|4-1606|5-1607|6-1608|7-1599|8,width:0-300-150-108-200-156-156-156-0,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT,lines:25,filter:true">table</Type>
 				<!-- /SuppressValidator 2.31.9 -->
 			</Measurement>
 		</Param>
@@ -3495,7 +3495,7 @@ At the end of the cycle this parameter should contain the entire list of still e
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1801|0-1802|1-1803|2-1804|3-1805|4-1806|5-1807|6-1808|7-1809|8-1810|9-1811|10-1812|11-1813|12-1814|13-1815|14-1799|15,width:400-100-100-100-100-100-100-100-100-113-144-144-156-156-145-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT-INT-INT-INT-INT|DESC-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1801|0-1802|1-1803|2-1804|3-1805|4-1806|5-1807|6-1808|7-1809|8-1810|9-1811|10-1812|11-1813|12-1814|13-1815|14-1799|15,width:400-100-100-100-100-100-100-100-100-113-144-144-156-156-151-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT-INT-INT-INT-INT|DESC-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1801" trending="false">
@@ -4279,7 +4279,7 @@ At the end of the cycle this parameter should contain the entire list of still e
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:2201|0-2202|1-2203|2-2204|3-2205|4-2206|5-2207|6-2199|7,width:350-111-100-100-100-156-145-0,sort:STRING-STRING-STRING-STRING-STRING-INT|DESC-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:2201|0-2202|1-2203|2-2204|3-2205|4-2206|5-2207|6-2199|7,width:350-111-100-100-100-156-147-0,sort:STRING-STRING-STRING-STRING-STRING-INT|DESC-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="2201" trending="false">
@@ -5259,7 +5259,7 @@ Are you sure you want to continue.]]>
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:3401|0-3402|1-3403|2-3405|4-3404|3-3406|5-3407|6-3408|7-3409|8-3399|9,width:0-0-125-200-200-300-100-140-100-0,sort:STRING|ASC|0-INT-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:3401|0-3402|1-3403|2-3405|4-3404|3-3406|5-3407|6-3408|7-3409|8-3399|9,width:0-0-200-200-200-300-100-140-100-0,sort:STRING|ASC|0-INT-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="3401" trending="false">
