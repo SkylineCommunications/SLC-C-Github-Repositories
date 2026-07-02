@@ -8,7 +8,6 @@
 #   - ChatOps Extension: If the Catalog item is a DataMiner Automation script designed as a ChatOps extension.
 #   - Connector: If the Catalog item is a DataMiner XML connector.
 #   - Custom Solution: If the Catalog item is a DataMiner Solution.
-#   - Data Query: If the Catalog item is a GQI data query.
 #   - Data Transformer: Includes a data transformer that enables you to modify data using a GQI data query before making it available to users in low-code apps or dashboards.
 #   - Dashboard: If the Catalog item is a DataMiner dashboard.
 #   - DevTool: If the Catalog item is a DevTool.
@@ -36,12 +35,12 @@ id: eece1db3-7a77-4182-bc0a-40e9158efc90
 #   Max length: 100 characters.
 #   Cannot contain newlines.
 #   Cannot contain leading or trailing whitespace characters.
-title: Github Repositories
+title: GitHub Repositories
 # [Optional]
 # General information about the Catalog item.
 #   Max length: 100,000 characters
 # Currently not shown in the Catalog UI but will be supported in the near future.
-short_description: A DataMiner connector that can track github repositories.
+short_description: A DataMiner connector that can track GitHub repositories and run GitHub actions from DataMiner.
 # [Optional]
 # A valid URL that points to the source code.
 #   A valid URL
@@ -52,7 +51,7 @@ source_code_url: https://github.com/SkylineCommunications/SLC-C-Github-Repositor
 #   A valid URL
 #   Max length: 2048 characters
 # Currently not shown in the Catalog UI but will be supported in the near future.
-documentation_url: https://github.com/SkylineCommunications/SLC-C-Github-Repositories/blob/1.0.0.X/Documentation/README.md
+documentation_url: https://github.com/SkylineCommunications/SLC-C-Github-Repositories/blob/1.0.1.X/Documentation/README.md
 # [Optional]
 # People who are responsible for this Catalog item. Might be developers, but this is not required.
 #   The name is required; max 256 characters.
@@ -68,4 +67,20 @@ owners:
 #   Cannot contain newlines.
 #   Cannot contain leading or trailing whitespace characters.
 tags:
-  - Github
+  - GitHub
+# [Optional]
+# The ID of the vendor.
+# This vendor ID can be retrieved using the public Catalog API.
+# If the vendor ID does not exist, the registration or update will fail with HTTP status code 400.
+# If the vendor ID is '00000000-0000-0000-0000-000000000000', the vendor will be unset.
+# If the vendor ID is not provided during the initial registration, the vendor will be unset.
+# If the vendor ID is not provided during an update, the vendor will be unchanged and keep the previously set value.
+#   Must be a valid GUID.
+vendor_id: 66a0e91f-9833-48dd-a1da-df95747f2045
+# [Optional]
+# The name of the market the Catalog item belongs to.
+market_name: 
+# [Optional]
+# The type of the element.
+# This can only be applied to Catalog items with the type Connector.
+element_type: 
