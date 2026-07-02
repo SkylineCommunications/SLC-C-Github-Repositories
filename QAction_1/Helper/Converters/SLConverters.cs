@@ -29,7 +29,7 @@
 				return (ISLConverter<TValue>)converter;
 			}
 
-			throw new Exception("No converter registered for type " + typeof(TValue).FullName);
+			throw new KeyNotFoundException("No converter registered for type " + typeof(TValue).FullName);
 		}
 	}
 }

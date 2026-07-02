@@ -1,4 +1,4 @@
-# SLC-Connector-Github-Repositories
+# GitHub Repositories
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=SkylineCommunications_SLC-C-Github-Repositories&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=SkylineCommunications_SLC-C-Github-Repositories)
 

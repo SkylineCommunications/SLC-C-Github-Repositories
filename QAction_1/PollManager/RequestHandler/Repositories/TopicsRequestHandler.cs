@@ -11,12 +11,13 @@
 
 	public static partial class RepositoriesRequestHandler
 	{
-		public static void HandleRepositoriesTopicsRequest(SLProtocol protocol)
+		public static void HandleRepositoriesTopicsRequest(SLProtocol protocol, bool executeNext)
 		{
-			HandleRepositoriesTopicsRequest(protocol, PollingConstants.PerPage, 1);
+			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Repositories_Topics)?.PageLimit ?? PollingConstants.PerPage;
+			HandleRepositoriesTopicsRequest(protocol, perPage, 1, executeNext);
 		}
 
-		public static void HandleRepositoriesTopicsRequest(SLProtocol protocol, int perPage, int page)
+		public static void HandleRepositoriesTopicsRequest(SLProtocol protocol, int perPage, int page, bool executeNext)
 		{
 			var rows = SLTables.Repositories.GetPrimaryKeys(protocol);
 			if (!rows.Any())
@@ -25,13 +26,14 @@
 			}
 
 			protocol.SetParameter(Parameter.getrepositorytopicsqueue, JsonConvert.SerializeObject(rows.Skip(1)));
-			HandleRepositoriesTopicsRequest(protocol, rows[0], perPage, page);
+			HandleRepositoriesTopicsRequest(protocol, rows[0], perPage, page, executeNext);
 		}
 
-		public static void HandleRepositoriesTopicsRequest(SLProtocol protocol, string repositoryId, int perPage, int page)
+		public static void HandleRepositoriesTopicsRequest(SLProtocol protocol, string repositoryId, int perPage, int page, bool executeNext)
 		{
 			protocol.SetParameter(Parameter.getrepositoryissuesurl, $"repos/{repositoryId}/topics?per_page={perPage}&page={page}&state=all");
-			protocol.CheckTrigger(229);
+			var trigger = executeNext ? Triggers.GetRepositoryTopicsNow : Triggers.GetRepositoryTopics;
+			protocol.CheckTrigger((int)trigger);
 		}
 
 		public static void CreateOrUpdateRepositoriesTopicsRequest(SLProtocol protocol, string repositoryId, IEnumerable<string> topics)
@@ -41,9 +43,14 @@
 				Names = topics.ToList(),
 			};
 
-			protocol.SetParameter(Parameter.putrepositorytopicsurl, $"repos/{repositoryId}/topics");
-			protocol.SetParameter(Parameter.putrepositorytopicsbody, JsonConvert.SerializeObject(request));
-			protocol.CheckTrigger(230);
+			var paramsToSet = new Dictionary<int, object>
+			{
+				{ Parameter.putrepositorytopicsurl, $"repos/{repositoryId}/topics" },
+				{ Parameter.putrepositorytopicsbody, JsonConvert.SerializeObject(request) },
+			};
+
+			protocol.SetParameters(paramsToSet.Keys.ToArray(), paramsToSet.Values.ToArray());
+			protocol.CheckTrigger((int)Triggers.PutRepositoryTopicsNow);
 		}
 	}
 }

@@ -10,7 +10,7 @@
 
 	public static class RequestHandler
 	{
-		private static IReadOnlyDictionary<RequestType, Action<SLProtocol>> handlers = new Dictionary<RequestType, Action<SLProtocol>>
+		private static readonly IReadOnlyDictionary<RequestType, Action<SLProtocol, bool>> _handlers = new Dictionary<RequestType, Action<SLProtocol, bool>>
 		{
 			{ RequestType.Table_Cleanup,						TableCleanup.Cleanup },
 
@@ -29,6 +29,6 @@
 			{ RequestType.Repositories_PublicKey,				RepositoriesRequestHandler.HandleRepositoriesPublicKeysRequest },
 		};
 
-		public static IReadOnlyDictionary<RequestType, Action<SLProtocol>> Handlers => handlers;
+		public static IReadOnlyDictionary<RequestType, Action<SLProtocol, bool>> Handlers => _handlers;
 	}
 }

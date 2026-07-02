@@ -25,8 +25,8 @@ namespace Skyline.Protocol.Tables
 				SLTables.Releases.TagId.Read.Map<ReleasesModel>(m => m.TagId),
 				SLTables.Releases.TargetCommitish.Read.Map<ReleasesModel>(m => m.TargetCommitish),
 				SLTables.Releases.Name.Read.Map<ReleasesModel>(m => m.Name),
-				SLTables.Releases.Draft.Read.Map<ReleasesModel>(m => m.Draft),
-				SLTables.Releases.PreRelease.Read.Map<ReleasesModel>(m => m.PreRelease),
+				SLTables.Releases.Published.Read.Map<ReleasesModel>(m => m.Draft),
+				SLTables.Releases.Type.Read.Map<ReleasesModel>(m => m.PreRelease),
 				SLTables.Releases.Body.Read.Map<ReleasesModel>(m => m.Body),
 				SLTables.Releases.Author.Read.Map<ReleasesModel>(m => m.Author),
 				SLTables.Releases.CreatedAt.Read.Map<ReleasesModel>(m => m.CreatedAt),
@@ -42,8 +42,8 @@ namespace Skyline.Protocol.Tables
 				SLTables.Releases.TagId.Read.MapWrite<ReleasesModel>(m => m.TagId),
 				SLTables.Releases.TargetCommitish.Read.MapWrite<ReleasesModel>(m => m.TargetCommitish),
 				SLTables.Releases.Name.Read.MapWrite<ReleasesModel>(m => m.Name),
-				SLTables.Releases.Draft.Read.MapWrite<ReleasesModel>(m => m.Draft),
-				SLTables.Releases.PreRelease.Read.MapWrite<ReleasesModel>(m => m.PreRelease),
+				SLTables.Releases.Published.Read.MapWrite<ReleasesModel>(m => m.Draft),
+				SLTables.Releases.Type.Read.MapWrite<ReleasesModel>(m => m.PreRelease),
 				SLTables.Releases.Body.Read.MapWrite<ReleasesModel>(m => m.Body),
 				SLTables.Releases.Author.Read.MapWrite<ReleasesModel>(m => m.Author),
 				SLTables.Releases.CreatedAt.Read.MapWrite<ReleasesModel>(m => m.CreatedAt),
@@ -149,14 +149,14 @@ namespace Skyline.Protocol.Tables
 				Parameter.Repositoryreleases.Pid.repositoryreleasesname,
 				this);
 
-			Draft = new SLReadColumn<bool?>(
-				Parameter.Repositoryreleases.Idx.repositoryreleasesdraft,
-				Parameter.Repositoryreleases.Pid.repositoryreleasesdraft,
+			Published = new SLReadColumn<bool?>(
+				Parameter.Repositoryreleases.Idx.repositoryreleasespublished,
+				Parameter.Repositoryreleases.Pid.repositoryreleasespublished,
 				this);
 
-			PreRelease = new SLReadColumn<bool?>(
-				Parameter.Repositoryreleases.Idx.repositoryreleasesprerelease,
-				Parameter.Repositoryreleases.Pid.repositoryreleasesprerelease,
+			Type = new SLReadColumn<bool?>(
+				Parameter.Repositoryreleases.Idx.repositoryreleasestype,
+				Parameter.Repositoryreleases.Pid.repositoryreleasestype,
 				this);
 
 			Body = new SLReadColumn<string>(
@@ -202,9 +202,9 @@ namespace Skyline.Protocol.Tables
 
 		public SLReadColumn<string> Name { get; }
 
-		public SLReadColumn<bool?> Draft { get; }
+		public SLReadColumn<bool?> Published { get; }
 
-		public SLReadColumn<bool?> PreRelease { get; }
+		public SLReadColumn<bool?> Type { get; }
 
 		public SLReadColumn<string> Body { get; }
 
@@ -239,9 +239,9 @@ namespace Skyline.Protocol.Tables
 		{
 			var pollRow = PollManagerRowConverter.Instance.FromRawValue(
 				SLTables.PollManager.GetRow(protocol, Convert.ToString((int)RequestType.Repositories_Releases)));
-			if (!pollRow.PreviouslyPolledUTCTime.HasValue)
+			if (!pollRow.LastPolledUTCTime.HasValue)
 			{
-				protocol.Log($"QA{protocol.QActionID}|{nameof(MembersQActionTable)}.{nameof(Cleanup)}|Table hasn't been polled twice yet", LogType.DebugInfo, LogLevel.Level2);
+				protocol.Log($"QA{protocol.QActionID}|{nameof(MembersQActionTable)}.{nameof(Cleanup)}|Table hasn't been polled yet", LogType.DebugInfo, LogLevel.Level2);
 				return;
 			}
 
@@ -251,7 +251,7 @@ namespace Skyline.Protocol.Tables
 				LastPolledAt.Read.Map<ReleasesModel>(m => m.LastPolledAt))
 					.Where(m =>
 						!m.LastPolledAt.HasValue ||
-						(m.LastPolledAt < pollRow.PreviouslyPolledUTCTime))
+						(m.LastPolledAt < pollRow.LastPolledUTCTime))
 					.Select(m => m.Instance)
 					.ToHashSet();
 

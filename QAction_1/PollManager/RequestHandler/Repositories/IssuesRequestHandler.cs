@@ -6,24 +6,26 @@
 
 	public static partial class RepositoriesRequestHandler
 	{
-		public static void HandleRepositoriesIssuesRequest(SLProtocol protocol)
+		public static void HandleRepositoriesIssuesRequest(SLProtocol protocol, bool executeNow)
 		{
-			HandleRepositoriesIssuesRequest(protocol, PollingConstants.PerPage, 1);
+			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Repository_Issues)?.PageLimit ?? PollingConstants.PerPage;
+			HandleRepositoriesIssuesRequest(protocol, perPage, 1, executeNow);
 		}
 
-		public static void HandleRepositoriesIssuesRequest(SLProtocol protocol, int perPage, int page)
+		public static void HandleRepositoriesIssuesRequest(SLProtocol protocol, int perPage, int page, bool executeNow)
 		{
 			var repositories = SLTables.Repositories.GetPrimaryKeys(protocol);
 			foreach (var row in repositories)
 			{
-				HandleRepositoriesIssuesRequest(protocol, row, perPage, page);
+				HandleRepositoriesIssuesRequest(protocol, row, perPage, page, executeNow);
 			}
 		}
 
-		public static void HandleRepositoriesIssuesRequest(SLProtocol protocol, string repositoryId, int perPage, int page)
+		public static void HandleRepositoriesIssuesRequest(SLProtocol protocol, string repositoryId, int perPage, int page, bool executeNow)
 		{
 			protocol.SetParameter(Parameter.getrepositoryissuesurl, $"repos/{repositoryId}/issues?per_page={perPage}&page={page}&state=all");
-			protocol.CheckTrigger(202);
+			var trigger = executeNow ? Triggers.GetRepositoryIssuesNow : Triggers.GetRepositoryIssues;
+			protocol.CheckTrigger((int)trigger);
 		}
 	}
 }

@@ -7,7 +7,9 @@
 		public UInt32? FromRawValue(object rawValue)
 		{
 			if (rawValue != null)
+			{
 				return Convert.ToUInt32(rawValue);
+			}
 
 			return null;
 		}

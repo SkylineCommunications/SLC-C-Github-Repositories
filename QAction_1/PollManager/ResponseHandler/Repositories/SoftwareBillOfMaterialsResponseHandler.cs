@@ -12,6 +12,10 @@
 
 	public static partial class RepositoriesResponseHandler
 	{
+		private static readonly Regex SbomNameRegex = new Regex(
+			@"com\.github\.(?<owner>[^/]+)/(?<repo>[^/]+)",
+			RegexOptions.Compiled);
+
 		public static void HandleSoftwareBillOfMaterialsResponse(SLProtocol protocol)
 		{
 			// Check status code
@@ -30,11 +34,8 @@
 			}
 
 			// Parse name to check which repository this SBOM is linked to
-			var pattern = @"com\.github\.(?<owner>.*)\/(?<repo>.*)";
-			var options = RegexOptions.Multiline;
-
 			var utcNow = DateTime.UtcNow;
-			var match = Regex.Match(response.Sbom.Name, pattern, options);
+			var match = SbomNameRegex.Match(response.Sbom.Name);
 			var owner = match.Groups["owner"].Value;
 			var repo = match.Groups["repo"].Value;
 

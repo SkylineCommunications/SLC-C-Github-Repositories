@@ -8,6 +8,7 @@ namespace Skyline.DataMiner.Utils.Github.API.V20221128.Repositories
 	using Newtonsoft.Json;
 
 	// Root myDeserializedClass = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryWorkflowsResponse>(myJsonResponse);
+
 	public class RepositoryWorkflowsResponse
 	{
 		[JsonProperty("total_count")]

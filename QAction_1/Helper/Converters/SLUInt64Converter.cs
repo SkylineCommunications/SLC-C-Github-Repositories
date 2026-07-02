@@ -7,7 +7,9 @@
 		public UInt64? FromRawValue(object rawValue)
 		{
 			if (rawValue != null)
+			{
 				return Convert.ToUInt64(rawValue);
+			}
 
 			return null;
 		}

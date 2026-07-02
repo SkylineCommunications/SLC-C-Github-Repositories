@@ -6,6 +6,14 @@
 
 	using Skyline.DataMiner.Net.SLDataGateway.Types;
 
+	public static class ColumnWriteExtensions
+	{
+		public static ColumnPropertyWriteMap<TModel, TValue> Map<TModel, TValue>(
+			this SLReadColumnObject<TValue> col,
+			Func<TModel, TValue> getter)
+			=> new ColumnPropertyWriteMap<TModel, TValue>(col, getter);
+	}
+
 	public abstract class ColumnMapBase<TModel>
 	{
 		protected ColumnMapBase(SLColumnObject column)
@@ -67,13 +75,5 @@
 		{
 			return _typedColumn.Converter.ToRawValue(_getter(model));
 		}
-	}
-
-	public static class ColumnWriteExtensions
-	{
-		public static ColumnPropertyWriteMap<TModel, TValue> Map<TModel, TValue>(
-			this SLReadColumnObject<TValue> col,
-			Func<TModel, TValue> getter)
-			=> new ColumnPropertyWriteMap<TModel, TValue>(col, getter);
 	}
 }

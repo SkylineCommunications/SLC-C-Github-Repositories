@@ -7,7 +7,9 @@
 		public Int16? FromRawValue(object rawValue)
 		{
 			if (rawValue != null)
+			{
 				return Convert.ToInt16(rawValue);
+			}
 
 			return null;
 		}

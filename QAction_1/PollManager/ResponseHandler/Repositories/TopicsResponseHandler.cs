@@ -3,7 +3,6 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using System.Text.RegularExpressions;
 
 	using Newtonsoft.Json;
 
@@ -12,6 +11,7 @@
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
 	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
+	using Skyline.Protocol.API;
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;
@@ -33,10 +33,15 @@
 				return;
 			}
 
-			// Parse response
-			var response = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryTopics>(
-				Convert.ToString(protocol.GetParameter(Parameter.getrepositorytopicscontent)));
-			var url = Convert.ToString(protocol.GetParameter(Parameter.getrepositorytopicsurl));
+			var parameterIds = new uint[]
+			{
+				Parameter.getrepositorytopicscontent,
+				Parameter.getrepositorytopicsurl,
+			};
+
+			var parameterValues = Array.ConvertAll((object[])protocol.GetParameters(parameterIds), Convert.ToString);
+			var response = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryTopics>(parameterValues[0]);
+			var url = parameterValues[1];
 
 			if (response == null)
 			{
@@ -56,10 +61,15 @@
 				return;
 			}
 
-			// Parse response
-			var response = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryTopics>(
-				Convert.ToString(protocol.GetParameter(Parameter.putrepositorytopicscontent)));
-			var url = Convert.ToString(protocol.GetParameter(Parameter.putrepositorytopicsurl));
+			var parameterIds = new uint[]
+			{
+				Parameter.putrepositorytopicscontent,
+				Parameter.putrepositorytopicsurl,
+			};
+
+			var parameterValues = Array.ConvertAll((object[])protocol.GetParameters(parameterIds), Convert.ToString);
+			var response = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryTopics>(parameterValues[0]);
+			var url = parameterValues[1];
 
 			if (response == null)
 			{
@@ -68,60 +78,6 @@
 			}
 
 			HandleRepositoriesTopicsResponse(protocol, response, url);
-		}
-
-		private static void HandleRepositoriesTopicsResponse(SLProtocol protocol, RepositoryTopics response, string url)
-		{
-			// Parse url to check which respository this issue is linked to
-			var pattern = "repos\\/(.*)\\/(.*)\\/topics";
-			var options = RegexOptions.Multiline;
-
-			var match = Regex.Match(url, pattern, options);
-			if (!match.Success)
-			{
-				protocol.Log($"QA{protocol.QActionID}|HandleRepositoriesTopicsResponse|Did not find a tracked repository for this request.", LogType.Information, LogLevel.Level1);
-				return;
-			}
-
-			var owner = match.Groups[1].Value;
-			var name = match.Groups[2].Value;
-
-			if (!SLTables.Repositories.TryGetRow(protocol, $"{owner}/{name}", out var rawRow))
-			{
-				return;
-			}
-
-			// Update the repositories table
-			var repo = RepositoriesRowConverter.Instance.FromRawValue(rawRow);
-			if (repo == null)
-			{
-				return;
-			}
-
-			repo.Topics.Clear();
-			repo.Topics.AddRange(response.Names);
-			SLTables.Repositories.SetRow(protocol, RepositoriesRowConverter.Instance.ToRawValue(repo));
-
-			HandleTopicsInterApp(protocol, owner, name, repo.Topics);
-		}
-
-		private static void HandleNextRepositoryTopics(SLProtocol protocol)
-		{
-			// Get the next repo in the queue to fetch
-			var queue = SecureNewtonsoftDeserialization.DeserializeObject<List<string>>(
-				Convert.ToString(protocol.GetParameter(Parameter.getrepositorytopicsqueue)));
-			var next = queue?.FirstOrDefault();
-
-			if (next == null)
-			{
-				return;
-			}
-
-			protocol.SetParameter(Parameter.getrepositorytopicsqueue, JsonConvert.SerializeObject(queue.Skip(1)));
-
-			////var nextOwner = next.Split('/')[0];
-			////var nextName = next.Split('/')[1];
-			RepositoriesRequestHandler.HandleRepositoriesTopicsRequest(protocol, next, PollingConstants.PerPage, 1);
 		}
 
 		public static void HandleTopicsInterApp(SLProtocol protocol, string owner, string name, IEnumerable<string> topics)
@@ -162,6 +118,51 @@
 					iacRow.SaveToProtocol(protocol);
 				}
 			}
+		}
+
+		private static void HandleRepositoriesTopicsResponse(SLProtocol protocol, RepositoryTopics response, string url)
+		{
+			// Parse url to check which repository this topic is linked to
+			if (!GithubUrlHelper.TryParseRepoOwnerAndName(url, out var owner, out var name))
+			{
+				protocol.Log($"QA{protocol.QActionID}|HandleRepositoriesTopicsResponse|Did not find a tracked repository for this request.", LogType.Information, LogLevel.Level1);
+				return;
+			}
+
+			if (!SLTables.Repositories.TryGetRow(protocol, $"{owner}/{name}", out var rawRow))
+			{
+				return;
+			}
+
+			// Update the repositories table
+			var repo = RepositoriesRowConverter.Instance.FromRawValue(rawRow);
+			if (repo == null)
+			{
+				return;
+			}
+
+			repo.Topics.Clear();
+			repo.Topics.AddRange(response.Names);
+			SLTables.Repositories.SetRow(protocol, RepositoriesRowConverter.Instance.ToRawValue(repo));
+
+			HandleTopicsInterApp(protocol, owner, name, repo.Topics);
+		}
+
+		private static void HandleNextRepositoryTopics(SLProtocol protocol)
+		{
+			// Get the next repo in the queue to fetch
+			var queue = SecureNewtonsoftDeserialization.DeserializeObject<List<string>>(
+				Convert.ToString(protocol.GetParameter(Parameter.getrepositorytopicsqueue)));
+			var next = queue?.FirstOrDefault();
+
+			if (next == null)
+			{
+				return;
+			}
+
+			protocol.SetParameter(Parameter.getrepositorytopicsqueue, JsonConvert.SerializeObject(queue.Skip(1)));
+			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Repositories_Topics)?.PageLimit ?? PollingConstants.PerPage;
+			RepositoriesRequestHandler.HandleRepositoriesTopicsRequest(protocol, next, perPage, 1, true);
 		}
 	}
 }

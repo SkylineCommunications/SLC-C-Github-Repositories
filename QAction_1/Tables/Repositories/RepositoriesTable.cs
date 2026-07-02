@@ -29,7 +29,7 @@ namespace Skyline.Protocol.Tables
 			{
 				SLTables.Repositories.FullName.Read.Map<RepositoriesModel>(m => m.FullName),
 				SLTables.Repositories.Name.Read.Map<RepositoriesModel>(m => m.Name),
-				SLTables.Repositories.Private.Read.Map<RepositoriesModel>(m => m.Private),
+				SLTables.Repositories.Visibility.Read.Map<RepositoriesModel>(m => m.Private),
 				SLTables.Repositories.Description.Read.Map<RepositoriesModel>(m => m.Description),
 				SLTables.Repositories.Owner.Read.Map<RepositoriesModel>(m => m.Owner),
 				SLTables.Repositories.Fork.Read.Map<RepositoriesModel>(m => m.Fork),
@@ -52,7 +52,7 @@ namespace Skyline.Protocol.Tables
 			{
 				SLTables.Repositories.FullName.Read.MapWrite<RepositoriesModel>(m => m.FullName),
 				SLTables.Repositories.Name.Read.MapWrite<RepositoriesModel>(m => m.Name),
-				SLTables.Repositories.Private.Read.MapWrite<RepositoriesModel>(m => m.Private),
+				SLTables.Repositories.Visibility.Read.MapWrite<RepositoriesModel>(m => m.Private),
 				SLTables.Repositories.Description.Read.MapWrite<RepositoriesModel>(m => m.Description),
 				SLTables.Repositories.Owner.Read.MapWrite<RepositoriesModel>(m => m.Owner),
 				SLTables.Repositories.Fork.Read.MapWrite<RepositoriesModel>(m => m.Fork),
@@ -176,9 +176,9 @@ namespace Skyline.Protocol.Tables
 				Parameter.Repositories.Pid.repositoriesname,
 				this);
 
-			Private = new SLReadColumn<bool?>(
-				Parameter.Repositories.Idx.repositoriesprivate,
-				Parameter.Repositories.Pid.repositoriesprivate,
+			Visibility = new SLReadColumn<bool?>(
+				Parameter.Repositories.Idx.repositoriesvisibility,
+				Parameter.Repositories.Pid.repositoriesvisibility,
 				this);
 
 			Description = new SLReadColumn<string>(
@@ -274,7 +274,7 @@ namespace Skyline.Protocol.Tables
 
 		public SLReadColumn<string> Name { get; }
 
-		public SLReadColumn<bool?> Private { get; }
+		public SLReadColumn<bool?> Visibility { get; }
 
 		public SLReadColumn<string> Description { get; }
 
@@ -335,7 +335,6 @@ namespace Skyline.Protocol.Tables
 				e.PollState != PollState.Disabled)
 			{
 				Repositories_Disabled(e.Protocol);
-				return;
 			}
 		}
 
@@ -380,7 +379,7 @@ namespace Skyline.Protocol.Tables
 						{
 							Repositoriesfullname_1001 = m.Repositoriesfullname,
 							Repositoriesname_1002 = Exceptions.NotAvailable,
-							Repositoriesprivate_1003 = Exceptions.IntNotAvailable,
+							Repositoriesvisibility_1003 = Exceptions.IntNotAvailable,
 							Repositoriesdescription_1004 = Exceptions.NotAvailable,
 							Repositoriesowner_1005 = Exceptions.NotAvailable,
 							Repositoriesfork_1006 = Exceptions.IntNotAvailable,

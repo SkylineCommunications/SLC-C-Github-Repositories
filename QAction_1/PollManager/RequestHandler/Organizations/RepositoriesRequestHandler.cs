@@ -11,27 +11,30 @@
 
 	public static partial class OrganizationsRequestHandler
 	{
-		public static void HandleOrganizationRepositoriesRequest(SLProtocol protocol)
+		public static void HandleOrganizationRepositoriesRequest(SLProtocol protocol, bool executeNow)
 		{
 			var rows = SLTables.Organizations.GetData(
 				protocol,
 				SLTables.Organizations.Instance.Read.Map<OrganizationsModel>(m => m.Instance),
 				SLTables.Organizations.Tracked.Read.Map<OrganizationsModel>(m => m.Tracked));
+
+			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_Repositories)?.PageLimit ?? PollingConstants.PerPage;
 			foreach (var row in rows.Where(org => org.Tracked.HasValue && org.Tracked.Value))
 			{
-				HandleOrganizationRepositoriesRequest(protocol, row.Instance);
+				HandleOrganizationRepositoriesRequest(protocol, row.Instance, perPage, executeNow);
 			}
 		}
 
-		public static void HandleOrganizationRepositoriesRequest(SLProtocol protocol, string organization)
+		public static void HandleOrganizationRepositoriesRequest(SLProtocol protocol, string organization, int perPage, bool executeNow)
 		{
-			HandleOrganizationRepositoriesRequest(protocol, organization, PollingConstants.PerPage, 1);
+			HandleOrganizationRepositoriesRequest(protocol, organization, perPage, 1, executeNow);
 		}
 
-		public static void HandleOrganizationRepositoriesRequest(SLProtocol protocol, string organization, int perPage, int page)
+		public static void HandleOrganizationRepositoriesRequest(SLProtocol protocol, string organization, int perPage, int page, bool executeNow)
 		{
 			protocol.SetParameter(Parameter.getorganizationrepositoriesurl, $"orgs/{organization}/repos?per_page={perPage}&page={page}");
-			protocol.CheckTrigger(211);
+			var trigger = executeNow ? Triggers.GetOrganizationRepositoriesNow : Triggers.GetOrganizationRepositories;
+			protocol.CheckTrigger((int)trigger);
 		}
 
 		public static void HandleOrganizationCreateRepositoryRequest(SLProtocol protocol, string organization, CreateRepository repo)
@@ -48,7 +51,7 @@
 			};
 
 			protocol.SetParameters(sets.Keys.ToArray(), sets.Values.ToArray());
-			protocol.CheckTrigger(222);
+			protocol.CheckTrigger((int)Triggers.PostRepositoryNow);
 		}
 	}
 }

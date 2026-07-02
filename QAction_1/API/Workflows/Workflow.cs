@@ -9,6 +9,7 @@ namespace Skyline.Protocol.API.Workflows
 	using YamlDotNet.Serialization;
 
 	// Root myDeserializedClass = SecureNewtonsoftDeserialization.DeserializeObject<Root>(myJsonResponse);
+
 	public class Job
 	{
 		[JsonProperty("if", NullValueHandling = NullValueHandling.Ignore)]

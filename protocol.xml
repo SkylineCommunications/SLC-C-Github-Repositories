@@ -6,17 +6,17 @@
 -->
 
 <Protocol xmlns="http://www.skyline.be/protocol">
-	<Name>Github Repositories</Name>
-	<Description>Github Repositories DataMiner connector</Description>
-	<Version>1.0.1.1</Version>
-	<IntegrationID>DMS-DRV-0</IntegrationID>
+	<Name>GitHub Repositories</Name>
+	<Description>GitHub Repositories DataMiner connector</Description>
+	<Version>1.0.2.1</Version>
+	<IntegrationID>DMS-DRV-9437</IntegrationID>
 	<Provider>Skyline Communications</Provider>
-	<Vendor>Github</Vendor>
-	<VendorOID>1.3.6.1.4.1.8813.2.0</VendorOID>
-	<DeviceOID>0</DeviceOID>
-	<ElementType>Github Repositories</ElementType>
+	<Vendor>GitHub</Vendor>
+	<VendorOID>1.3.6.1.4.1.8813.2.1268</VendorOID>
+	<DeviceOID>1</DeviceOID>
+	<ElementType>Management System</ElementType>
 	<Type relativeTimers="true">http</Type>
-	<Display defaultPage="General" pageOrder="General;----------;Organizations - Overview;Organizations;Teams;Members;----------;Repositories - Overview;Repositories;Releases;Issues;Workflows;Software Bill of Materials;----------;Inter-App Communication;Linker Tables" wideColumnPages="">
+	<Display defaultPage="General" pageOrder="General;----------;Organizations - Overview;Organizations;Teams;Members;----------;Repositories - Overview;Repositories;Releases;Issues;Workflows;Software Bill of Materials;----------;Inter-App Communication;Linker Tables" wideColumnPages="Repositories;Workflows;Repositories - Overview;Releases;Issues;Software Bill of Materials;Organizations - Overview;Organizations;Teams;Members;Poll Manager;Inter-App Communication">
 		<Pages>
 			<Page>
 				<Name>Linker Tables</Name>
@@ -99,10 +99,10 @@
 				<LengthType>next param</LengthType>
 				<DefaultValue>
 					<![CDATA[To start tracking repositories, add one to the repositories table. This can be done via the context menu or via the add repository page.
-Both will ask for the repository owner and name, both can be found in the url of the github repository.
+Both will ask for the repository owner and name, both can be found in the URL of the github repository.
 
-By default this element runs without an api key. This means that the element can only sent 60 request per hour before being blocked out by Github.
-To get more request you can add an api key under General/Configuration page. To generate such a token you can go to Github.com -> Settings -> Developer settings -> Personal access tokens -> tokens (classic), to generate one.]]>
+By default this element runs without an API key. This means that the element can only sent 60 request per hour before being blocked out by GitHub.
+To get more request you can add an API key under General/Configuration page. To generate such a token you can go to GitHub.com -> Settings -> Developer settings -> Personal access tokens -> tokens (classic), to generate one.]]>
 				</DefaultValue>
 			</Interprete>
 			<Display>
@@ -190,13 +190,13 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Measurement>
 		</Param>
 		
-		<Param id="10" save="true">
+		<Param id="10" trending="false" save="true">
 			<Name>ApiKey</Name>
 			<Description>API Key</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>
-					<![CDATA[The api key retrieved by going to your account settings -> Developer settings -> Personal access tokens -> Tokens (classic)]]>
+					<![CDATA[The API key retrieved by going to your account settings -> Developer settings -> Personal access tokens -> Tokens (classic)]]>
 				</Subtext>
 			</Information>
 			<Interprete>
@@ -243,7 +243,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="12" save="true">
 			<Name>ApiKeyBearer</Name>
-			<Description>Api Key Bearer</Description>
+			<Description>API Key Bearer</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -252,11 +252,13 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Interprete>
 		</Param>
 		<Param id="13" save="true">
-			<Name>GithubApiVersion</Name>
-			<Description>Github API Version</Description>
+			<Name>GitHubApiVersion</Name>
+			<!-- SuppressValidator 2.14.7 GitHub is the correct casing -->
+			<Description>GitHub API Version</Description>
+			<!-- /SuppressValidator 2.14.7 -->
 			<Type>read</Type>
 			<Information>
-				<Subtext>The Api version this element uses.</Subtext>
+				<Subtext>The API version this element uses.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -289,8 +291,10 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Measurement>
 		</Param>
 		<Param id="14" setter="true">
-			<Name>GithubApiVersion</Name>
-			<Description>Github API Version</Description>
+			<Name>GitHubApiVersion</Name>
+			<!-- SuppressValidator 2.14.7 GitHub is the correct casing -->
+			<Description>GitHub API Version</Description>
+			<!-- /SuppressValidator 2.14.7 -->
 			<Type>write</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -323,7 +327,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Description>Rate Limit</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The maximum number of request this api key can make in one hour.</Subtext>
+				<Subtext>The maximum number of requests this API key can make in one hour.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -337,9 +341,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
-				<!-- SuppressValidator 2.9.4 This is correct -->
-				<Units>requests</Units>
-				<!-- /SuppressValidator 2.9.4 -->
+				<Units>Requests</Units>
 				<Range>
 					<Low>0</Low>
 				</Range>
@@ -360,7 +362,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Description>Rate Limit Remaining</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The amount of hourly request remaining.</Subtext>
+				<Subtext>The amount of hourly requests remaining.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -377,9 +379,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
-				<!-- SuppressValidator 2.9.4 This is correct -->
-				<Units>requests</Units>
-				<!-- /SuppressValidator 2.9.4 -->
+				<Units>Requests</Units>
 				<Range>
 					<Low>0</Low>
 				</Range>
@@ -400,7 +400,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Description>Rate Limit Used</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The amount of hourly request already used.</Subtext>
+				<Subtext>The amount of hourly requests already used.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -417,9 +417,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
-				<!-- SuppressValidator 2.9.4 This is correct -->
-				<Units>requests</Units>
-				<!-- /SuppressValidator 2.9.4 -->
+				<Units>Requests</Units>
 				<Range>
 					<Low>0</Low>
 				</Range>
@@ -440,7 +438,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Description>Rate Limit Reset</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The date time when the rate limit is going to reset again.</Subtext>
+				<Subtext>The DateTime when the rate limit is going to reset again.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -557,7 +555,7 @@ To get more request you can add an api key under General/Configuration page. To 
 					<Position>
 						<Page>Workflows</Page>
 						<Column>0</Column>
-						<Row>2</Row>
+						<Row>1</Row>
 					</Position>
 				</Positions>
 			</Display>
@@ -581,9 +579,9 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
-		<Param id="101" save="true">
+		<Param id="101">
 			<Name>GetRepositoryUrl</Name>
-			<Description>Get Repository Url</Description>
+			<Description>Get Repository URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -591,9 +589,9 @@ To get more request you can add an api key under General/Configuration page. To 
 				<LengthType>next param</LengthType>
 			</Interprete>
 		</Param>
-		<Param id="102" save="true">
+		<Param id="102">
 			<Name>GetRepositoryIssuesUrl</Name>
-			<Description>Get Repository Issues Url</Description>
+			<Description>Get Repository Issues URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -603,7 +601,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="103">
 			<Name>GetRepositoryTagsUrl</Name>
-			<Description>Get Repository Tags Url</Description>
+			<Description>Get Repository Tags URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -613,7 +611,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="104">
 			<Name>GetRepositoryReleasesUrl</Name>
-			<Description>Get Repository Releases Url</Description>
+			<Description>Get Repository Releases URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -623,7 +621,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="105">
 			<Name>GetRepositoryWorkflowsUrl</Name>
-			<Description>Get Repository Workflows Url</Description>
+			<Description>Get Repository Workflows URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -633,7 +631,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="106">
 			<Name>GetRepositorySoftwareBillOfMaterialsUrl</Name>
-			<Description>Get Repository Software Bill of Materials Url</Description>
+			<Description>Get Repository Software Bill of Materials URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -653,7 +651,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="110">
 			<Name>GetUserOrganizationsUrl</Name>
-			<Description>Get User Organizations Url</Description>
+			<Description>Get User Organizations URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -663,7 +661,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="111">
 			<Name>GetOrganizationRepositoriesUrl</Name>
-			<Description>Get Organization Repositories Url</Description>
+			<Description>Get Organization Repositories URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -673,7 +671,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="112">
 			<Name>GetOrganizationTeamsUrl</Name>
-			<Description>Get Organization Teams Url</Description>
+			<Description>Get Organization Teams URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -683,7 +681,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="113">
 			<Name>GetOrganizationMembersUrl</Name>
-			<Description>Get Organization Members Url</Description>
+			<Description>Get Organization Members URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -703,7 +701,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="120">
 			<Name>GetRepositoryContentUrl</Name>
-			<Description>Get Repository Content Url</Description>
+			<Description>Get Repository Content URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -713,7 +711,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="121">
 			<Name>PutRepositoryContentUrl</Name>
-			<Description>Create/Update Repository Content Url</Description>
+			<Description>Create/Update Repository Content URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -733,7 +731,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="122">
 			<Name>PostRepositoryUrl</Name>
-			<Description>Create Repository Url</Description>
+			<Description>Create Repository URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -753,7 +751,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="123">
 			<Name>PutRepositoryUserCollaboratorUrl</Name>
-			<Description>Create Repository User Collaborator Url</Description>
+			<Description>Create Repository User Collaborator URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -773,7 +771,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="124">
 			<Name>PutRepositoryTeamCollaboratorUrl</Name>
-			<Description>Create Repository Team Collaborator Url</Description>
+			<Description>Create Repository Team Collaborator URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -793,7 +791,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="126">
 			<Name>PutRepositorySecretUrl</Name>
-			<Description>Create/Update Repository Secret Url</Description>
+			<Description>Create/Update Repository Secret URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -813,7 +811,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="128">
 			<Name>GetRepositoryPublicKeyUrl</Name>
-			<Description>Get Repository Public Key Url</Description>
+			<Description>Get Repository Public Key URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -833,7 +831,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="129">
 			<Name>GetRepositoryTopicsUrl</Name>
-			<Description>Get Repository Topics Url</Description>
+			<Description>Get Repository Topics URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -853,7 +851,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="130">
 			<Name>PutRepositoryTopicsUrl</Name>
-			<Description>Put Repository Topics Url</Description>
+			<Description>Put Repository Topics URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -873,7 +871,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		</Param>
 		<Param id="131">
 			<Name>PostWorkflowExecutionUrl</Name>
-			<Description>Post Workflow Execution Url</Description>
+			<Description>Post Workflow Execution URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -894,7 +892,7 @@ To get more request you can add an api key under General/Configuration page. To 
 		
 		<Param id="135">
 			<Name>PostRepositoryVariableUrl</Name>
-			<Description>Post Repository Variable Url</Description>
+			<Description>Post Repository Variable URL</Description>
 			<Type>read</Type>
 			<Interprete>
 				<RawType>other</RawType>
@@ -1363,7 +1361,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Name>AddRepositoryButton</Name>
 			<Type>write</Type>
 			<Information>
-				<Subtext>The button that trigger an add to the repositories table.</Subtext>
+				<Subtext>When pressed, adds the specified Repository to the Repositories table.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -1714,11 +1712,11 @@ To get more request you can add an api key under General/Configuration page. To 
 						<Value>2</Value>
 					</Discreet>
 					<Discreet>
-						<Display>Nuget Solution CICD</Display>
+						<Display>NuGet Solution CICD</Display>
 						<Value>3</Value>
 					</Discreet>
 					<Discreet>
-						<Display>Internal Nuget Solution CICD</Display>
+						<Display>Internal NuGet Solution CICD</Display>
 						<Value>4</Value>
 					</Discreet>
 				</Discreets>
@@ -1759,11 +1757,11 @@ To get more request you can add an api key under General/Configuration page. To 
 						<Value>2</Value>
 					</Discreet>
 					<Discreet>
-						<Display>Nuget Solution CICD</Display>
+						<Display>NuGet Solution CICD</Display>
 						<Value>3</Value>
 					</Discreet>
 					<Discreet>
-						<Display>Internal Nuget Solution CICD</Display>
+						<Display>Internal NuGet Solution CICD</Display>
 						<Value>4</Value>
 					</Discreet>
 				</Discreets>
@@ -1802,7 +1800,7 @@ To get more request you can add an api key under General/Configuration page. To 
 			<Information>
 				<Subtext>
 					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
-At the end of the cycle this parameter should contains the entire list of still existing repositories. This list is used to for cleanup at the end]]>
+At the end of the cycle this parameter should contain the entire list of still existing repositories. This list is used for cleanup at the end]]>
 				</Subtext>
 			</Information>
 			<Type>read</Type>
@@ -1825,7 +1823,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RTDisplay onAppLevel="true">true</RTDisplay>
 			</Display>
 		</Param>
-		<Param id="996">
+		<Param id="996" trending="false">
 			<Name>RepositoriesOverview</Name>
 			<Description>Repositories Overview</Description>
 			<Type>read</Type>
@@ -1852,14 +1850,14 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Type>array</Type>
 			<ArrayOptions index="0" partial="true:200">
 				<ColumnOption idx="0" pid="1001" type="retrieved" options="" />
-				<ColumnOption idx="1" pid="1002" type="retrieved" options=";save" />
+				<ColumnOption idx="1" pid="1002" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="1003" type="retrieved" options="" />
 				<ColumnOption idx="3" pid="1004" type="retrieved" options="" />
-				<ColumnOption idx="4" pid="1005" type="retrieved" options=";save" />
+				<ColumnOption idx="4" pid="1005" type="retrieved" options="" />
 				<ColumnOption idx="5" pid="1006" type="retrieved" options="" />
-				<ColumnOption idx="6" pid="1007" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="7" pid="1008" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="8" pid="1009" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="6" pid="1007" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
+				<ColumnOption idx="7" pid="1008" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
+				<ColumnOption idx="8" pid="1009" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
 				<ColumnOption idx="9" pid="1010" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="10" pid="1011" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="11" pid="1012" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
@@ -1868,7 +1866,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="14" pid="1015" type="retrieved" options="" />
 				<ColumnOption idx="15" pid="1016" type="retrieved" options="" />
 				<ColumnOption idx="16" pid="1017" type="retrieved" options="" />
-				<ColumnOption idx="17" pid="1018" type="retrieved" options=";save" />
+				<ColumnOption idx="17" pid="1018" type="retrieved" options="" />
 				<ColumnOption idx="18" pid="1019" type="retrieved" options="" />
 				<ColumnOption idx="19" pid="1020" type="retrieved" options=";save" />
 			</ArrayOptions>
@@ -1886,7 +1884,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3-1005|4-1006|5-1007|6-1008|7-1009|8-1010|9-1011|10-1012|11-1013|12-1014|13-1015|14-1016|15-1017|16-1018|17-1019|18-1020|19,width:100-134-157-140-165-137-156-160-165-157-123-128-147-103-100-0-0-0-0-100,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT-INT-INT-STRING-STRING-STRING-STRING-INT-STRING-STRING,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1001|0-1002|1-1003|2-1004|3-1005|4-1006|5-1007|6-1008|7-1009|8-1010|9-1011|10-1012|11-1013|12-1014|13-1015|14-1016|15-1017|16-1018|17-1019|18-1020|19,width:350-200-157-140-165-137-156-160-165-157-123-128-147-103-100-0-0-0-0-100,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-STRING-INT-INT-INT|DESC|0-INT-INT-INT-INT-STRING-STRING-STRING-STRING-INT-STRING-STRING,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1001" trending="false">
@@ -1934,8 +1932,8 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Measurement>
 		</Param>
 		<Param id="1003" trending="false">
-			<Name>RepositoriesPrivate</Name>
-			<Description>Private (Repositories)</Description>
+			<Name>RepositoriesVisibility</Name>
+			<Description>Visibility (Repositories)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Indicates if the repository is public or private.</Subtext>
@@ -2008,7 +2006,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Owner (Repositories)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The owner of the repository</Subtext>
+				<Subtext>The owner of the repository.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -2063,11 +2061,11 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<Type>discreet</Type>
 				<Discreets>
 					<Discreet>
-						<Display>Fork</Display>
+						<Display>Yes</Display>
 						<Value>1</Value>
 					</Discreet>
 					<Discreet>
-						<Display>Normal</Display>
+						<Display>No</Display>
 						<Value>0</Value>
 					</Discreet>
 				</Discreets>
@@ -2084,6 +2082,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 				<Exceptions>
 					<Exception id="2" value="-2">
 						<Display state="disabled">N/A</Display>
@@ -2115,6 +2114,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 				<Exceptions>
 					<Exception id="2" value="-2">
 						<Display state="disabled">N/A</Display>
@@ -2146,6 +2146,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 				<Exceptions>
 					<Exception id="2" value="-2">
 						<Display state="disabled">N/A</Display>
@@ -2171,7 +2172,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Size (Repositories)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The total size of the repository in kilo bytes</Subtext>
+				<Subtext>The total size of the repository in kilobytes.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -2337,7 +2338,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Type (Repositories)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The type of the repository</Subtext>
+				<Subtext>The type of the repository.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -2461,7 +2462,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Topics (Repositories)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>comma separated list of the topics assigned to the repository.</Subtext>
+				<Subtext>Comma separated list of the topics assigned to the repository.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -2491,7 +2492,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Auto-Remove (Repositories)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>Indicates whether this repository should be auto removed when it's no removed. This is used when you enable the track repositories option for an organization.</Subtext>
+				<Subtext>Indicates whether this repository should be auto removed when it's no longer tracked. This is used when you enable the track repositories option for an organization.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -2551,7 +2552,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Information>
 				<Subtext>
 					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
-At the end of the cycle this parameter should contains the entire list of still existing tags. This list is used to for cleanup at the end]]>
+At the end of the cycle this parameter should contain the entire list of still existing tags. This list is used for cleanup at the end]]>
 				</Subtext>
 			</Information>
 			<Type>read</Type>
@@ -2566,7 +2567,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Repository Tags)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -2576,6 +2577,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -2657,7 +2659,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Repository ID (Repository Tags)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The ID of the repository this tag is linked.</Subtext>
+				<Subtext>The ID of the repository this tag is linked to.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -2697,7 +2699,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Information>
 				<Subtext>
 					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
-At the end of the cycle this parameter should contains the entire list of still existing releases. This list is used to for cleanup at the end]]>
+At the end of the cycle this parameter should contain the entire list of still existing releases. This list is used for cleanup at the end]]>
 				</Subtext>
 			</Information>
 			<Type>read</Type>
@@ -2712,7 +2714,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -2722,6 +2724,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -2742,8 +2745,8 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="7" pid="1408" type="retrieved" options="" />
 				<ColumnOption idx="8" pid="1409" type="retrieved" options="" />
 				<ColumnOption idx="9" pid="1410" type="retrieved" options="" />
-				<ColumnOption idx="10" pid="1411" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="11" pid="1412" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="10" pid="1411" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
+				<ColumnOption idx="11" pid="1412" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
 				<ColumnOption idx="12" pid="1413" type="retrieved" options=";foreignKey=1000" />
 				<ColumnOption idx="13" pid="1399" type="retrieved" options="" />
 			</ArrayOptions>
@@ -2761,7 +2764,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1401|0-1402|1-1403|2-1404|3-1405|4-1406|5-1407|6-1408|7-1409|8-1410|9-1411|10-1412|11-1413|12-1399|13,width:100-100-100-0-118-100-100-100-100-100-156-156-111-0,sort:STRING|ASC|1-INT-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1401|0-1402|1-1403|2-1404|3-1405|4-1406|5-1407|6-1408|7-1409|8-1410|9-1411|10-1412|11-1413|12-1399|13,width:400-100-100-0-118-100-100-100-100-100-156-156-111-0,sort:STRING|ASC|1-INT-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1401" trending="false">
@@ -2833,10 +2836,10 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="1404" trending="false">
 			<Name>RepositoryReleasesTagId</Name>
-			<Description>Tag Id (Repository Releases)</Description>
+			<Description>Tag ID (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The dataminer id of the tag this release is linked with.</Subtext>
+				<Subtext>The DataMiner ID of the tag this release is linked with.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -2860,7 +2863,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Target Commitish (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The branch this relaese is targetting.</Subtext>
+				<Subtext>The branch this release is targeting.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -2883,7 +2886,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Name (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The name of the release</Subtext>
+				<Subtext>The name of the release.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -2898,11 +2901,11 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Measurement>
 		</Param>
 		<Param id="1407" trending="false">
-			<Name>RepositoryReleasesDraft</Name>
-			<Description>Draft (Repository Releases)</Description>
+			<Name>RepositoryReleasesPublished</Name>
+			<Description>Published (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>Indication if this release is a draft or not.</Subtext>
+				<Subtext>Indication if this release is a draft.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -2931,8 +2934,8 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Measurement>
 		</Param>
 		<Param id="1408" trending="false">
-			<Name>RepositoryReleasesPreRelease</Name>
-			<Description>Pre-Release (Repository Releases)</Description>
+			<Name>RepositoryReleasesType</Name>
+			<Description>Type (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Indication if this release is a pre-release or not.</Subtext>
@@ -3022,6 +3025,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 			</Interprete>
 			<!-- SuppressValidator 2.5.1 Depend on the use case -->
 			<Alarm>
@@ -3030,6 +3034,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -3040,12 +3045,13 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Published At (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The in UTC when the release was publsihed.</Subtext>
+				<Subtext>The DateTime in UTC when the release was published.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 			</Interprete>
 			<!-- SuppressValidator 2.5.1 Depend on the use case -->
 			<Alarm>
@@ -3054,6 +3060,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -3064,7 +3071,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Repository ID (Repository Releases)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The id of the repository this release is linked with.</Subtext>
+				<Subtext>The ID of the repository this release is linked with.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -3107,7 +3114,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Information>
 				<Subtext>
 					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
-At the end of the cycle this parameter should contains the entire list of still existing workflows. This list is used to for cleanup at the end]]>
+At the end of the cycle this parameter should contain the entire list of still existing workflows. This list is used for cleanup at the end]]>
 				</Subtext>
 			</Information>
 			<Type>read</Type>
@@ -3136,7 +3143,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Repository Workflows)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -3146,6 +3153,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -3161,9 +3169,9 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="2" pid="1603" type="retrieved" options="" />
 				<ColumnOption idx="3" pid="1604" type="retrieved" options="" />
 				<ColumnOption idx="4" pid="1605" type="retrieved" options="" />
-				<ColumnOption idx="5" pid="1606" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="6" pid="1607" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="7" pid="1608" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="5" pid="1606" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
+				<ColumnOption idx="6" pid="1607" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
+				<ColumnOption idx="7" pid="1608" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
 				<ColumnOption idx="8" pid="1599" type="retrieved" options="" />
 			</ArrayOptions>
 			<Information>
@@ -3181,7 +3189,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Display>
 			<Measurement>
 				<!-- SuppressValidator 2.31.9 More important to be grouped by repository then by datetime column -->
-				<Type options="tab=columns:1601|0-1602|1-1603|2-1604|3-1605|4-1606|5-1607|6-1608|7-1599|8,width:0-200-100-108-100-156-156-156-0,sort:STRING|ASC|0-STRING-STRING-STRING-STRING-INT|ASC|1-INT-INT-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1601|0-1602|1-1603|2-1604|3-1605|4-1606|5-1607|6-1608|7-1599|8,width:0-300-150-108-200-156-156-156-0,sort:STRING|ASC|1-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-INT,lines:25,filter:true">table</Type>
 				<!-- /SuppressValidator 2.31.9 -->
 			</Measurement>
 		</Param>
@@ -3209,7 +3217,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Repository ID (Repository Workflows)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The ID of the repository this workflow is linked.</Subtext>
+				<Subtext>The ID of the repository this workflow is linked to.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -3252,7 +3260,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>State (Repository Workflows)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The state of the workflow</Subtext>
+				<Subtext>The state of the workflow.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -3299,7 +3307,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Path (Repository Workflows)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The path to the workflow yaml file.</Subtext>
+				<Subtext>The path to the workflow YAML file.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -3323,12 +3331,13 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Created At (Repository Workflows)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The datetime when the workflow was created.</Subtext>
+				<Subtext>The DateTime when the workflow was created.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 				<Exceptions>
 					<Exception id="2" value="-2">
 						<Display state="disabled">N/A</Display>
@@ -3343,6 +3352,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -3353,7 +3363,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Updated At (Repository Workflows)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The datetime of the last update to the workflow</Subtext>
+				<Subtext>The DateTime of the last update to the workflow.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -3365,6 +3375,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 						<Value>-2</Value>
 					</Exception>
 				</Exceptions>
+				<Decimals>8</Decimals>
 			</Interprete>
 			<!-- SuppressValidator 2.5.1 Depends on use case -->
 			<Alarm>
@@ -3373,6 +3384,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -3383,12 +3395,13 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Deleted At (Repository Workflows)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The datetime when the workflow was deleted.</Subtext>
+				<Subtext>The DateTime when the workflow was deleted.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 				<Exceptions>
 					<Exception id="2" value="-2">
 						<Display state="disabled">N/A</Display>
@@ -3402,6 +3415,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Alarm>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -3414,7 +3428,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Information>
 				<Subtext>
 					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
-At the end of the cycle this parameter should contains the entire list of still existing release assets. This list is used to for cleanup at the end]]>
+At the end of the cycle this parameter should contain the entire list of still existing release assets. This list is used for cleanup at the end]]>
 				</Subtext>
 			</Information>
 			<Type>read</Type>
@@ -3429,7 +3443,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Release Assets)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -3439,6 +3453,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -3461,8 +3476,8 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="9" pid="1810" type="retrieved" options="" />
 				<ColumnOption idx="10" pid="1811" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
 				<ColumnOption idx="11" pid="1812" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="12" pid="1813" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="13" pid="1814" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="12" pid="1813" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
+				<ColumnOption idx="13" pid="1814" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
 				<ColumnOption idx="14" pid="1815" type="retrieved" options="" />
 				<ColumnOption idx="15" pid="1799" type="retrieved" options="" />
 			</ArrayOptions>
@@ -3480,7 +3495,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:1801|0-1802|1-1803|2-1804|3-1805|4-1806|5-1807|6-1808|7-1809|8-1810|9-1811|10-1812|11-1813|12-1814|13-1815|14-1799|15,width:100-100-100-100-100-100-100-100-100-113-144-144-156-156-145-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT-INT-INT-STRING-STRING|DESC-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:1801|0-1802|1-1803|2-1804|3-1805|4-1806|5-1807|6-1808|7-1809|8-1810|9-1811|10-1812|11-1813|12-1814|13-1815|14-1799|15,width:400-100-100-100-100-100-100-100-100-113-144-144-156-156-151-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT-INT-INT-INT-INT-INT|DESC-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="1801" trending="false">
@@ -3782,12 +3797,13 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Created At (Release Assets)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The datetime when the asset was first created.</Subtext>
+				<Subtext>The DateTime when the asset was first created.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 			</Interprete>
 			<!-- SuppressValidator 2.5.1 Depends on the use case -->
 			<Alarm>
@@ -3810,12 +3826,13 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Updated At (Release Assets)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The datetime when the asset was last updated.</Subtext>
+				<Subtext>The DateTime when the asset was last updated.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 			</Interprete>
 			<!-- SuppressValidator 2.5.1 Depends on the use case -->
 			<Alarm>
@@ -3835,10 +3852,10 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="1815" trending="false">
 			<Name>RepositoryReleaseAssetsBrowserDownloadUrl</Name>
-			<Description>Browser Download Url (Release Assets)</Description>
+			<Description>Browser Download URL (Release Assets)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The url to download the asset in a browser.</Subtext>
+				<Subtext>The URL to download the asset in a browser.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -3864,7 +3881,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Information>
 				<Subtext>
 					<![CDATA[This is used to cache the pk's in when going through the paged polling cycle.
-At the end of the cycle this parameter should contains the entire list of still existing release assets. This list is used to for cleanup at the end]]>
+At the end of the cycle this parameter should contain the entire list of still existing release assets. This list is used for cleanup at the end]]>
 				</Subtext>
 			</Information>
 			<Type>read</Type>
@@ -3879,7 +3896,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Repository Issues)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -3889,6 +3906,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -3906,9 +3924,9 @@ At the end of the cycle this parameter should contains the entire list of still 
 				<ColumnOption idx="4" pid="2005" type="retrieved" options="" />
 				<ColumnOption idx="5" pid="2006" type="retrieved" options="" />
 				<ColumnOption idx="6" pid="2007" type="retrieved" options="" />
-				<ColumnOption idx="7" pid="2008" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="8" pid="2009" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
-				<ColumnOption idx="9" pid="2010" type="retrieved" options=";enableHeaderSum;enableHistogram;enableHeatmap" />
+				<ColumnOption idx="7" pid="2008" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
+				<ColumnOption idx="8" pid="2009" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
+				<ColumnOption idx="9" pid="2010" type="retrieved" options=";disableHeaderSum;disableHistogram;disableHeatmap" />
 				<ColumnOption idx="10" pid="2011" type="retrieved" options=";foreignKey=1000" />
 				<ColumnOption idx="11" pid="1999" type="retrieved" options="" />
 			</ArrayOptions>
@@ -3926,7 +3944,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:2001|0-2002|1-2003|2-2004|3-2005|4-2006|5-2007|6-2008|7-2009|8-2010|9-2011|10-1999|11,width:100-100-200-200-100-100-144-156-156-156-111-0,sort:STRING|DESC|1-INT-STRING-STRING-STRING-STRING-STRING-INT|DESC|0-INT-INT-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:2001|0-2002|1-2003|2-2004|3-2005|4-2006|5-2007|6-2008|7-2009|8-2010|9-2011|10-1999|11,width:350-100-200-200-100-100-144-156-156-156-111-0,sort:STRING|DESC|1-INT-STRING-STRING-STRING-STRING-STRING-INT-INT|DESC|0-INT-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="2001" trending="false">
@@ -4113,12 +4131,13 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Created At (Repository Issues)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The datetime in UTC when the task was created.</Subtext>
+				<Subtext>The DateTime in UTC when the task was created.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 			</Interprete>
 			<!-- SuppressValidator 2.5.1 Depend on the use case -->
 			<Alarm>
@@ -4127,6 +4146,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -4137,12 +4157,13 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Updated At (Repository Issues)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The datetime when the issue was last updated.</Subtext>
+				<Subtext>The DateTime when the issue was last updated.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 			</Interprete>
 			<!-- SuppressValidator 2.5.1 Depend on the use case -->
 			<Alarm>
@@ -4151,6 +4172,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -4161,12 +4183,13 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Closed At (Repository Issues)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The datetime when the issue was closed.</Subtext>
+				<Subtext>The DateTime when the issue was closed.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 				<Exceptions>
 					<Exception id="2" value="-2">
 						<Display state="disabled">N/A</Display>
@@ -4181,6 +4204,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<!-- /SuppressValidator 2.5.1 -->
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -4191,7 +4215,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Repository ID (Repository Issues)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The ID of the repository this issue is linked.</Subtext>
+				<Subtext>The ID of the repository this issue is linked to.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -4211,7 +4235,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Repository Software Bill of Materials)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -4221,6 +4245,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -4254,7 +4279,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:2201|0-2202|1-2203|2-2204|3-2205|4-2206|5-2207|6-2199|7,width:100-111-100-100-100-156-145-0,sort:STRING-STRING-STRING-STRING-STRING-INT|DESC-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:2201|0-2202|1-2203|2-2204|3-2205|4-2206|5-2207|6-2199|7,width:350-111-100-100-100-156-147-0,sort:STRING-STRING-STRING-STRING-STRING-INT|DESC-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="2201" trending="false">
@@ -4281,7 +4306,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Repository ID (Repository Software Bill of Materials)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The ID of the repository this sbom is linked.</Subtext>
+				<Subtext>The ID of the repository this SBOM is linked to.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -4367,6 +4392,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -4374,10 +4400,10 @@ At the end of the cycle this parameter should contains the entire list of still 
 		</Param>
 		<Param id="2207" trending="false">
 			<Name>RepositorySoftwareBillOfMaterialsDocumentNamespace</Name>
-			<Description>Document Namespace (Repository Software Bill of Materials)</Description>
+			<Description>Document NameSpace (Repository Software Bill of Materials)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The namespace for the SPDX document.</Subtext>
+				<Subtext>The NameSpace for the SPDX document.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -4397,7 +4423,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Software Bill of Materials Packages)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -4407,6 +4433,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -4445,7 +4472,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:2401|0-2402|1-2403|2-2404|3-2405|4-2406|5-2407|6-2408|7-2409|8-2410|9-2411|10-2412|11-2399|12,width:100-100-111-100-100-100-128-100-123-112-100-102-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:2401|0-2402|1-2403|2-2404|3-2405|4-2406|5-2407|6-2408|7-2409|8-2410|9-2411|10-2412|11-2399|12,width:0-200-350-200-350-100-128-100-123-112-100-102-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="2401" trending="false">
@@ -4732,7 +4759,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Software Bill of Materials Relationships)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -4742,6 +4769,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -4774,7 +4802,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:2601|0-2602|1-2603|2-2604|3-2605|4-2606|5-2599|6,width:100-100-111-114-160-119-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:2601|0-2602|1-2603|2-2604|3-2605|4-2606|5-2599|6,width:0-200-350-200-200-119-0,sort:STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="2601" trending="false">
@@ -4892,7 +4920,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Measurement>
 		</Param>
 		
-		<Param id="2996">
+		<Param id="2996" trending="false">
 			<Name>OrganizationsOverview</Name>
 			<Description>Organizations Overview</Description>
 			<Type>read</Type>
@@ -4917,7 +4945,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Last Polled at UTC (Organizations)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -4927,6 +4955,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -4936,7 +4965,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Name>Organizations</Name>
 			<Description>Organizations</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0">
+			<ArrayOptions index="0" partial="true:200">
 				<ColumnOption idx="0" pid="3001" type="retrieved" options=""/>
 				<ColumnOption idx="1" pid="3002" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="3003" type="retrieved" options="" />
@@ -5039,7 +5068,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Avatar URL (Organizations)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The url the the avatar of the organization.</Subtext>
+				<Subtext>The URL the avatar of the organization.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -5058,7 +5087,7 @@ At the end of the cycle this parameter should contains the entire list of still 
 			<Description>Track Repositories (Organizations)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>Indicates if the repositories under this origanization should be polled.</Subtext>
+				<Subtext>Indicates if the repositories under this organization should be polled.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -5184,7 +5213,7 @@ Are you sure you want to continue.]]>
 			<Description>Last Polled at UTC (Teams)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -5194,6 +5223,7 @@ Are you sure you want to continue.]]>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -5229,7 +5259,7 @@ Are you sure you want to continue.]]>
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:3401|0-3402|1-3403|2-3405|4-3404|3-3406|5-3407|6-3408|7-3409|8-3399|9,width:0-0-125-200-200-300-100-140-100-0,sort:STRING|ASC|0-INT-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:3401|0-3402|1-3403|2-3405|4-3404|3-3406|5-3407|6-3408|7-3409|8-3399|9,width:0-0-200-200-200-300-100-140-100-0,sort:STRING|ASC|0-INT-STRING-STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="3401" trending="false">
@@ -5469,7 +5499,7 @@ Are you sure you want to continue.]]>
 			<Description>Last Polled at UTC (Members)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -5479,6 +5509,7 @@ Are you sure you want to continue.]]>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -5513,7 +5544,7 @@ Are you sure you want to continue.]]>
 				</Positions>
 			</Display>
 			<Measurement>
-				<Type options="tab=columns:3601|0-3602|1-3603|2-3604|3-3605|4-3606|5-3607|6-3608|7-3599|8,width:0-100-100-100-100-0-0-0-0,sort:STRING-INT-STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:3601|0-3602|1-3603|2-3604|3-3605|4-3606|5-3607|6-3608|7-3599|8,width:0-100-200-100-100-0-0-0-0,sort:STRING-INT-STRING-STRING-STRING-STRING-STRING-STRING-INT,lines:25,filter:true">table</Type>
 			</Measurement>
 		</Param>
 		<Param id="3601" trending="false">
@@ -5643,10 +5674,10 @@ Are you sure you want to continue.]]>
 		</Param>
 		<Param id="3606" trending="false">
 			<Name>OrganizationMembersUrl</Name>
-			<Description>Url (Members)</Description>
+			<Description>URL (Members)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The API url to fetch specific user information from.</Subtext>
+				<Subtext>The API URL to fetch specific user information from.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -5662,10 +5693,10 @@ Are you sure you want to continue.]]>
 		</Param>
 		<Param id="3607" trending="false">
 			<Name>OrganizationMembersHtmlUrl</Name>
-			<Description>Html Url (Members)</Description>
+			<Description>HTML URL (Members)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The browser url that will take you to the member's GitHub page.</Subtext>
+				<Subtext>The browser URL that will take you to the member's GitHub page.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -5681,10 +5712,10 @@ Are you sure you want to continue.]]>
 		</Param>
 		<Param id="3608" trending="false">
 			<Name>OrganizationMembersAvatarUrl</Name>
-			<Description>Avatar Url (Members)</Description>
+			<Description>Avatar URL (Members)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The url to the member's avatar image.</Subtext>
+				<Subtext>The URL to the member's avatar image.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
@@ -5704,7 +5735,7 @@ Are you sure you want to continue.]]>
 			<Description>Last Polled at UTC (Member Organization Links)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The time the this row was last polled. This is used to detect stale rows.</Subtext>
+				<Subtext>The time this row was last polled. This is used to detect stale rows.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>numeric text</RawType>
@@ -5714,6 +5745,7 @@ Are you sure you want to continue.]]>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
@@ -5900,6 +5932,7 @@ Are you sure you want to continue.]]>
 				<ColumnOption idx="4" pid="21005" type="retrieved" options="" />
 				<ColumnOption idx="5" pid="21006" type="retrieved" options="" />
 				<ColumnOption idx="6" pid="21007" type="retrieved" options="" />
+				<ColumnOption idx="7" pid="21008" type="retrieved" options=";save" />
 			</ArrayOptions>
 			<Information>
 				<Subtext>Poll Manager</Subtext>
@@ -5916,7 +5949,7 @@ Are you sure you want to continue.]]>
 			</Display>
 			<Measurement>
 				<!-- SuppressValidator 2.31.9 Poll Manager Table -->
-				<Type options="tab=columns:21001|0-21002|1-21003|2-21004|3-21005|4-21006|5-21007|6,width:0-200-80-138-156-106-0,sort:STRING|ASC-STRING-STRING-INT-INT-STRING-INT,lines:25,filter:true">table</Type>
+				<Type options="tab=columns:21001|0-21002|1-21003|2-21004|3-21005|4-21006|5-21007|6-21008|7,width:0-200-80-138-156-106-0-100,sort:STRING|ASC-STRING-STRING-INT-INT-STRING-INT-INT,lines:25,filter:true">table</Type>
 				<!-- /SuppressValidator 2.31.9 -->
 			</Measurement>
 		</Param>
@@ -6029,6 +6062,7 @@ Are you sure you want to continue.]]>
 				<RawType>numeric text</RawType>
 				<Type>double</Type>
 				<LengthType>next param</LengthType>
+				<Decimals>8</Decimals>
 				<Range>
 					<Low>10</Low>
 				</Range>
@@ -6059,6 +6093,7 @@ Are you sure you want to continue.]]>
 			</Interprete>
 			<Display>
 				<RTDisplay>true</RTDisplay>
+				<Decimals>8</Decimals>
 				<Range>
 					<Low>10</Low>
 				</Range>
@@ -6144,6 +6179,57 @@ Are you sure you want to continue.]]>
 			</Display>
 			<Measurement>
 				<Type options="datetime">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="21008" trending="false">
+			<Name>PollManagerPageLimit</Name>
+			<Description>Page Limit (Poll Manager)</Description>
+			<Type>read</Type>
+			<Information>
+				<Subtext>Determines the number of units that can be retrieved in a single API call. Lower Page Limits help when the units of the call are large while higher Page Limits help when the units are small and numerous.</Subtext>
+			</Information>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+				<Exceptions>
+					<Exception id="1" value="-2">
+						<Display state="disabled">N/A</Display>
+						<Value>-2</Value>
+					</Exception>
+				</Exceptions>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Range>
+					<Low>0</Low>
+					<High>100</High>
+				</Range>
+				<Units>Units</Units>
+			</Display>
+			<Measurement>
+				<Type options="custom=disableWrite:21008=-1">number</Type>
+			</Measurement>
+		</Param>
+		<Param id="21058" setter="true">
+			<Name>PollManagerPageLimit</Name>
+			<Description>Page Limit (Poll Manager)</Description>
+			<Type>write</Type>
+			<Interprete>
+				<RawType>numeric text</RawType>
+				<Type>double</Type>
+				<LengthType>next param</LengthType>
+			</Interprete>
+			<Display>
+				<RTDisplay>true</RTDisplay>
+				<Range>
+					<Low>0</Low>
+					<High>100</High>
+				</Range>
+				<Units>Units</Units>
+			</Display>
+			<Measurement>
+				<Type options="custom=disableWrite:21008=-1">number</Type>
 			</Measurement>
 		</Param>
 		
@@ -6437,9 +6523,9 @@ Are you sure you want to continue.]]>
 		</Param>
 		<Param id="9000100">
 			<Name>IAC_Messages</Name>
-			<Description>IAC_Messages</Description>
+			<Description>Inter-App Messages</Description>
 			<Type>array</Type>
-			<ArrayOptions index="0" options=";volatile">
+			<ArrayOptions index="0" options=";volatile" partial="true:200">
 				<ColumnOption idx="0" pid="9000101" type="retrieved" options="" />
 				<ColumnOption idx="1" pid="9000102" type="retrieved" options="" />
 				<ColumnOption idx="2" pid="9000103" type="retrieved" options="" />
@@ -6468,7 +6554,7 @@ Are you sure you want to continue.]]>
 		</Param>
 		<Param id="9000101" trending="false">
 			<Name>IAC_MessagesGuid</Name>
-			<Description>GUID [IDX] (IAC_Messages)</Description>
+			<Description>GUID [IDX] (Inter-App Messages)</Description>
 			<Information>
 				<Subtext>This is the key used internally by DataMiner to identify the table entries.</Subtext>
 			</Information>
@@ -6487,7 +6573,7 @@ Are you sure you want to continue.]]>
 		</Param>
 		<Param id="9000102" trending="false">
 			<Name>IAC_MessagesStatus</Name>
-			<Description>Status (IAC_Messages)</Description>
+			<Description>Status (Inter-App Messages)</Description>
 			<Information>
 				<Subtext>This is the current status of the InterApp Call.</Subtext>
 			</Information>
@@ -6520,7 +6606,7 @@ Are you sure you want to continue.]]>
 		</Param>
 		<Param id="9000103" trending="false">
 			<Name>IAC_MessagesRequest</Name>
-			<Description>Request (IAC_Messages)</Description>
+			<Description>Request (Inter-App Messages)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>The incoming InterApp message that triggered this.</Subtext>
@@ -6539,7 +6625,7 @@ Are you sure you want to continue.]]>
 		</Param>
 		<Param id="9000104" trending="false">
 			<Name>IAC_MessagesRequestType</Name>
-			<Description>Request Type (IAC_Messages)</Description>
+			<Description>Request Type (Inter-App Messages)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>This is the type of the request message from the InterApp Call.</Subtext>
@@ -6558,7 +6644,7 @@ Are you sure you want to continue.]]>
 		</Param>
 		<Param id="9000105" trending="false">
 			<Name>IAC_MessagesResponse</Name>
-			<Description>Response (IAC_Messages)</Description>
+			<Description>Response (Inter-App Messages)</Description>
 			<Information>
 				<Subtext>This is the return message for the InterApp Call.</Subtext>
 			</Information>
@@ -6577,7 +6663,7 @@ Are you sure you want to continue.]]>
 		</Param>
 		<Param id="9000106" trending="false">
 			<Name>IAC_MessagesResponseType</Name>
-			<Description>Response Type (IAC_Messages)</Description>
+			<Description>Response Type (Inter-App Messages)</Description>
 			<Information>
 				<Subtext>This is the type of the response message for the InterApp Call. This type is used to know what return messages needs to be made.</Subtext>
 			</Information>
@@ -6601,7 +6687,7 @@ Are you sure you want to continue.]]>
 		</Param>
 		<Param id="9000107" trending="false">
 			<Name>IAC_MessagesInfo</Name>
-			<Description>Info (IAC_Messages)</Description>
+			<Description>Info (Inter-App Messages)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Extra info used to match incoming responses with the InterApp message.</Subtext>
@@ -6620,7 +6706,7 @@ Are you sure you want to continue.]]>
 		</Param>
 		<Param id="9000108" trending="false">
 			<Name>IAC_MessagesReceivedAt</Name>
-			<Description>Received At (IAC_Messages)</Description>
+			<Description>Received At (Inter-App Messages)</Description>
 			<Type>read</Type>
 			<Information>
 				<Subtext>Time the InterApp message was received.</Subtext>
@@ -6644,18 +6730,18 @@ Are you sure you want to continue.]]>
 	<QActions>
 		<QAction id="1" name="Precompiled Code" encoding="csharp" options="precompile" />
 		<QAction id="2" name="After Startup" encoding="csharp" triggers="2" />
-		<QAction id="19" name="Parse general parameters" encoding="csharp" triggers="11;19"></QAction>
+		<QAction id="19" name="Parse general parameters" encoding="csharp" triggers="11;19"/>
 
 		<QAction id="990" name="Repositories Table - ContextMenu" encoding="csharp" triggers="990" />
-		<QAction id="1000" name="Add Repositories page" encoding="csharp" triggers="500"></QAction>
+		<QAction id="1000" name="Add Repositories page" encoding="csharp" triggers="500"/>
 
 		<QAction id="1590" name="Repository Workflow Table - ContextMenu" encoding="csharp" triggers="1590" />
-		<QAction id="1600" name="Add Repository Workflow page" encoding="csharp" triggers="550;651"></QAction>
+		<QAction id="1600" name="Add Repository Workflow page" encoding="csharp" triggers="550;651"/>
 
 		<QAction id="3000" name="Organizations Table - Changes" encoding="csharp" triggers="3105" row="true" />
 
 		<QAction id="20000" name="HTTP Request Handling" encoding="csharp" triggers="30" />
-		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;206;210;211;212;213;220;221;222;223;224;226;228;229;230;235;281"></QAction>
+		<QAction id="20001" name="HTTP Parse Responses" encoding="csharp" triggers="201;202;203;204;205;206;210;211;212;213;220;221;222;223;224;226;228;229;230;235;281"/>
 		<QAction id="20002" name="HTTP Poll Manager Updates" encoding="csharp" row="true" triggers="21006;21053" />
 
 		<QAction id="9000000" name="Process Incoming InterApp Messages" encoding="csharp" triggers="9000000"/>
@@ -7021,7 +7107,7 @@ Are you sure you want to continue.]]>
 		<!--ID 25 for Get Repository Secret-->
 		<!--ID 26 for Put Repository Secret-->
 		<!--ID 27 for Delete Repository Secret-->
-		<!--ID 28 for Get Repository Pulic Key-->
+		<!--ID 28 for Get Repository Public Key-->
 		<Session id="26" name="Create/Update Repository Secret">
 			<Connection id="26" name="Create/Update Repository Secret">
 				<Request verb="PUT" pid="126">
@@ -7730,6 +7816,154 @@ Are you sure you want to continue.]]>
 				<Id>335</Id>
 			</Content>
 		</Trigger>
+
+		<Trigger id="401">
+			<Name>Start GetRepository Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>401</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="402">
+			<Name>Start GetRepository Issues Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>402</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="403">
+			<Name>Start GetRepository Tags Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>403</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="404">
+			<Name>Start GetRepository Releases Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>404</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="405">
+			<Name>Start GetRepository Workflows Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>405</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="406">
+			<Name>Start GetRepository Software Bill of Materials Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>406</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="410">
+			<Name>Start GetUser Organizations Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>410</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="411">
+			<Name>Start GetOrganization Repositories Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>411</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="412">
+			<Name>Start GetOrganization Teams Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>412</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="413">
+			<Name>Start GetOrganization Members Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>413</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="420">
+			<Name>Start GetRepository Content Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>420</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="421">
+			<Name>Start PutRepository Content Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>421</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="422">
+			<Name>Start PostRepository Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>422</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="423">
+			<Name>Start PutRepository User Collaborator Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>423</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="424">
+			<Name>Start PutRepository Team Collaborator Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>424</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="426">
+			<Name>Start PutRepository Secret Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>426</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="428">
+			<Name>Start GetRepository Public Key Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>428</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="429">
+			<Name>Start GetRepository Topics Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>429</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="430">
+			<Name>Start PutRepository Topics Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>430</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="431">
+			<Name>Start PostWorkflow Execution Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>431</Id>
+			</Content>
+		</Trigger>
+		<Trigger id="435">
+			<Name>Start PostRepository Variable Now</Name>
+			<Type>action</Type>
+			<Content>
+				<Id>435</Id>
+			</Content>
+		</Trigger>
 	</Triggers>
 
 	<Actions>
@@ -7753,107 +7987,107 @@ Are you sure you want to continue.]]>
 		<Action id="201">
 			<Name>Get Repository</Name>
 			<On id="201">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="202">
 			<Name>Get Repository Issues</Name>
 			<On id="202">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="203">
 			<Name>Get Repository Tags</Name>
 			<On id="203">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="204">
 			<Name>Get Repository Releases</Name>
 			<On id="204">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="205">
 			<Name>Get Repository Workflows</Name>
 			<On id="205">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="206">
 			<Name>Get Repository Software Bill of Materials</Name>
 			<On id="206">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="210">
 			<Name>Get User Organizations</Name>
 			<On id="210">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="211">
 			<Name>Get Organization Repositories</Name>
 			<On id="211">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="212">
 			<Name>Get Organization Teams</Name>
 			<On id="212">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="213">
 			<Name>Get Organization Members</Name>
 			<On id="213">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="220">
 			<Name>Get Repository Content</Name>
 			<On id="220">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="221">
 			<Name>Put Repository Content</Name>
 			<On id="221">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="222">
 			<Name>Post Repository</Name>
 			<On id="222">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="223">
 			<Name>Put Repository User Collaborator</Name>
 			<On id="223">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="224">
 			<Name>Put Repository Team Collaborator</Name>
 			<On id="224">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="226">
 			<Name>Put Repository Secret</Name>
 			<On id="226">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="228">
 			<Name>Get Repository Public Key</Name>
 			<On id="228">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="229">
 			<Name>Get Repository Topics</Name>
 			<On id="229">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="230">
 			<Name>Put Repository Topics</Name>
 			<On id="230">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="231">
 			<Name>Post Workflow Execution</Name>
 			<On id="231">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 		<Action id="235">
 			<Name>Post Repository Variable</Name>
 			<On id="235">group</On>
-			<Type>execute next</Type>
+			<Type>execute</Type>
 		</Action>
 
 		<Action id="251">
@@ -8057,6 +8291,112 @@ Are you sure you want to continue.]]>
 			<On id="235">parameter</On>
 			<Type>clear</Type>
 		</Action>
+
+		<Action id="401">
+			<Name>Get Repository Now</Name>
+			<On id="201">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="402">
+			<Name>Get Repository Issues Now</Name>
+			<On id="202">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="403">
+			<Name>Get Repository Tags Now</Name>
+			<On id="203">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="404">
+			<Name>Get Repository Releases Now</Name>
+			<On id="204">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="405">
+			<Name>Get Repository Workflows Now</Name>
+			<On id="205">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="406">
+			<Name>Get Repository Software Bill of Materials Now</Name>
+			<On id="206">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="410">
+			<Name>Get User Organizations Now</Name>
+			<On id="210">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="411">
+			<Name>Get Organization Repositories Now</Name>
+			<On id="211">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="412">
+			<Name>Get Organization Teams Now</Name>
+			<On id="212">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="413">
+			<Name>Get Organization Members Now</Name>
+			<On id="213">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="420">
+			<Name>Get Repository Content Now</Name>
+			<On id="220">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="421">
+			<Name>Put Repository Content Now</Name>
+			<On id="221">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="422">
+			<Name>Post Repository Now</Name>
+			<On id="222">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="423">
+			<Name>Put Repository User Collaborator Now</Name>
+			<On id="223">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="424">
+			<Name>Put Repository Team Collaborator Now</Name>
+			<On id="224">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="426">
+			<Name>Put Repository Secret Now</Name>
+			<On id="226">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="428">
+			<Name>Get Repository Public Key Now</Name>
+			<On id="228">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="429">
+			<Name>Get Repository Topics Now</Name>
+			<On id="229">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="430">
+			<Name>Put Repository Topics Now</Name>
+			<On id="230">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="431">
+			<Name>Post Workflow Execution Now</Name>
+			<On id="231">group</On>
+			<Type>execute next</Type>
+		</Action>
+		<Action id="435">
+			<Name>Post Repository Variable Now</Name>
+			<On id="235">group</On>
+			<Type>execute next</Type>
+		</Action>
 	</Actions>
 
 	<Timers>
@@ -8108,7 +8448,7 @@ Are you sure you want to continue.]]>
 											<Fix>Issue 1 pagination</Fix>
 										</Changes>
 										<References>
-											<Reference type="Github">https://github.com/SkylineCommunications/SLC-Connector-Github-Repositories/issues/1</Reference>
+											<Reference type="GitHub">https://github.com/SkylineCommunications/SLC-Connector-GitHub-Repositories/issues/1</Reference>
 										</References>
 									</MinorVersion>
 									<MinorVersion id="3" basedOn="1.0.0.2">
@@ -8181,7 +8521,7 @@ Are you sure you want to continue.]]>
 											<Fix>Fixed IndexOutOfRange exception when no repositories are present</Fix>
 											<Change>Updated all QActions to net48</Change>
 											<Change>Updated to InterApp Library 1.0.1.1</Change>
-											<Change>Updated Github ConnectorAPI to 1.0.4</Change>
+											<Change>Updated GitHub ConnectorAPI to 1.0.4</Change>
 											<NewFeature>Added Teams page</NewFeature>
 											<NewFeature>Added Members page</NewFeature>
 											<NewFeature>Added Create Repository InterApp Request</NewFeature>
@@ -8196,7 +8536,7 @@ Are you sure you want to continue.]]>
 											<Company>Skyline Communications</Company>
 										</Provider>
 										<Changes>
-											<Change>Updated Github ConnectorAPI to 1.0.6</Change>
+											<Change>Updated GitHub ConnectorAPI to 1.0.6</Change>
 											<NewFeature>Added more option for alarming</NewFeature>
 											<NewFeature>Added Release Assets table</NewFeature>
 										</Changes>
@@ -8231,7 +8571,7 @@ Are you sure you want to continue.]]>
 											<Company>Skyline Communications</Company>
 										</Provider>
 										<Changes>
-											<Change>Update to Github ConnectorAPI v1.0.9</Change>
+											<Change>Update to GitHub ConnectorAPI v1.0.9</Change>
 											<NewFeature>Handle the adding of custom workflows</NewFeature>
 											<NewFeature>Can now also add variables to repositories</NewFeature>
 										</Changes>
@@ -8274,6 +8614,32 @@ Are you sure you want to continue.]]>
 										</Changes>
 										<References>
 											<TaskId>293386</TaskId>
+										</References>
+									</MinorVersion>
+								</MinorVersions>
+							</MajorVersion>
+							<MajorVersion id="2">
+								<Changes>
+									<Change>
+										<Impact>Trending no longer available on API Key</Impact>
+										<ActionsToTake>
+											<ActionToTake>No action, loss of trend data</ActionToTake>
+										</ActionsToTake>
+									</Change>
+								</Changes>
+								<MinorVersions>
+									<MinorVersion id="1" basedOn="1.0.1.1">
+										<Date>2026-05-18</Date>
+										<Provider>
+											<Author>BSO</Author>
+											<Company>Skyline Communications</Company>
+										</Provider>
+										<Changes>
+											<Change>Cleaning up Connector</Change>
+											<NewFeature>Added Page Limits to Poll Manager</NewFeature>
+										</Changes>
+										<References>
+											<TaskId>298519</TaskId>
 										</References>
 									</MinorVersion>
 								</MinorVersions>

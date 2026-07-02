@@ -92,7 +92,8 @@
 
 			if (link.HasNext)
 			{
-				OrganizationsRequestHandler.HandleOrganizationRepositoriesRequest(protocol, response[0].Owner.Login, PollingConstants.PerPage, link.NextPage);
+				var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_Repositories)?.PageLimit ?? PollingConstants.PerPage;
+				OrganizationsRequestHandler.HandleOrganizationRepositoriesRequest(protocol, response[0].Owner.Login, perPage, link.NextPage, true);
 			}
 		}
 
@@ -142,7 +143,7 @@
 
 			SLTables.Repositories.SetRow(protocol, RepositoriesRowConverter.Instance.ToRawValue(row));
 
-			RepositoriesRequestHandler.HandleRepositoriesPublicKeysRequest(protocol, response.FullName);
+			RepositoriesRequestHandler.HandleRepositoriesPublicKeysRequest(protocol, response.FullName, true);
 
 			HandleInterAppResponses(protocol, response);
 			RepositoriesResponseHandler.HandleTopicsInterApp(protocol, response.Name, response.Owner.Login, response.Topics);

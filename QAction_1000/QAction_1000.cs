@@ -13,11 +13,6 @@ using Skyline.Protocol.InterApp;
 /// </summary>
 public static class QAction
 {
-    private static Dictionary<int, Action<SLProtocol>> Handlers = new Dictionary<int, Action<SLProtocol>>
-    {
-        { Parameter.Write.addrepositorybutton_500, HandleIndividualAdd },
-    };
-
     /// <summary>
     /// The QAction entry point.
     /// </summary>
@@ -26,40 +21,27 @@ public static class QAction
     {
         try
         {
-            var trigger = protocol.GetTriggerParameter();
-            if (Handlers.TryGetValue(trigger, out var handler))
-            {
-                handler(protocol);
-            }
-            else
-            {
-                protocol.Log($"QA{protocol.QActionID}|Run|No handler found for trigger parameter '{trigger}'", LogType.Error, LogLevel.NoLogging);
-            }
-        }
+			var ids = new[]
+		    {
+			    Parameter.addrepositoryname,
+			    Parameter.addrepositoryowner,
+		    };
+			var parameters = (object[])protocol.GetParameters(Array.ConvertAll(ids, Convert.ToUInt32));
+
+			// Add through name and owner
+			var request = new GenericInterAppMessage<AddRepositoryRequest>(
+				new AddRepositoryRequest
+				{
+					RepositoryId = new RepositoryId(Convert.ToString(parameters[1]), Convert.ToString(parameters[0])),
+				});
+
+			request.TryExecute(protocol, protocol, Mapping.MessageToExecutorMapping, out _);
+
+			protocol.SetParameters(ids, new object[] { Exceptions.NotAvailable, Exceptions.NotAvailable });
+		}
         catch (Exception ex)
         {
             protocol.Log($"QA{protocol.QActionID}|{protocol.GetTriggerParameter()}|Run|Exception thrown:{Environment.NewLine}{ex}", LogType.Error, LogLevel.NoLogging);
         }
-    }
-
-    private static void HandleIndividualAdd(SLProtocol protocol)
-    {
-        var ids = new[]
-        {
-            Parameter.addrepositoryname,
-            Parameter.addrepositoryowner,
-        };
-        var parameters = (object[])protocol.GetParameters(Array.ConvertAll(ids, Convert.ToUInt32));
-
-        // Add through name and owner
-        var request = new GenericInterAppMessage<AddRepositoryRequest>(
-			new AddRepositoryRequest
-			{
-				RepositoryId = new RepositoryId(Convert.ToString(parameters[1]), Convert.ToString(parameters[0])),
-			});
-
-        request.TryExecute(protocol, protocol, Mapping.MessageToExecutorMapping, out _);
-
-        protocol.SetParameters(ids, new object[] { Exceptions.NotAvailable, Exceptions.NotAvailable });
     }
 }

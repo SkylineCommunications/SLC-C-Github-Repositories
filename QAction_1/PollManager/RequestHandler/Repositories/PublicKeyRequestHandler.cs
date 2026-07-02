@@ -12,7 +12,7 @@
 
 	public static partial class RepositoriesRequestHandler
 	{
-		public static void HandleRepositoriesPublicKeysRequest(SLProtocol protocol)
+		public static void HandleRepositoriesPublicKeysRequest(SLProtocol protocol, bool executeNow)
 		{
 			var repositories = SLTables.Repositories.GetPrimaryKeys(protocol);
 			if (!repositories.Any())
@@ -21,13 +21,14 @@
 			}
 
 			protocol.SetParameter(Parameter.getrepositorypublickeyqueue, JsonConvert.SerializeObject(repositories.Skip(1)));
-			HandleRepositoriesPublicKeysRequest(protocol, repositories[0]);
+			HandleRepositoriesPublicKeysRequest(protocol, repositories[0], executeNow);
 		}
 
-		public static void HandleRepositoriesPublicKeysRequest(SLProtocol protocol, string repositoryId)
+		public static void HandleRepositoriesPublicKeysRequest(SLProtocol protocol, string repositoryId, bool executeNow)
 		{
 			protocol.SetParameter(Parameter.getrepositorypublickeyurl, $"repos/{repositoryId}/actions/secrets/public-key");
-			protocol.CheckTrigger(228);
+			var trigger = executeNow ? Triggers.GetRepositoryPublicKeyNow : Triggers.GetRepositoryPublicKey;
+			protocol.CheckTrigger((int)trigger);
 		}
 	}
 }

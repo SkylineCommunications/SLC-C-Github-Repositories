@@ -25,6 +25,10 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 
 	public static partial class RepositoriesResponseHandler
 	{
+		private static readonly Regex WorkflowDispatchUrlRegex = new Regex(
+			@"repos/([^/]+)/([^/]+)/actions/workflows/(.*)/dispatches",
+			RegexOptions.Compiled);
+
 		public static void HandleRepositoriesWorkflowsResponse(SLProtocol protocol)
 		{
 			// Check status code
@@ -44,17 +48,13 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 				return;
 			}
 
-			// Parse url to check which respository this workflow is linked to
+			// Parse url to check which repository this workflow is linked to
 			var url = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowsurl_105));
-			var pattern = "repos\\/(.*)\\/(.*)\\/actions\\/workflows(.*)";
-			var options = RegexOptions.Multiline;
-
-			var utcNow = DateTime.UtcNow;
-			var match = Regex.Match(url, pattern, options);
-			var owner = match.Groups[1].Value;
-			var name = match.Groups[2].Value;
+			GithubUrlHelper.TryParseRepoOwnerAndName(url, out var owner, out var name);
 			var repositoryId = $"{owner}/{name}";
 			var primaryKeys = SLTables.Workflows.RepositoryID.Read.GetPrimaryKeysForValue(protocol, repositoryId);
+
+			var utcNow = DateTime.UtcNow;
 
 			if (response.TotalCount <= 0)
 			{
@@ -114,58 +114,13 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 			// Parse response
 			var url = Convert.ToString(protocol.GetParameter(Parameter.postworkflowexecutionurl_131));
 
-			// Parse url to check which respository this issue is linked to
-			var pattern = "repos\\/(.*)\\/(.*)\\/actions\\/workflows\\/(.*)\\/dispatches";
-			var options = RegexOptions.Multiline;
-
-			var match = Regex.Match(url, pattern, options);
+			// Parse url to check which repository this workflow dispatch is linked to
+			var match = WorkflowDispatchUrlRegex.Match(url);
 			var owner = match.Groups[1].Value;
 			var name = match.Groups[2].Value;
 			var workflowId = HttpUtility.UrlDecode(match.Groups[3].Value);
 
 			HandleWorkflowExecutionInterApp(protocol, owner, name, workflowId, message);
-		}
-
-		private static void HandleNextRepositoryWorkflowPage(SLProtocol protocol, string owner, string name)
-		{
-			// Check if there are more workflows to fetch
-			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowslinkheader));
-			var link = new LinkHeader(linkHeader);
-
-			// Check if there are more workflows to fetch for the current repository
-			if (!string.IsNullOrEmpty(linkHeader))
-			{
-				if (link.HasNext)
-				{
-					RepositoriesRequestHandler.HandleRepositoriesTagsRequest(protocol, $"{owner}/{name}", PollingConstants.PerPage, link.NextPage);
-					return;
-				}
-				else
-				{
-					SLTables.Workflows.Cleanup(protocol, $"{owner}/{name}");
-				}
-			}
-
-			// If no more workflows for this repo fetch the next repository in the queue.
-			HandleNextRepositoryWorkflow(protocol);
-		}
-
-		private static void HandleNextRepositoryWorkflow(SLProtocol protocol)
-		{
-			var queue = SecureNewtonsoftDeserialization.DeserializeObject<List<string>>(
-				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowsqueue)));
-			var next = queue?.FirstOrDefault();
-
-			if (next == null)
-			{
-				return;
-			}
-
-			protocol.SetParameter(Parameter.getrepositoryworkflowsqueue, JsonConvert.SerializeObject(queue.Skip(1)));
-
-			////var nextOwner = next.Split('/')[0];
-			////var nextName = next.Split('/')[1];
-			RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, next, PollingConstants.PerPage, 1);
 		}
 
 		public static void HandleWorkflowExecutionInterApp(SLProtocol protocol, string owner, string name, string workflowId, string message)
@@ -190,6 +145,47 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 					iacRow.SaveToProtocol(protocol);
 				}
 			}
+		}
+
+		private static void HandleNextRepositoryWorkflowPage(SLProtocol protocol, string owner, string name)
+		{
+			// Check if there are more workflows to fetch
+			var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowslinkheader));
+			var link = new LinkHeader(linkHeader);
+
+			// Check if there are more workflows to fetch for the current repository
+			if (!string.IsNullOrEmpty(linkHeader))
+			{
+				if (link.HasNext)
+				{
+					var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Repositories_Workflows)?.PageLimit ?? PollingConstants.PerPage;
+					RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, $"{owner}/{name}", perPage, link.NextPage, true);
+					return;
+				}
+				else
+				{
+					SLTables.Workflows.Cleanup(protocol, $"{owner}/{name}");
+				}
+			}
+
+			// If no more workflows for this repo fetch the next repository in the queue.
+			HandleNextRepositoryWorkflow(protocol);
+		}
+
+		private static void HandleNextRepositoryWorkflow(SLProtocol protocol)
+		{
+			var queue = SecureNewtonsoftDeserialization.DeserializeObject<List<string>>(
+				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryworkflowsqueue)));
+			var next = queue?.FirstOrDefault();
+
+			if (next == null)
+			{
+				return;
+			}
+
+			protocol.SetParameter(Parameter.getrepositoryworkflowsqueue, JsonConvert.SerializeObject(queue.Skip(1)));
+			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Repositories_Workflows)?.PageLimit ?? PollingConstants.PerPage;
+			RepositoriesRequestHandler.HandleRepositoriesWorkflowsRequest(protocol, next, perPage, 1, true);
 		}
 	}
 }

@@ -51,6 +51,7 @@
 				row.Id = org.Id;
 				row.Description = org.Description;
 				row.AvatarUrl = org.AvatarUrl.OriginalString;
+				row.LastPolledAt = DateTime.UtcNow;
 
 				// If its a new row fill in ID and default values and add it to the table.
 				if (String.IsNullOrEmpty(row.Instance))
@@ -76,7 +77,8 @@
 
 			if (link.HasNext)
 			{
-				OrganizationsRequestHandler.HandleUserOrganizationsRequest(protocol, PollingConstants.PerPage, link.NextPage);
+				var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_User)?.PageLimit ?? PollingConstants.PerPage;
+				OrganizationsRequestHandler.HandleUserOrganizationsRequest(protocol, perPage, link.NextPage, true);
 			}
 		}
 	}

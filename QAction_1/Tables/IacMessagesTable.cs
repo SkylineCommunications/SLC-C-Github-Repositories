@@ -93,6 +93,9 @@ namespace Skyline.Protocol.Tables
 
 	public class IAC_MessagesTable
 	{
+		private static readonly int MaxCellCountPerBatch = 25000;
+		private static readonly int ColumnCount = 8;
+
 		private static IAC_MessagesTable instance;
 
 		#region Constructors
@@ -151,7 +154,7 @@ namespace Skyline.Protocol.Tables
 		public void SaveToProtocol(SLProtocol protocol, bool partial = false)
 		{
 			// Calculate the batch size, recommended 25000 cells max per fill array, divided by the number of columns.
-			var batchSize = 25000 / 8;
+			var batchSize = MaxCellCountPerBatch / ColumnCount;
 
 			// If full then the first batch needs to be a SaveOption.Full.
 			var first = !partial;

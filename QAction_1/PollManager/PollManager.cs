@@ -14,21 +14,21 @@
 	{
 		private static readonly Dictionary<RequestType, PollSettings> InitialSettings = new Dictionary<RequestType, PollSettings>
 		{
-			{ RequestType.Table_Cleanup, new PollSettings { PollFrequency = TimeSpan.FromMinutes(10), Enabled = true } },
+			{ RequestType.Table_Cleanup, new PollSettings { PollFrequency = TimeSpan.FromMinutes(10), Enabled = true, PageLimit = Exceptions.IntNotAvailable } },
 
-			{ RequestType.Repositories_Repositories, new PollSettings { PollFrequency = TimeSpan.FromMinutes(10), Enabled = true } },
-			{ RequestType.Repositories_Tags, new PollSettings { PollFrequency = TimeSpan.FromMinutes(360), Enabled = true } },
-			{ RequestType.Repositories_Releases, new PollSettings { PollFrequency = TimeSpan.FromMinutes(360), Enabled = true } },
-			{ RequestType.Repository_Issues, new PollSettings { PollFrequency = TimeSpan.FromMinutes(5), Enabled = true } },
-			{ RequestType.Repositories_Workflows, new PollSettings { PollFrequency = TimeSpan.FromMinutes(360), Enabled = true } },
-			{ RequestType.Repositories_SoftwareBillOfMaterials, new PollSettings { PollFrequency = TimeSpan.FromMinutes(360), Enabled = true } },
+			{ RequestType.Repositories_Repositories, new PollSettings { PollFrequency = TimeSpan.FromMinutes(10), Enabled = true, PageLimit = Exceptions.IntNotAvailable } },
+			{ RequestType.Repositories_Tags, new PollSettings { PollFrequency = TimeSpan.FromMinutes(360), Enabled = true, PageLimit = PollingConstants.PerPage } },
+			{ RequestType.Repositories_Releases, new PollSettings { PollFrequency = TimeSpan.FromMinutes(360), Enabled = true, PageLimit = PollingConstants.PerPage } },
+			{ RequestType.Repository_Issues, new PollSettings { PollFrequency = TimeSpan.FromMinutes(5), Enabled = true, PageLimit = PollingConstants.PerPage } },
+			{ RequestType.Repositories_Workflows, new PollSettings { PollFrequency = TimeSpan.FromMinutes(360), Enabled = true, PageLimit = PollingConstants.PerPage } },
+			{ RequestType.Repositories_SoftwareBillOfMaterials, new PollSettings { PollFrequency = TimeSpan.FromMinutes(360), Enabled = true, PageLimit = Exceptions.IntNotAvailable } },
 
-			{ RequestType.Organizations_User, new PollSettings { PollFrequency = TimeSpan.FromHours(24), Enabled = true } },
-			{ RequestType.Organizations_Repositories, new PollSettings { PollFrequency = TimeSpan.FromHours(10), Enabled = true } },
-			{ RequestType.Organizations_Teams, new PollSettings { PollFrequency = TimeSpan.FromHours(10), Enabled = true } },
-			{ RequestType.Organizations_Members, new PollSettings { PollFrequency = TimeSpan.FromHours(10), Enabled = true } },
+			{ RequestType.Organizations_User, new PollSettings { PollFrequency = TimeSpan.FromHours(24), Enabled = true, PageLimit = PollingConstants.PerPage } },
+			{ RequestType.Organizations_Repositories, new PollSettings { PollFrequency = TimeSpan.FromHours(10), Enabled = true, PageLimit = PollingConstants.PerPage } },
+			{ RequestType.Organizations_Teams, new PollSettings { PollFrequency = TimeSpan.FromHours(10), Enabled = true, PageLimit = PollingConstants.PerPage } },
+			{ RequestType.Organizations_Members, new PollSettings { PollFrequency = TimeSpan.FromHours(10), Enabled = true, PageLimit = PollingConstants.PerPage } },
 
-			{ RequestType.Repositories_PublicKey, new PollSettings { PollFrequency = TimeSpan.FromHours(360), Enabled = true } },
+			{ RequestType.Repositories_PublicKey, new PollSettings { PollFrequency = TimeSpan.FromHours(360), Enabled = true, PageLimit = Exceptions.IntNotAvailable } },
 		};
 
 		/// <summary>
@@ -58,17 +58,19 @@
 				Parameter.Pollmanager.Idx.pollmanagerpollstate_21003,
 				Parameter.Pollmanager.Idx.pollmanagerpollfrequency_21004,
 				Parameter.Pollmanager.Idx.pollmanagerlastpolled_21005,
+				Parameter.Pollmanager.Idx.pollmanagerpagelimit_21008,
 			};
 			var pollManagerColumns = (object[])protocol.NotifyProtocol((int)NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Pollmanager.tablePid, pollManagerIdx);
 			uint[] pollManagerKeys = Array.ConvertAll((object[])pollManagerColumns[0], Convert.ToUInt32);
 			bool[] pollManagerStates = Array.ConvertAll((object[])pollManagerColumns[1], Convert.ToBoolean);
 			TimeSpan[] pollManagerFrequencies = Array.ConvertAll((object[])pollManagerColumns[2], x => TimeSpan.FromSeconds(Convert.ToInt32(x)));
 			DateTime[] pollManagerLastPolled = Array.ConvertAll((object[])pollManagerColumns[3], x => DateTime.FromOADate(Convert.ToDouble(x)));
+			int[] pollManagerPageLimits = Array.ConvertAll((object[])pollManagerColumns[4], Convert.ToInt32);
 
 			var dic = new Dictionary<RequestType, PollSettings>();
 			for (var i = 0; i < pollManagerKeys.Length; i++)
 			{
-				dic.Add((RequestType)pollManagerKeys[i], new PollSettings { Enabled = pollManagerStates[i], PollFrequency = pollManagerFrequencies[i], LastPollTime = pollManagerLastPolled[i] });
+				dic.Add((RequestType)pollManagerKeys[i], new PollSettings { Enabled = pollManagerStates[i], PollFrequency = pollManagerFrequencies[i], LastPollTime = pollManagerLastPolled[i], PageLimit = pollManagerPageLimits[i] });
 			}
 
 			return dic;
@@ -100,6 +102,7 @@
 						Pollmanagerpollstate_21003 = Convert.ToInt32(kvp.Value.Enabled),
 						Pollmanagerpollfrequency_21004 = kvp.Value.PollFrequency.TotalSeconds,
 						Pollmanagerlastpolled_21005 = 0,
+						Pollmanagerpagelimit_21008 = kvp.Value.PageLimit,
 					}.ToObjectArray());
 			}
 
@@ -108,14 +111,14 @@
 
 		public static void ManualRefreshDeviceObject(SLProtocol protocol, RequestType requestType, DateTime utcNow)
 		{
-			PollDeviceObject(protocol, requestType, utcNow);
+			PollDeviceObject(protocol, requestType, utcNow, true);
 		}
 
 		public static void ManualRefreshDeviceObjects(SLProtocol protocol, List<RequestType> requestTypes, DateTime utcNow)
 		{
 			foreach (RequestType requestType in requestTypes)
 			{
-				PollDeviceObject(protocol, requestType, utcNow);
+				PollDeviceObject(protocol, requestType, utcNow, true);
 			}
 		}
 
@@ -129,16 +132,16 @@
 					continue;
 				}
 
-				PollDeviceObject(protocol, pollItem.Key, utcNow);
+				PollDeviceObject(protocol, pollItem.Key, utcNow, false);
 			}
 		}
 
-		private static void PollDeviceObject(SLProtocol protocol, RequestType requestType, DateTime utcNow)
+		private static void PollDeviceObject(SLProtocol protocol, RequestType requestType, DateTime utcNow, bool executeNow)
 		{
-			if (RequestHandler.RequestHandler.Handlers.TryGetValue(requestType, out Action<SLProtocol> action))
+			if (RequestHandler.RequestHandler.Handlers.TryGetValue(requestType, out Action<SLProtocol, bool> action))
 			{
 				UpdateLastPollTime(protocol, requestType, utcNow);
-				action.Invoke(protocol);
+				action.Invoke(protocol, executeNow);
 			}
 		}
 
@@ -162,6 +165,8 @@
 			public DateTime LastPollTime { get; set; }
 
 			public TimeSpan PollFrequency { get; set; }
+
+			public int PageLimit { get; set; }
 		}
 	}
 }

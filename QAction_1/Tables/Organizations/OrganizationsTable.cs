@@ -23,6 +23,7 @@ namespace Skyline.Protocol.Tables
 				SLTables.Organizations.Description.Read.Map<OrganizationsModel>(m => m.Description),
 				SLTables.Organizations.AvatarUrl.Read.Map<OrganizationsModel>(m => m.AvatarUrl),
 				SLTables.Organizations.Tracked.Read.Map<OrganizationsModel>(m => m.Tracked),
+				SLTables.Organizations.LastPolledAt.Read.Map<OrganizationsModel>(m => m.LastPolledAt),
 			};
 			_columnWriteMaps = new ColumnWriteMapBase<OrganizationsModel>[]
 			{
@@ -31,6 +32,7 @@ namespace Skyline.Protocol.Tables
 				SLTables.Organizations.Description.Read.MapWrite<OrganizationsModel>(m => m.Description),
 				SLTables.Organizations.AvatarUrl.Read.MapWrite<OrganizationsModel>(m => m.AvatarUrl),
 				SLTables.Organizations.Tracked.Read.MapWrite<OrganizationsModel>(m => m.Tracked),
+				SLTables.Organizations.LastPolledAt.Read.MapWrite<OrganizationsModel>(m => m.LastPolledAt),
 			};
 		}
 
@@ -70,6 +72,8 @@ namespace Skyline.Protocol.Tables
 		public string AvatarUrl { get; set; }
 
 		public bool? Tracked { get; set; }
+
+		public DateTime? LastPolledAt { get; set; }
 	}
 
 	public class OrganizationsQActionTable : SLTable<OrganizationsQActionRow>
@@ -127,19 +131,19 @@ namespace Skyline.Protocol.Tables
 		{
 			var pollRow = PollManagerRowConverter.Instance.FromRawValue(
 				SLTables.PollManager.GetRow(protocol, Convert.ToString((int)RequestType.Organizations_User)));
-			if (!pollRow.PreviouslyPolledUTCTime.HasValue)
+			if (!pollRow.LastPolledUTCTime.HasValue)
 			{
-				protocol.Log($"QA{protocol.QActionID}|{nameof(MembersQActionTable)}.{nameof(Cleanup)}|Table hasn't been polled twice yet", LogType.DebugInfo, LogLevel.Level2);
+				protocol.Log($"QA{protocol.QActionID}|{nameof(OrganizationsQActionTable)}.{nameof(Cleanup)}|Table hasn't been polled yet", LogType.DebugInfo, LogLevel.Level2);
 				return;
 			}
 
 			var toBeRemoved = SLTables.Organizations.GetData(
 				protocol,
-				Instance.Read.Map<MemberOrganizationLinksModel>(m => m.Instance),
-				LastPolledAt.Read.Map<MemberOrganizationLinksModel>(m => m.LastPolledAt))
+				Instance.Read.Map<OrganizationsModel>(m => m.Instance),
+				LastPolledAt.Read.Map<OrganizationsModel>(m => m.LastPolledAt))
 					.Where(m =>
 						!m.LastPolledAt.HasValue ||
-						(m.LastPolledAt < pollRow.PreviouslyPolledUTCTime))
+						(m.LastPolledAt < pollRow.LastPolledUTCTime))
 					.Select(m => m.Instance)
 					.ToHashSet();
 
