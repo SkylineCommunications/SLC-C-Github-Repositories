@@ -1712,11 +1712,15 @@ To get more request you can add an API key under General/Configuration page. To 
 						<Value>2</Value>
 					</Discreet>
 					<Discreet>
+						<!-- SuppressValidator 2.13.7 NuGet is the correct casing -->
 						<Display>NuGet Solution CICD</Display>
+						<!-- /SuppressValidator 2.13.7 -->
 						<Value>3</Value>
 					</Discreet>
 					<Discreet>
+						<!-- SuppressValidator 2.13.7 NuGet is the correct casing -->
 						<Display>Internal NuGet Solution CICD</Display>
+						<!-- /SuppressValidator 2.13.7 -->
 						<Value>4</Value>
 					</Discreet>
 				</Discreets>
@@ -1757,11 +1761,15 @@ To get more request you can add an API key under General/Configuration page. To 
 						<Value>2</Value>
 					</Discreet>
 					<Discreet>
+						<!-- SuppressValidator 2.13.7 NuGet is the correct casing -->
 						<Display>NuGet Solution CICD</Display>
+						<!-- /SuppressValidator 2.13.7 -->
 						<Value>3</Value>
 					</Discreet>
 					<Discreet>
+						<!-- SuppressValidator 2.13.7 NuGet is the correct casing -->
 						<Display>Internal NuGet Solution CICD</Display>
+						<!-- /SuppressValidator 2.13.7 -->
 						<Value>4</Value>
 					</Discreet>
 				</Discreets>
@@ -4458,10 +4466,10 @@ At the end of the cycle this parameter should contain the entire list of still e
 		</Param>
 		<Param id="2207" trending="false">
 			<Name>RepositorySoftwareBillOfMaterialsDocumentNamespace</Name>
-			<Description>Document NameSpace (Repository Software Bill of Materials)</Description>
+			<Description>Document Namespace (Repository Software Bill of Materials)</Description>
 			<Type>read</Type>
 			<Information>
-				<Subtext>The NameSpace for the SPDX document.</Subtext>
+				<Subtext>The Namespace for the SPDX document.</Subtext>
 			</Information>
 			<Interprete>
 				<RawType>other</RawType>
