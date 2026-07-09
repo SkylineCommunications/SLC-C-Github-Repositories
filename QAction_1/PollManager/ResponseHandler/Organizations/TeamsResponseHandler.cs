@@ -22,6 +22,7 @@
 			// Check status code
 			if (!protocol.IsSuccessStatusCode())
 			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Organizations_Teams, PollingStatus.Idle);
 				return;
 			}
 
@@ -30,6 +31,7 @@
 				Convert.ToString(protocol.GetParameter(Parameter.getorganizationteamscontent)));
 			if (response == null)
 			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Organizations_Teams, PollingStatus.Idle);
 				protocol.Log($"QA{protocol.QActionID}|HandleOrganizationTeamsResponse|response was null.", LogType.Error, LogLevel.Level1);
 				return;
 			}
@@ -37,6 +39,7 @@
 			if (!response.Any())
 			{
 				// No repositories for the organization
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Organizations_Teams, PollingStatus.Idle);
 				protocol.Log($"QA{protocol.QActionID}|HandleOrganizationTeamsResponse|No teams", LogType.Information, LogLevel.Level2);
 				return;
 			}
@@ -87,6 +90,7 @@
 			}
 			else
 			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Organizations_Teams, PollingStatus.Idle);
 				SLTables.Teams.Cleanup(protocol, owner);
 			}
 		}

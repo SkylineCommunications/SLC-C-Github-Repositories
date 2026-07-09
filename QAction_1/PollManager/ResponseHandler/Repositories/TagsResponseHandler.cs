@@ -21,6 +21,7 @@
 			// Check status code
 			if (!protocol.IsSuccessStatusCode())
 			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repositories_Tags, PollingStatus.Idle);
 				return;
 			}
 
@@ -30,6 +31,7 @@
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|response was null.", LogType.Error, LogLevel.Level1);
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repositories_Tags, PollingStatus.Idle);
 				return;
 			}
 
@@ -37,6 +39,7 @@
 			{
 				// No tags for the repository
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTagsResponse|No tags for the repo.", LogType.Information, LogLevel.Level2);
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repositories_Tags, PollingStatus.Idle);
 				return;
 			}
 
@@ -89,6 +92,7 @@
 			}
 			else
 			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repositories_Tags, PollingStatus.Idle);
 				SLTables.Tags.Cleanup(protocol, repositoryId);
 			}
 		}

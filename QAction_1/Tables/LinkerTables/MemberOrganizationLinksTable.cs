@@ -128,7 +128,8 @@ namespace Skyline.Protocol.Tables
 		{
 			var pollRow = PollManagerRowConverter.Instance.FromRawValue(
 				SLTables.PollManager.GetRow(protocol, Convert.ToString((int)RequestType.Organizations_Members)));
-			if (!pollRow.LastPolledUTCTime.HasValue)
+			var pollTime = pollRow.PollingStatus == PollingStatus.Polling ? pollRow.PreviouslyPolledUTCTime : pollRow.LastPolledUTCTime;
+			if (!pollTime.HasValue)
 			{
 				protocol.Log($"QA{protocol.QActionID}|{nameof(MembersQActionTable)}.{nameof(Cleanup)}|Table hasn't been polled yet", LogType.DebugInfo, LogLevel.Level2);
 				return;
@@ -140,7 +141,7 @@ namespace Skyline.Protocol.Tables
 				LastPolledAt.Read.Map<MemberOrganizationLinksModel>(m => m.LastPolledAt))
 					.Where(m =>
 						!m.LastPolledAt.HasValue ||
-						(m.LastPolledAt < pollRow.LastPolledUTCTime))
+						(m.LastPolledAt < pollTime))
 					.Select(m => m.Instance)
 					.ToHashSet();
 

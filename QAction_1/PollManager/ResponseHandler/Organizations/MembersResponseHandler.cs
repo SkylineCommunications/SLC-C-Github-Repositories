@@ -22,24 +22,30 @@
 	{
 		public static void HandleOrganizationMembersResponse(SLProtocol protocol)
 		{
+			var parameters = (object[])protocol.GetParameters(new uint[] { Parameter.getorganizationmemberscontent_213, Parameter.getorganizationmembersqueue_163 });
+			var queue = SecureNewtonsoftDeserialization.DeserializeObject<List<string>>(Convert.ToString(parameters[1])) ?? new List<string>();
+
 			// Check status code
 			if (!protocol.IsSuccessStatusCode())
 			{
+				HandleNextOrganizationPolling(protocol, queue);
 				return;
 			}
 
 			// Parse response
 			var response = SecureNewtonsoftDeserialization.DeserializeObject<List<Member>>(
-				Convert.ToString(protocol.GetParameter(Parameter.getorganizationmemberscontent)));
+				Convert.ToString(parameters[0]));
 			if (response == null)
 			{
+				HandleNextOrganizationPolling(protocol, queue);
 				protocol.Log($"QA{protocol.QActionID}|HandleOrganizationMembersResponse|response was null.", LogType.Error, LogLevel.Level1);
 				return;
 			}
 
 			if (!response.Any())
 			{
-				// No repositories for the organization
+				// No members for the organization
+				HandleNextOrganizationPolling(protocol, queue);
 				protocol.Log($"QA{protocol.QActionID}|HandleOrganizationMembersResponse|No Members", LogType.Information, LogLevel.Level2);
 				return;
 			}
@@ -103,13 +109,30 @@
 			if (link.HasNext)
 			{
 				var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_Members)?.PageLimit ?? PollingConstants.PerPage;
-				OrganizationsRequestHandler.HandleOrganizationMembersRequest(protocol, org, perPage, link.NextPage, true);
+				OrganizationsRequestHandler.HandleOrganizationMembersRequest(protocol, org, perPage, link.NextPage, false);
 			}
 			else
 			{
+				HandleNextOrganizationPolling(protocol, queue);
 				SLTables.Members.Cleanup(protocol);
 				SLTables.MemberOrganizationLinks.Cleanup(protocol, org);
 			}
+		}
+
+		private static void HandleNextOrganizationPolling(SLProtocol protocol, List<string> queue)
+		{
+			var nextOrg = queue.FirstOrDefault();
+			if (nextOrg == null)
+			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Organizations_Members, PollingStatus.Idle);
+				return;
+			}
+
+			queue.Remove(nextOrg);
+			protocol.SetParameter(Parameter.getorganizationmembersqueue_163, JsonConvert.SerializeObject(nextOrg));
+
+			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_Members)?.PageLimit ?? PollingConstants.PerPage;
+			OrganizationsRequestHandler.HandleOrganizationMembersRequest(protocol, nextOrg, perPage, 1, false);
 		}
 	}
 }

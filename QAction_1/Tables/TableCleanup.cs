@@ -15,6 +15,7 @@
 				SLTables.PollManager.GetRow(protocol, Convert.ToString((int)RequestType.Table_Cleanup)));
 			if(!pollRow.LastPolledUTCTime.HasValue)
 			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Table_Cleanup, PollingStatus.Idle);
 				return;
 			}
 
@@ -31,6 +32,7 @@
 			SLTables.Organizations.Cleanup(protocol);
 			SLTables.Teams.Cleanup(protocol);
 			SLTables.Members.Cleanup(protocol);
+			SLTables.PollManager.SetPollingStatus(protocol, RequestType.Table_Cleanup, PollingStatus.Idle);
 		}
 
 		private static void CleanupInterApp(SLProtocol protocol)

@@ -5,6 +5,7 @@
 	using System.Linq;
 
 	using Skyline.DataMiner.Scripting;
+	using Skyline.DataMiner.Scripting.Helper;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Organizations;
 	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 	using Skyline.Protocol.API.Headers;
@@ -19,6 +20,7 @@
 			// Check status code
 			if (!protocol.IsSuccessStatusCode())
 			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Organizations_User, PollingStatus.Idle);
 				return;
 			}
 
@@ -28,6 +30,7 @@
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|HandleUserOrganizationsResponse|response was null.", LogType.Error, LogLevel.Level1);
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Organizations_User, PollingStatus.Idle);
 				return;
 			}
 
@@ -35,6 +38,7 @@
 			{
 				// No organizations for the user
 				protocol.Log($"QA{protocol.QActionID}|HandleUserOrganizationsResponse|No organizations", LogType.Information, LogLevel.Level2);
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Organizations_User, PollingStatus.Idle);
 				return;
 			}
 
@@ -79,6 +83,10 @@
 			{
 				var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_User)?.PageLimit ?? PollingConstants.PerPage;
 				OrganizationsRequestHandler.HandleUserOrganizationsRequest(protocol, perPage, link.NextPage, true);
+			}
+			else
+			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Organizations_User, PollingStatus.Idle);
 			}
 		}
 	}

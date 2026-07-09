@@ -7,7 +7,7 @@
 	using Skyline.DataMiner.Net.Messages;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.Protocol.Extensions;
-
+	using Skyline.Protocol.Tables;
 	using Parameter = Skyline.DataMiner.Scripting.Parameter;
 
 	public static class PollManager
@@ -59,6 +59,7 @@
 				Parameter.Pollmanager.Idx.pollmanagerpollfrequency_21004,
 				Parameter.Pollmanager.Idx.pollmanagerlastpolled_21005,
 				Parameter.Pollmanager.Idx.pollmanagerpagelimit_21008,
+				Parameter.Pollmanager.Idx.pollmanagerpollingstatus_21009,
 			};
 			var pollManagerColumns = (object[])protocol.NotifyProtocol((int)NotifyType.NT_GET_TABLE_COLUMNS, Parameter.Pollmanager.tablePid, pollManagerIdx);
 			uint[] pollManagerKeys = Array.ConvertAll((object[])pollManagerColumns[0], Convert.ToUInt32);
@@ -66,11 +67,12 @@
 			TimeSpan[] pollManagerFrequencies = Array.ConvertAll((object[])pollManagerColumns[2], x => TimeSpan.FromSeconds(Convert.ToInt32(x)));
 			DateTime[] pollManagerLastPolled = Array.ConvertAll((object[])pollManagerColumns[3], x => DateTime.FromOADate(Convert.ToDouble(x)));
 			int[] pollManagerPageLimits = Array.ConvertAll((object[])pollManagerColumns[4], Convert.ToInt32);
+			PollingStatus[] pollManagerPollingStatus = Array.ConvertAll((object[])pollManagerColumns[5], x => (PollingStatus)Convert.ToInt32(x));
 
 			var dic = new Dictionary<RequestType, PollSettings>();
 			for (var i = 0; i < pollManagerKeys.Length; i++)
 			{
-				dic.Add((RequestType)pollManagerKeys[i], new PollSettings { Enabled = pollManagerStates[i], PollFrequency = pollManagerFrequencies[i], LastPollTime = pollManagerLastPolled[i], PageLimit = pollManagerPageLimits[i] });
+				dic.Add((RequestType)pollManagerKeys[i], new PollSettings { Enabled = pollManagerStates[i], PollFrequency = pollManagerFrequencies[i], LastPollTime = pollManagerLastPolled[i], PageLimit = pollManagerPageLimits[i], PollingStatus = pollManagerPollingStatus[i] });
 			}
 
 			return dic;
@@ -111,14 +113,22 @@
 
 		public static void ManualRefreshDeviceObject(SLProtocol protocol, RequestType requestType, DateTime utcNow)
 		{
-			PollDeviceObject(protocol, requestType, utcNow, true);
+			var pollingStatus = SLTables.PollManager.GetRowByRequestType(protocol, requestType).PollingStatus;
+			if (pollingStatus != PollingStatus.Polling)
+			{
+				PollDeviceObject(protocol, requestType, utcNow, true);
+			}
 		}
 
 		public static void ManualRefreshDeviceObjects(SLProtocol protocol, List<RequestType> requestTypes, DateTime utcNow)
 		{
 			foreach (RequestType requestType in requestTypes)
 			{
-				PollDeviceObject(protocol, requestType, utcNow, true);
+				var pollingStatus = SLTables.PollManager.GetRowByRequestType(protocol, requestType).PollingStatus;
+				if (pollingStatus != PollingStatus.Polling)
+				{
+					PollDeviceObject(protocol, requestType, utcNow, true);
+				}
 			}
 		}
 
@@ -127,7 +137,7 @@
 			foreach (KeyValuePair<RequestType, PollSettings> pollItem in pollItems.OrderByDescending(x => (int)x.Key))
 			{
 				if (!pollItem.Value.Enabled
-					|| pollItem.Value.LastPollTime + pollItem.Value.PollFrequency > utcNow)
+					|| pollItem.Value.LastPollTime + pollItem.Value.PollFrequency > utcNow || pollItem.Value.PollingStatus == PollingStatus.Polling)
 				{
 					continue;
 				}
@@ -154,6 +164,7 @@
 
 			row.Pollmanagerpreviouslypolled_21007 = lastPolled;
 			row.Pollmanagerlastpolled_21005 = dt.ToOADate();
+			row.Pollmanagerpollingstatus_21009 = (int)PollingStatus.Polling;
 
 			protocol.SetRow(Parameter.Pollmanager.tablePid, rowKey, row.ToObjectArray());
 		}
@@ -167,6 +178,8 @@
 			public TimeSpan PollFrequency { get; set; }
 
 			public int PageLimit { get; set; }
+
+			public PollingStatus PollingStatus { get; set; }
 		}
 	}
 }

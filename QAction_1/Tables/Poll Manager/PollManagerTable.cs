@@ -25,6 +25,7 @@
 				SLTables.PollManager.LastPolled.Read.Map<PollManagerModel>(m => m.LastPolledUTCTime),
 				SLTables.PollManager.PreviouslyPolled.Read.Map<PollManagerModel>(m => m.PreviouslyPolledUTCTime),
 				SLTables.PollManager.PageLimit.Read.Map<PollManagerModel>(m => m.PageLimit),
+				SLTables.PollManager.PollingStatus.Read.Map<PollManagerModel>(m => m.PollingStatus),
 			};
 			_columnWriteMaps = new ColumnWriteMapBase<PollManagerModel>[]
 			{
@@ -35,6 +36,7 @@
 				SLTables.PollManager.LastPolled.Read.MapWrite<PollManagerModel>(m => m.LastPolledUTCTime),
 				SLTables.PollManager.PreviouslyPolled.Read.MapWrite<PollManagerModel>(m => m.PreviouslyPolledUTCTime),
 				SLTables.PollManager.PageLimit.Read.MapWrite<PollManagerModel>(m => m.PageLimit),
+				SLTables.PollManager.PollingStatus.Read.MapWrite<PollManagerModel>(m => m.PollingStatus),
 			};
 		}
 
@@ -78,6 +80,8 @@
 		public DateTime? PreviouslyPolledUTCTime { get; set; }
 
 		public int PageLimit { get; set; }
+
+		public PollingStatus? PollingStatus { get; set; }
 	}
 
 	public class PollManagerQActionTable : SLTable<PollmanagerQActionRow>
@@ -124,6 +128,12 @@
 				Parameter.Pollmanager.Idx.pollmanagerpagelimit_21008,
 				Parameter.Pollmanager.Pid.pollmanagerpagelimit_21008,
 				this);
+
+			PollingStatus = new SLReadColumn<PollingStatus?>(
+				Parameter.Pollmanager.Idx.pollmanagerpollingstatus_21009,
+				Parameter.Pollmanager.Pid.pollmanagerpollingstatus_21009,
+				new PollingStatusConverter(),
+				this);
 		}
 
 		public event EventHandler<PollManagerStateChangedEventArgs> StateChanged;
@@ -141,6 +151,8 @@
 		public SLReadColumn<DateTime?> PreviouslyPolled { get; }
 
 		public SLReadColumn<int?> PageLimit { get; }
+
+		public SLReadColumn<PollingStatus?> PollingStatus { get; }
 
 		public PollManagerModel GetRowByRequestType(SLProtocol protocol, RequestType requestType)
 		{
@@ -182,6 +194,17 @@
 
 			PollState.Read.SetCell(protocol, Convert.ToString((int)requestType), pollState);
 			StateChanged?.Invoke(this, new PollManagerStateChangedEventArgs(protocol, requestType, pollState));
+		}
+
+		public void SetPollingStatus(SLProtocol protocol, RequestType requestType, PollingStatus pollingStatus)
+		{
+			var original = PollingStatus.Read.GetCell(protocol, Convert.ToString((int)requestType));
+			if (original.Value == pollingStatus)
+			{
+				return;
+			}
+
+			PollingStatus.Read.SetCell(protocol, Convert.ToString((int)requestType), pollingStatus);
 		}
 
 		protected override void DisposeEvents()

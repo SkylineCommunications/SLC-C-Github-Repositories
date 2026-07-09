@@ -1,10 +1,11 @@
 ﻿namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 {
 	using System;
+	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
 	using System.Web;
-
+	using Newtonsoft.Json;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Repositories;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Workflows;
@@ -22,18 +23,24 @@
 	{
 		public static void HandleRepositoriesResponse(SLProtocol protocol)
 		{
+			var parameters = (object[])protocol.GetParameters(new uint[] { Parameter.getrepositorycontent_201, Parameter.repositoriespollingqueue_999 });
+			var queue = SecureNewtonsoftDeserialization.DeserializeObject<List<string>>(Convert.ToString(parameters[1])) ?? new List<string>();
+
 			// Check status code
 			if (!protocol.IsSuccessStatusCode())
 			{
+				HandleRepositoriesNextPoll(protocol, queue);
 				return;
 			}
 
 			// Parse response
 			var response = SecureNewtonsoftDeserialization.DeserializeObject<RepositoryResponse>(
-				Convert.ToString(protocol.GetParameter(Parameter.getrepositorycontent)));
+				Convert.ToString(parameters[0]));
+
 			if (response is null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|{nameof(HandleRepositoriesResponse)}|response was null.", LogType.Error, LogLevel.Level1);
+				HandleRepositoriesNextPoll(protocol, queue);
 				return;
 			}
 
@@ -65,6 +72,7 @@
 			SLTables.Repositories.SetRow(protocol, RepositoriesRowConverter.Instance.ToRawValue(row));
 
 			RepositoriesResponseHandler.HandleTopicsInterApp(protocol, response.Name, response.Owner.Login, response.Topics);
+			HandleRepositoriesNextPoll(protocol, queue);
 		}
 
 		public static void HandleRepositoryContentResponse(SLProtocol protocol)
@@ -127,6 +135,22 @@
 					iacRow.SaveToProtocol(protocol);
 				}
 			}
+		}
+
+		private static void HandleRepositoriesNextPoll(SLProtocol protocol, List<string> queue)
+		{
+			var nextItem = queue.FirstOrDefault();
+			if (nextItem != null)
+			{
+				queue.Remove(nextItem);
+				RepositoriesRequestHandler.HandleRepositoriesRequest(protocol, nextItem, false);
+			}
+			else
+			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repositories_Repositories, PollingStatus.Idle);
+			}
+
+			protocol.SetParameter(Parameter.repositoriespollingqueue_999, JsonConvert.SerializeObject(queue));
 		}
 	}
 }

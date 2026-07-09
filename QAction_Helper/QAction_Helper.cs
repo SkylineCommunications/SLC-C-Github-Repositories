@@ -483,6 +483,16 @@ public static class Parameter
 	public const int repositoriesoverview_996 = 996;
 	/// <summary>PID: 996 | Type: read</summary>
 	public const int repositoriesoverview = 996;
+	/// <summary>PID: 998 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int organizationrepositoriespollingqueue_998 = 998;
+	/// <summary>PID: 998 | Type: read</summary>
+	public const int organizationrepositoriespollingqueue = 998;
+	/// <summary>PID: 999 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int repositoriespollingqueue_999 = 999;
+	/// <summary>PID: 999 | Type: read</summary>
+	public const int repositoriespollingqueue = 999;
 	/// <summary>PID: 1191 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int repositorytags_pk_cache_1191 = 1191;
@@ -513,6 +523,11 @@ public static class Parameter
 	public const int repositoryissues_pk_cache_1991 = 1991;
 	/// <summary>PID: 1991 | Type: read</summary>
 	public const int repositoryissues_pk_cache = 1991;
+	/// <summary>PID: 2198 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public const int repositoriessoftwarebillofmaterialspollingqueue_2198 = 2198;
+	/// <summary>PID: 2198 | Type: read</summary>
+	public const int repositoriessoftwarebillofmaterialspollingqueue = 2198;
 	/// <summary>PID: 2996 | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public const int organizationsoverview_2996 = 2996;
@@ -2361,6 +2376,11 @@ public static class Parameter
 			public const int pollmanagerpagelimit_21008 = 21008;
 			/// <summary>PID: 21008 | Type: read</summary>
 			public const int pollmanagerpagelimit = 21008;
+			/// <summary>PID: 21009 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int pollmanagerpollingstatus_21009 = 21009;
+			/// <summary>PID: 21009 | Type: read</summary>
+			public const int pollmanagerpollingstatus = 21009;
 			public class Write
 			{
 				/// <summary>PID: 21006 | Type: write</summary>
@@ -2407,6 +2427,11 @@ public static class Parameter
 			public const int pollmanagerpagelimit_21008 = 7;
 			/// <summary>IDX: 7 | Type: read</summary>
 			public const int pollmanagerpagelimit = 7;
+			/// <summary>IDX: 8 | Type: read</summary>
+			[EditorBrowsable(EditorBrowsableState.Never)]
+			public const int pollmanagerpollingstatus_21009 = 8;
+			/// <summary>IDX: 8 | Type: read</summary>
+			public const int pollmanagerpollingstatus = 8;
 		}
 	}
 	public class Iac_messages
@@ -2816,6 +2841,10 @@ public interface SLProtocolExt : SLProtocol
 	object Repositories_changerequest { get; set; }
 	object Repositoriesoverview_996 { get; set; }
 	object Repositoriesoverview { get; set; }
+	object Organizationrepositoriespollingqueue_998 { get; set; }
+	object Organizationrepositoriespollingqueue { get; set; }
+	object Repositoriespollingqueue_999 { get; set; }
+	object Repositoriespollingqueue { get; set; }
 	object Repositoriesfullname_1001 { get; set; }
 	object Repositoriesfullname { get; set; }
 	object Repositoriesname_1002 { get; set; }
@@ -2983,6 +3012,8 @@ public interface SLProtocolExt : SLProtocol
 	object Repositoryissuesclosedat { get; set; }
 	object Repositoryissuesrepositoryid_2011 { get; set; }
 	object Repositoryissuesrepositoryid { get; set; }
+	object Repositoriessoftwarebillofmaterialspollingqueue_2198 { get; set; }
+	object Repositoriessoftwarebillofmaterialspollingqueue { get; set; }
 	object Repositorysoftwarebillofmaterialslastpolledatutc_2199 { get; set; }
 	object Repositorysoftwarebillofmaterialslastpolledatutc { get; set; }
 	object Repositorysoftwarebillofmaterialsname_2201 { get; set; }
@@ -3112,6 +3143,8 @@ public interface SLProtocolExt : SLProtocol
 	object Pollmanagerpreviouslypolled { get; set; }
 	object Pollmanagerpagelimit_21008 { get; set; }
 	object Pollmanagerpagelimit { get; set; }
+	object Pollmanagerpollingstatus_21009 { get; set; }
+	object Pollmanagerpollingstatus { get; set; }
 	object Pollmanagerpollstate_21053 { get; set; }
 	object Pollmanagerpollfrequency_21054 { get; set; }
 	object Pollmanagerpagelimit_21058 { get; set; }
@@ -3729,6 +3762,16 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoriesoverview_996 {get { return GetParameter(996); }set { SetParameter(996, value); }}
 	/// <summary>PID: 996  | Type: read</summary>
 	public System.Object Repositoriesoverview {get { return GetParameter(996); }set { SetParameter(996, value); }}
+	/// <summary>PID: 998  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Organizationrepositoriespollingqueue_998 {get { return GetParameter(998); }set { SetParameter(998, value); }}
+	/// <summary>PID: 998  | Type: read</summary>
+	public System.Object Organizationrepositoriespollingqueue {get { return GetParameter(998); }set { SetParameter(998, value); }}
+	/// <summary>PID: 999  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoriespollingqueue_999 {get { return GetParameter(999); }set { SetParameter(999, value); }}
+	/// <summary>PID: 999  | Type: read</summary>
+	public System.Object Repositoriespollingqueue {get { return GetParameter(999); }set { SetParameter(999, value); }}
 	/// <summary>PID: 1001  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositoriesfullname_1001 {get { return GetParameter(1001); }set { SetParameter(1001, value); }}
@@ -4146,6 +4189,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Repositoryissuesrepositoryid_2011 {get { return GetParameter(2011); }set { SetParameter(2011, value); }}
 	/// <summary>PID: 2011  | Type: read</summary>
 	public System.Object Repositoryissuesrepositoryid {get { return GetParameter(2011); }set { SetParameter(2011, value); }}
+	/// <summary>PID: 2198  | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Repositoriessoftwarebillofmaterialspollingqueue_2198 {get { return GetParameter(2198); }set { SetParameter(2198, value); }}
+	/// <summary>PID: 2198  | Type: read</summary>
+	public System.Object Repositoriessoftwarebillofmaterialspollingqueue {get { return GetParameter(2198); }set { SetParameter(2198, value); }}
 	/// <summary>PID: 2199  | Type: read</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Repositorysoftwarebillofmaterialslastpolledatutc_2199 {get { return GetParameter(2199); }set { SetParameter(2199, value); }}
@@ -4468,6 +4516,11 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Pollmanagerpagelimit_21008 {get { return GetParameter(21008); }set { SetParameter(21008, value); }}
 	/// <summary>PID: 21008  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	public System.Object Pollmanagerpagelimit {get { return GetParameter(21008); }set { SetParameter(21008, value); }}
+	/// <summary>PID: 21009  | Type: read | DISCREETS: Idle = 1, Polling = 2</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Pollmanagerpollingstatus_21009 {get { return GetParameter(21009); }set { SetParameter(21009, value); }}
+	/// <summary>PID: 21009  | Type: read | DISCREETS: Idle = 1, Polling = 2</summary>
+	public System.Object Pollmanagerpollingstatus {get { return GetParameter(21009); }set { SetParameter(21009, value); }}
 	/// <summary>PID: 21053  | Type: write | DISCREETS: Disabled = 0, Enabled = 1</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Pollmanagerpollstate_21053 {get { return GetParameter(21053); }set { SetParameter(21053, value); }}
@@ -5620,8 +5673,13 @@ public class PollmanagerQActionRow : QActionTableRow
 	public System.Object Pollmanagerpagelimit_21008 { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
 	/// <summary>PID: 21008 | Type: read</summary>
 	public System.Object Pollmanagerpagelimit { get { if (base.Columns.ContainsKey(7)) { return base.Columns[7]; } else { return null; } } set { if (base.Columns.ContainsKey(7)) { base.Columns[7] = value; } else { base.Columns.Add(7, value); } } }
-	public PollmanagerQActionRow() : base(0, 8) { }
-	public PollmanagerQActionRow(System.Object[] oRow) : base(0, 8, oRow) { }
+	/// <summary>PID: 21009 | Type: read</summary>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public System.Object Pollmanagerpollingstatus_21009 { get { if (base.Columns.ContainsKey(8)) { return base.Columns[8]; } else { return null; } } set { if (base.Columns.ContainsKey(8)) { base.Columns[8] = value; } else { base.Columns.Add(8, value); } } }
+	/// <summary>PID: 21009 | Type: read</summary>
+	public System.Object Pollmanagerpollingstatus { get { if (base.Columns.ContainsKey(8)) { return base.Columns[8]; } else { return null; } } set { if (base.Columns.ContainsKey(8)) { base.Columns[8] = value; } else { base.Columns.Add(8, value); } } }
+	public PollmanagerQActionRow() : base(0, 9) { }
+	public PollmanagerQActionRow(System.Object[] oRow) : base(0, 9, oRow) { }
 	public static implicit operator PollmanagerQActionRow(System.Object[] source) { return new PollmanagerQActionRow(source); }
 	public static implicit operator System.Object[](PollmanagerQActionRow source) { return source.ToObjectArray(); }
 }

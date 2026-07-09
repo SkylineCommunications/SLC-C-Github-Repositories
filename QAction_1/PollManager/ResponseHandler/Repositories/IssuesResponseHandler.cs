@@ -21,6 +21,7 @@
 			// Check status code
 			if (!protocol.IsSuccessStatusCode())
 			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repository_Issues, PollingStatus.Idle);
 				return;
 			}
 
@@ -29,6 +30,7 @@
 				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryissuescontent_202)));
 			if (response == null)
 			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repository_Issues, PollingStatus.Idle);
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|response was null.", LogType.Error, LogLevel.Level1);
 				return;
 			}
@@ -36,6 +38,7 @@
 			if (!response.Any())
 			{
 				// No issues for the repository
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repository_Issues, PollingStatus.Idle);
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryIssuesResponse|No issues for the repo.", LogType.Information, LogLevel.Level2);
 				return;
 			}
@@ -90,6 +93,7 @@
 			}
 			else
 			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repository_Issues, PollingStatus.Idle);
 				SLTables.Issues.Cleanup(protocol, repositoryId);
 			}
 		}

@@ -1,5 +1,7 @@
 ﻿namespace Skyline.Protocol.PollManager.RequestHandler.Repositories
 {
+	using System.Linq;
+	using Newtonsoft.Json;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.Protocol.Tables;
 
@@ -8,10 +10,17 @@
 		public static void HandleSoftwareBillOfMaterialsRequest(SLProtocol protocol, bool executeNow)
 		{
 			var rows = SLTables.Repositories.GetPrimaryKeys(protocol);
-			foreach (var row in rows)
+			var row = rows.Count > 0 ? rows[0] : null;
+
+			if(row == null)
 			{
-				HandleSoftwareBillOfMaterialsRequest(protocol, row, executeNow);
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repositories_SoftwareBillOfMaterials, PollingStatus.Idle);
+				return;
 			}
+
+			var queue = rows.Where(r => r != row).ToList();
+			protocol.SetParameter(Parameter.repositoriessoftwarebillofmaterialspollingqueue_2198, JsonConvert.SerializeObject(queue));
+			HandleSoftwareBillOfMaterialsRequest(protocol, row, executeNow);
 		}
 
 		public static void HandleSoftwareBillOfMaterialsRequest(SLProtocol protocol, string repositoryId, bool executeNow)

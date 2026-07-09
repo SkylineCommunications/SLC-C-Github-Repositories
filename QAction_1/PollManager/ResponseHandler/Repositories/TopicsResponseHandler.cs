@@ -3,15 +3,14 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-
 	using Newtonsoft.Json;
-
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Repositories;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Repositories;
 	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 	using Skyline.Protocol.API;
+	using Skyline.Protocol.API.Headers;
 	using Skyline.Protocol.Extensions;
 	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;
@@ -30,6 +29,7 @@
 
 			if (!protocol.IsSuccessStatusCode())
 			{
+				HandleNextRepositoryTopics(protocol);
 				return;
 			}
 
@@ -46,11 +46,12 @@
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryTopicsResponse|response was null.", LogType.Error, LogLevel.Level1);
+				HandleNextRepositoryTopics(protocol);
 				return;
 			}
 
 			HandleRepositoriesTopicsResponse(protocol, response, url);
-			HandleNextRepositoryTopics(protocol);
+			HandleNextRepositoryTopicsPage(protocol, url);
 		}
 
 		public static void HandleRepositoriesCreateOrUpdateTopicsResponse(SLProtocol protocol)
@@ -148,6 +149,28 @@
 			HandleTopicsInterApp(protocol, owner, name, repo.Topics);
 		}
 
+		private static void HandleNextRepositoryTopicsPage(SLProtocol protocol, string url)
+		{
+			// Parse url to check which repository this topic is linked to
+			if (GithubUrlHelper.TryParseRepoOwnerAndName(url, out var owner, out var name))
+			{
+				// Check if there are more topics to fetch
+				var linkHeader = Convert.ToString(protocol.GetParameter(Parameter.getrepositorytopicslinkheader));
+				var link = new LinkHeader(linkHeader);
+
+				// Check if there are more topics to fetch for the current repository
+				if (!string.IsNullOrEmpty(linkHeader) && link.HasNext)
+				{
+					var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Repositories_Topics)?.PageLimit ?? PollingConstants.PerPage;
+					RepositoriesRequestHandler.HandleRepositoriesTopicsRequest(protocol, $"{owner}/{name}", perPage, link.NextPage, true);
+					return;
+				}
+			}
+
+			// If no more topics for this repo fetch the next repository in the queue.
+			HandleNextRepositoryTopics(protocol);
+		}
+
 		private static void HandleNextRepositoryTopics(SLProtocol protocol)
 		{
 			// Get the next repo in the queue to fetch
@@ -157,6 +180,7 @@
 
 			if (next == null)
 			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repositories_Topics, PollingStatus.Idle);
 				return;
 			}
 
