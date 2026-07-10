@@ -6319,11 +6319,11 @@ Are you sure you want to continue.]]>
 				<Discreets>
 					<Discreet>
 						<Display>Idle</Display>
-						<Value>1</Value>
+						<Value>0</Value>
 					</Discreet>
 					<Discreet>
 						<Display>Polling</Display>
-						<Value>2</Value>
+						<Value>1</Value>
 					</Discreet>
 				</Discreets>
 			</Measurement>

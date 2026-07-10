@@ -4516,10 +4516,10 @@ public class ConcreteSLProtocolExt : ConcreteSLProtocol, SLProtocolExt
 	public System.Object Pollmanagerpagelimit_21008 {get { return GetParameter(21008); }set { SetParameter(21008, value); }}
 	/// <summary>PID: 21008  | Type: read | EXCEPTIONS: N/A = -2</summary>
 	public System.Object Pollmanagerpagelimit {get { return GetParameter(21008); }set { SetParameter(21008, value); }}
-	/// <summary>PID: 21009  | Type: read | DISCREETS: Idle = 1, Polling = 2</summary>
+	/// <summary>PID: 21009  | Type: read | DISCREETS: Idle = 0, Polling = 1</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public System.Object Pollmanagerpollingstatus_21009 {get { return GetParameter(21009); }set { SetParameter(21009, value); }}
-	/// <summary>PID: 21009  | Type: read | DISCREETS: Idle = 1, Polling = 2</summary>
+	/// <summary>PID: 21009  | Type: read | DISCREETS: Idle = 0, Polling = 1</summary>
 	public System.Object Pollmanagerpollingstatus {get { return GetParameter(21009); }set { SetParameter(21009, value); }}
 	/// <summary>PID: 21053  | Type: write | DISCREETS: Disabled = 0, Enabled = 1</summary>
 	[EditorBrowsable(EditorBrowsableState.Never)]
