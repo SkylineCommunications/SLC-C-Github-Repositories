@@ -180,6 +180,7 @@ namespace Skyline.Protocol.PollManager.ResponseHandler.Repositories
 
 			if (next == null)
 			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repositories_Workflows, PollingStatus.Idle);
 				return;
 			}
 

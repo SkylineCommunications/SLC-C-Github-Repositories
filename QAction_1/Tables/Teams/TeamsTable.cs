@@ -196,7 +196,8 @@ namespace Skyline.Protocol.Tables
 		{
 			var pollRow = PollManagerRowConverter.Instance.FromRawValue(
 				SLTables.PollManager.GetRow(protocol, Convert.ToString((int)RequestType.Organizations_Teams)));
-			if (!pollRow.LastPolledUTCTime.HasValue)
+			var pollTime = pollRow.PollingStatus == PollingStatus.Polling ? pollRow.PreviouslyPolledUTCTime : pollRow.LastPolledUTCTime;
+			if (!pollTime.HasValue)
 			{
 				protocol.Log($"QA{protocol.QActionID}|{nameof(TeamsQActionTable)}.{nameof(Cleanup)}|Table hasn't been polled yet", LogType.DebugInfo, LogLevel.Level2);
 				return;

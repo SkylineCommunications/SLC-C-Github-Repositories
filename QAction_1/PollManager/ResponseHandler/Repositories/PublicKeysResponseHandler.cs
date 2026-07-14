@@ -28,6 +28,7 @@
 
 			if (!protocol.IsSuccessStatusCode())
 			{
+				HandleNextRepositoryPublicKey(protocol);
 				return;
 			}
 
@@ -44,6 +45,7 @@
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryPublicKeyResponse|response was null.", LogType.Error, LogLevel.Level1);
+				HandleNextRepositoryPublicKey(protocol);
 				return;
 			}
 
@@ -78,6 +80,7 @@
 
 			if (next == null)
 			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repositories_PublicKey, PollingStatus.Idle);
 				return;
 			}
 

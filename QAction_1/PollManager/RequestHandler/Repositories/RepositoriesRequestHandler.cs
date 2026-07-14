@@ -36,10 +36,19 @@
 				SLTables.Repositories.FullName.Read.Map<RepositoriesModel>(m => m.FullName))
 				.Select(m => new { m.FullName, Owner = m.FullName.Split('/')[0] })
 				.ToArray();
-			foreach (var row in repositories.Where(repo => !trackedOrganizations.Contains(repo.Owner)))
+
+			var repositoriesToFetch = repositories.Where(repo => !trackedOrganizations.Contains(repo.Owner)).ToList();
+			var repositoryToPoll = repositoriesToFetch.FirstOrDefault();
+			if(repositoryToPoll == null)
 			{
-				HandleRepositoriesRequest(protocol, row.FullName, executeNow);
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repositories_Repositories, PollingStatus.Idle);
+				return;
 			}
+
+			repositoriesToFetch.Remove(repositoryToPoll);
+			protocol.SetParameter(Parameter.repositoriespollingqueue_999, JsonConvert.SerializeObject(repositoriesToFetch.Select(repo => repo.FullName)));
+
+			HandleRepositoriesRequest(protocol, repositoryToPoll?.FullName, executeNow);
 		}
 
 		public static void HandleRepositoriesRequest(SLProtocol protocol, string repositoryId, bool executeNow)

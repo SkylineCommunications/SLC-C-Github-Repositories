@@ -89,4 +89,10 @@ namespace Skyline.Protocol.PollManager
 		Disabled = 0,
 		Enabled = 1,
 	}
+
+	public enum PollingStatus
+	{
+		Idle = 0,
+		Polling = 1,
+	}
 }

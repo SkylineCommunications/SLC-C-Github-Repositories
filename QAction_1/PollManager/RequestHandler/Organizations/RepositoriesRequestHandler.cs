@@ -4,9 +4,9 @@
 	using System.Linq;
 
 	using Newtonsoft.Json;
-
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.Github.API.V20221128.Organizations;
+	using Skyline.DataMiner.Utils.Protocol.Extension;
 	using Skyline.Protocol.Tables;
 
 	public static partial class OrganizationsRequestHandler
@@ -19,10 +19,17 @@
 				SLTables.Organizations.Tracked.Read.Map<OrganizationsModel>(m => m.Tracked));
 
 			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_Repositories)?.PageLimit ?? PollingConstants.PerPage;
-			foreach (var row in rows.Where(org => org.Tracked.HasValue && org.Tracked.Value))
+			var orgsToPoll = rows.Where(org => org.Tracked.HasValue && org.Tracked.Value).Select(org => org.Instance).ToList();
+			var orgToPoll = orgsToPoll.FirstOrDefault();
+			if (orgToPoll == null)
 			{
-				HandleOrganizationRepositoriesRequest(protocol, row.Instance, perPage, executeNow);
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Organizations_Repositories, PollingStatus.Idle);
 			}
+
+			orgsToPoll.Remove(orgToPoll);
+			protocol.SetParameter(Parameter.organizationrepositoriespollingqueue_998, JsonConvert.SerializeObject(orgsToPoll));
+
+			HandleOrganizationRepositoriesRequest(protocol, orgToPoll, perPage, executeNow);
 		}
 
 		public static void HandleOrganizationRepositoriesRequest(SLProtocol protocol, string organization, int perPage, bool executeNow)

@@ -22,6 +22,7 @@
 			// Check status code
 			if (!protocol.IsSuccessStatusCode())
 			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repositories_Releases, PollingStatus.Idle);
 				return;
 			}
 
@@ -30,6 +31,7 @@
 				Convert.ToString(protocol.GetParameter(Parameter.getrepositoryreleasescontent)));
 			if (response == null)
 			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repositories_Releases, PollingStatus.Idle);
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|response was null.", LogType.Error, LogLevel.Level1);
 				return;
 			}
@@ -37,6 +39,7 @@
 			if (!response.Any())
 			{
 				// No releases for the repository
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repositories_Releases, PollingStatus.Idle);
 				protocol.Log($"QA{protocol.QActionID}|ParseGetRepositoryReleasesResponse|No releases for the repo.", LogType.Information, LogLevel.Level2);
 				return;
 			}
@@ -107,6 +110,7 @@
 			}
 			else
 			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repositories_Releases, PollingStatus.Idle);
 				SLTables.Releases.Cleanup(protocol, repositoryId);
 				SLTables.ReleaseAssets.Cleanup(protocol, repositoryId);
 			}

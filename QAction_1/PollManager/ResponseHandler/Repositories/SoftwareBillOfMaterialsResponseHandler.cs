@@ -2,12 +2,14 @@
 {
 	using System;
 	using System.Collections.Generic;
+	using System.Linq;
 	using System.Text.RegularExpressions;
-
+	using Newtonsoft.Json;
 	using Skyline.DataMiner.Scripting;
 	using Skyline.DataMiner.Utils.SecureCoding.SecureSerialization.Json.Newtonsoft;
 	using Skyline.Protocol.API.Dependency;
 	using Skyline.Protocol.Extensions;
+	using Skyline.Protocol.PollManager.RequestHandler.Repositories;
 	using Skyline.Protocol.Tables;
 
 	public static partial class RepositoriesResponseHandler
@@ -18,18 +20,25 @@
 
 		public static void HandleSoftwareBillOfMaterialsResponse(SLProtocol protocol)
 		{
+			var parameters = (object[])protocol.GetParameters(new uint[] { Parameter.getrepositorysoftwarebillofmaterialscontent_206, Parameter.repositoriessoftwarebillofmaterialspollingqueue_2198 });
+
+			var queue = SecureNewtonsoftDeserialization.DeserializeObject<List<string>>(Convert.ToString(parameters[1])) ?? new List<string>();
+
 			// Check status code
 			if (!protocol.IsSuccessStatusCode())
 			{
+				HandleNextSoftwareBillOfMaterialsPoll(protocol, queue);
 				return;
 			}
 
 			// Parse response
 			var response = SecureNewtonsoftDeserialization.DeserializeObject<SoftwareBillOfMaterialsResponse>(
-				Convert.ToString(protocol.GetParameter(Parameter.getrepositorysoftwarebillofmaterialscontent_206)));
+				Convert.ToString(parameters[0]));
+
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|{nameof(HandleSoftwareBillOfMaterialsResponse)}|response was null.", LogType.Error, LogLevel.Level1);
+				HandleNextSoftwareBillOfMaterialsPoll(protocol, queue);
 				return;
 			}
 
@@ -62,6 +71,7 @@
 
 			HandleSoftwareBillOfMaterialsPackagesResponse(protocol, row.RepositoryID, response);
 			HandleSoftwareBillOfMaterialsRelationshipsResponse(protocol, row.RepositoryID, response);
+			HandleNextSoftwareBillOfMaterialsPoll(protocol, queue);
 		}
 
 		private static void HandleSoftwareBillOfMaterialsPackagesResponse(SLProtocol protocol, string repositoryId, SoftwareBillOfMaterialsResponse response)
@@ -118,6 +128,22 @@
 
 			SLTables.SoftwareBillOfMaterialsRelationships.FillTableNoDelete(protocol, rows);
 			SLTables.SoftwareBillOfMaterialsRelationships.Cleanup(protocol, repositoryId);
+		}
+
+		private static void HandleNextSoftwareBillOfMaterialsPoll(SLProtocol protocol, List<string> queue)
+		{
+			var nextItem = queue.FirstOrDefault();
+			if (nextItem != null)
+			{
+				queue.Remove(nextItem);
+				RepositoriesRequestHandler.HandleSoftwareBillOfMaterialsRequest(protocol, nextItem, false);
+			}
+			else
+			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Repositories_SoftwareBillOfMaterials, PollingStatus.Idle);
+			}
+
+			protocol.SetParameter(Parameter.repositoriessoftwarebillofmaterialspollingqueue_2198, JsonConvert.SerializeObject(queue));
 		}
 	}
 }

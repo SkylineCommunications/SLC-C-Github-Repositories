@@ -4,6 +4,7 @@
 	using System.Collections.Generic;
 	using System.Linq;
 
+	using Newtonsoft.Json;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages;
 	using Skyline.DataMiner.ConnectorAPI.Github.Repositories.InterAppMessages.Repositories;
@@ -22,18 +23,23 @@
 	{
 		public static void HandleOrganizationRepositoriesResponse(SLProtocol protocol)
 		{
+			var parameters = (object[])protocol.GetParameters(new uint[] { Parameter.getorganizationrepositoriescontent_211, Parameter.organizationrepositoriespollingqueue_998 });
+			var queue = SecureNewtonsoftDeserialization.DeserializeObject<List<string>>(Convert.ToString(parameters[1])) ?? new List<string>();
+
 			// Check status code
 			if (!protocol.IsSuccessStatusCode())
 			{
+				HandleNextOrganizationRepositoryPolling(protocol, queue);
 				return;
 			}
 
 			// Parse response
 			var response = SecureNewtonsoftDeserialization.DeserializeObject<List<RepositoryResponse>>(
-				Convert.ToString(protocol.GetParameter(Parameter.getorganizationrepositoriescontent)));
+				Convert.ToString(parameters[0]));
 			if (response == null)
 			{
 				protocol.Log($"QA{protocol.QActionID}|ParseGetOrganizationRepositoriesResponse|response was null.", LogType.Error, LogLevel.Level1);
+				HandleNextOrganizationRepositoryPolling(protocol, queue);
 				return;
 			}
 
@@ -41,6 +47,7 @@
 			{
 				// No repositories for the organization
 				protocol.Log($"QA{protocol.QActionID}|ParseGetOrganizationRepositoriesResponse|No repositories", LogType.Information, LogLevel.Level2);
+				HandleNextOrganizationRepositoryPolling(protocol, queue);
 				return;
 			}
 
@@ -94,6 +101,10 @@
 			{
 				var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_Repositories)?.PageLimit ?? PollingConstants.PerPage;
 				OrganizationsRequestHandler.HandleOrganizationRepositoriesRequest(protocol, response[0].Owner.Login, perPage, link.NextPage, true);
+			}
+			else
+			{
+				HandleNextOrganizationRepositoryPolling(protocol, queue);
 			}
 		}
 
@@ -173,6 +184,22 @@
 					iacRow.SaveToProtocol(protocol);
 				}
 			}
+		}
+
+		private static void HandleNextOrganizationRepositoryPolling(SLProtocol protocol, List<string> queue)
+		{
+			var nextOrg = queue.FirstOrDefault();
+			if (nextOrg == null)
+			{
+				SLTables.PollManager.SetPollingStatus(protocol, RequestType.Organizations_Repositories, PollingStatus.Idle);
+				return;
+			}
+
+			queue.Remove(nextOrg);
+			protocol.SetParameter(Parameter.organizationrepositoriespollingqueue_998, JsonConvert.SerializeObject(nextOrg));
+
+			var perPage = SLTables.PollManager.GetRowByRequestType(protocol, RequestType.Organizations_Repositories)?.PageLimit ?? PollingConstants.PerPage;
+			OrganizationsRequestHandler.HandleOrganizationRepositoriesRequest(protocol, nextOrg, perPage, 1, false);
 		}
 	}
 }
