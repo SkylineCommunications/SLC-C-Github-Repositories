@@ -8,7 +8,7 @@
 <Protocol xmlns="http://www.skyline.be/protocol">
 	<Name>GitHub Repositories</Name>
 	<Description>GitHub Repositories DataMiner connector</Description>
-	<Version>1.0.2.1</Version>
+	<Version>1.0.2.2</Version>
 	<IntegrationID>DMS-DRV-9437</IntegrationID>
 	<Provider>Skyline Communications</Provider>
 	<Vendor>GitHub</Vendor>
@@ -8736,6 +8736,19 @@ Are you sure you want to continue.]]>
 										</Changes>
 										<References>
 											<TaskId>298519</TaskId>
+										</References>
+									</MinorVersion>
+									<MinorVersion id="2" basedOn="1.0.2.1">
+										<Date>2026-11-13</Date>
+										<Provider>
+											<Author>CMT</Author>
+											<Company>Skyline Communications</Company>
+										</Provider>
+										<Changes>
+											<Change>Upgraded Github Repositories NuGet for public release</Change>
+										</Changes>
+										<References>
+											<TaskId>311029</TaskId>
 										</References>
 									</MinorVersion>
 								</MinorVersions>
